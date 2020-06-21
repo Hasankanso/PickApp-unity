@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>998948836075-udvp9eer3b3acpuvi4j0trg3fh64ngql.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.998948836075-udvp9eer3b3acpuvi4j0trg3fh64ngql</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCW2cCfTMctkSMiipNWw1a7JY7FjSJPMhM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>998948836075</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.DefaultCompany.NewUnityProject3</string>
+	<key>PROJECT_ID</key>
+	<string>pickapp-ed95e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pickapp-ed95e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:998948836075:ios:0e775998816302c92d24ae</string>
+	<key>DATABASE_URL</key>
+	<string>https://pickapp-ed95e.firebaseio.com</string>
+</dict>
+</plist>

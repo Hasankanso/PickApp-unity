@@ -1,2 +1,62 @@
-# PickApp
-same as old one
+# TheProject
+let normal people offer rides and drive together, this modern way is efficient, flexible and energy saving. It might helps to solve congestion problems since more people will fit in one car, which means less cars on the road.<br>
+
+# TASKS
+Adel: Register, login.<br>
+Ali: Becomedriver, Addcar.<br>
+Hassan S.: AddRide.<br>
+Hassan K.: SearchRide.<br>
+
+# Unity Version
+<h4>Version 2019.3.2f1 Personal</h4>
+
+Prefabs:<br>
+AddRidePanel <br>
+AddCarPanel <br>
+AlertPanel<br>
+BioPanel<br>
+ChattinessPanel<br>
+RatePanel<br>
+UserDetailsPanel<br>
+UserRatings <br>
+FindLocationPanel <br>
+NotificationsPanel <br>
+HowItWorksPanel <br>
+ContactUsPanel<br>
+YourRidesPanel<br>
+ReportUserPanel<br>
+DirectionsFinderPanel<br>
+SchedulePanel <br>
+PrivacyPolicyPanel<br>
+LicensesPanel<br>
+TermsConditionsPanel<br>
+become a driver<br>
+ProfilePanel<br>
+SettingsPanel  //language<br>
+BookingHistoryPanel<br>
+SearchPanel <br>
+ChatPanel <br>
+Alert details<br>
+InboxPanel<br>
+LoginPanel<br>
+RegisterPanel<br>
+AccountPanel<br>
+Phone<br>
+ChangePasswordPanel<br>
+Tasks: <br>
+Make first english language xml file and test it in any free prefab<br>
+Test app on android devices(different screen sizes)<br>
+Test app on ios devices(different screen sizes)<br>
+Test app on tablet
+Test the one picker for date and time (look for it in schedulepanel or searchpanel or addRidePanel)
+Track Bugs and report them in issues section.
+
+<h3>Beta ER Model</h3>
+<img src="https://github.com/Hasankanso/TheProject/blob/master/DBimage.png"\>
+
+<h3>Beta UML diagramm</h3>
+<img src="https://github.com/Hasankanso/TheProject/blob/master/UML.png"\>
+
+
+<h3>Communicator UML diagramm</h3>
+<img src="https://github.com/Hasankanso/TheProject/blob/master/Requests.png"\>

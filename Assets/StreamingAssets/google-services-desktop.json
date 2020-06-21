@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "998948836075",
+    "firebase_url": "https://pickapp-ed95e.firebaseio.com",
+    "project_id": "pickapp-ed95e",
+    "storage_bucket": "pickapp-ed95e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998948836075:android:b4e8c79c2ef5b5bb2d24ae",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.NewUnityProject3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998948836075-p5fmfg9s8j7g6veqephi4pnn3iquuj7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtsxrmIPGkRA35awvb-1O3xqrFM-7AOVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998948836075-p5fmfg9s8j7g6veqephi4pnn3iquuj7e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "998948836075-udvp9eer3b3acpuvi4j0trg3fh64ngql.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.DefaultCompany.NewUnityProject3"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

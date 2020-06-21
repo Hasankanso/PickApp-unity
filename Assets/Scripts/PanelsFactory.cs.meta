@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: a8fb76b6cb46330439fe2acde3b02dfc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rideResultsPanel: {instanceID: 0}
+  - howItWorks: {instanceID: 0}
+  - privacyPolicy: {instanceID: 0}
+  - termsConditions: {instanceID: 0}
+  - contactUs: {instanceID: 0}
+  - licenses: {instanceID: 0}
+  - rideItem: {instanceID: 0}
+  - alertPanel: {instanceID: 0}
+  - searchPanel: {fileID: 277725644112073835, guid: f6c6f563b87464e4a9c6c6817357bd0d,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
