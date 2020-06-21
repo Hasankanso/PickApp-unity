@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 770b7338d8c129545bf48aae01fb9d19
-=======
-guid: a0371cdfe48246a44bcacf64e64ecba9
->>>>>>> 22a5b90e64b19c63aa627d060e0d68976fd3dc7b
+guid: 7bc44e101c9c4b9997973ec71e31fb0a
+labels:
+- gvh
+- gvh_version-6.15.0
+- gvhp_exportpath-Plugins/Android/Firebase/AndroidManifest.xml
+timeCreated: 1480838400
 DefaultImporter:
-  externalObjects: {}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData:
+  assetBundleName:
+  assetBundleVariant:
