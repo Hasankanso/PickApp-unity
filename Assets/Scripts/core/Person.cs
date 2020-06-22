@@ -113,8 +113,9 @@ public class Person {
             bio = bi.ToString();
         DateTime birthday=new DateTime();
         var br = json["birthday"];
-        //if (br != null)
-            //birthday =Program.StringToBirthday(br.ToString());
+        if (br != null) {
+            birthday = Program.StringIsoToBirthday(br.ToString());
+        }
 
         CountryInformations countryInformations = global::CountryInformations.ToObject((JObject)json[nameof(Person.countryInformations)]);
         bool gender = false;
@@ -123,11 +124,7 @@ public class Person {
             bool.TryParse(gn.ToString(), out gender);
 
         string image = json["image"].ToString();
-        Person p = new Person(id,firstName, lastName, chattiness, email, countryInformations, bio, gender,birthday, image);
-        if (json.GetValue("driver") != null && !string.IsNullOrEmpty(json.GetValue("driver").ToString())) {
-            return Driver.ToObject((JObject)json["driver"]); 
-        }
-        return p;
+        return new Person(id, firstName, lastName, chattiness, email, countryInformations, bio, gender, birthday, image);
     }
     public Person(string email) {
         this.email = email;

@@ -9,14 +9,14 @@ namespace Requests {
         Texture2D image;
         public Login(Person user) {
             this.user = user;
-            HttpPath = "PersonBusiness/Login";
+            HttpPath = "UserBusiness/Login";
         }
 
         public override Person BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             JObject json = JObject.Parse(response);
-            if (json.GetValue("driver") != null && !string.IsNullOrEmpty(json.GetValue("driver").ToString()))
-                return Driver.ToObject(json);
+            /*if (json.GetValue("driver") != null && !string.IsNullOrEmpty(json.GetValue("driver").ToString()))
+               return Driver.ToObject(json);*/
             return Person.ToObject(json);
         }
 

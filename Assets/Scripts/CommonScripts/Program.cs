@@ -257,7 +257,9 @@ public static class Program {
     public static string BirthdayToString(DateTime date) {
         return date.ToString("dd/MM/yyyy");
     }
-
+    public static DateTime StringIsoToBirthday(string d) {
+        return DateTime.Parse(d, null, System.Globalization.DateTimeStyles.RoundtripKind);
+    }
     public static DateTime CombineDateTime(DateTime date, DateTime time) {
         return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0);
     }
