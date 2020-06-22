@@ -21,7 +21,7 @@ public static class Program {
   private static CountryInformations FakeCountry()
   {
   //  return new CountryInformations("0", "EUR", "Germany", 11, "+49");
-    return new CountryInformations("1", "L.L", "Lebanon", 8, "+961");
+    return new CountryInformations("F85258BF-63A7-F939-FF31-C78BB1837300", "L.L", "Lebanon", 8, "+961");
   }
 
     private static Dictionary<string,CountryInformations> countriesInformations;//this list is for countries dropdown in registeration panel
