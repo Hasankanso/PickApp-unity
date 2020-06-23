@@ -253,25 +253,23 @@ public static class Program {
             return DateTime.ParseExact(date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
         }
     }
-
-    public static string BirthdayToString(DateTime date) {
-        return date.ToString("dd/MM/yyyy");
-    }
-    public static DateTime StringIsoToBirthday(string d) {
-        return DateTime.Parse(d, null, System.Globalization.DateTimeStyles.RoundtripKind);
-    }
     public static DateTime CombineDateTime(DateTime date, DateTime time) {
         return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0);
     }
-
+    public static string BirthdayToString(DateTime date) {
+        return date.ToString("dd/MM/yyyy");
+    }
+    public static DateTime StringToBirthday(string date) {
+        return DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+    }
+    public static DateTime UnixToUtc(double milliseconds) {
+        DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+        dtDateTime = dtDateTime.AddMilliseconds(milliseconds).ToLocalTime();
+        return dtDateTime;
+    }
     public static DateTime CombineDateTime(String date, String time) {
         return CombineDateTime(StringToDate(date), StringToDate(time));
     }
-
-    public static DateTime StringToBirthday(string date) {
-        return DateTime.ParseExact(date,"dd/MM/yyyy",CultureInfo.InvariantCulture);
-    }
-
     public static void Logout() {
         Backendless.UserService.Logout();
         IsLoggedIn = false;

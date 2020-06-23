@@ -12,7 +12,7 @@ namespace Requests {
 
         public EditAccount(Person newUser) {
             this.newUser = newUser;
-            HttpPath = "";
+            HttpPath = "PersonBusiness/EditPerson";
         }
 
         public override Person BuildResponse(string response, HttpStatusCode statusCode) //TODO
@@ -23,14 +23,11 @@ namespace Requests {
         public override string ToJson() {
             JObject personJ = newUser.ToJson();
             personJ[nameof(newUser.id)] = newUser.Id;
-            if (!string.IsNullOrEmpty(newUser.image)) {
-                personJ[nameof(newUser.profilePicture)] = newUser.Image;
-            }
             return personJ.ToString();
         }
 
         protected override string IsValid() {
-            if (string.IsNullOrEmpty(newUser.FirstName) || string.IsNullOrEmpty(newUser.LastName)
+            /*if (string.IsNullOrEmpty(newUser.FirstName) || string.IsNullOrEmpty(newUser.LastName)
               || string.IsNullOrEmpty(newUser.Email) || string.IsNullOrEmpty(newUser.Phone)
               || string.IsNullOrEmpty(newUser.Password)) {
                 return "Please fill empty fields.";
@@ -45,7 +42,7 @@ namespace Requests {
 
             if (!ValidPassword(newUser.Password)) {
                 return "Make sure your password has at least 8 characters and contains at least one number and one letter";
-            }
+            }*/
             return string.Empty;
         }
     }
