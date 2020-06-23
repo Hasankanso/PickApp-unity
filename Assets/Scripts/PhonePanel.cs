@@ -82,7 +82,8 @@ public class PhonePanel : Panel
     PhoneAuthProvider provider = PhoneAuthProvider.GetInstance(firebaseAuth);
     Credential credential = provider.GetCredential(verificationId, code.text.text);
 
-    firebaseAuth.SignInWithCredentialAsync(credential).ContinueWith(task => {
+    firebaseAuth.SignInWithCredentialAsync(credential).ContinueWith(task =>
+    {
       if (task.IsFaulted)
       {
         OpenDialog(task.Exception.ToString(), false);
@@ -90,10 +91,11 @@ public class PhonePanel : Panel
 
       FirebaseUser newUser = task.Result;
 
-      newUser.TokenAsync(true).ContinueWith(task2 => {
+      newUser.TokenAsync(true).ContinueWith(task2 =>
+      {
         if (task2.IsCanceled)
         {
-          OpenDialog("TokenAsync was canceled.", false) ;
+          OpenDialog("TokenAsync was canceled.", false);
           Debug.LogError("TokenAsync was canceled.");
           return;
         }
@@ -107,8 +109,8 @@ public class PhonePanel : Panel
 
         string idToken = task2.Result;
 
-        Request<Person> smsVerification = new VerifySmsCode(person, idToken);
-        smsVerification.Send(UserRegistered);
+        Request<Person> registerRequest = new RegisterPerson(person, idToken);
+        registerRequest.Send(RegistrationResponse);
         // Send token to your backend via HTTPS
         // ...
       });
@@ -121,166 +123,168 @@ public class PhonePanel : Panel
     });
   }
 
-  private void UserRegistered(Person arg1, HttpStatusCode arg2, string arg3)
+  private void RegistrationResponse(Person user, HttpStatusCode statusCode, string arg3)
   {
-    throw new NotImplementedException();
-  }
-
-  void signout()
-  {
-    FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(Program.FirebaseApp);
-    PhoneAuthProvider provider = PhoneAuthProvider.GetInstance(firebaseAuth);
-    firebaseAuth.SignOut();
-  }
-
-  IEnumerator ResendTimer()
-  {
-    float counter = timeout / 1000f; //convert from milliseconds to seconds.
-
-    resendCodeLabel.GetComponent<Button>().interactable = false;
-    resendCodeLabel.color = new Color(186f / 255f, 186f / 255f, 186f / 255f, 128f / 255f);
-    codeImage.color = new Color(168f / 255f, 168f / 255f, 168f / 255f, 128f / 255f);
-    int minutes = 0;
-    int seconds = 0;
-
-    while (counter >= 0)
-    {
-      counter -= Time.deltaTime;
-      minutes = Mathf.FloorToInt(counter / 60f);
-      seconds = Mathf.RoundToInt(counter % 60f);
-      resendCodeLabel.text = "Resend code in " + minutes + ":" + seconds;
-      yield return null;
-    }
-
-    resendCodeLabel.GetComponent<Button>().interactable = true;
-    resendCodeLabel.text = "Resend code";
-    resendCodeLabel.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
-    codeImage.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
-  }
-
-
-  public void Register()
-  {
-    if (vadilateSecondView())
-    {
-      person.Phone = phone.text.text;
-      firebaseVerification();
-      // Request<Person> request = new RegisterPerson(person);
-      // request.Send(RegisterResponse);
-    }
-  }
-  private void RegisterResponse(Person result, HttpStatusCode code, string message)
-  {
-    if (!code.Equals(HttpStatusCode.OK))
-      OpenDialog("Error while register", false);
-    else
+    if (statusCode == HttpStatusCode.OK)
     {
       OpenDialog("Welcome to PickApp!", true);
-      FooterMenu.dFooterMenu.OpenSearchPanel();
+      Program.User = user;
+      Program.IsLoggedIn = true;
+      FooterMenu.dFooterMenu.OpenProfilePanel();
+      this.destroy();
     }
-  }
-  public void ResetPassword()
-  {
-    if (vadilateSecondView())
-    {
-      Request<Person> request = new VerifySmsCode(person, code.text.text);
-      request.Send(ResetPasswordResponse);
-    }
-  }
-
-  private void ResetPasswordResponse(Person result, HttpStatusCode code, string message)
-  {
-    if (!code.Equals(HttpStatusCode.OK))
-      OpenDialog("Wrong Code", false);
     else
     {
-      OpenDialog("Please add a new password!", true);
-      Panel panel = PanelsFactory.ChangePassword(true, result);
-      openCreated(panel);
+      OpenDialog("Error while register", false);
     }
-  }
-  public void openView(int index)
-  {
-    firstView.SetActive(false);
-    secondView.SetActive(false);
-    if (index == 0)
+    }
+
+    void signout()
     {
-      firstView.SetActive(true);
+      FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(Program.FirebaseApp);
+      PhoneAuthProvider provider = PhoneAuthProvider.GetInstance(firebaseAuth);
+      firebaseAuth.SignOut();
     }
-    else if (index == 1 && vadilateFirstView())
+
+    IEnumerator ResendTimer()
     {
-      SendCode();
-      secondView.SetActive(true);
-      phoneLabel.text = phone.text.text;
+      float counter = timeout / 1000f; //convert from milliseconds to seconds.
+
+      resendCodeLabel.GetComponent<Button>().interactable = false;
+      resendCodeLabel.color = new Color(186f / 255f, 186f / 255f, 186f / 255f, 128f / 255f);
+      codeImage.color = new Color(168f / 255f, 168f / 255f, 168f / 255f, 128f / 255f);
+      int minutes = 0;
+      int seconds = 0;
+
+      while (counter >= 0)
+      {
+        counter -= Time.deltaTime;
+        minutes = Mathf.FloorToInt(counter / 60f);
+        seconds = Mathf.RoundToInt(counter % 60f);
+        resendCodeLabel.text = "Resend code in " + minutes + ":" + seconds;
+        yield return null;
+      }
+
+      resendCodeLabel.GetComponent<Button>().interactable = true;
+      resendCodeLabel.text = "Resend code";
+      resendCodeLabel.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
+      codeImage.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
     }
-  }
-  public void closeView(int index)
-  {
-    firstView.SetActive(false);
-    secondView.SetActive(false);
-    phone.PlaceHolder();
-    code.PlaceHolder();
-    if (index == 0)
-    {
-      firstView.SetActive(true);
-    }
-    else if (index == 1)
-      secondView.SetActive(true);
-  }
 
 
-  bool vadilateFirstView()
-  {
-    bool valid = true;
-    if (phone.text.text.Equals(""))
+    public void Register()
     {
-      phone.Error();
-      OpenDialog("Please enter your phone number", false);
-      valid = false;
+      if (vadilateSecondView())
+      {
+        person.Phone = phone.text.text;
+        firebaseVerification();
+        // Request<Person> request = new RegisterPerson(person);
+        // request.Send(RegisterResponse);
+      }
     }
-    if (Regex.Matches(phone.text.text, @"[a-zA-Z]").Count > 0)
+
+    public void ResetPassword()
     {
-      phone.Error();
-      OpenDialog("Your phone number is invalid", false);
-      valid = false;
+      if (vadilateSecondView())
+      {
+        Request<Person> request = new VerifySmsCode(person, code.text.text);
+        request.Send(ResetPasswordResponse);
+      }
     }
-    if (phone.text.text.Length != Program.CountryInformations.Digits)
+
+    private void ResetPasswordResponse(Person result, HttpStatusCode code, string message)
     {
-      phone.Error();
-      OpenDialog("Your phone number is invalid", false);
-      valid = false;
+      if (!code.Equals(HttpStatusCode.OK))
+        OpenDialog("Wrong Code", false);
+      else
+      {
+        OpenDialog("Please add a new password!", true);
+        Panel panel = PanelsFactory.ChangePassword(true, result);
+        openCreated(panel);
+      }
     }
-    return valid;
-  }
-  bool vadilateSecondView()
-  {
-    bool valid = true;
-    string givenCode = code.text.text;
-    print(givenCode);
-    if (givenCode.Equals(""))
+    public void openView(int index)
     {
-      code.Error();
-      valid = false;
+      firstView.SetActive(false);
+      secondView.SetActive(false);
+      if (index == 0)
+      {
+        firstView.SetActive(true);
+      }
+      else if (index == 1 && vadilateFirstView())
+      {
+        SendCode();
+        secondView.SetActive(true);
+        phoneLabel.text = phone.text.text;
+      }
     }
-    return valid;
-  }
-  public void Init(Person person)
-  {
-    Clear();
-    register.gameObject.SetActive(true);
-    nextRegister.gameObject.SetActive(true);
-    this.person = person;
-    phone.GetComponentInParent<InputField>().characterLimit = Program.CountryInformations.Digits;
-    countryCode.text = Program.CountryInformations.Code;
-  }
-  public void Init()
-  {
-    Clear();
-    phone.GetComponentInParent<InputField>().characterLimit = Program.CountryInformations.Digits;
-    countryCode.text = Program.CountryInformations.Code;
-    reset.gameObject.SetActive(true);
-    nextReset.gameObject.SetActive(true);
-  }
+    public void closeView(int index)
+    {
+      firstView.SetActive(false);
+      secondView.SetActive(false);
+      phone.PlaceHolder();
+      code.PlaceHolder();
+      if (index == 0)
+      {
+        firstView.SetActive(true);
+      }
+      else if (index == 1)
+        secondView.SetActive(true);
+    }
+
+
+    bool vadilateFirstView()
+    {
+      bool valid = true;
+      if (phone.text.text.Equals(""))
+      {
+        phone.Error();
+        OpenDialog("Please enter your phone number", false);
+        valid = false;
+      }
+      if (Regex.Matches(phone.text.text, @"[a-zA-Z]").Count > 0)
+      {
+        phone.Error();
+        OpenDialog("Your phone number is invalid", false);
+        valid = false;
+      }
+      if (phone.text.text.Length != Program.CountryInformations.Digits)
+      {
+        phone.Error();
+        OpenDialog("Your phone number is invalid", false);
+        valid = false;
+      }
+      return valid;
+    }
+    bool vadilateSecondView()
+    {
+      bool valid = true;
+      string givenCode = code.text.text;
+      print(givenCode);
+      if (givenCode.Equals(""))
+      {
+        code.Error();
+        valid = false;
+      }
+      return valid;
+    }
+    public void Init(Person person)
+    {
+      Clear();
+      register.gameObject.SetActive(true);
+      nextRegister.gameObject.SetActive(true);
+      this.person = person;
+      phone.GetComponentInParent<InputField>().characterLimit = Program.CountryInformations.Digits;
+      countryCode.text = Program.CountryInformations.Code;
+    }
+    public void Init()
+    {
+      Clear();
+      phone.GetComponentInParent<InputField>().characterLimit = Program.CountryInformations.Digits;
+      countryCode.text = Program.CountryInformations.Code;
+      reset.gameObject.SetActive(true);
+      nextReset.gameObject.SetActive(true);
+    }
   internal override void Clear()
   {
     phone.Reset();
