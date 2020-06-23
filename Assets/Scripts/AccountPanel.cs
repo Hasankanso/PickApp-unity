@@ -20,6 +20,7 @@ public class AccountPanel : Panel {
             person.LastName = lastName.text.text;
             person.Birthday = DateTime.Parse(birthday.text);
             person.ProfilePicture = profilePicture.sprite.texture;
+            person.Email = email.text.text;
             person.CountryInformations = new CountryInformations();
             person.CountryInformations.Name=countryDP.options[countryDP.value].text;
             person.Gender = genderDP.value == 0;
@@ -79,6 +80,7 @@ public class AccountPanel : Panel {
         this.person = person;
         firstName.SetText(person.FirstName);
         lastName.SetText(person.LastName);
+        email.SetText(person.Email);
         birthday.text = Program.BirthdayToString(person.Birthday);
         CheckGender(person.Gender);
         CheckCountry(person.CountryInformations.Name);

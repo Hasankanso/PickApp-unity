@@ -18,9 +18,11 @@ namespace Requests {
             Action = "addRide";
         }
 
-        public override Ride BuildResponse(string response, HttpStatusCode statusCode) //TODO we have to use statusCode
+        public override Ride BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
-            return JsonConvert.DeserializeObject<Ride>(response);
+            JObject ride = JObject.Parse(response);
+            if (ride == null) return null;
+            return Ride.ToObject(ride);
         }
 
         public override string ToJson() {

@@ -28,13 +28,14 @@ public class Person {
     public Person() {
     }
     //Constructor for register
-    public Person(string id,string firstName, string lastName, string chattiness,string phone,string userPhone, string email, CountryInformations countryInformations, string bio, bool gender,DateTime birthday, string profilePictureUrl) {
+    public Person(string id,string firstName, string lastName, string chattiness,string phone,string userPhone, string email, CountryInformations countryInformations, string bio, float rateAverage ,bool gender,DateTime birthday, string profilePictureUrl) {
         this.Id = id;
         this.firstName = firstName;
         this.bio = bio;
         this.phone = phone;
         this.userPhone = userPhone;
         this.lastName = lastName;
+        this.rateAverage = rateAverage;
         this.chattiness = chattiness;
         this.ProfilePictureUrl = profilePictureUrl;
         this.email = email;
@@ -123,12 +124,18 @@ public class Person {
         var bi = json["bio"];
         if (bi != null)
             bio = bi.ToString();
-        DateTime birthday=new DateTime();
+
+        double birthdayDouble = -1;
         var br = json["birthday"];
         if (br != null) {
-            birthday = Program.StringIsoToBirthday(br.ToString());
+            double.TryParse(br.ToString(), out birthdayDouble);
         }
+        DateTime birthday = Program.StringToBirthday(Program.UnixToUtc(birthdayDouble).ToString("dd/MM/yyyy"));
 
+        float rateAverage = -1;
+        var ra = json[nameof(Person.rateAverage)];
+        if (ra != null)
+            float.TryParse(ra.ToString(), out rateAverage);
         CountryInformations countryInformations = CountryInformations.ToObject((JObject)json[nameof(Person.countryInformations)]);
         bool gender = false;
         var gn = json[nameof(Person.gender)];
@@ -136,7 +143,7 @@ public class Person {
             bool.TryParse(gn.ToString(), out gender);
 
         string image = json["image"].ToString();
-        return new Person(id, firstName, lastName, chattiness,phone, userPhone, email, countryInformations, bio, gender, birthday, image);
+        return new Person(id, firstName, lastName, chattiness,phone, userPhone, email, countryInformations, bio,rateAverage, gender, birthday, image);
     }
     public Person(string email) {
         this.email = email;
