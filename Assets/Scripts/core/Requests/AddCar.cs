@@ -16,7 +16,7 @@ namespace Requests {
         public AddCar(Car car,Driver driver) {
             this.driver = driver;
             this.car = car;
-            HttpPath = "CarBusiness/AddCar";
+            HttpPath = "/CarBusiness/AddCar";
         }
 
         public override Car BuildResponse(string response, HttpStatusCode statusCode) //ToDo

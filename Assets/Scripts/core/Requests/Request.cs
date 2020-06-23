@@ -10,7 +10,7 @@ namespace Requests {
 
     public abstract class Request<T> {
 
-        private readonly static string ip = "https://api.backendless.com/" + BackendlessPlugin.Instance.applicationId + "/" + BackendlessPlugin.Instance.APIKey + "/services/";
+        private readonly static string ip = "https://api.backendless.com/" + BackendlessPlugin.Instance.applicationId + "/" + BackendlessPlugin.Instance.APIKey + "/services";
         private static readonly HttpClient client = new HttpClient();
         private string httpPath;
         private string action;

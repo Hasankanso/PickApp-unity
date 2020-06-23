@@ -76,13 +76,14 @@ public class PhonePanel : Panel
         });
   }
 
-  void firebaseVerification()
+  void FirebaseVerification()
   {
     FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(Program.FirebaseApp);
     PhoneAuthProvider provider = PhoneAuthProvider.GetInstance(firebaseAuth);
     Credential credential = provider.GetCredential(verificationId, code.text.text);
 
-    firebaseAuth.SignInWithCredentialAsync(credential).ContinueWith(task => {
+    firebaseAuth.SignInWithCredentialAsync(credential).ContinueWith(task =>
+    {
       if (task.IsFaulted)
       {
         OpenDialog(task.Exception.ToString(), false);
@@ -90,10 +91,11 @@ public class PhonePanel : Panel
 
       FirebaseUser newUser = task.Result;
 
-      newUser.TokenAsync(true).ContinueWith(task2 => {
+      newUser.TokenAsync(true).ContinueWith(task2 =>
+      {
         if (task2.IsCanceled)
         {
-          OpenDialog("TokenAsync was canceled.", false) ;
+          OpenDialog("TokenAsync was canceled.", false);
           Debug.LogError("TokenAsync was canceled.");
           return;
         }
@@ -107,8 +109,8 @@ public class PhonePanel : Panel
 
         string idToken = task2.Result;
 
-        Request<Person> smsVerification = new VerifySmsCode(person, idToken);
-        smsVerification.Send(UserRegistered);
+        Request<Person> registerRequest = new RegisterPerson(person, idToken);
+        registerRequest.Send(RegistrationResponse);
         // Send token to your backend via HTTPS
         // ...
       });
@@ -121,9 +123,20 @@ public class PhonePanel : Panel
     });
   }
 
-  private void UserRegistered(Person arg1, HttpStatusCode arg2, string arg3)
+  private void RegistrationResponse(Person user, HttpStatusCode statusCode, string arg3)
   {
-    throw new NotImplementedException();
+    if (statusCode == HttpStatusCode.OK)
+    {
+      OpenDialog("Welcome to PickApp!", true);
+      Program.User = user;
+      Program.IsLoggedIn = true;
+      FooterMenu.dFooterMenu.OpenProfilePanel();
+      this.destroy();
+    }
+    else
+    {
+      OpenDialog("Error while register", false);
+    }
   }
 
   void signout()
@@ -164,27 +177,15 @@ public class PhonePanel : Panel
     if (vadilateSecondView())
     {
       person.Phone = phone.text.text;
-      firebaseVerification();
-      // Request<Person> request = new RegisterPerson(person);
-      // request.Send(RegisterResponse);
+      FirebaseVerification();
     }
   }
-  private void RegisterResponse(Person result, HttpStatusCode code, string message)
-  {
-    if (!code.Equals(HttpStatusCode.OK))
-      OpenDialog("Error while register", false);
-    else
-    {
-      OpenDialog("Welcome to PickApp!", true);
-      FooterMenu.dFooterMenu.OpenSearchPanel();
-    }
-  }
+
   public void ResetPassword()
   {
     if (vadilateSecondView())
     {
-      Request<Person> request = new VerifySmsCode(person, code.text.text);
-      request.Send(ResetPasswordResponse);
+      //IMPLEMENT
     }
   }
 

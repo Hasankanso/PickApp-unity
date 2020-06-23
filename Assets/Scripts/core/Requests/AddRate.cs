@@ -14,7 +14,7 @@ namespace Requests {
 
         public AddRate(Rate rate) {
             this.rate = rate;
-            HttpPath = "RateBusiness/AddRate";
+            HttpPath = "/RateBusiness/AddRate";
             Action = "addRate";
         }
 

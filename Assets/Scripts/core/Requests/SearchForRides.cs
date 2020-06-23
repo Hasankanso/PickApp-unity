@@ -16,7 +16,7 @@ namespace Requests
     public SearchForRides(SearchInfo searchInfo)
     {
       this.searchInfo = searchInfo;
-      HttpPath = "SearchBusiness/SearchRides";
+      HttpPath = "/SearchBusiness/SearchRides";
       Action = "searchForRides";
     }
 

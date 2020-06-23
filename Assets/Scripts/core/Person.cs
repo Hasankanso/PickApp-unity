@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Requests;
 using System;
@@ -17,6 +17,7 @@ public class Person {
     public string image, profilePictureUrl;
     private float rateAverage;
     private DateTime updated;
+
     private CountryInformations countryInformations;
 
     //user
@@ -30,7 +31,7 @@ public class Person {
     public Person() {
     }
     //Constructor for register
-    public Person(string id,string firstName, string lastName, string chattiness,string phone, string email, CountryInformations countryInformations, string bio, float rateAverage ,bool gender,DateTime birthday, string profilePictureUrl) {
+    public Person(string id, string firstName, string lastName, string chattiness, string phone, string email, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday, string profilePictureUrl) {
         this.Id = id;
         this.firstName = firstName;
         this.bio = bio;
@@ -140,7 +141,7 @@ public class Person {
             bool.TryParse(gn.ToString(), out gender);
 
         string image = json["image"].ToString();
-        return new Person(id, firstName, lastName, chattiness,phone, email, countryInformations, bio,rateAverage, gender, birthday, image);
+        return new Person(id, firstName, lastName, chattiness, phone, email, countryInformations, bio, rateAverage, gender, birthday, image);
     }
     public Person(string email) {
         this.email = email;
