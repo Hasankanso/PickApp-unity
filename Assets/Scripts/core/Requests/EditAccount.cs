@@ -12,7 +12,7 @@ namespace Requests {
 
         public EditAccount(Person newUser) {
             this.newUser = newUser;
-            HttpPath = "PersonBusiness/EditPerson";
+            HttpPath = "/PersonBusiness/EditPerson";
         }
 
         public override Person BuildResponse(string response, HttpStatusCode statusCode) //TODO

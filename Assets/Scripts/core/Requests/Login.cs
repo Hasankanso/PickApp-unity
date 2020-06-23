@@ -9,7 +9,7 @@ namespace Requests {
         Texture2D image;
         public Login(Person user) {
             this.user = user;
-            HttpPath = "UserBusiness/Login";
+            HttpPath = "/UserBusiness/Login";
         }
 
         public override Person BuildResponse(string response, HttpStatusCode statusCode) //TODO

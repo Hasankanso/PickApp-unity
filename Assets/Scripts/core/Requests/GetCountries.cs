@@ -13,7 +13,7 @@ namespace Requests {
         private Dictionary<string ,CountryInformations> countryInformations;
 
         public GetCountries() {
-            HttpPath = "PersonBusiness/GetCountries";
+            HttpPath = "/PersonBusiness/GetCountries";
         }
 
         public override Dictionary<string, CountryInformations> BuildResponse(string response, HttpStatusCode statusCode) {

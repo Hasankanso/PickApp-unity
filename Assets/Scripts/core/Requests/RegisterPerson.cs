@@ -19,7 +19,7 @@ namespace Requests
     {
       this.newUser = newUser;
       this.verificationToken = verificationToken;
-      HttpPath = "UserBusiness/Register";
+      HttpPath = "/UserBusiness/Register";
     }
 
     public override Person BuildResponse(string response, HttpStatusCode statusCode) //TODO
