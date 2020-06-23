@@ -15,16 +15,16 @@ public static class Program {
     public static Font font;
     public static Language language = Language.language;
     private static Person user;
+    private static string userToken;
     private static bool isLoggedIn = false;
     private static CountryInformations countryInformations = FakeCountry();//fake this should be set after finishing registration
     private static FirebaseApp firebaseApp = FirebaseApp.Create();
-  private static CountryInformations FakeCountry()
-  {
-  //  return new CountryInformations("0", "EUR", "Germany", 11, "+49");
-    return new CountryInformations("F85258BF-63A7-F939-FF31-C78BB1837300", "L.L", "Lebanon", 8, "+961");
-  }
+    private static CountryInformations FakeCountry() {
+        //  return new CountryInformations("0", "EUR", "Germany", 11, "+49");
+        return new CountryInformations("F85258BF-63A7-F939-FF31-C78BB1837300", "L.L", "Lebanon", 8, "+961");
+    }
 
-    private static Dictionary<string,CountryInformations> countriesInformations;//this list is for countries dropdown in registeration panel
+    private static Dictionary<string, CountryInformations> countriesInformations;//this list is for countries dropdown in registeration panel
     private static string cultureInfo = CultureInfo.CurrentCulture.Name;
     private static DateTime maxAlertDate;
     private static DateTime maxScheduleDate;
@@ -57,7 +57,7 @@ public static class Program {
         cars.Add(new Car("wizii", 1995, 4, 4, "Nissan", "#000000", FakeCarImage()));
         cars.Add(new Car("c300", 2000, 4, 4, "Mercedes", "#ffffff", FakeCarImage()));
         cars.Add(new Car("pikanto", 2003, 4, 2, "PIKA", "#ffffff", FakeCarImage()));
-      //  cars.Add(new Car("HammerX", 2005, 5, 5, "Hammer", "#ffffff", FakeCarImage()));
+        //  cars.Add(new Car("HammerX", 2005, 5, 5, "Hammer", "#ffffff", FakeCarImage()));
         return cars;
     }
     public static List<Chat> FakeChats() {
@@ -168,7 +168,7 @@ public static class Program {
         p.Bio = "I like to travel around lebanese mountains and roads, I like to eat albeni and lahme mad2ou2a";
         p.Rates = FakeRates(p);
         p.CountryInformations = new CountryInformations();
-         p.CountryInformations.Name="Lebanon" ;
+        p.CountryInformations.Name = "Lebanon";
         p.UpcomingRides = FakeUpcomingRides(p);
         return p;
     }
@@ -188,12 +188,12 @@ public static class Program {
         Passenger passenger = new Passenger(p, 4);
         return passenger;
     }
-    public static Dictionary<string,CountryInformations> FakeCountries() {
+    public static Dictionary<string, CountryInformations> FakeCountries() {
         Dictionary<string, CountryInformations> countriesInformations = new Dictionary<string, CountryInformations>();
-        var c1=new CountryInformations("id asnhdjasdnasd", "L.L", "Lebanon", 8, "+961");
-        var c2 =new CountryInformations("asdasdasdsad", "USD", "USA", 10, "+1");
-        countriesInformations.Add(c1.Name,c1);
-        countriesInformations.Add(c2.Name,c2);
+        var c1 = new CountryInformations("id asnhdjasdnasd", "L.L", "Lebanon", 8, "+961");
+        var c2 = new CountryInformations("asdasdasdsad", "USD", "USA", 10, "+1");
+        countriesInformations.Add(c1.Name, c1);
+        countriesInformations.Add(c2.Name, c2);
         return countriesInformations;
     }
     public static readonly string googleKey = "AIzaSyC7U0OEb9200tGZFFFTyLjQdo3goKyuSsw";
@@ -208,9 +208,10 @@ public static class Program {
 
     public static string AppName => appName;
 
-  public static FirebaseApp FirebaseApp { get => firebaseApp; set => firebaseApp = value; }
+    public static FirebaseApp FirebaseApp { get => firebaseApp; set => firebaseApp = value; }
+    public static string UserToken { get => userToken; set => userToken = value; }
 
-  public static Sprite GetImage(Texture2D texture2D) {
+    public static Sprite GetImage(Texture2D texture2D) {
         return Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 1024);
     }
     public static bool GetNewsCheckbox() {
