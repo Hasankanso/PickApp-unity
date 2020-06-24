@@ -34,10 +34,7 @@ public class PhonePanel : Panel
       verificationCompleted: (credential) =>
       {
         print(credential.ToString());
-        OpenDialog("Phone number has been validated!", true);
-        // Auto-sms-retrieval or instant validation has succeeded (Android only).
-        // There is no need to input the verification code.
-        // `credential` can be used instead of calling GetCredential().
+        Debug.Log("Phone number has been validated!");
       },
       verificationFailed: (error) =>
       {
@@ -50,29 +47,18 @@ public class PhonePanel : Panel
           resendCodeLabel.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
           codeImage.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
         }
-        // The verification code was not sent.
-        // `error` contains a human readable explanation of the problem.
       },
       codeSent: (id, token) =>
       {
-        OpenDialog("sms has been sent!, with id:" + id, true);
+        OpenDialog("Sms has been sent!" + id, true);
         verificationId = id;
         this.token = token;
-
-        // Verification code was successfully sent via SMS.
-        // `id` contains the verification id that will need to passed in with
-        // the code from the user when calling GetCredential().
-        // `token` can be used if the user requests the code be sent again, to
-        // tie the two requests together.
       },
         codeAutoRetrievalTimeOut: (id) =>
         {
           verificationId = id;
           OpenDialog("time out, make sure phone number is correct", false);
           print("time out, make sure phone number is correct");
-          // Called when the auto-sms-retrieval has timed out, based on the given
-          // timeout parameter.
-          // `id` contains the verification id of the request that timed out.
         });
   }
 
@@ -85,12 +71,9 @@ public class PhonePanel : Panel
     firebaseAuth.SignInWithCredentialAsync(credential).ContinueWith(task =>
     {
       if (task.IsFaulted)
-      {
         OpenDialog(task.Exception.ToString(), false);
-      }
 
       FirebaseUser newUser = task.Result;
-
       newUser.TokenAsync(true).ContinueWith(task2 =>
       {
         if (task2.IsCanceled)
@@ -99,16 +82,13 @@ public class PhonePanel : Panel
           Debug.LogError("TokenAsync was canceled.");
           return;
         }
-
         if (task2.IsFaulted)
         {
           OpenDialog("TokenAsync encountered an error: ", false);
           Debug.LogError("TokenAsync encountered an error: " + task.Exception);
           return;
         }
-
         string idToken = task2.Result;
-
         Request<Person> registerRequest = new RegisterPerson(person, idToken);
         registerRequest.Send(RegistrationResponse);
         // Send token to your backend via HTTPS

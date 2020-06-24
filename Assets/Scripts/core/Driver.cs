@@ -11,12 +11,12 @@ public class Driver : Person {
     private List<ScheduleRide> schedules = new List<ScheduleRide>();
 
     private DateTime updated;
-    public Driver(Person person, List<Car> cars, List<ScheduleRide> schedules) : base(person.Id, person.FirstName, person.LastName, person.Chattiness, person.Phone, person.Email, person.CountryInformations, person.Bio,person.RateAverage, person.Gender, person.Birthday, person.ProfilePictureUrl) {
+    public Driver(Person person, List<Car> cars, List<ScheduleRide> schedules) : base(person.Id, person.UserId, person.Token, person.FirstName, person.LastName, person.Chattiness, person.Phone, person.Email, person.CountryInformations, person.Bio,person.RateAverage, person.Gender, person.Birthday, person.Updated,person.ProfilePictureUrl) {
         this.cars = cars;
         this.schedules = schedules;
         IsDriver = true;
     }
-    public Driver(Person person, List<Car> cars) : base(person.Id, person.FirstName, person.LastName, person.Chattiness, person.Phone, person.Email, person.CountryInformations, person.Bio, person.RateAverage, person.Gender, person.Birthday, person.ProfilePictureUrl) {
+    public Driver(Person person, List<Car> cars) : base(person.Id, person.UserId, person.Token ,person.FirstName, person.LastName, person.Chattiness, person.Phone, person.Email, person.CountryInformations, person.Bio, person.RateAverage, person.Gender, person.Birthday, person.Updated, person.ProfilePictureUrl) {
         this.cars = cars;
         IsDriver = true;
     }

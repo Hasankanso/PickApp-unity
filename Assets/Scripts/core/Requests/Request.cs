@@ -39,6 +39,9 @@ namespace Requests {
                 string data = ToJson();
                 Debug.Log(data);
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
+                if (!string.IsNullOrEmpty(Program.UserToken)) {
+                    content.Headers.Add("user-token", Program.UserToken);
+                }
                 var answer = await Client.PostAsync(Ip + HttpPath, content);
                 string result = await answer.Content.ReadAsStringAsync();
                 Debug.Log(result);

@@ -39,6 +39,7 @@ public class LoginPanel : Panel {
             Program.SetPassword(password.GetComponent<InputField>().text);
             OpenDialog("Welcome back to PickApp", true);
             Program.IsLoggedIn = true;
+            Program.UserToken = p.Token;
             Program.CountryInformations = p.CountryInformations;
             if (!isFromFooter)
                 back();

@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class Person {
     public string id;
-    private string firstName, lastName, email, bio, chattiness;
+    private string firstName, lastName,  bio, chattiness;
     private DateTime birthday;
     private List<Rate> rates;
     private List<Ride> upcomingRides = new List<Ride>();
@@ -17,12 +17,14 @@ public class Person {
     public string image, profilePictureUrl;
     private float rateAverage;
     private DateTime updated;
-
+    private string token;
     private CountryInformations countryInformations;
 
     //user
     public string phone;
     public string password;
+    private string email;
+    private string userId;
 
     public Person(string phone, string password) {
         this.phone = phone;
@@ -30,9 +32,11 @@ public class Person {
     }
     public Person() {
     }
-    //Constructor for register
-    public Person(string id, string firstName, string lastName, string chattiness, string phone, string email, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday, string profilePictureUrl) {
-        this.Id = id;
+    //Constructor for login
+    public Person(string id,string userId, string token, string firstName, string lastName, string chattiness, string phone, string email, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday,DateTime updated, string profilePictureUrl) {
+        this.id = id;
+        this.UserId = userId;
+        this.token = token;
         this.firstName = firstName;
         this.bio = bio;
         this.phone = phone;
@@ -44,6 +48,7 @@ public class Person {
         this.gender = gender;
         this.countryInformations = countryInformations;
         this.birthday = birthday;
+        this.updated = updated;
     }
 
     //Constructor for Edit
@@ -93,12 +98,20 @@ public class Person {
     //Constructor for adding bio
 
     public static Person ToObject(JObject json) {
+        string token = "";
+        var tk = json["user-token"];
+        if (tk != null)
+            token = tk.ToString();
+        string userId = "";
+        var uId = json["objectId"];
+        if (uId != null)
+            userId = uId.ToString();
         string phone = "";
-        var ph = json["phone"];
+        var ph = json[nameof(phone)];
         if (ph != null)
             phone = ph.ToString();
         string email = "";
-        var em = json["email"];
+        var em = json[nameof(email)];
         if (em != null)
             email = em.ToString();
         json = (JObject)json["person"];
@@ -107,28 +120,35 @@ public class Person {
         if (oId != null)
             id = oId.ToString();
         string firstName = "";
-        var fn = json["firstName"];
+        var fn = json[nameof(firstName)];
         if (fn != null)
             firstName = fn.ToString();
         string lastName = "";
-        var ln = json["lastName"];
+        var ln = json[nameof(lastName)];
         if (ln != null)
             lastName = ln.ToString();
         string chattiness = "";
-        var cn = json["chattiness"];
+        var cn = json[nameof(chattiness)];
         if (cn != null)
             chattiness = cn.ToString();
         string bio = "";
-        var bi = json["bio"];
+        var bi = json[nameof(bio)];
         if (bi != null)
             bio = bi.ToString();
 
         double birthdayDouble = -1;
-        var br = json["birthday"];
+        var br = json[nameof(Person.birthday)];
         if (br != null) {
             double.TryParse(br.ToString(), out birthdayDouble);
         }
         DateTime birthday = Program.UnixToUtc(birthdayDouble);
+
+        double updatedDouble = -1;
+        var up = json[nameof(Person.updated)];
+        if (up != null) {
+            double.TryParse(up.ToString(), out updatedDouble);
+        }
+        DateTime updated = Program.UnixToUtc(updatedDouble);
 
         float rateAverage = -1;
         var ra = json[nameof(Person.rateAverage)];
@@ -140,8 +160,8 @@ public class Person {
         if (gn != null)
             bool.TryParse(gn.ToString(), out gender);
 
-        string image = json["image"].ToString();
-        return new Person(id, firstName, lastName, chattiness, phone, email, countryInformations, bio, rateAverage, gender, birthday, image);
+        string image = json[nameof(image)].ToString();
+        return new Person(id, userId, token, firstName, lastName, chattiness, phone, email, countryInformations, bio, rateAverage, gender, birthday, updated, image);
     }
     public Person(string email) {
         this.email = email;
@@ -175,4 +195,6 @@ public class Person {
     public string Image { get => image; set => image = value; }
     public DateTime Updated { get => updated; set => updated = value; }
     public string ProfilePictureUrl { get => profilePictureUrl; set => profilePictureUrl = value; }
+    public string Token { get => token;}
+    public string UserId { get => userId; set => userId = value; }
 }
