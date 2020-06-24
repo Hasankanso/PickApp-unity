@@ -108,7 +108,7 @@ public class SearchPanel : Panel
         valid = false;
       }
     }
-    if (Program.StringToDate(maxDate.text) < DateTime.Parse(minDate.text))
+    if (Program.StringToDate(maxDate.text) < Program.StringToDate(minDate.text))
     {
       OpenDialog("The maximum date range couldn't be less tham the minimum.", false);
       valid = false;
