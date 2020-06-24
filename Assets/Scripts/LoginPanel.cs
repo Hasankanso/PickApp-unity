@@ -13,14 +13,14 @@ using UnityEngine.Networking;
 using System.Threading.Tasks;
 
 public class LoginPanel : Panel {
-    public InputFieldScript phone, password;
+    public InputFieldScript phone,code, password;
     public Image backButton;
     private Person person;
     private bool isFromFooter;
 
     public void Login() {
         if (Validate()) {
-            Person person = new Person(phone.text.text, password.GetComponent<InputField>().text);
+            Person person = new Person("+"+code.text.text+phone.text.text, password.GetComponent<InputField>().text);
             Request<Person> request = new Login(person);
             request.Send(Response);
             
@@ -35,6 +35,7 @@ public class LoginPanel : Panel {
                 Program.User = (Driver)p;
             else
                 Program.User = p;
+            Program.SetPhoneCode(this.code.text.text);
             Program.SetPhone(phone.text.text);
             Program.SetPassword(password.GetComponent<InputField>().text);
             OpenDialog("Welcome back to PickApp", true);
@@ -58,6 +59,9 @@ public class LoginPanel : Panel {
         if (!string.IsNullOrEmpty(Program.GetPhone())) {
             phone.SetText(Program.GetPhone());
         }
+        if (!string.IsNullOrEmpty(Program.GetPhoneCode())) {
+            code.SetText(Program.GetPhoneCode());
+        }
         if (!string.IsNullOrEmpty(Program.GetPassword())) {
             password.SetText(Program.GetPassword());
         }
@@ -65,34 +69,39 @@ public class LoginPanel : Panel {
 
     private bool Validate() {
         bool valid = true;
+        if (code.text.text.Equals("")) {
+            code.Error();
+            OpenDialog("Please enter code", false);
+            valid = false;
+        }
         if (phone.text.text.Equals("")) {
             phone.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Please enter phone", false);
-            OpenDialog(p);
+            OpenDialog("Please enter phone", false);
             valid = false;
         }
         if (Regex.Matches(phone.text.text, @"[a-zA-Z]").Count > 0) {
             phone.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Invalid phone", false);
-            OpenDialog(p);
+            OpenDialog("Invalid phone", false);
             valid = false;
         }
         if (phone.text.text.Length > 15) {
             phone.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Your phone number is invalid", false);
-            OpenDialog(p);
+            OpenDialog("Your phone number is invalid", false);
+            valid = false;
+        }
+        if (phone.text.text.Length < 0) {
+            phone.Error();
+            OpenDialog("Your phone number is invalid", false);
             valid = false;
         }
         if (password.text.text.Equals("")) {
             password.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Enter password", false);
-            OpenDialog(p);
+            OpenDialog("Enter password", false);
             valid = false;
         }
         if (password.text.text.Length < 7) {
             password.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Invalid password", false);
-            OpenDialog(p);
+            OpenDialog("Invalid password", false);
             valid = false;
         }
         if (password.text.text.Any(char.IsDigit)) {
@@ -114,5 +123,6 @@ public class LoginPanel : Panel {
         backButton.gameObject.SetActive(false);
         phone.Reset();
         password.Reset();
+        code.Reset();
     }
 }

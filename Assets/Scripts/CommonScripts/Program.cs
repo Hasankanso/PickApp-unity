@@ -226,11 +226,17 @@ public static class Program {
     public static void SetPhone(string phone) {
         PlayerPrefs.SetString("phone", phone);
     }
+    public static void SetPhoneCode(string phoneCode) {
+        PlayerPrefs.SetString("phoneCode", phoneCode);
+    }
     public static void SetPassword(string password) {
         PlayerPrefs.SetString("password", password);
     }
     public static string GetPhone() {
         return PlayerPrefs.GetString("phone", "");
+    }
+    public static string GetPhoneCode() {
+        return PlayerPrefs.GetString("phoneCode", "");
     }
     public static string GetPassword() {
         return PlayerPrefs.GetString("password", "");
