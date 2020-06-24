@@ -44,11 +44,17 @@ namespace Requests
       {
         string data = ToJson();
         Debug.Log(data);
-        Client.DefaultRequestHeaders.Add("user-token", Program.token);
+
+        if (!String.IsNullOrEmpty(Program.UserToken))
+        {
+          Client.DefaultRequestHeaders.Add("user-token", Program.UserToken);
+        }
+
         var content = new StringContent(data, Encoding.UTF8, "application/json");
         var answer = await Client.PostAsync(Ip + HttpPath, content);
         string result = await answer.Content.ReadAsStringAsync();
         Debug.Log(result);
+
         callback(BuildResponse(result, answer.StatusCode), answer.StatusCode, answer.ReasonPhrase);
       }
     }

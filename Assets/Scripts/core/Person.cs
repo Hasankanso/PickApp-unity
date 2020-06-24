@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class Person {
     public string id;
+    public string phone, password;
     private string firstName, lastName, email, bio, chattiness;
     private DateTime birthday;
     private List<Rate> rates;
@@ -17,25 +18,23 @@ public class Person {
     public string image, profilePictureUrl;
     private float rateAverage;
     private DateTime updated;
-
     private CountryInformations countryInformations;
+    private string userPhone;
+  private string phone1;
 
-    //user
-    public string phone;
-    public string password;
-
-    public Person(string phone, string password) {
+  public Person(string phone, string password) {
         this.phone = phone;
         this.password = password;
     }
     public Person() {
     }
     //Constructor for register
-    public Person(string id, string firstName, string lastName, string chattiness, string phone, string email, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday, string profilePictureUrl) {
+    public Person(string id,string firstName, string lastName, string chattiness,string phone,string userPhone, string email, CountryInformations countryInformations, string bio, float rateAverage ,bool gender,DateTime birthday, string profilePictureUrl) {
         this.Id = id;
         this.firstName = firstName;
         this.bio = bio;
         this.phone = phone;
+        this.userPhone = userPhone;
         this.lastName = lastName;
         this.rateAverage = rateAverage;
         this.chattiness = chattiness;
@@ -93,10 +92,10 @@ public class Person {
     //Constructor for adding bio
 
     public static Person ToObject(JObject json) {
-        string phone = "";
-        var ph = json["phone"];
-        if (ph != null)
-            phone = ph.ToString();
+        string userPhone = "";
+        var phu = json["phone"];
+        if (phu != null)
+            userPhone = phu.ToString();
         string email = "";
         var em = json["email"];
         if (em != null)
@@ -118,6 +117,10 @@ public class Person {
         var cn = json["chattiness"];
         if (cn != null)
             chattiness = cn.ToString();
+        string phone = "";
+        var ph = json["phone"];
+        if (ph != null)
+            phone = ph.ToString();
         string bio = "";
         var bi = json["bio"];
         if (bi != null)
@@ -128,7 +131,7 @@ public class Person {
         if (br != null) {
             double.TryParse(br.ToString(), out birthdayDouble);
         }
-        DateTime birthday = Program.UnixToUtc(birthdayDouble);
+        DateTime birthday = Program.StringToBirthday(Program.UnixToUtc(birthdayDouble).ToString("dd/MM/yyyy"));
 
         float rateAverage = -1;
         var ra = json[nameof(Person.rateAverage)];
@@ -141,12 +144,27 @@ public class Person {
             bool.TryParse(gn.ToString(), out gender);
 
         string image = json["image"].ToString();
-        return new Person(id, firstName, lastName, chattiness, phone, email, countryInformations, bio, rateAverage, gender, birthday, image);
+        return new Person(id, firstName, lastName, chattiness,phone, userPhone, email, countryInformations, bio,rateAverage, gender, birthday, image);
     }
     public Person(string email) {
         this.email = email;
     }
-    public override string ToString() {
+
+  public Person(string phone, string password, string lastName, string chattiness, string phone1, string email, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday, string profilePictureUrl) : this(phone, password)
+  {
+    this.lastName = lastName;
+    this.chattiness = chattiness;
+    this.phone1 = phone1;
+    this.email = email;
+    this.countryInformations = countryInformations;
+    this.bio = bio;
+    this.rateAverage = rateAverage;
+    this.gender = gender;
+    this.birthday = birthday;
+    this.profilePictureUrl = profilePictureUrl;
+  }
+
+  public override string ToString() {
         return base.ToString();
     }
 
@@ -175,4 +193,5 @@ public class Person {
     public string Image { get => image; set => image = value; }
     public DateTime Updated { get => updated; set => updated = value; }
     public string ProfilePictureUrl { get => profilePictureUrl; set => profilePictureUrl = value; }
+    public string UserPhone { get => userPhone; set => userPhone = value; }
 }

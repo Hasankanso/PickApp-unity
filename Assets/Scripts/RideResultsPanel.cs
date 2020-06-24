@@ -16,7 +16,7 @@ public class RideResultsPanel : Panel
   public ListView resultsList;
   private List<RideItem> rideItems = new List<RideItem>();
   public Text filterButton, clearFilterButton;
-
+  public Transform noResultsPanel;
   public void Init(List<Ride> rides, SearchInfo searchInfo)
   {
     Clear();
@@ -25,9 +25,16 @@ public class RideResultsPanel : Panel
     this.to.text = searchInfo.To.ToString();
     this.rideNumber.text = rides.Count + " rides available";
     this.searchInfo = searchInfo;
-    foreach (Ride r in rides)
+
+
+    if (rides.Count > 0)
     {
-      AddItemToList(r);
+      foreach (Ride r in rides)
+      {
+        AddItemToList(r);
+      }
+    } else {
+      noResultsPanel.gameObject.SetActive(true);
     }
   }
   private void AddItemToList(Ride r)
@@ -152,6 +159,7 @@ public class RideResultsPanel : Panel
     gender.value = 0;
     filterButton.gameObject.SetActive(true);
     clearFilterButton.gameObject.SetActive(false);
+    noResultsPanel.gameObject.SetActive(false);
   }
 
   public void OnAlertClicked()
