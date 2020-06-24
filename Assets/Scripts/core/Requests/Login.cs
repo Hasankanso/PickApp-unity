@@ -15,8 +15,9 @@ namespace Requests {
         public override Person BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             JObject json = JObject.Parse(response);
-            /*if (json.GetValue("driver") != null && !string.IsNullOrEmpty(json.GetValue("driver").ToString()))
-               return Driver.ToObject(json);*/
+            JObject person = (JObject)json["person"];
+            if (person.GetValue("driver") != null && !string.IsNullOrEmpty(person.GetValue("driver").ToString()))
+               return Driver.ToObject(json);
             return Person.ToObject(json);
         }
 

@@ -10,7 +10,7 @@ public class Car
 {
   public string id;
   private int year, maxLuggage, maxSeats;
-  private string name, color, brand;
+  private string name, color, brand,carPictureUrl;
   private Texture2D picture;
   private string pictureBase64;
   private DateTime updated;
@@ -28,6 +28,17 @@ public class Car
         this.Name = name;
         this.Color = color;
         this.Picture = picture;
+    }
+    public Car(string name, string name1, int year, int maxLuggage, int maxSeats, string brand, string color, string carPictureUrl)
+    {
+
+        this.Year = year;
+        this.MaxLuggage = maxLuggage;
+        this.MaxSeats = maxSeats;
+        this.Brand = brand;
+        this.Name = name;
+        this.Color = color;
+        this.carPictureUrl = carPictureUrl;
     }
     public Car(string id,string name, int year, int maxLuggage, int maxSeats, string brand, string color, Texture2D picture) {
         this.id = id;
@@ -79,10 +90,9 @@ public class Car
         string color = "";
         var oColor = json["color"];
         if (oColor != null)
-
-        color = oColor.ToString();
-        //I didnt know how to make the picture to object   
-        return null;// new Car(id,name,year,maxLuggage,,maxSeats,brand,color,)
+            color = oColor.ToString();
+        string carPictureUrl = json["picture"].ToString();
+        return new Car(id, name, year, maxLuggage, maxSeats, brand, color, carPictureUrl);
     }
 
 
