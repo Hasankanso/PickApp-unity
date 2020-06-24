@@ -8,6 +8,7 @@ using UnityEngine;
 public class Driver : Person {
     List<string> regions = new List<string>();
     List<Car> cars;
+    string did;
     private List<ScheduleRide> schedules = new List<ScheduleRide>();
 
     private DateTime updated;
@@ -25,6 +26,7 @@ public class Driver : Person {
         IsDriver = true;
     }
     public Driver(string id, string firstName, string lastName, DateTime birthday, string email, string phone, string password, string region, Texture2D profilePicture, bool gender, List<Rate> rates, float rateAverage, List<Car> cars) : base(id, firstName, lastName, birthday, email, phone, password, profilePicture, gender, rates, rateAverage) {
+        did = id;
         this.cars = cars;
         IsDriver = true;
     }
@@ -54,6 +56,8 @@ public class Driver : Person {
     }
 
     public static Driver ToObject(JObject json) {
+        var Did = json["objectId"];
+        string did = Did.ToString();
         Person person = Person.ToObject(json);
         JObject pr = (JObject)json["person"];
         JObject driver = (JObject)pr["driver"];
@@ -74,6 +78,7 @@ public class Driver : Person {
     }
     public override List<Car> Cars { get => cars; }
     public List<string> Regions { get => regions; set => regions = value; }
+    public string Did { get => did; set => did = value; }
     public DateTime Updated { get => updated; set => updated = value; }
     public List<ScheduleRide> Schedules1 { get => schedules; set => schedules = value; }
 }

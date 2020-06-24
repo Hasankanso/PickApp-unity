@@ -120,7 +120,7 @@ public class Ride
 
     rideJ[nameof(this.car)] = this.Car.Id;
     rideJ[nameof(this.comment)] = this.Comment;
-    rideJ[nameof(this.driver)] = this.Driver.Id;
+    rideJ[nameof(this.driver)] = this.Driver.Did;
 
     rideJ[nameof(this.reservedLuggages)] = this.ReservedLuggages;
 
