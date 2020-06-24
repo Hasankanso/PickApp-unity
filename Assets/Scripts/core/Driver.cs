@@ -55,13 +55,14 @@ public class Driver : Person {
 
     public static Driver ToObject(JObject json) {
         Person person = Person.ToObject(json);
-        JObject driver = (JObject)json["driver"];
+        JObject pr = (JObject)json["person"];
+        JObject driver = (JObject)pr["driver"];
         JArray carsJ = (JArray)driver.GetValue("cars");
         List<Car> cars = new List<Car>();
         foreach (var car in carsJ) {
             cars.Add(Car.ToObject((JObject)car));
         }
-        if (driver.GetValue("schedules") != null && !string.IsNullOrEmpty(driver.GetValue("schedules").ToString())) {
+        if (driver.GetValue("schedules") != null && !string.IsNullOrEmpty(driver.GetValue("schedules").ToString())&& !driver.GetValue("schedules").ToString().Equals("[]")) {
             JArray schedulesJ = (JArray)json.GetValue("schedules");
             List<ScheduleRide> schedules = new List<ScheduleRide>();
             foreach (var schedule in schedulesJ) {
