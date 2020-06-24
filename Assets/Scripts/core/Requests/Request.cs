@@ -31,7 +31,7 @@ namespace Requests
      */
     public abstract T BuildResponse(string response, HttpStatusCode statusCode);
 
-<<<<<<< HEAD
+
         public async void Send(Action<T, HttpStatusCode, string> callback) {
             string valid = IsValid();
             Debug.Log(valid);
@@ -50,34 +50,7 @@ namespace Requests
                 Debug.Log(result);
                 callback(BuildResponse(result, answer.StatusCode), answer.StatusCode, answer.ReasonPhrase);
             }
-=======
-    public async void Send(Action<T, HttpStatusCode, string> callback)
-    {
-      string valid = IsValid();
-      Debug.Log(valid);
-      if (!string.IsNullOrEmpty(valid))
-      {
-        Debug.Log("error");
-        callback(default, HttpStatusCode.NotAcceptable, valid);
-      }
-      else
-      {
-        string data = ToJson();
-        Debug.Log(data);
 
-        if (!String.IsNullOrEmpty(Program.UserToken))
-        {
-          Client.DefaultRequestHeaders.Add("user-token", Program.UserToken);
->>>>>>> cfcd2077dbc48eab369f964db5c500cc22f022a4
-        }
-
-        var content = new StringContent(data, Encoding.UTF8, "application/json");
-        var answer = await Client.PostAsync(Ip + HttpPath, content);
-        string result = await answer.Content.ReadAsStringAsync();
-        Debug.Log(result);
-
-        callback(BuildResponse(result, answer.StatusCode), answer.StatusCode, answer.ReasonPhrase);
-      }
     }
 
     public static List<KeyValuePair<string, string>> ToList(object obj, List<KeyValuePair<string, string>> list, string parentKey)
