@@ -360,8 +360,9 @@ public class RideDetails : Panel
   private void AddRideResponse(Ride result, HttpStatusCode code, string message)
   {
     if (!code.Equals(HttpStatusCode.OK)) Debug.Log("no results");
-
-    Debug.Log("Got Response from servaa");
+        Program.User.UpcomingRides.Add(result);
+        FooterMenu.dFooterMenu.OpenYourRidesPanel();
+        Debug.Log("Got Response from servaa");
 
   }
 

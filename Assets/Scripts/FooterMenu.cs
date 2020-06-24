@@ -115,7 +115,7 @@ public void OpenProfilePanel() {
     currPanel.openExisted(yourRidesPanel);
     currPanel = yourRidesPanel;
     myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
-    yourRidesPanel.Init(Program.FakeUser());
+    yourRidesPanel.Init(Program.User);
   }
 
   public static bool IsStaticPanel(Panel p){

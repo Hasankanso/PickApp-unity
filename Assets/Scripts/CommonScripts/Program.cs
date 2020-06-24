@@ -14,7 +14,7 @@ public static class Program {
     public static int fontSize = 28;
     public static Font font;
     public static Language language = Language.language;
-    private static Person user;
+    private static Person user ;
     private static string userToken;
     private static bool isLoggedIn = false;
     private static CountryInformations countryInformations = FakeCountry();//fake this should be set after finishing registration

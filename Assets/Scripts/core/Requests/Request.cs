@@ -35,7 +35,7 @@ namespace Requests {
             if (!string.IsNullOrEmpty(valid)) {
                 Debug.Log("error");
                 callback(default, HttpStatusCode.NotAcceptable, valid);
-            } else { 
+            } else {
                 string data = ToJson();
                 Debug.Log(data);
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
