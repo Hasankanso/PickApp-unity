@@ -13,8 +13,7 @@ namespace Requests {
         private Driver driver;
         public BecomeDriver(Driver driver) {
             this.driver = driver;
-            HttpPath = "/Server/RideController";
-            Action = "becomeDriver";
+            HttpPath = "/PersonBusiness/BecomeDriver";
         }
 
         public override BecomeDriver BuildResponse(string response, HttpStatusCode statusCode) //TODO we have to use statusCode

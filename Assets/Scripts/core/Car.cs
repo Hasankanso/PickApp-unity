@@ -29,9 +29,9 @@ public class Car
         this.Color = color;
         this.Picture = picture;
     }
-    public Car(string name, string name1, int year, int maxLuggage, int maxSeats, string brand, string color, string carPictureUrl)
+    public Car(string id,string name, int year, int maxLuggage, int maxSeats, string brand, string color, string carPictureUrl)
     {
-
+        this.Id = id;
         this.Year = year;
         this.MaxLuggage = maxLuggage;
         this.MaxSeats = maxSeats;
