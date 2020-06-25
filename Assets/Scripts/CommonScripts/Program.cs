@@ -277,8 +277,4 @@ public static class Program {
     public static DateTime CombineDateTime(String date, String time) {
         return CombineDateTime(StringToDate(date), StringToDate(time));
     }
-    public static void Logout() {
-        Backendless.UserService.Logout();
-        IsLoggedIn = false;
-    }
 }

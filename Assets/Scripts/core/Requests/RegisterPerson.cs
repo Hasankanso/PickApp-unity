@@ -31,7 +31,6 @@ namespace Requests
     {
       JObject data = new JObject();
       JObject personJ = newUser.ToJson();
-      personJ[nameof(newUser.phone)] = newUser.Phone;
 
       if (!string.IsNullOrEmpty(newUser.image))
       {
