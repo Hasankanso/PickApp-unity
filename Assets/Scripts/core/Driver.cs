@@ -8,25 +8,27 @@ using UnityEngine;
 public class Driver : Person {
     List<string> regions = new List<string>();
     List<Car> cars;
-    string did;
+    string dId;
     private List<ScheduleRide> schedules = new List<ScheduleRide>();
 
     private DateTime updated;
-    public Driver(Person person, List<Car> cars, List<ScheduleRide> schedules) : base(person.Id, person.UserId, person.Token, person.FirstName, person.LastName, person.Chattiness, person.Phone, person.Email, person.CountryInformations, person.Bio,person.RateAverage, person.Gender, person.Birthday, person.Updated,person.ProfilePictureUrl) {
+    public Driver(string dId,Person person, List<Car> cars, List<ScheduleRide> schedules) : base(person.Id, person.UserId, person.Token, person.FirstName, person.LastName, person.Chattiness, person.Phone, person.Email, person.CountryInformations, person.Bio,person.RateAverage, person.Gender, person.Birthday, person.Updated,person.ProfilePictureUrl) {
         this.cars = cars;
         this.schedules = schedules;
         IsDriver = true;
+        this.dId = dId;
     }
-    public Driver(Person person, List<Car> cars) : base(person.Id, person.UserId, person.Token ,person.FirstName, person.LastName, person.Chattiness, person.Phone, person.Email, person.CountryInformations, person.Bio, person.RateAverage, person.Gender, person.Birthday, person.Updated, person.ProfilePictureUrl) {
+    public Driver(string dId, Person person, List<Car> cars) : base(person.Id, person.UserId, person.Token ,person.FirstName, person.LastName, person.Chattiness, person.Phone, person.Email, person.CountryInformations, person.Bio, person.RateAverage, person.Gender, person.Birthday, person.Updated, person.ProfilePictureUrl) {
         this.cars = cars;
         IsDriver = true;
+        this.dId = dId;
     }
     public Driver(Person person, List<string> regions) : base(person.FirstName, person.LastName, person.Phone, person.Birthday, person.ProfilePicture, person.CountryInformations, person.Gender) {
         this.Regions = regions;
         IsDriver = true;
     }
     public Driver(string id, string firstName, string lastName, DateTime birthday, string email, string phone, string password, string region, Texture2D profilePicture, bool gender, List<Rate> rates, float rateAverage, List<Car> cars) : base(id, firstName, lastName, birthday, email, phone, password, profilePicture, gender, rates, rateAverage) {
-        did = id;
+        dId = id;
         this.cars = cars;
         IsDriver = true;
     }
@@ -56,11 +58,13 @@ public class Driver : Person {
     }
 
     public static Driver ToObject(JObject json) {
-        var Did = json["objectId"];
-        string did = Did.ToString();
         Person person = Person.ToObject(json);
         JObject pr = (JObject)json["person"];
         JObject driver = (JObject)pr["driver"];
+        string did = "";
+        var dId = driver["objectId"];
+        if (dId != null)
+             did = dId.ToString();
         JArray carsJ = (JArray)driver.GetValue("cars");
         List<Car> cars = new List<Car>();
         foreach (var car in carsJ) {
@@ -72,13 +76,13 @@ public class Driver : Person {
             foreach (var schedule in schedulesJ) {
                 schedules.Add(ScheduleRide.ToObject((JObject)schedule));
             }
-            return new Driver(person, cars,schedules);
+            return new Driver(did,person, cars,schedules);
         } else
-            return new Driver(person, cars);
+            return new Driver(did,person, cars);
     }
     public override List<Car> Cars { get => cars; }
     public List<string> Regions { get => regions; set => regions = value; }
-    public string Did { get => did; set => did = value; }
+    public string Did { get => dId; set => dId = value; }
     public DateTime Updated { get => updated; set => updated = value; }
     public List<ScheduleRide> Schedules1 { get => schedules; set => schedules = value; }
 }

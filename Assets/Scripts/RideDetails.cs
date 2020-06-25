@@ -363,7 +363,7 @@ public class RideDetails : Panel
         Program.User.UpcomingRides.Add(result);
         FooterMenu.dFooterMenu.OpenYourRidesPanel();
         Debug.Log("Got Response from servaa");
-
+        this.destroy();
   }
 
   public void EditRideResponse(ScheduleRide result, HttpStatusCode code, string message)

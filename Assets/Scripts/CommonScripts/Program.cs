@@ -164,7 +164,7 @@ public static class Program {
 
     public static Driver FakeNewDriver() {
         Person pr = new Person("wdedwed", "Jaafar", "Ali", new DateTime(1990, 10, 10), "adel@adel.adel", "passwordyy", "Lebanon", FakeProfileImage(), true, null, 4.0f);
-        Driver p = new Driver(pr, FakeCars(), FakeSchedule((Driver)pr));
+        Driver p = new Driver("",pr, FakeCars(), FakeSchedule((Driver)pr));
         p.Bio = "I like to travel around lebanese mountains and roads, I like to eat albeni and lahme mad2ou2a";
         p.Rates = FakeRates(p);
         p.CountryInformations = new CountryInformations();
