@@ -109,14 +109,23 @@ public void OpenProfilePanel() {
     inboxPanel.Init(Program.FakeChats());
   }
 
-  public void OpenYourRidesPanel()
-  {
-    ResetButtons();
-    currPanel.openExisted(yourRidesPanel);
-    currPanel = yourRidesPanel;
-    myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
-    yourRidesPanel.Init(Program.User);
-  }
+    public void OpenYourRidesPanel()
+    {
+        ResetButtons();
+        if (!Program.IsLoggedIn)
+        {
+            Panel notLoginPanel = PanelsFactory.createLogin(true);
+            currPanel.openCreated(notLoginPanel);
+            currPanel = notLoginPanel;
+        }
+        else
+        {
+            currPanel.openExisted(yourRidesPanel);
+            currPanel = yourRidesPanel;
+            myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
+            yourRidesPanel.Init(Program.User);
+        }
+    }
 
   public static bool IsStaticPanel(Panel p){
     return p.Equals(dFooterMenu.searchPanel) || p.Equals(dFooterMenu.addRidePanel) || p.Equals(dFooterMenu.yourRidesPanel) || p.Equals(dFooterMenu.inboxPanel) || p.Equals(dFooterMenu.profilePanel);

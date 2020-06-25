@@ -44,9 +44,8 @@ public class LoginPanel : Panel {
             Program.CountryInformations = p.CountryInformations;
             if (!isFromFooter)
                 back();
-            else {
+            else 
                 FooterMenu.dFooterMenu.OpenProfilePanel();
-            }
         }
     }
 
