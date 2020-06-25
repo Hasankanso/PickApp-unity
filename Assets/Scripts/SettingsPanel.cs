@@ -55,7 +55,7 @@ public class SettingsPanel : Panel {
     private void response(string result, HttpStatusCode code, string message) {
         if (!code.Equals(HttpStatusCode.OK)) {
         } else {
-            OpenDialog("Waiting for your to come back!", true);
+            OpenDialog("Waiting for your come back!", true);
             Program.User = null;
             Program.IsLoggedIn = false;
             Program.UserToken = null;
