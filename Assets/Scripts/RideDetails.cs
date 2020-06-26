@@ -161,10 +161,12 @@ public class RideDetails : Panel
     if (person.ProfilePicture!=null) {
         profileImage.sprite = Program.GetImage(person.ProfilePicture);
     }
+
     if(ride.Map ==null){
         StartCoroutine(Panel.RequestImage(ride.MapUrl, Succeed, Error));
+    } else {
+      rideMapImage.sprite = Program.GetImage(ride.Map);
     }
-  
   }
 
   private void Error(string obj)
