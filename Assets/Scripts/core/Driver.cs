@@ -95,6 +95,6 @@ public class Driver
   public List<string> Regions { get => regions; set => regions = value; }
   public string Did { get => id; set => id = value; }
   public DateTime Updated { get => updated; set => updated = value; }
-  public List<ScheduleRide> Schedules1 { get => schedules; set => schedules = value; }
+  public List<ScheduleRide> Schedules { get => schedules; set => schedules = value; }
   public string Id { get => id; set => id = value; }
 }

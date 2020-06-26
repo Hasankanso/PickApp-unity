@@ -24,18 +24,20 @@ public class ProfilePanel : Panel
     Clear();
 
     Person person = Program.Person;
+    Driver driver = Program.Driver;
+
     if (Program.Person.ProfilePicture == null)
       StartCoroutine(Panel.RequestImage(person.ProfilePictureUrl, Succed, Error));
     StatusProperty = Status.VIEW;
     fullName.text = person.FirstName + " " + person.LastName;
     ratings.text = person.RateAverage.ToString() + "/5 ";
-    if (person.IsDriver)
+    if (driver != null)
     {
       scheduleLabel.SetActive(true);
       regionsLabel.SetActive(true);
       becomeDriverLabel.SetActive(false);
-      ImplementCarList(person.Cars);
-      ImplementScheduleList(person.Schedules);
+      ImplementCarList(driver.Cars);
+      ImplementScheduleList(driver.Schedules);
     }
     else
       becomeDriverLabel.SetActive(true);
@@ -67,7 +69,7 @@ public class ProfilePanel : Panel
   public void ImplementScheduleList(List<ScheduleRide> schedules)
   {
     Person person = Program.Person;
-    if ((schedules != null) && schedules.Count > 0 && person.Cars.Count > 0)
+    if ((schedules != null) && schedules.Count > 0 && Program.Driver.Cars.Count > 0)
     {
       scheduleLabel.SetActive(false);
       scheduleContainer.SetActive(true);
@@ -107,10 +109,10 @@ public class ProfilePanel : Panel
   }
   public void AddSchedule()
   {
-    Person person = Program.Person;
-    if (person.Cars.Count > 0)
+    Driver driver = Program.Driver;
+    if (driver.Cars.Count > 0)
     {
-      if (person.Schedules.Count < Program.MaxSchedulesPerUser)
+      if (driver.Schedules.Count < Program.MaxSchedulesPerUser)
       {
         SchedulePanel panel = PanelsFactory.CreateAddSchedule();
         panel.Init();
@@ -126,8 +128,8 @@ public class ProfilePanel : Panel
   }
   public void AddCar()
   {
-    Person person = Program.Person;
-    if (person.Cars.Count < 4)
+    Driver driver = Program.Driver;
+    if (driver.Cars.Count < 4)
     {
       Panel panel = PanelsFactory.createAddCar();
       openCreated(panel);

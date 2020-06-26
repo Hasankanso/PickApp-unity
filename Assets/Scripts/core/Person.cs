@@ -13,7 +13,7 @@ public class Person
   private DateTime birthday;
   private List<Rate> rates;
   private List<Ride> upcomingRides = new List<Ride>();
-  private bool gender, isDriver;
+  private bool gender;
   public Texture2D profilePicture;
   public string image, profilePictureUrl;
   private float rateAverage;
@@ -172,9 +172,7 @@ public class Person
   public List<Ride> UpcomingRides { get { return upcomingRides; } set { upcomingRides = value; } }
   public List<Rate> Rates { get { return rates; } set { rates = value; } }
   public float RateAverage { get => rateAverage; set => rateAverage = value; }
-  public bool IsDriver { get => isDriver; set => isDriver = value; }
-  virtual public List<Car> Cars { get => null; }
-  virtual public List<ScheduleRide> Schedules { get => null; }
+
   public string Image { get => image; set => image = value; }
   public DateTime Updated { get => updated; set => updated = value; }
   public string ProfilePictureUrl { get => profilePictureUrl; set => profilePictureUrl = value; }
