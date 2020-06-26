@@ -65,9 +65,9 @@ public class PanelsFactory : MonoBehaviour {
         phonePanel.Init();
         return phonePanel;
     }
-    public static PhonePanel CreatePhonePanel(Person person) {
+    public static PhonePanel CreatePhonePanel(User user) {
         PhonePanel phonePanel = Instantiate(defaultPanelsFactory.phonePanel);
-        phonePanel.Init(person);
+        phonePanel.Init(user);
         return phonePanel;
     }
     public static LoginPanel createLogin(bool isFromFooter) {
@@ -85,9 +85,9 @@ public class PanelsFactory : MonoBehaviour {
         becomeDriver.Init(person);
         return becomeDriver;
     }
-    public static BecomeDriver CreateBecomeDriver(Driver driver) {
+    public static BecomeDriver CreateBecomeDriver() {
         BecomeDriver becomeDriver = Instantiate(defaultPanelsFactory.becomeDriver);
-        becomeDriver.Init(driver);
+        becomeDriver.Init();
         return becomeDriver;
     }
     public static CarDetails CreateCarDetails(Car car) {
@@ -100,9 +100,9 @@ public class PanelsFactory : MonoBehaviour {
         notificationsPanel.Init();
         return notificationsPanel;
     }
-    public static UserRatings createUserRatings(Person person) {
+    public static UserRatings CreateUserRatings(User user) {
         UserRatings userRatings = Instantiate(defaultPanelsFactory.userRatings);
-        userRatings.init(person);
+        userRatings.Init(user);
         return userRatings;
     }
     public static ChatPanel createChat(Chat chat) {
@@ -120,9 +120,8 @@ public class PanelsFactory : MonoBehaviour {
         ride.Init(rides, searchInfo);
         return ride;
     }
-    public static BookingHistoryPanel createBookingHistory(Person person) {
+    public static BookingHistoryPanel CreateBookingHistory() {
         BookingHistoryPanel ride = Instantiate(defaultPanelsFactory.bookingHistory);
-        ride.init(person);
         return ride;
     }
 
@@ -164,11 +163,7 @@ public class PanelsFactory : MonoBehaviour {
         SearchPanel searchPanel = Instantiate(defaultPanelsFactory.searchPanel);
         return searchPanel;
     }
-    public static SettingsPanel createSettings(Person person) {
-        SettingsPanel settingsPanel = Instantiate(defaultPanelsFactory.settingsPanel);
-        settingsPanel.init(person);
-        return settingsPanel;
-    }
+
     public static SettingsPanel createSettings() {
         SettingsPanel settingsPanel = Instantiate(defaultPanelsFactory.settingsPanel);
         return settingsPanel;
@@ -201,27 +196,26 @@ public class PanelsFactory : MonoBehaviour {
         return privacyPolicy;
     }
 
-    public static UserDetails CreateUserDetails(Person person, bool isDriver) {
+    public static UserDetails CreateUserDetails(User person) {
         UserDetails userDetails = Instantiate(defaultPanelsFactory.userDetails);
-        userDetails.Init(person, isDriver);
+        userDetails.Init(person);
         return userDetails;
     }
 
-    public static AccountPanel CreateAccountPanel(Person person) {
+    public static AccountPanel CreateAccountPanel() {
         AccountPanel accountPanel = Instantiate(defaultPanelsFactory.accountPanel);
-        accountPanel.init(person);
+        accountPanel.Init();
         return accountPanel;
     }
 
-    public static BioPanel CreateBioPanel(Person person) {
+    public static BioPanel CreateBioPanel() {
         BioPanel bioPanel = Instantiate(defaultPanelsFactory.bioPanel);
-        bioPanel.init(person);
+        bioPanel.Init();
         return bioPanel;
     }
 
-    public static ChattinessPanel createChattinessPanel(Person person) {
+    public static ChattinessPanel CreateChattinessPanel() {
         ChattinessPanel chattinessPanel = Instantiate(defaultPanelsFactory.chattinessPanel);
-        chattinessPanel.init(person);
         return chattinessPanel;
     }
 
@@ -268,14 +262,14 @@ public class PanelsFactory : MonoBehaviour {
         return dialogBox;
     }
 
-    public static ChangePasswordPanel ChangePassword(Person person) {
+    public static ChangePasswordPanel ChangePassword(User user) {
         ChangePasswordPanel changePassword = Instantiate(defaultPanelsFactory.changePassword);
-        changePassword.Init(person);
+        changePassword.Init(user);
         return changePassword;
     }
-    public static ChangePasswordPanel ChangePassword(bool isForgetPassword, Person person) {
+    public static ChangePasswordPanel ChangePassword(bool isForgetPassword, User user) {
         ChangePasswordPanel changePassword = Instantiate(defaultPanelsFactory.changePassword);
-        changePassword.Init(isForgetPassword, person);
+        changePassword.Init(isForgetPassword, user);
         return changePassword;
     }
 }

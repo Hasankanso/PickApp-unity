@@ -18,7 +18,7 @@ public class RideItem : MonoBehaviour
     this.price.text = ride.CountryInformations.ToString();
     this.origin.text = ride.From.ToString();
     this.target.text = ride.To.ToString();
-    Person driver = ride.Driver;
+    User user = ride.User;
    // this.driverName.text = driver.FirstName + " " + driver.LastName;
    // this.rating.text = driver.RateAverage + "";
     //this.profilePicture.sprite = Program.GetImage(driver.ProfilePicture);

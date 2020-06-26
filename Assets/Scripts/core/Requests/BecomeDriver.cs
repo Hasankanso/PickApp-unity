@@ -9,14 +9,14 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
 namespace Requests {
-    class BecomeDriver : Request<BecomeDriver> {
+    class BecomeDriver : Request<Driver> {
         private Driver driver;
         public BecomeDriver(Driver driver) {
             this.driver = driver;
             HttpPath = "/PersonBusiness/BecomeDriver";
         }
 
-        public override BecomeDriver BuildResponse(string response, HttpStatusCode statusCode) //TODO we have to use statusCode
+        public override Driver BuildResponse(string response, HttpStatusCode statusCode) //TODO we have to use statusCode
         {
             //return JsonConvert.DeserializeObject<Ride>(response);
             throw new System.NotImplementedException();

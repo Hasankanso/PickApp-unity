@@ -11,14 +11,14 @@ public class UserDetails : Panel {
     public Image profileImage,message;
     private Person person = null;
 
-    public void Init(Person person,bool isDriver) {
-        this.person = person;
+    public void Init(User user) {
+        this.person = user.Person;
         bio.text = person.Bio;
         fullName.text = person.FirstName + " " + person.LastName;
         ratings.text = person.RateAverage.ToString() + "/5 - " + person.Rates.Count + " ratings";
         chattiness.text = person.Chattiness;
         profileImage.sprite = Program.GetImage(person.ProfilePicture);
-        if (isDriver) {
+        if (user.Driver !=null) {
             message.gameObject.SetActive(true);
         }
     }

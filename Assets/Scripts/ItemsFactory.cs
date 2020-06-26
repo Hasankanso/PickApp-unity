@@ -68,11 +68,11 @@ public class ItemsFactory : MonoBehaviour
     caritem.init(car, profilePanel);
     return caritem;
   }
-  public static ScheduleItem CreateScheduleItem(GameObject parent, ScheduleRide scheduleRide, Panel profilePanel, AddRidePanel addRide)
+  public static ScheduleItem CreateScheduleItem(GameObject parent, ScheduleRide scheduleRide, Panel profilePanel)
   {
     ScheduleItem scheduleItem = Instantiate(defaultItemsFactory.scheduleItem);
     scheduleItem.transform.SetParent(parent.transform, false);
-    scheduleItem.init(scheduleRide, profilePanel, addRide);
+    scheduleItem.init(scheduleRide, profilePanel);
     return scheduleItem;
   }
   public static MyRideItem CreateMyRideItem(GameObject parent, Ride ride, Person person, MyRidePanel yourRidesPanel)
@@ -86,7 +86,7 @@ public class ItemsFactory : MonoBehaviour
   {
     BookingHistoryItem bookingHistoryItem = Instantiate(defaultItemsFactory.bookingHistoryItem);
     bookingHistoryItem.transform.SetParent(parent.transform, false);
-    bookingHistoryItem.init( Program.DateToString(o.LeavingDate), o.Price + o.CountryInformations.Unit, o.From.Name, o.To.Name, o.Driver.FirstName, o.Driver.ProfilePicture);
+    bookingHistoryItem.init( Program.DateToString(o.LeavingDate), o.Price + o.CountryInformations.Unit, o.From.Name, o.To.Name, o.User.Person.FirstName, o.User.Person.ProfilePicture);
     return bookingHistoryItem;
   }
   public static RideItem CreateRideItem(GameObject parent, Ride ride, Action<Ride> OnItemClick)

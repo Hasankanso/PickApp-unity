@@ -10,13 +10,13 @@ using UnityEngine;
 namespace Requests {
     class ReserveSeat : Request<Ride> {
         Ride ride;
-        Person person;
+        User user;
         int seats;
 
-        public ReserveSeat(Ride ride, Person user, int seats) {
+        public ReserveSeat(Ride ride, User user, int seats) {
             this.ride = ride;
             this.seats = seats;
-            this.person = user;
+            this.user = user;
             HttpPath = "";
             Action = "reserveRide";
         }
@@ -30,7 +30,7 @@ namespace Requests {
         public override string ToJson() {
             JObject reserveJ = new JObject();
             reserveJ[nameof(ride)] = new JObject { [nameof(ride.id)] = ride.Id };
-            reserveJ[nameof(person)] = new JObject { [nameof(person.id)] = person.Id };
+            reserveJ[nameof(user)] = new JObject { [nameof(user.id)] = user.Id };
             reserveJ[nameof(seats)] = this.seats;
             return reserveJ.ToString();
         }

@@ -11,20 +11,21 @@ using UnityEngine;
 
 namespace Requests
 {
-  public class RegisterPerson : Request<Person>
+  public class RegisterPerson : Request<User>
   {
-    Person newUser;
+    User newUser;
     string verificationToken;
-    public RegisterPerson(Person newUser, string verificationToken)
+    public RegisterPerson(User newUser, string verificationToken)
     {
       this.newUser = newUser;
       this.verificationToken = verificationToken;
       HttpPath = "/UserBusiness/Register";
     }
 
-    public override Person BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    public override User BuildResponse(string response, HttpStatusCode statusCode) //TODO
     {
-      return JsonConvert.DeserializeObject<Person>(response);
+      return null;
+      //return JsonConvert.DeserializeObject<Person>(response);
     }
 
     public override string ToJson()
@@ -32,9 +33,9 @@ namespace Requests
       JObject data = new JObject();
       JObject personJ = newUser.ToJson();
 
-      if (!string.IsNullOrEmpty(newUser.image))
+      if (!string.IsNullOrEmpty(newUser.Person.image))
       {
-        personJ[nameof(newUser.image)] = newUser.Image;
+        personJ[nameof(newUser.Person.image)] = newUser.Person.Image;
       }
 
       data["person"] = personJ;

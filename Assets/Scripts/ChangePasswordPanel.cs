@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 public class ChangePasswordPanel : Panel {
     public InputFieldScript currentPassword, newPassword, confirmPassword;
-    private Person person = null;
+    private User user = null;
     private bool isChangePassword;
     public Button changePassword, register;
     private bool isForgetPassword = false;
@@ -21,10 +21,10 @@ public class ChangePasswordPanel : Panel {
     public void submit() {
         if (validate()) {
             if (isForgetPassword) {
-                Request<Person> request = new ForgetPassword(person, newPassword.GetComponent<InputField>().text);
+                Request<Person> request = new ForgetPassword(user, newPassword.GetComponent<InputField>().text);
                 Task.Run(() => request.Send(response));
             } else {
-                Request<Person> request = new ChangePassword(person, currentPassword.GetComponent<InputField>().text, newPassword.GetComponent<InputField>().text);
+                Request<Person> request = new ChangePassword(user, currentPassword.GetComponent<InputField>().text, newPassword.GetComponent<InputField>().text);
                 Task.Run(() => request.Send(response));
             }
         }
@@ -42,23 +42,23 @@ public class ChangePasswordPanel : Panel {
     }
     public void Register() {
         if (validate()) {
-            person.Password = newPassword.GetComponent<InputField>().text;
-            Panel panel = PanelsFactory.CreatePhonePanel(person);
+            user.Password = newPassword.GetComponent<InputField>().text;
+            Panel panel = PanelsFactory.CreatePhonePanel(user);
             openCreated(panel);
         }
     }
-    public void Init(Person person) {
+    public void Init(User user) {
         Clear();
-        this.person = person;
+        this.user = user;
         isChangePassword = true;
         changePassword.gameObject.SetActive(true);
     }
-    public void Init(bool isForgetPassword, Person person) {
+    public void Init(bool isForgetPassword, User user) {
         Clear();
         isChangePassword = false;
         this.isForgetPassword = isForgetPassword;
         currentPassword.gameObject.SetActive(false);
-        this.person = person;
+        this.user = user;
         if (!isForgetPassword)
             register.gameObject.SetActive(true);
         else

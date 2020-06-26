@@ -12,13 +12,11 @@ public class BookingHistoryPanel : Panel
 {
     public ListView listView;
     public InputField search;
-    private Person person = null;
     private List<Ride> rides = null;
     private List<BookingHistoryItem> bookingHistoryItems = new List<BookingHistoryItem>();
 
-    public void init(Person person)
+    public void Init()
     {
-        this.person = person;
         GetMyRidesHistory();
     }
     public void GetMyRidesHistory()

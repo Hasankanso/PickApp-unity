@@ -14,10 +14,9 @@ public static class Program {
     public static int fontSize = 28;
     public static Font font;
     public static Language language = Language.language;
-    private static Person user ;
+    private static User user ;
     private static string userToken;
     private static bool isLoggedIn = false;
-    private static CountryInformations countryInformations = FakeCountry();//fake this should be set after finishing registration
     private static FirebaseApp firebaseApp = FirebaseApp.Create();
     private static CountryInformations FakeCountry() {
         //  return new CountryInformations("0", "EUR", "Germany", 11, "+49");
@@ -62,8 +61,6 @@ public static class Program {
     }
     public static List<Chat> FakeChats() {
         List<Chat> chats = new List<Chat>();
-        chats.Add(new Chat(DateTime.Now, FakeMessages(), FakeNewUser(), true));
-        chats.Add(new Chat(DateTime.Now, FakeMessages(), FakeUser(), false));
         return chats;
     }
     public static List<Message> FakeMessages() {
@@ -78,14 +75,10 @@ public static class Program {
         messages.Add(new Message("100$ miin?", DateTime.Now, true));
         return messages;
     }
-    public static List<ScheduleRide> FakeSchedule(Driver d) {
-        List<ScheduleRide> scheduleRide = new List<ScheduleRide>(4);
-        scheduleRide.Add(new ScheduleRide(DateTime.Now.AddDays(-12), DateTime.Now.AddDays(2), true, false, true, true, true, false, false, FakeRide(d, d.Cars[0])));
-        scheduleRide.Add(new ScheduleRide(DateTime.Now.AddDays(2), DateTime.Now.AddDays(10), true, false, true, true, true, false, false, FakeRide(d, d.Cars[1])));
-        return scheduleRide;
-    }
+
+
     public static Person FakeReviewer() {
-        Person p = new Person("wdedwed", "Mr", "Judge", new DateTime(2000, 10, 10), "0111222333", "darkEnergy", "Lebanon", FakeProfileImage(), true, null, 4.0f);
+        Person p = new Person("wdedwed", "Mr", "Judge", new DateTime(2000, 10, 10), "0111222333", FakeProfileImage(), true, null, 4.0f);
         return p;
     }
 
@@ -93,101 +86,8 @@ public static class Program {
         return new Texture2D(100, 100);
     }
 
-    public static Ride FakeRide(Driver driver, Car c) {
-        Ride r = new Ride(driver, c, new Location("fakeid", "Nabatyeh"), new Location("fakeid", "Sidon"), "I drive Slowely", "2000", Program.CountryInformations,
-        new DateTime(2020, 4, 1, 20, 50, 0), true, false, false, true, true, 4, 4, 30, FakeMap());
-        r.Passengers = FakePassengers();
-        return r;
-    }
-    public static List<Ride> FakeRides() {
-        List<Ride> rides = new List<Ride>();
-        Driver p = new Driver("wdedwed", "Awesome", "LASTY", new DateTime(1990, 10, 10), "adel@adel.adel", "passwordyy", "Nabatyeh", "Lebanon", FakeProfileImage(), true, null, 4.0f, FakeCars());
-        Driver c = new Driver("wdedwed", "adel", "LASTY", new DateTime(1990, 10, 10), "adel@adel.adel", "passwordyy", "Nabatyeh", "Lebanon", FakeProfileImage(), true, null, 4.0f, FakeCars());
-        rides.Add(FakeNewRide(p, FakeCars()[0]));
-        rides.Add(FakeNewRide(p, FakeCars()[0]));
-        rides.Add(FakeNewRide(c, FakeCars()[0]));
-        rides.Add(FakeNewRide(p, FakeCars()[0]));
-        rides.Add(FakeNewRide(p, FakeCars()[0]));
-        rides.Add(FakeNewRide(c, FakeCars()[0]));
-        rides.Add(FakeNewRide(p, FakeCars()[0]));
-        rides.Add(FakeNewRide(c, FakeCars()[0]));
-        return rides;
-    }
-    public static Ride FakeNewRide(Driver driver, Car c) {
-        Ride r = new Ride(driver, c, new Location("fakeid", "Nabatyeh"), new Location("fakeid", "Sidon"), "I drive Slowely", "2000", Program.CountryInformations,
-        new DateTime(2020, 4, 1, 20, 50, 0), true, false, false, true, true, 4, 4, 30, FakeMap());
-        r.Passengers = FakePassengers();
-        return r;
-    }
-    private static List<Passenger> FakePassengers() {
-        List<Passenger> passengers = new List<Passenger>(4);
-        passengers.Add(FakePassenger());
-        passengers.Add(FakePassenger());
-        passengers.Add(FakePassenger());
-        passengers.Add(FakePassenger());
-        return passengers;
-    }
 
-    public static List<Rate> FakeRates(Driver target) {
-        List<Rate> rates = new List<Rate>(10);
-        rates.Add(new Rate(4, "I would like to drive with Awesome again", new DateTime(2020, 4, 1), FakeReviewer(), FakeNewRide(target, target.Cars[0]), target));
-        rates.Add(new Rate(5, "Awesome was a good driver again", new DateTime(2020, 4, 2), FakeReviewer(), FakeNewRide(target, target.Cars[0]), target));
-        rates.Add(new Rate(5, "OMG! Awesome is so exciting!", new DateTime(2020, 4, 3), FakeReviewer(), FakeNewRide(target, target.Cars[2]), target));
-        rates.Add(new Rate(5, "Awesome has many cars!!!", new DateTime(2020, 4, 4), FakeReviewer(), FakeNewRide(target, target.Cars[3]), target));
-        return rates;
-    }
-    public static List<Rate> FakeNewRates(Person target) {
-        List<Rate> rates = new List<Rate>(10);
-        rates.Add(new Rate(4, "I would like to drive with Awesome again", new DateTime(2020, 4, 1), FakeReviewer(), target));
-        rates.Add(new Rate(5, "Awesome was a good driver again", new DateTime(2020, 4, 2), FakeReviewer(), target));
-        rates.Add(new Rate(5, "OMG! Awesome is so exciting!", new DateTime(2020, 4, 3), FakeReviewer(), target));
-        rates.Add(new Rate(5, "Awesome has many cars!!!", new DateTime(2020, 4, 4), FakeReviewer(), target));
-        return rates;
-    }
-    public static Person FakeUser() {
-        Driver p = new Driver("646C55E6-CEE8-BFA7-FFFF-B2047EF74C00", "Awesome", "LASTY", new DateTime(1990, 10, 10), "adel@adel.adel", "passwordyy", "Nabatyeh", "Lebanon", FakeProfileImage(), true, null, 4.0f, FakeCars());
-        p.Bio = "I like to travel around lebanese mountains and roads, I like to eat albeni and lahme mad2ou2a";
-        p.CountryInformations = new CountryInformations();
-        p.CountryInformations.Name = "Lebanon";
-        p.Chattiness = "I talk depending on my mood";
-        p.UpcomingRides = FakeUpcomingRides(p);
-        p.IsDriver = true;
-        return p;
-    }
 
-    private static List<Ride> FakeUpcomingRides(Driver p) {
-        List<Ride> rides = new List<Ride>(3);
-        rides.Add(FakeRide(p, p.Cars[0]));
-        rides.Add(FakeRide(p, p.Cars[1]));
-        return rides;
-    }
-
-    public static Driver FakeNewDriver() {
-        Person pr = new Person("wdedwed", "Jaafar", "Ali", new DateTime(1990, 10, 10), "adel@adel.adel", "passwordyy", "Lebanon", FakeProfileImage(), true, null, 4.0f);
-        Driver p = new Driver("",pr, FakeCars(), FakeSchedule((Driver)pr));
-        p.Bio = "I like to travel around lebanese mountains and roads, I like to eat albeni and lahme mad2ou2a";
-        p.Rates = FakeRates(p);
-        p.CountryInformations = new CountryInformations();
-        p.CountryInformations.Name = "Lebanon";
-        p.UpcomingRides = FakeUpcomingRides(p);
-        return p;
-    }
-
-    public static Person FakeNewUser() {
-        Person p = new Person("wdedwed", "Jaafar", "Ali", new DateTime(1990, 10, 10), "adel@adel.adel", "passwordyy", "Lebanon", FakeProfileImage(), true, null, 4.0f);
-        p.Bio = "I like to travel around lebanese mountains and roads, I like to eat albeni and lahme mad2ou2a";
-        p.RateAverage = 3;
-        return p;
-    }
-    public static Passenger FakePassenger() {
-        Person p = new Person("wdedwed", "Awesome", "LASTY", new DateTime(1990, 10, 10), "015223753292", "passwordyy", "Lebanon", FakeProfileImage(), true, null, 4.0f);
-        p.Bio = "I like to travel around lebanese mountains and roads, I like to eat albeni and lahme mad2ou2a";
-        p.Rates = FakeNewRates(p);
-        p.Chattiness = "I'm the quit person!";
-        p.RateAverage = 3;
-        Passenger passenger = new Passenger(p, 4);
-        return passenger;
-    }
     public static Dictionary<string, CountryInformations> FakeCountries() {
         Dictionary<string, CountryInformations> countriesInformations = new Dictionary<string, CountryInformations>();
         var c1 = new CountryInformations("id asnhdjasdnasd", "L.L", "Lebanon", 8, "+961");
@@ -198,9 +98,14 @@ public static class Program {
     }
     public static readonly string googleKey = "AIzaSyC7U0OEb9200tGZFFFTyLjQdo3goKyuSsw";
 
-    public static Person User { get => user; set => user = value; }
+    public static User User { get => user; set { user = value;
+      SetPhoneCode(user.Person.CountryInformations.Code);
+      SetPhone(user.Phone);
+      SetPassword(user.Password);
+        }
+      }
     public static bool IsLoggedIn { get => isLoggedIn; set => isLoggedIn = value; }
-    public static CountryInformations CountryInformations { get => countryInformations; set => countryInformations = value; }
+    public static CountryInformations CountryInformations { get => User.Person.CountryInformations;}
     public static Dictionary<string, CountryInformations> CountriesInformations { get => countriesInformations; set => countriesInformations = value; }
     public static List<string> CountriesInformationsNames { get => countriesInformationsNames; set => countriesInformationsNames = value; }
 
@@ -209,9 +114,11 @@ public static class Program {
     public static string AppName => appName;
 
     public static FirebaseApp FirebaseApp { get => firebaseApp; set => firebaseApp = value; }
-    public static string UserToken { get => userToken; set => userToken = value; }
+    public static string UserToken { get => User==null? null : User.Token;}
+  public static Driver Driver { get => User == null ? null : User.Driver; }
+  public static Person Person { get => User == null ? null : User.Person; }
 
-    public static Sprite GetImage(Texture2D texture2D) {
+  public static Sprite GetImage(Texture2D texture2D) {
         return Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 1024);
     }
     public static bool GetNewsCheckbox() {

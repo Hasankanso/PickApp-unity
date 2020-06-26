@@ -10,8 +10,8 @@ using Newtonsoft.Json.Linq;
 
 namespace Requests {
     class GetMyCars : Request<List<Car>> {
-        private Driver user;
-        public GetMyCars(Driver user) {
+        private User user;
+        public GetMyCars(User user) {
             this.user = user;
             HttpPath = "";
             Action = "getMyCars";

@@ -53,19 +53,6 @@ namespace Requests
 
     }
 
-    public static List<KeyValuePair<string, string>> ToList(object obj, List<KeyValuePair<string, string>> list, string parentKey)
-    {
-      if (list == null) list = new List<KeyValuePair<string, string>>();
-      if (parentKey != null) parentKey = parentKey + ".";
-
-      foreach (var property in obj.GetType().GetProperties())
-      {
-        object variable = property.GetValue(obj);
-        if (variable == null) continue;
-        list.Add(new KeyValuePair<string, string>(parentKey + property.Name, variable.ToString()));
-      }
-      return list;
-    }
 
     public static bool IsPhoneNumber(string number)
     {

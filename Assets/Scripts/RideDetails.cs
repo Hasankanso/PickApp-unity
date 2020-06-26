@@ -52,8 +52,7 @@ public class RideDetails : Panel
 
   public void UserDetails()
   {
-    Driver driver = ride.Driver;
-    Panel panel = PanelsFactory.CreateUserDetails(driver, driver.IsDriver);
+    Panel panel = PanelsFactory.CreateUserDetails(ride.User);
     openCreated(panel);
   }
 
@@ -140,9 +139,7 @@ public class RideDetails : Panel
     
     this.ride = ride;
     this.car = ride.Car;
-    if (ride.Driver==null&&Program.User != null && Program.User.IsDriver) {
-        ride.Driver = (Driver)Program.User;
-    }
+    Person person = ride.User.Person;
     date.text = Program.DateToString(ride.LeavingDate);
     from.text = ride.From.Name;
     to.text = ride.To.Name;
@@ -150,8 +147,8 @@ public class RideDetails : Panel
     comment.text = ride.Comment;
     seats.text = ride.AvailableSeats.ToString();
     luggages.text = ride.AvailableLuggages.ToString();
-    driverFullName.text = ride.Driver.FirstName + " " + ride.Driver.LastName;
-    driverBio.text = ride.Driver.Bio;
+    driverFullName.text = person.FirstName + " " + person.LastName;
+    driverBio.text = person.Bio;
     //driverRatings.text = ride.Driver.RateAverage.ToString() + "/5 - " + ride.Driver.Rates.Count.ToString() + " ratings";
     carName.text = car.Name;
     carBrand.text = car.Brand;
@@ -161,8 +158,8 @@ public class RideDetails : Panel
     if (car.Picture!=null) {
         carImage.sprite = Program.GetImage(car.Picture);
     }
-    if (ride.Driver.ProfilePicture!=null) {
-        profileImage.sprite = Program.GetImage(ride.Driver.ProfilePicture);
+    if (person.ProfilePicture!=null) {
+        profileImage.sprite = Program.GetImage(person.ProfilePicture);
     }
     rideMapImage.sprite = Program.GetImage(ride.Map);
   }
@@ -360,7 +357,7 @@ public class RideDetails : Panel
   private void AddRideResponse(Ride result, HttpStatusCode code, string message)
   {
     if (!code.Equals(HttpStatusCode.OK)) Debug.Log("no results");
-        Program.User.UpcomingRides.Add(result);
+        Program.Person.UpcomingRides.Add(result);
         FooterMenu.dFooterMenu.OpenYourRidesPanel();
         Debug.Log("Got Response from servaa");
         this.destroy();

@@ -21,7 +21,7 @@ public class BecomeDriver : Panel {
             foreach (var item in regionItems) {
                 regions.Add(item.getRegion());
             }
-            driver = new Driver(person, regions);
+            driver = new Driver(regions);
             //    Request<BecomeDriver> request = new BecomeDriver(becomeDriver);
             //     Task.Run(() => request.Send(response));
         }
@@ -81,9 +81,9 @@ public class BecomeDriver : Panel {
         this.person = person;
         AddItemToList();
     }
-    public void Init(Driver driver) {
+    public void Init() {
         Clear();
-        this.person = driver;
+        this.person = Program.Person;
         AddItemToList(driver.Regions);
         title.text = "Regions";
         editRegions.gameObject.SetActive(true);

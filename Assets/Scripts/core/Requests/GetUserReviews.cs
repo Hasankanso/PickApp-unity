@@ -11,10 +11,10 @@ namespace Requests
 {
   class GetUserReviews : Request<List<Rate>>
   {
-    Person person;
-    public GetUserReviews(Person person)
+    User user;
+    public GetUserReviews(User user)
     {
-      this.person = person;
+      this.user = user;
       HttpPath = "";
       Action = "getUserReviews";
     }
@@ -28,7 +28,7 @@ namespace Requests
     public override string ToJson()
     {
         JObject personJ = new JObject();
-        personJ[nameof(person.id)] = person.Id;
+        personJ[nameof(user.id)] = user.Id;
         return personJ.ToString();
     }
 

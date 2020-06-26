@@ -13,11 +13,11 @@ public class Alert {
     private string comment;
     private float price;
     private CountryInformations countryInformations;
-    private Person person;
+    private User user;
     private DateTime updated;
 
-    public Alert(Person person, Location from, Location to, string price, DateTime minDate, DateTime maxDate, int numberOfPersons, int numberOfLuggages, CountryInformations countryInformations, string comment) {
-        this.Person = person;
+    public Alert(User user, Location from, Location to, string price, DateTime minDate, DateTime maxDate, int numberOfPersons, int numberOfLuggages, CountryInformations countryInformations, string comment) {
+        this.User = user;
         this.from = from;
         this.to = to;
         this.minDate = minDate;
@@ -33,7 +33,7 @@ public class Alert {
         JObject alertJ = new JObject();
 
         alertJ[nameof(From)] = From.ToJson();
-        alertJ[nameof(Person)] = new JObject { [nameof(Person.Id)] = this.Person.Id };
+        alertJ[nameof(user)] = new JObject { [nameof(User.id)] = this.User.Id};
 
         alertJ[nameof(To)] = To.ToJson();
         
@@ -58,8 +58,8 @@ public class Alert {
     public Location From { get => from; set => from = value; }
     public Location To { get => to; set => to = value; }
     public int Id { get => id; set => id = value; }
-    public Person Person { get => person; set => person = value; }
     public string Comment { get => comment; set => comment = value; }
     public DateTime Updated { get => updated; set => updated = value; }
     public float Price { get => price; set => price = value; }
+  public User User { get => user; set => user = value; }
 }

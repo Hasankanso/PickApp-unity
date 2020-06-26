@@ -10,9 +10,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Requests {
     class ChangePassword : Request<Person> {
-        private Person user;
+        private User user;
         private string newPassword, currentPassword;
-        public ChangePassword(Person user, string currentPassword, string newPassword) {
+        public ChangePassword(User user, string currentPassword, string newPassword) {
             this.user = user;
             this.newPassword = newPassword;
             this.currentPassword = currentPassword;
@@ -21,7 +21,7 @@ namespace Requests {
         }
         public override string ToJson() {
             JObject json = new JObject();
-            json[nameof(user.id)] = user.Id;
+            json[user.id] = user.Id;
             json["currentPassword"] = currentPassword;
             json["newPassword"] = newPassword;
             return json.ToString();

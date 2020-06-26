@@ -11,12 +11,10 @@ public class ScheduleItem : Panel {
     public Sprite smokingOnSpirite, musicOnSpirite, acOnSpirite, kidsSeatOnSpirite, petsOnSpirite;
     public Sprite smokingOffSpirite, musicOffSpirite, acOffSpirite, kidsSeatOffSpirite, petsOffSpirite;
     public Text monday, tuesday, wednesday, thursday, friday, saturday, sunday;
-    private AddRidePanel addRidePanel;
     public ScheduleRide scheduleRide = null;
 
-    public void init(ScheduleRide scheduleRide, Panel profilePanel, AddRidePanel addRidePanel) {
+    public void init(ScheduleRide scheduleRide, Panel profilePanel) {
         Clear();
-        this.addRidePanel = addRidePanel;
         this.scheduleRide = scheduleRide;
         from.text = scheduleRide.Ride.From.Name;
         to.text = scheduleRide.Ride.To.Name;

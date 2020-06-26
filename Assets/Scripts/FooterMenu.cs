@@ -87,7 +87,7 @@ public void OpenProfilePanel() {
     } else {
         currPanel.openExisted(profilePanel);
         currPanel = profilePanel;
-        profilePanel.init(Program.User, addRidePanel);
+        profilePanel.Init();
     }
 }
 
@@ -123,7 +123,7 @@ public void OpenProfilePanel() {
             currPanel.openExisted(yourRidesPanel);
             currPanel = yourRidesPanel;
             myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
-            yourRidesPanel.Init(Program.User);
+            yourRidesPanel.Init(Program.Person);
         }
     }
 

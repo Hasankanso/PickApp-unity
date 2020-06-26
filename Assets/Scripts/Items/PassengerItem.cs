@@ -11,15 +11,16 @@ public class PassengerItem : Panel {
     public Passenger passenger = null;
     public void Init(Passenger passenger, Panel rideDetail) {
         Clear();
+    Person person = passenger.User.Person;
         this.passenger = passenger;
         this.rideDetail = rideDetail;
-        fullName.text = passenger.Person.FirstName + " "+ passenger.Person.LastName;
-        ratings.text = passenger.Person.RateAverage + "/5 - " + passenger.Person.Rates.Count + " ratings";
-        bio.text = passenger.Person.Bio;
+        fullName.text = person.FirstName + " "+ person.LastName;
+        ratings.text = person.RateAverage + "/5 - " + person.Rates.Count + " ratings";
+        bio.text = person.Bio;
         persons.text = passenger.NumberOfPersons.ToString();
     }
     public void OpenUserDetails() {
-        Panel panel = PanelsFactory.CreateUserDetails(passenger.Person, true);
+        Panel panel = PanelsFactory.CreateUserDetails(passenger.User);
         rideDetail.openCreated(panel);
     }
     internal override void Clear() {

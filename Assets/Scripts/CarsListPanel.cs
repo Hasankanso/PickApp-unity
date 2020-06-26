@@ -9,7 +9,7 @@ public class CarsListPanel : Panel
   public void Init(Action<Car> CarPickedCallBack, Car chosenCar)
   {
 
-    List<Car> cars = ((Driver)Program.User).Cars;
+    List<Car> cars = Program.Driver.Cars;
     this.CarPickedCallBack = CarPickedCallBack;
 
     foreach (Car c in cars)
@@ -28,7 +28,7 @@ public class CarsListPanel : Panel
   public void Init(Action<Car> CarPickedCallBack)
   {
 
-    List<Car> cars = ((Driver) Program.User).Cars;
+    List<Car> cars = Program.Driver.Cars;
     this.CarPickedCallBack = CarPickedCallBack;
 
     foreach (Car c in cars)

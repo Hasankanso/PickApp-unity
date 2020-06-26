@@ -66,7 +66,7 @@ public class RideResultsPanel : Panel
       {
         for (int i = 0; i < rideItems.Count; i++)
         {
-          if ((gender.value == 1) == rideItems[i].ride.Driver.Gender)
+          if ((gender.value == 1) == rideItems[i].ride.User.Person.Gender)
           {
             rideItems[i].gameObject.SetActive(true);
             isNoResult = false;
@@ -81,7 +81,7 @@ public class RideResultsPanel : Panel
       {
         for (int i = 0; i < rideItems.Count; i++)
         {
-          if (float.Parse(rate.text.text) == rideItems[i].ride.Driver.RateAverage)
+          if (float.Parse(rate.text.text) == rideItems[i].ride.User.Person.RateAverage)
           {
             rideItems[i].gameObject.SetActive(true);
             isNoResult = false;
