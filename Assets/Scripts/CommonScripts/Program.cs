@@ -14,7 +14,7 @@ public static class Program {
     public static int fontSize = 28;
     public static Font font;
     public static Language language = Language.language;
-    private static User user ;
+    private static User user;
     private static string userToken;
     private static bool isLoggedIn = false;
     private static FirebaseApp firebaseApp = FirebaseApp.Create();
@@ -98,14 +98,17 @@ public static class Program {
     }
     public static readonly string googleKey = "AIzaSyC7U0OEb9200tGZFFFTyLjQdo3goKyuSsw";
 
-    public static User User { get => user; set { user = value;
-      SetPhoneCode(user.Person.CountryInformations.Code);
-      SetPhone(user.Phone);
-      SetPassword(user.Password);
+    public static User User {
+        get => user; set {
+            user = value;
+            if (user != null) {
+                SetPhone(user.Phone);
+                SetPassword(user.Password);
+            }
         }
-      }
+    }
     public static bool IsLoggedIn { get => isLoggedIn; set => isLoggedIn = value; }
-    public static CountryInformations CountryInformations { get => User.Person.CountryInformations;}
+    public static CountryInformations CountryInformations { get => User.Person.CountryInformations; }
     public static Dictionary<string, CountryInformations> CountriesInformations { get => countriesInformations; set => countriesInformations = value; }
     public static List<string> CountriesInformationsNames { get => countriesInformationsNames; set => countriesInformationsNames = value; }
 
@@ -114,11 +117,11 @@ public static class Program {
     public static string AppName => appName;
 
     public static FirebaseApp FirebaseApp { get => firebaseApp; set => firebaseApp = value; }
-    public static string UserToken { get => User==null? null : User.Token;}
-  public static Driver Driver { get => User == null ? null : User.Driver; }
-  public static Person Person { get => User == null ? null : User.Person; }
+    public static string UserToken { get => User == null ? null : User.Token; }
+    public static Driver Driver { get => User == null ? null : User.Driver; }
+    public static Person Person { get => User == null ? null : User.Person; }
 
-  public static Sprite GetImage(Texture2D texture2D) {
+    public static Sprite GetImage(Texture2D texture2D) {
         return Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 1024);
     }
     public static bool GetNewsCheckbox() {
@@ -133,17 +136,11 @@ public static class Program {
     public static void SetPhone(string phone) {
         PlayerPrefs.SetString("phone", phone);
     }
-    public static void SetPhoneCode(string phoneCode) {
-        PlayerPrefs.SetString("phoneCode", phoneCode);
-    }
     public static void SetPassword(string password) {
         PlayerPrefs.SetString("password", password);
     }
     public static string GetPhone() {
         return PlayerPrefs.GetString("phone", "");
-    }
-    public static string GetPhoneCode() {
-        return PlayerPrefs.GetString("phoneCode", "");
     }
     public static string GetPassword() {
         return PlayerPrefs.GetString("password", "");

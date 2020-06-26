@@ -60,10 +60,6 @@ public class LoginPanel : Panel
     {
       phone.SetText(Program.GetPhone());
     }
-    if (!string.IsNullOrEmpty(Program.GetPhoneCode()))
-    {
-      code.SetText(Program.GetPhoneCode());
-    }
     if (!string.IsNullOrEmpty(Program.GetPassword()))
     {
       password.SetText(Program.GetPassword());
