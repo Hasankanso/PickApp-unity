@@ -118,7 +118,7 @@ public class AddRidePanel : Panel
       ride = new Ride(Program.User, null, fromL, toL, comment.text.text, price.text.text, Program.CountryInformations,
 wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
 int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
-stopTime, null);
+stopTime, null, null);
 
       if (carPickerPanel == null)
       {

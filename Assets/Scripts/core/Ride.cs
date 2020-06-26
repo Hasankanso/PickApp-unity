@@ -29,6 +29,7 @@ public class Ride
   private int stopTime;
   private string comment;
   private Texture2D map;
+  private string mapUrl;
   private string mapBase64;
   private float price;
   private CountryInformations countryInformations;
@@ -66,13 +67,13 @@ public class Ride
 
 
   public Ride(string id, User driver, Car car, Location from, Location to, string comment, string price, CountryInformations countryInformations, DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int availableSeats, int availableLuggages, int stopTime, Texture2D map)
-  : this(driver, car, from, to, comment, price, countryInformations, date, musicAllowed, acAllowed, smokingAllowed, petsAllowed, kidSeat, availableSeats, availableLuggages, stopTime, map)
+  : this(driver, car, from, to, comment, price, countryInformations, date, musicAllowed, acAllowed, smokingAllowed, petsAllowed, kidSeat, availableSeats, availableLuggages, stopTime, map, null)
   {
     Id = id;  
   }
 
     //constructor to add full ride
-    public Ride(User user, Car car, Location from, Location to, string comment, string price, CountryInformations countryInformations, DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int availableSeats, int availableLuggages, int stopTime, Texture2D map)
+    public Ride(User user, Car car, Location from, Location to, string comment, string price, CountryInformations countryInformations, DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int availableSeats, int availableLuggages, int stopTime, Texture2D map, string mapUrl)
   {
     this.user = user;
     Car = car;
@@ -91,6 +92,7 @@ public class Ride
     CountryInformations = countryInformations;
     Price = float.Parse(price);
     Map = map;
+    this.mapUrl = mapUrl;
     ReservedLuggages = reservedLuggages;
     ReservedSeats = reservedSeats;
   }
@@ -217,13 +219,13 @@ public class Ride
     Location from = Location.ToObject((JObject)json[nameof(Ride.from)]);
     Location to = Location.ToObject((JObject)json[nameof(Ride.to)]);
 
-    // JObject cI = (JObject) json[nameof(Ride.countryInformations)];
-    // CountryInformations countryInformations = CountryInformations.ToObject(cI);
+     JObject cI = (JObject) json[nameof(Ride.countryInformations)];
+     CountryInformations countryInformations = CountryInformations.ToObject(cI);
     Debug.Log(json[nameof(Ride.countryInformations)]);
 
-    JObject personJ = (JObject) json["person"];
-    JObject driverJ = (JObject)json["driver"];
 
+    JObject driverJ = (JObject)json["driver"];
+    JObject personJ = (JObject)driverJ["person"];
     Person person = Person.ToObject(personJ);
     Driver driver = Driver.ToObject(driverJ);
     User user = new User(person, driver);
@@ -232,6 +234,7 @@ public class Ride
     if (p != null)
       price = p.ToString();
 
+    string mapUrl = json["map"].ToString();
     //Texture2D map = json[nameof(map)].ToString();
     /*
     rideJ[nameof(this.Date)] = this.Date;
@@ -250,7 +253,7 @@ public class Ride
 
     rideJ[nameof(this.Map)] = this.MapBase64;
     */
-    return new Ride(id, user, car, from, to, comment, price, null, leavingDate, musicAllowed, acAllowed, smokingAllowed, petsAllowed,
+    return new Ride(id, user, car, from, to, comment, price, countryInformations, leavingDate, musicAllowed, acAllowed, smokingAllowed, petsAllowed,
     kidSeat, availableSeats, availableLuggages, stopTime, null);
   }
 
@@ -273,6 +276,7 @@ public class Ride
   public int ReservedSeats { get => reservedSeats; set => reservedSeats = value; }
   public User User { get => user; set => user = value; }
 
+  public string MapUrl { get => mapUrl; set => mapUrl = value; }
   public Driver Driver { get => user.Driver;}
   public List<Passenger> Passengers { get => passengers; set => passengers = value; }
   public Car Car { get => car; set => car = value; } //has texture2d

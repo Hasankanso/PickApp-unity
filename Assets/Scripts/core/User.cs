@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Quobject.SocketIoClientDotNet.Client;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -85,6 +86,9 @@ public class User
     this.text = text;
   }
 
+  public override bool Equals(object u){
+    return this.person.id == ((User)u).person.id;
+  }
   public string Phone { get => phone; set => phone = value; }
   public string Password { get => password; set => password = value; }
   public string Email { get => email; set => email = value; }

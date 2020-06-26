@@ -68,11 +68,16 @@ public class Driver
     if (dId != null)
       did = dId.ToString();
     JArray carsJ = (JArray)driver.GetValue("cars");
-    List<Car> cars = new List<Car>();
-    foreach (var car in carsJ)
+    List<Car> cars = null;
+    if (carsJ != null)
     {
-      cars.Add(Car.ToObject((JObject)car));
+      cars = new List<Car>();
+      foreach (var car in carsJ)
+      {
+        cars.Add(Car.ToObject((JObject)car));
+      }
     }
+
     if (driver.GetValue("schedules") != null && !string.IsNullOrEmpty(driver.GetValue("schedules").ToString()) && !driver.GetValue("schedules").ToString().Equals("[]"))
     {
       JArray schedulesJ = (JArray)driver.GetValue("schedules");

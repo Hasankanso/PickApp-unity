@@ -161,7 +161,20 @@ public class RideDetails : Panel
     if (person.ProfilePicture!=null) {
         profileImage.sprite = Program.GetImage(person.ProfilePicture);
     }
-    rideMapImage.sprite = Program.GetImage(ride.Map);
+    if(ride.Map ==null){
+        StartCoroutine(Panel.RequestImage(ride.MapUrl, Succeed, Error));
+    }
+  
+  }
+
+  private void Error(string obj)
+  {
+    OpenDialog("man nzlet l soura", false);
+  }
+
+  private void Succeed(Texture2D map)
+  {
+    rideMapImage.sprite = Program.GetImage(map);
   }
 
   private void ImplementPassengersList(List<Passenger> passengers)
