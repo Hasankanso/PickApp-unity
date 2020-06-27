@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Requests
@@ -32,37 +33,71 @@ namespace Requests
     public abstract T BuildResponse(string response, HttpStatusCode statusCode);
 
 
-        public async void Send(Action<T, HttpStatusCode, string> callback) {
-            string valid = IsValid();
-            Debug.Log(valid);
-            if (!string.IsNullOrEmpty(valid)) {
-                Debug.Log("error");
-                callback(default, HttpStatusCode.NotAcceptable, valid);
-            } else {
-                string data = ToJson();
-                Debug.Log(data);
-                var content = new StringContent(data, Encoding.UTF8, "application/json");
-                if (!string.IsNullOrEmpty(Program.UserToken)) {
-                    content.Headers.Add("user-token", Program.UserToken);
-                }
-                var answer = await Client.PostAsync(Ip + HttpPath, content);
-                string result = await answer.Content.ReadAsStringAsync();
-                Debug.Log(result);
-                callback(BuildResponse(result, answer.StatusCode), answer.StatusCode, answer.ReasonPhrase);
-            }
+    public async void Send(Action<T, HttpStatusCode, string> callback)
+    {
+      string valid = IsValid();
+      Debug.Log(valid);
+      if (!string.IsNullOrEmpty(valid))
+      {
+        Debug.Log("error");
+        callback(default, HttpStatusCode.NotAcceptable, valid);
+      }
+      else
+      {
+        string data = ToJson();
+        Debug.Log(data);
+        var content = new StringContent(data, Encoding.UTF8, "application/json");
+        if (!string.IsNullOrEmpty(Program.UserToken))
+        {
+          content.Headers.Add("user-token", Program.UserToken);
+        }
+        var answer = await Client.PostAsync(Ip + HttpPath, content);
+        string result = await answer.Content.ReadAsStringAsync();
+        Debug.Log(result);
+        callback(BuildResponse(result, answer.StatusCode), answer.StatusCode, answer.ReasonPhrase);
+      }
 
     }
 
-
-    public static bool IsPhoneNumber(string number)
+   /* public static async Task<Texture2D> downloadImage(string urlLink)
     {
-      return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
+      Texture2D tex;
+      Byte[] bArray;
+      try
+      {
+        var response = await Client.GetAsync(urlLink);
+
+        response.EnsureSuccessStatusCode();
+
+        using (IInputStream inputStream = await response.Content.ReadAsStreamAsync())
+        {
+          ReadAsStreamAsync();
+          bitmapImage.SetSource(inputStream.AsStreamForRead());
+          tex.LoadRawTextureData(pvrtcBytes);
+          tex.Apply();
+        }
+
+        return bitmapImage;
+      }
+
+      catch (Exception ex)
+      {
+        Debug.WriteLine("Failed to load the image: {0}", ex.Message);
+      }
+
+      return null;
     }
+    */
 
-    public static bool ValidPassword(string password)
-    {
-      return Regex.Match(password, @"^(?=.*[0-9] +.*)(?=.*[a-zA-Z] +.*)[0-9a-zA-Z]{8,30}
+public static bool IsPhoneNumber(string number)
+{
+  return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
+}
+
+public static bool ValidPassword(string password)
+{
+  return Regex.Match(password, @"^(?=.*[0-9] +.*)(?=.*[a-zA-Z] +.*)[0-9a-zA-Z]{8,30}
     $").Success;
-    }
+}
   }
 }
