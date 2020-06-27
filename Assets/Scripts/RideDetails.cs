@@ -97,7 +97,7 @@ public class RideDetails : Panel
     }
 
     this.schedule = schedule;
-    date.text = Program.DateToString(schedule.StartDate)+" - "+ Program.DateToString(schedule.EndDate);
+    date.text = Program.DateToString(schedule.StartDate) + " - " + Program.DateToString(schedule.EndDate);
     SetWeekDays(schedule.IsMonday, schedule.IsTuesday, schedule.IsWednesday, schedule.IsThursday, schedule.IsFriday, schedule.IsSaturday, schedule.IsSunday);
     dayOfWeek.SetActive(true);
   }
@@ -136,7 +136,7 @@ public class RideDetails : Panel
   private void Init(Ride ride)
   {
     Clear();
-    
+
     this.ride = ride;
     this.car = ride.Car;
     Person person = ride.User.Person;
@@ -155,16 +155,21 @@ public class RideDetails : Panel
     carYear.text = car.Year.ToString();
     SetColor(car.Color);
     SetPermissions(ride.SmokingAllowed, ride.AcAllowed, ride.PetsAllowed, ride.MusicAllowed, ride.KidSeat);
-    if (car.Picture!=null) {
-        carImage.sprite = Program.GetImage(car.Picture);
+    if (car.Picture != null)
+    {
+      carImage.sprite = Program.GetImage(car.Picture);
     }
-    if (person.ProfilePicture!=null) {
-        profileImage.sprite = Program.GetImage(person.ProfilePicture);
+    if (person.ProfilePicture != null)
+    {
+      profileImage.sprite = Program.GetImage(person.ProfilePicture);
     }
 
-    if(ride.Map ==null){
-        StartCoroutine(Panel.RequestImage(ride.MapUrl, Succeed, Error));
-    } else {
+    if (ride.Map == null)
+    {
+      StartCoroutine(Program.RequestImage(ride.MapUrl, Succeed, Error));
+    }
+    else
+    {
       rideMapImage.sprite = Program.GetImage(ride.Map);
     }
   }
@@ -177,6 +182,7 @@ public class RideDetails : Panel
   private void Succeed(Texture2D map)
   {
     rideMapImage.sprite = Program.GetImage(map);
+    ride.Map = map;
   }
 
   private void ImplementPassengersList(List<Passenger> passengers)
@@ -327,7 +333,8 @@ public class RideDetails : Panel
 
   }
 
-  public void RemoveSchedule(){
+  public void RemoveSchedule()
+  {
 
   }
 
@@ -350,8 +357,9 @@ public class RideDetails : Panel
     request.Send(ReserveSeatsResponse);
   }
 
-  public void RemoveRide(){
-   //Request
+  public void RemoveRide()
+  {
+    //Request
   }
 
   public void AddScheduleResponse(ScheduleRide result, HttpStatusCode code, string message)
@@ -372,10 +380,10 @@ public class RideDetails : Panel
   private void AddRideResponse(Ride result, HttpStatusCode code, string message)
   {
     if (!code.Equals(HttpStatusCode.OK)) Debug.Log("no results");
-        Program.Person.UpcomingRides.Add(result);
-        FooterMenu.dFooterMenu.OpenYourRidesPanel();
-        Debug.Log("Got Response from servaa");
-        this.destroy();
+    Program.Person.UpcomingRides.Add(result);
+    FooterMenu.dFooterMenu.OpenYourRidesPanel();
+    Debug.Log("Got Response from servaa");
+    this.destroy();
   }
 
   public void EditRideResponse(ScheduleRide result, HttpStatusCode code, string message)

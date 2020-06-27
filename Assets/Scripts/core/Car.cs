@@ -69,7 +69,6 @@ public class Car
             id = oId.ToString();
         string name = "";
         var oName = json["name"];
-        Debug.Log(oName);
         if (oName != null)
             name = oName.ToString();
         int year = -1;
@@ -93,7 +92,6 @@ public class Car
         if (oColor != null)
             color = oColor.ToString();
         string carPictureUrl = json["picture"].ToString();
-        Debug.Log(name);
         return new Car(id, name, year, maxLuggage, maxSeats, brand, color, carPictureUrl);
     }
 

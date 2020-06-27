@@ -22,7 +22,7 @@ public class MyRideItem : Panel
     this.ride = ride;
     from.text = ride.From.Name;
     to.text = ride.To.Name;
-    price.text = ride.Price + ride.CountryInformations.Unit;
+    price.text = ride.Price + " " + ride.CountryInformations.Unit;
     date.text = Program.DateToString(ride.LeavingDate);
     SetPermissions(ride.SmokingAllowed, ride.AcAllowed, ride.PetsAllowed, ride.MusicAllowed, ride.KidSeat);
   }

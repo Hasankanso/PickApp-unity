@@ -29,17 +29,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
       back();
     }
   }
-    public static IEnumerator RequestImage(string url, Action<Texture2D> callBack, Action<string> callBackError) {
-        var uwr = new UnityWebRequest(url);
-        DownloadHandlerTexture texDl = new DownloadHandlerTexture(true);
-        uwr.downloadHandler = texDl;
-        yield return uwr.SendWebRequest();
-        if (uwr.isNetworkError || uwr.isHttpError) {
-            callBackError(uwr.error);
-        } else {
-            callBack(texDl.texture);
-        }
-    }
+
     public void back()
   {
     if (Previous != null)

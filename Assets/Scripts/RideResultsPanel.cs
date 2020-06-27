@@ -46,13 +46,11 @@ public class RideResultsPanel : Panel
 
   public void OnRidePick(Ride r)
   {
-    print("clicked");
 
     bool owner = false;
-    if(r.Driver !=null)
+    if(Program.User !=null && Program.Driver !=null)
     owner = Program.User.Equals(r.User);
     RideDetails rd = PanelsFactory.CreateRideDetails(r, owner, Status.VIEW);
-    print("clicki");
     openCreated(rd);
   }
 
