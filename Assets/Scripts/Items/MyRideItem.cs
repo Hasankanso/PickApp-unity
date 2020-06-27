@@ -29,7 +29,7 @@ public class MyRideItem : Panel
 
   public void OpenRideDetails()
   {
-    bool owner = Program.User.Equals(ride.Driver);
+    bool owner = Program.Driver.Equals(ride.Driver);
     Panel panel = PanelsFactory.CreateRideDetails(ride, true, Status.VIEW);
     myRidesPanel.openCreated(panel);
   }

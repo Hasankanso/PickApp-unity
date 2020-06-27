@@ -33,7 +33,11 @@ public class Driver
     this.id = id;
     this.cars = cars;
   }
-  public JObject ToJson()
+    public override bool Equals(object d)
+    {
+        return id == ((Driver)d).id;
+    }
+    public JObject ToJson()
   {
 
     JObject driverJ = new JObject();
