@@ -90,13 +90,9 @@ public class PhonePanel : Panel
           return;
         }
         idToken = task2.Result;
-        Debug.Log("task   " + task2.Result);
-
-        Debug.Log("set id " + idToken);
-
+          Request<User> registerRequest = new RegisterPerson(user, idToken);
+          registerRequest.Send(RegistrationResponse);
       });
-      Request<User> registerRequest = new RegisterPerson(user, idToken);
-      registerRequest.Send(RegistrationResponse);
     });
   }
 

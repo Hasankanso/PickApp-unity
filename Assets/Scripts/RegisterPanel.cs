@@ -1,14 +1,7 @@
-﻿using BackendlessAPI;
-using BackendlessAPI.Async;
-using BackendlessAPI.Exception;
-using Requests;
+﻿using Requests;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +14,6 @@ public class RegisterPanel : Panel
   public Image profilePicture;
   private bool haveProfile = false;
   public User user = null;
-  AsyncCallback<BackendlessUser> callbackk;
   public void Register()
   {
     if (Validate())
@@ -35,7 +27,6 @@ public class RegisterPanel : Panel
       var country = Program.CountriesInformations[ci.Name];
       person.CountryInformations = country;
       person.Gender = genderDP.value == 0;
-
       user = new User(person, email.text.text);
       Panel panel = PanelsFactory.ChangePassword(false, user);
       openCreated(panel);
@@ -81,7 +72,8 @@ public class RegisterPanel : Panel
         else
         {
           profilePicture.sprite = Program.GetImage(texture);
-          user.Person.profilePicture = texture;
+          user.Person.ProfilePicture = texture;
+          Debug.Log(user.Person.Image);
           haveProfile = true;
         }
       }

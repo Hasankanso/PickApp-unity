@@ -102,7 +102,9 @@ public static class Program {
         get => user; set {
             user = value;
             if (user != null) {
-                SetPhone(user.Phone);
+                Debug.Log(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
+                SetPhoneCode(user.Person.CountryInformations.Code.Split(new string[] { "+" }, StringSplitOptions.None)[1]);
+                SetPhone(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
                 SetPassword(user.Password);
             }
         }
@@ -136,11 +138,17 @@ public static class Program {
     public static void SetPhone(string phone) {
         PlayerPrefs.SetString("phone", phone);
     }
+    public static void SetPhoneCode(string phoneCode) {
+        PlayerPrefs.SetString("phoneCode", phoneCode);
+    }
     public static void SetPassword(string password) {
         PlayerPrefs.SetString("password", password);
     }
     public static string GetPhone() {
         return PlayerPrefs.GetString("phone", "");
+    }
+    public static string GetPhoneCode() {
+        return PlayerPrefs.GetString("phoneCode", "");
     }
     public static string GetPassword() {
         return PlayerPrefs.GetString("password", "");
