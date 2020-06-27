@@ -30,7 +30,7 @@ namespace Requests
      * <param name = "response" >json response</param>
      * <param name = "statusCode" >check https://docs.microsoft.com/en-us/dotnet/api/system.net.httpstatuscode?view=netframework-4.8</param>
      */
-    public abstract T BuildResponse(string response, HttpStatusCode statusCode);
+    public abstract Task<T> BuildResponse(string response, HttpStatusCode statusCode);
 
 
     public async void Send(Action<T, HttpStatusCode, string> callback)
@@ -54,40 +54,21 @@ namespace Requests
         var answer = await Client.PostAsync(Ip + HttpPath, content);
         string result = await answer.Content.ReadAsStringAsync();
         Debug.Log(result);
-        callback(BuildResponse(result, answer.StatusCode), answer.StatusCode, answer.ReasonPhrase);
+        callback(await BuildResponse(result, answer.StatusCode), answer.StatusCode, answer.ReasonPhrase);
       }
 
     }
 
-   /* public static async Task<Texture2D> downloadImage(string urlLink)
+    protected static async Task<Texture2D> DownloadImage(string urlLink)
     {
-      Texture2D tex;
-      Byte[] bArray;
-      try
-      {
-        var response = await Client.GetAsync(urlLink);
+      Texture2D tex = new Texture2D(1, 1);
+      var data = await Client.GetByteArrayAsync(new Uri(urlLink));
 
-        response.EnsureSuccessStatusCode();
+      tex.LoadImage(data);
+      tex.Apply();
 
-        using (IInputStream inputStream = await response.Content.ReadAsStreamAsync())
-        {
-          ReadAsStreamAsync();
-          bitmapImage.SetSource(inputStream.AsStreamForRead());
-          tex.LoadRawTextureData(pvrtcBytes);
-          tex.Apply();
-        }
-
-        return bitmapImage;
-      }
-
-      catch (Exception ex)
-      {
-        Debug.WriteLine("Failed to load the image: {0}", ex.Message);
-      }
-
-      return null;
+      return tex;
     }
-    */
 
 public static bool IsPhoneNumber(string number)
 {

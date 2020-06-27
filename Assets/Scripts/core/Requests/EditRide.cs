@@ -20,7 +20,7 @@ namespace Requests {
             Action = "editRide";
         }
 
-        public override Ride BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             JObject ride = JObject.Parse(response);
             if (ride == null) return null;

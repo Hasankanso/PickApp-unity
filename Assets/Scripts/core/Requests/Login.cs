@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Requests
@@ -15,11 +16,13 @@ namespace Requests
       HttpPath = "/UserBusiness/Login";
     }
 
-    public override User BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    public override async Task<User> BuildResponse(string response, HttpStatusCode statusCode) //TODO
     {
       JObject json = JObject.Parse(response);
-
-      return User.ToObject(json);
+      User u = User.ToObject(json);
+      Texture2D image = await DownloadImage(u.Person.ProfilePictureUrl);
+      u.Person.ProfilePicture = image;
+      return u;
     }
 
     public override string ToJson()

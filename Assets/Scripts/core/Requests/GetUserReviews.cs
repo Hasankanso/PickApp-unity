@@ -19,7 +19,7 @@ namespace Requests
       Action = "getUserReviews";
     }
 
-    public override List<Rate> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    public override async Task<List<Rate>> BuildResponse(string response, HttpStatusCode statusCode) //TODO
     {
       return JsonConvert.DeserializeObject<List<Rate>>(response);
 

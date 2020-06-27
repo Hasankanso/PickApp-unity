@@ -21,7 +21,7 @@ namespace Requests {
             Action = "sendContactUs";
         }
 
-        public override string BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<string> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             return JsonConvert.DeserializeObject<string>(response);
 

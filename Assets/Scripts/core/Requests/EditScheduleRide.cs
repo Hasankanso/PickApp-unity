@@ -21,9 +21,10 @@ namespace Requests
       Action = "editScheduleRide";
     }
 
-    public override ScheduleRide BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    public override Task<ScheduleRide> BuildResponse(string response, HttpStatusCode statusCode) //TODO
     {
-      return JsonConvert.DeserializeObject<ScheduleRide>(response);
+      return null;
+      //return JsonConvert.DeserializeObject<ScheduleRide>(response);
     }
 
     public override string ToJson()

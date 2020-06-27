@@ -18,13 +18,13 @@ namespace Requests {
             Action = "addRide";
         }
 
-        public override Ride BuildResponse(string response, HttpStatusCode statusCode) //TODO
-        {
-            JObject ride = JObject.Parse(response);
-            return Ride.ToObject(ride);
-        }
+    public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    {
+      JObject ride = JObject.Parse(response);
+      return Ride.ToObject(ride);
+    }
 
-        public override string ToJson() {
+    public override string ToJson() {
             JObject rideJ = ride.ToJson();
             return rideJ.ToString();
         }

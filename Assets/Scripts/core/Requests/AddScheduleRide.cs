@@ -18,7 +18,7 @@ namespace Requests {
             Action = "/AddScheduleRide";
         }
 
-        public override ScheduleRide BuildResponse(string response, HttpStatusCode statusCode) {
+        public override async Task<ScheduleRide> BuildResponse(string response, HttpStatusCode statusCode) {
             throw new System.NotImplementedException();
         }
 

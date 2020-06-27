@@ -20,7 +20,7 @@ namespace Requests {
             Action = "cancelRide";
         }
 
-        public override Ride BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             return JsonConvert.DeserializeObject<Ride>(response);
         }

@@ -19,7 +19,7 @@ namespace Requests {
             HttpPath = "/UserBusiness/Register";
         }
 
-        public override User BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<User> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             JObject user = JObject.Parse(response);
             return User.ToObject(user);

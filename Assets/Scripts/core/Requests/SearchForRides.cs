@@ -20,7 +20,7 @@ namespace Requests
       Action = "searchForRides";
     }
 
-    public override List<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    public override async Task<List<Ride>> BuildResponse(string response, HttpStatusCode statusCode) //TODO
     {
       var ridesArray = JArray.Parse(response);
       List<Ride> rides = new List<Ride>();

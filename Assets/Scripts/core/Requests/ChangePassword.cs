@@ -26,7 +26,7 @@ namespace Requests {
             json["newPassword"] = newPassword;
             return json.ToString();
         }
-        public override Person BuildResponse(string response, HttpStatusCode statusCode) {
+        public override async Task<Person> BuildResponse(string response, HttpStatusCode statusCode) {
             return JsonConvert.DeserializeObject<Person>(response);
         }
         protected override string IsValid() {

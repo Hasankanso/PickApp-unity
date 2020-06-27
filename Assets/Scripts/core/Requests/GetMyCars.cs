@@ -17,7 +17,7 @@ namespace Requests {
             Action = "getMyCars";
         }
 
-        public override List<Car> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<List<Car>> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             return JsonConvert.DeserializeObject<List<Car>>(response);
         }

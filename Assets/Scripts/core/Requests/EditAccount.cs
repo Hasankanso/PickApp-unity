@@ -18,7 +18,7 @@ namespace Requests
       HttpPath = "/PersonBusiness/EditPerson";
     }
 
-    public override User BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    public override Task<User> BuildResponse(string response, HttpStatusCode statusCode) //TODO
     {
       return null;
       // return JsonConvert.DeserializeObject<Person>(response);

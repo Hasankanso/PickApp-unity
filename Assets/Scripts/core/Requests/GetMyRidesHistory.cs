@@ -17,7 +17,7 @@ namespace Requests {
             Action = "getMyRidesHistory";
         }
 
-        public override List<Ride> BuildResponse(string response, HttpStatusCode statusCode)//ToDo
+        public override async Task<List<Ride>> BuildResponse(string response, HttpStatusCode statusCode)//ToDo
         {
             return JsonConvert.DeserializeObject<List<Ride>>(response);
         }

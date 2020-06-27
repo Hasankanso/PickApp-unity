@@ -7,30 +7,36 @@ using UnityEngine;
 using System.Net;
 using System.Collections.Generic;
 
-namespace Requests {
-    class BroadCastAlert : Request<Alert> {
-        private Alert alert;
+namespace Requests
+{
+  class BroadCastAlert : Request<Alert>
+  {
+    private Alert alert;
 
-        public BroadCastAlert(Alert alert) {
-            this.alert = alert;
-            HttpPath = "";
-            Action = "broadCastAlert";
-        }
-
-        public override Alert BuildResponse(string response, HttpStatusCode statusCode) //TODO
-        {
-            return JsonConvert.DeserializeObject<Alert>(response);
-        }
-
-        public override string ToJson() {
-            return alert.ToJson().ToString();
-        }
-
-        protected override string IsValid() {
-            return string.Empty;
-
-        }
+    public BroadCastAlert(Alert alert)
+    {
+      this.alert = alert;
+      HttpPath = "";
+      Action = "broadCastAlert";
     }
+
+    public override Task<Alert> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    {
+      return null;
+      //return JsonConvert.DeserializeObject<Alert>(response);
+    }
+
+    public override string ToJson()
+    {
+      return alert.ToJson().ToString();
+    }
+
+    protected override string IsValid()
+    {
+      return string.Empty;
+
+    }
+  }
 }
 
 

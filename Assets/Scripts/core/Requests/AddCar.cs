@@ -19,7 +19,7 @@ namespace Requests {
             HttpPath = "/CarBusiness/AddCar";
         }
 
-        public override Car BuildResponse(string response, HttpStatusCode statusCode) //ToDo
+        public override async Task<Car> BuildResponse(string response, HttpStatusCode statusCode) //ToDo
         {
             //  if (statusCode == HttpStatusCode.Accepted) 
             return JsonConvert.DeserializeObject<Car>(response);

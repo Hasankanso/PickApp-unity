@@ -18,7 +18,7 @@ namespace Requests {
             Action = "editRate";
         }
 
-        public override Rate BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<Rate> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             return JsonConvert.DeserializeObject<Rate>(response);
 

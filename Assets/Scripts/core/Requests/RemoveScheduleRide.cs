@@ -18,7 +18,7 @@ namespace Requests {
             Action = "scheduleRide";
         }
 
-        public override ScheduleRide BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<ScheduleRide> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             return JsonConvert.DeserializeObject<ScheduleRide>(response);
 

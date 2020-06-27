@@ -9,6 +9,7 @@ public class CarsListPanel : Panel
   public void Init(Action<Car> CarPickedCallBack, Car chosenCar)
   {
 
+    Clear();
     List<Car> cars = Program.Driver.Cars;
     this.CarPickedCallBack = CarPickedCallBack;
 

@@ -15,7 +15,7 @@ namespace Requests {
             Action = "getMyAccountInfo";
         }
 
-        public override Person BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<Person> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             return JsonConvert.DeserializeObject<Person>(response);
         }

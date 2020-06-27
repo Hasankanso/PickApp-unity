@@ -16,7 +16,7 @@ namespace Requests {
             Action = "getMyUpcomingRides";
         }
 
-        public override List<Ride> BuildResponse(string response, HttpStatusCode statusCode) {
+        public override async Task<List<Ride>> BuildResponse(string response, HttpStatusCode statusCode) {
             return JsonConvert.DeserializeObject<List<Ride>>(response);
         }
 

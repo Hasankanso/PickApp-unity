@@ -19,7 +19,7 @@ namespace Requests {
             Action = "newPassword";
         }
 
-        public override Person BuildResponse(string response, HttpStatusCode statusCode) {
+        public override async Task<Person> BuildResponse(string response, HttpStatusCode statusCode) {
             throw new System.NotImplementedException();
         }
 

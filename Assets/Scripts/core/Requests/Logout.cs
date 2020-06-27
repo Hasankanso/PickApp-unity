@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Requests {
@@ -8,7 +9,7 @@ namespace Requests {
         public Logout() {
             HttpPath = "/UserBusiness/Logout";
         }
-        public override string BuildResponse(string response, HttpStatusCode statusCode) {
+        public override async Task<string> BuildResponse(string response, HttpStatusCode statusCode) {
             return response;
         }
 
