@@ -1,16 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using UnityEngine;
 using UnityEngine.UI;
-using BackendlessAPI;
-using BackendlessAPI.Async;
-using BackendlessAPI.Exception;
 using Requests;
-using System.Collections;
-using UnityEngine.Networking;
-using System.Threading.Tasks;
 
 public class LoginPanel : Panel {
     public InputFieldScript phone, code, password;
@@ -32,6 +24,7 @@ public class LoginPanel : Panel {
             OpenDialog("Incorrect email or password", false);
         } else {
             Program.User = u;
+            Program.SetPassword(password.GetComponent<InputField>().text);
             OpenDialog("Welcome back to PickApp", true);
             Program.IsLoggedIn = true;
             if (!isFromFooter)

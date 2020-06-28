@@ -22,7 +22,10 @@ namespace Requests {
         public override async Task<User> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             JObject user = JObject.Parse(response);
-            return User.ToObject(user);
+            User u= User.ToObject(user);
+            Texture2D image = await DownloadImage(u.Person.ProfilePictureUrl);
+            u.Person.ProfilePicture = image;
+            return u;
         }
 
         public override string ToJson() {

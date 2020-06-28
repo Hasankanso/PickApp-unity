@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Requests
 {
@@ -18,11 +19,15 @@ namespace Requests
       HttpPath = "/PersonBusiness/EditPerson";
     }
 
-    public override Task<User> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    public override async Task<User> BuildResponse(string response, HttpStatusCode statusCode) //TODO
     {
-      return null;
-      // return JsonConvert.DeserializeObject<Person>(response);
-    }
+            /*JObject json = JObject.Parse(response);
+            Person p = Person.ToObject(json);
+            Texture2D image = await DownloadImage(p.ProfilePictureUrl);
+            p.ProfilePicture = image;
+            return p;*/
+            return null;
+        }
 
     public override string ToJson()
     {

@@ -251,8 +251,6 @@ public class PhonePanel : Panel
   public void Init()
   {
     Clear();
-    phone.GetComponentInParent<InputField>().characterLimit = Program.CountryInformations.Digits;
-    countryCode.text = Program.CountryInformations.Code;
     reset.gameObject.SetActive(true);
     nextReset.gameObject.SetActive(true);
   }

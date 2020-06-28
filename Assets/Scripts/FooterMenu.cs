@@ -31,6 +31,7 @@ public class FooterMenu : MonoBehaviour
     profilePanel.gameObject.SetActive(false);
     currPanel = searchPanel;
     searchButton.image.sprite = searchButton.spriteState.selectedSprite;
+
   }
 
   public void OpenSearchPanel()
