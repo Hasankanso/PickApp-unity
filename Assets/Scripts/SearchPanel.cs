@@ -123,15 +123,13 @@ public class SearchPanel : Panel
 
   public void OpenFromLocationPicker()
   {
-    Panel p = PanelsFactory.CreateLocationsFinderPanel(from.text.text, OnFromLocationPicked);
-    OpenDialog(p);
-  }
+        OpenLocationFinder(from.text.text, OnFromLocationPicked);
+    }
 
   public void OpenToLocationPicker()
   {
-    Panel p = PanelsFactory.CreateLocationsFinderPanel(to.text.text, OnToLocationPicked);
-    OpenDialog(p);
-  }
+        OpenLocationFinder(to.text.text, OnToLocationPicked);
+    }
 
   public void OnFromLocationPicked(Location loc)
   {
