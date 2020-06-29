@@ -3,6 +3,8 @@ using System.Net;
 using System.Text.RegularExpressions;
 using UnityEngine.UI;
 using Requests;
+using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 public class LoginPanel : Panel {
     public InputFieldScript phone, code, password;
@@ -20,11 +22,19 @@ public class LoginPanel : Panel {
     }
 
     private void Response(User u, HttpStatusCode code, string message) {
-        if (!code.Equals(HttpStatusCode.OK)) {
+        JObject j=null;
+        if (string.IsNullOrEmpty(message)) {
+            Debug.Log(2);
+             j = JObject.Parse(message);
+            if (!string.IsNullOrEmpty(message) && int.Parse(j["code"].ToString()) == 3003) {
+                OpenDialog(message, false);
+            }
+        }
+        else if (!code.Equals(HttpStatusCode.OK)) {
             OpenDialog("Incorrect email or password", false);
         } else {
             Program.User = u;
-            Program.SetPassword(password.GetComponent<InputField>().text);
+            Cache.SetPassword(password.GetComponent<InputField>().text);
             OpenDialog("Welcome back to PickApp", true);
             Program.IsLoggedIn = true;
             if (!isFromFooter)
@@ -40,14 +50,14 @@ public class LoginPanel : Panel {
         if (!isFromFooter) {
             backButton.gameObject.SetActive(true);
         }
-        if (!string.IsNullOrEmpty(Program.GetPhone())) {
-            phone.SetText(Program.GetPhone());
+        if (!string.IsNullOrEmpty(Cache.GetPhone())) {
+            phone.SetText(Cache.GetPhone());
         }
-        if (!string.IsNullOrEmpty(Program.GetPhoneCode())) {
-            this.code.SetText(Program.GetPhoneCode());
+        if (!string.IsNullOrEmpty(Cache.GetPhoneCode())) {
+            this.code.SetText(Cache.GetPhoneCode());
         }
-        if (!string.IsNullOrEmpty(Program.GetPassword())) {
-            password.SetText(Program.GetPassword());
+        if (!string.IsNullOrEmpty(Cache.GetPassword())) {
+            password.SetText(Cache.GetPassword());
         }
     }
 

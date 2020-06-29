@@ -11,13 +11,13 @@ public class NotificationsPanel : Panel {
     public Toggle news, disableAll;
 
     public void Submit() {
-        Program.SetNewsCheckbox(news.isOn);
-        Program.SetDisableAllCheckbox(disableAll.isOn);
+        Cache.SetNewsCheckbox(news.isOn);
+        Cache.SetDisableAllCheckbox(disableAll.isOn);
         closeBack();
     }
     public void Init() {
-        news.isOn = Program.GetNewsCheckbox();
-        disableAll.isOn = Program.GetDisableAllCheckbox();
+        news.isOn = Cache.GetNewsCheckbox();
+        disableAll.isOn = Cache.GetDisableAllCheckbox();
     }
     internal override void Clear() {
         throw new NotImplementedException();

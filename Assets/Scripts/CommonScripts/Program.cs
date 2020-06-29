@@ -101,10 +101,14 @@ public static class Program {
         get => user; set {
             user = value;
             if (user != null) {
-                Debug.Log(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
-                SetPhoneCode(user.Person.CountryInformations.Code.Split(new string[] { "+" }, StringSplitOptions.None)[1]);
-                SetPhone(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
-                SetToken(user.Token);
+                if (user.Person!=null) {
+                    Cache.SetPhoneCode(user.Person.CountryInformations.Code.Split(new string[] { "+" }, StringSplitOptions.None)[1]);
+                }
+                if (user.phone!=null) {
+                    Cache.SetPhone(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
+                }
+                Cache.SetToken(user.Token);
+                Cache.SetUserId(user.Id);
             }
         }
     }
@@ -125,42 +129,7 @@ public static class Program {
     public static Sprite GetImage(Texture2D texture2D) {
         return Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 1024);
     }
-    public static bool GetNewsCheckbox() {
-        return bool.Parse(PlayerPrefs.GetString("news", "true"));
-    }
-    public static bool GetDisableAllCheckbox() {
-        return bool.Parse(PlayerPrefs.GetString("disableAll", "true"));
-    }
-    public static void SetNewsCheckbox(bool news) {
-        PlayerPrefs.SetString("news", news.ToString());
-    }
-    public static void SetPhone(string phone) {
-        PlayerPrefs.SetString("phone", phone);
-    }
-    public static void SetPhoneCode(string phoneCode) {
-        PlayerPrefs.SetString("phoneCode", phoneCode);
-    }
-    public static void SetPassword(string password) {
-        PlayerPrefs.SetString("password", password);
-    }
-    public static void SetToken(string token) {
-        PlayerPrefs.SetString("token", token);
-    }
-    public static string GetToken() {
-        return PlayerPrefs.GetString("token", "");
-    }
-    public static string GetPhone() {
-        return PlayerPrefs.GetString("phone", "");
-    }
-    public static string GetPhoneCode() {
-        return PlayerPrefs.GetString("phoneCode", "");
-    }
-    public static string GetPassword() {
-        return PlayerPrefs.GetString("password", "");
-    }
-    public static void SetDisableAllCheckbox(bool disableAll) {
-        PlayerPrefs.SetString("disableAll", disableAll.ToString());
-    }
+   
 
     public static string DateToString(DateTime date) {
         return DateToString(date, false);
