@@ -63,7 +63,6 @@ public class User {
         this.driver = driver;
     }
     public User() {
-        person = new Person();
     }
     public User(Person person, Driver driver, string phone, string password, string email, string userId, string token) {
         this.person = person;

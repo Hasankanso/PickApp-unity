@@ -58,7 +58,7 @@ public class RegisterPanel : Panel {
         NativeGallery.Permission permission = NativeGallery.GetImageFromGallery((path) => {
             if (path != null) {
                 // Create Texture from selected image
-                Texture2D texture = NativeGallery.LoadImageAtPath(path, -1,false);
+                Texture2D texture = NativeGallery.LoadImageAtPath(path, -1);
                 if (texture == null) {
                     return;
                 } else {
