@@ -106,6 +106,7 @@ public class RideDetails : Panel
   //Init MyRidesPanel
   public void Init(Ride ride, bool owner, Status prevStatus)
   {
+        Debug.Log("inittttt");
     Init(ride);
     StatusProperty = prevStatus;
     if (StatusProperty == Status.ADD)

@@ -322,6 +322,8 @@ MonoBehaviour:
   listView: {fileID: 7935656175079953346}
   locItem: {fileID: 5917992268252691313, guid: de59b044e762a4e42bc55e561390cbe8, type: 3}
   radius: 200
+  longtitude: 33.8547
+  latitude: 35.8623
 --- !u!111 &1758537707903480549
 Animation:
   m_ObjectHideFlags: 0
@@ -580,7 +582,7 @@ PrefabInstance:
     - target: {fileID: 964811019698917068, guid: 79b23ef31e0d8c34083c838834b146aa,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 549.66565
+      value: 85.53702
       objectReference: {fileID: 0}
     - target: {fileID: 1242764732985622682, guid: 79b23ef31e0d8c34083c838834b146aa,
         type: 3}

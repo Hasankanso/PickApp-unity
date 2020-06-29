@@ -19,7 +19,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   public Status StatusProperty { get => status; set => status = value; }
 
   private static DialogBox dialogBox;
-
+    private static LocationsFinderPanel locationFinderPanel;
   void Update()
   {
     if (Input.GetKeyDown(KeyCode.Escape)
@@ -109,7 +109,17 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     OpenDialog(dialogBox);
   }
 
-  public void OpenDateTimePicker(DateTime startDate, Action<DateTime> OnDatePicked)
+    public void OpenLocationFinder(string text, Action<Location> OnFromLocationPicked)
+    {
+        if (locationFinderPanel == null)
+        {
+            locationFinderPanel = PanelsFactory.CreateLocationsFinderPanel(text, OnFromLocationPicked);
+        }
+   
+        OpenDialog(locationFinderPanel);
+    }
+
+    public void OpenDateTimePicker(DateTime startDate, Action<DateTime> OnDatePicked)
   {
     MobileDateTimePicker.CreateDate(startDate.Year, startDate.Month, startDate.Day, null, (dt) => OpenTimePicker(dt, OnDatePicked));
   }
