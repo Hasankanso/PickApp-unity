@@ -17,8 +17,7 @@ namespace Requests {
             this.ride = ride;
             this.seats = seats;
             this.user = user;
-            HttpPath = "";
-            Action = "reserveRide";
+            HttpPath = "/ReserveBusiness/ReserveSeat";
         }
 
         public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
