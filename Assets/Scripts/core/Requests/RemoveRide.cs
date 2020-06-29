@@ -19,18 +19,17 @@ namespace Requests
         {
             this.ride = ride;
             HttpPath = "/RideBusiness/DeleteRide";
-            Action = "deleteRide";
         }
 
         public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
             JObject ride = JObject.Parse(response);
-            return null; ///
+            return Ride.ToObject(ride);
         }
 
         public override string ToJson()
         {
-            JObject rideJ = ride.ToJson();
+            JObject rideJ = ride.removeToJson();
             return rideJ.ToString();
         }
 

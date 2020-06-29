@@ -376,8 +376,9 @@ public class RideDetails : Panel
 
   public void RemoveRide()
   {
-    //Request
-  }
+        Request<Ride> request = new RemoveRide( ride);
+        request.Send(RemoveRideResponse);
+    }
 
   public void AddScheduleResponse(ScheduleRide result, HttpStatusCode code, string message)
   {
@@ -404,15 +405,18 @@ public class RideDetails : Panel
 
     }
 
-  public void EditRideResponse(ScheduleRide result, HttpStatusCode code, string message)
+  public void EditRideResponse(ScheduleRide result, HttpStatusCode code, string message) //Not in use cause we used AddRideResponse instead.
   {
     //check if schedule Ride add in server success
   }
 
-  public void RemoveRideResponse(ScheduleRide result, HttpStatusCode code, string message)
+  private void RemoveRideResponse(Ride result, HttpStatusCode code, string message)
   {
-    //check if schedule Ride add in server success
-  }
+        Program.Person.UpcomingRides.Remove(result);
+        FooterMenu.dFooterMenu.OpenYourRidesPanel();
+        this.destroy();
+
+    }
 
   private void ReserveSeatsResponse(Ride result, HttpStatusCode code, string message)
   {

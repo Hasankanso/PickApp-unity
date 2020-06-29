@@ -142,8 +142,14 @@ public class Ride
     rideJ[nameof(this.map)] = this.mapBase64;
     return rideJ;
   }
-
-  public static Ride ToObject(JObject json)
+    public JObject removeToJson()
+    {
+        JObject userJ = new JObject();
+        userJ[nameof(this.user)] = this.user.Id;
+        userJ[nameof(this.id)] = this.id;
+        return userJ;
+    }
+    public static Ride ToObject(JObject json)
   {
     bool kidSeat = false;
     var ks = json[nameof(Ride.kidSeat)];
