@@ -117,27 +117,26 @@ public void OpenInboxPanel(Person personToChat, Panel srcPanel) {
     inboxPanel.Init(personToChat);
 }
 
-public void OpenInboxPanel() {
-    ResetButtons();
-    currPanel.openExisted(inboxPanel);
-    currPanel = inboxPanel;
-    messagesButton.image.sprite = messagesButton.spriteState.selectedSprite;
-    inboxPanel.Init(Program.FakeChats());
-}
 
-public void OpenYourRidesPanel() {
-    ResetButtons();
-    if (!Program.IsLoggedIn) {
-        Panel notLoginPanel = PanelsFactory.createLogin(true);
-        currPanel.openCreated(notLoginPanel);
-        currPanel = notLoginPanel;
-    } else {
-        currPanel.openExisted(yourRidesPanel);
-        currPanel = yourRidesPanel;
-        myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
-        yourRidesPanel.Init(Program.Person);
+    public void OpenYourRidesPanel()
+    {
+        ResetButtons();
+        Debug.Log(Program.IsLoggedIn);
+
+        if (!Program.IsLoggedIn)
+        {
+            Panel notLoginPanel = PanelsFactory.createLogin(true);
+            currPanel.openCreated(notLoginPanel);
+            currPanel = notLoginPanel;
+        }
+        else
+        {
+            currPanel.openExisted(yourRidesPanel);
+            currPanel = yourRidesPanel;
+            myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
+            yourRidesPanel.Init();
+        }
     }
-}
 
 public static bool IsStaticPanel(Panel p) {
     return p.Equals(dFooterMenu.searchPanel) || p.Equals(dFooterMenu.addRidePanel) || p.Equals(dFooterMenu.yourRidesPanel) || p.Equals(dFooterMenu.inboxPanel) || p.Equals(dFooterMenu.profilePanel);

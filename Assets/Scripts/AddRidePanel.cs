@@ -43,20 +43,23 @@ public class AddRidePanel : Panel
   }
 
   public void Init(Ride ride)
-  {
+  { 
     Clear();
+        this.ride = ride;
     StatusProperty = Status.UPDATE;
-    if (ride.StopTime != 0 || !ride.StopTime.Equals(""))
+    if (ride.StopTime != 0 && !ride.StopTime.ToString().Equals(""))
     {
+            Debug.Log(ride.StopTime);
       stopTimeCheckBox.isOn = true;
       stopTimeTextToShow.SetActive(true);
-      stopTimeField.SetText(ride.StopTime.ToString());
+     // stopTimeField.SetText(ride.StopTime.ToString());
     }
+        Debug.Log(ride.id);
     from.SetText(ride.From.Name);
     to.SetText(ride.To.Name);
     comment.SetText(ride.Comment);
-    price.SetText(ride.Price.ToString());
-    date.text = ride.LeavingDate.ToString();
+   // price.SetText(ride.Price.ToString());
+    date.text = Program.DateToString(ride.LeavingDate);
     isMusicAllowed.isOn = ride.MusicAllowed;
     isPetsAllowed.isOn = ride.PetsAllowed;
     isAcAllowed.isOn = ride.AcAllowed;
@@ -115,12 +118,18 @@ public class AddRidePanel : Panel
       {
         stopTime = int.Parse(stopTimeField.text.text);
       }
-      ride = new Ride(Program.User, null, fromL, toL, comment.text.text, price.text.text, Program.CountryInformations,
+      if (StatusProperty == Status.UPDATE) 
+      ride = new Ride(ride.id,Program.User, null, fromL, toL, comment.text.text, price.text.text, Program.CountryInformations,
 wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
 int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
 stopTime, null, null);
+      else
+                ride = new Ride(null, Program.User, null, fromL, toL, comment.text.text, price.text.text, Program.CountryInformations,
+          wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
+          int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
+          stopTime, null, null);
 
-      if (carPickerPanel == null)
+            if (carPickerPanel == null)
       {
         carPickerPanel = PanelsFactory.CreateCarsListPanel(OnCarPicked, car);
         openCreated(carPickerPanel);

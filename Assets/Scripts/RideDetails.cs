@@ -65,9 +65,13 @@ public class RideDetails : Panel
   {
     personsDialog.gameObject.SetActive(false);
   }
-
+    static bool edit = false;
   public void EditRide()
   {
+        edit = true;
+        Debug.Log(StatusProperty);
+        StatusProperty = Status.UPDATE;
+        Debug.Log(ride.id);
     FooterMenu.dFooterMenu.OpenAddRidePanel(this, ride);
   }
 
@@ -106,17 +110,27 @@ public class RideDetails : Panel
   //Init MyRidesPanel
   public void Init(Ride ride, bool owner, Status prevStatus)
   {
-        Debug.Log("inittttt");
-    Init(ride);
+        Debug.Log(edit);
+        Debug.Log(
+    StatusProperty);
+        Init(ride);
     StatusProperty = prevStatus;
+        Debug.Log(edit);
+        Debug.Log(prevStatus);
     if (StatusProperty == Status.ADD)
-    {
-      addRideButton.SetActive(true);
+    { if (edit == true) { prevStatus = Status.UPDATE; updateRideButton.SetActive(true); }
+            else
+            {
+                Debug.Log("Add");
+                addRideButton.SetActive(true);
+            }
     }
     else if (StatusProperty == Status.UPDATE)
     {
-      updateRideButton.SetActive(true);
-    }
+            edit = true;
+            Debug.Log("update");
+            updateRideButton.SetActive(true);
+        }
     else if (StatusProperty == Status.VIEW)
     {
       if (owner)
@@ -348,8 +362,10 @@ public class RideDetails : Panel
 
   public void UpdateRide()
   {
-    Request<Ride> request = new ReserveSeat(ride, Program.User, personsDropdown.value + 1);
-    request.Send(ReserveSeatsResponse);
+        Debug.Log(ride.id);
+
+    Request<Ride> request = new EditRide(Program.Person, ride);
+    request.Send(AddRideResponse);
   }
 
   public void ReserveSeat()
@@ -360,8 +376,9 @@ public class RideDetails : Panel
 
   public void RemoveRide()
   {
-    //Request
-  }
+        Request<Ride> request = new RemoveRide( ride);
+        request.Send(RemoveRideResponse);
+    }
 
   public void AddScheduleResponse(ScheduleRide result, HttpStatusCode code, string message)
   {
@@ -382,20 +399,24 @@ public class RideDetails : Panel
   {
     if (!code.Equals(HttpStatusCode.OK)) Debug.Log("no results");
     Program.Person.UpcomingRides.Add(result);
-    FooterMenu.dFooterMenu.OpenYourRidesPanel();
-    Debug.Log("Got Response from servaa");
-    this.destroy();
-  }
+      FooterMenu.dFooterMenu.OpenYourRidesPanel();
+        Debug.Log("Got Response from servaa");
+        this.destroy();
 
-  public void EditRideResponse(ScheduleRide result, HttpStatusCode code, string message)
+    }
+
+  public void EditRideResponse(ScheduleRide result, HttpStatusCode code, string message) //Not in use cause we used AddRideResponse instead.
   {
     //check if schedule Ride add in server success
   }
 
-  public void RemoveRideResponse(ScheduleRide result, HttpStatusCode code, string message)
+  private void RemoveRideResponse(Ride result, HttpStatusCode code, string message)
   {
-    //check if schedule Ride add in server success
-  }
+        Program.Person.UpcomingRides.Remove(result);
+        FooterMenu.dFooterMenu.OpenYourRidesPanel();
+        this.destroy();
+
+    }
 
   private void ReserveSeatsResponse(Ride result, HttpStatusCode code, string message)
   {
