@@ -16,7 +16,7 @@ namespace Requests {
         public EditRide(Person user, Ride ride) {
             this.user = user;
             this.ride = ride;
-            HttpPath = "";
+            HttpPath = "/RideBusiness/EditRide";
             Action = "editRide";
         }
 
@@ -30,6 +30,7 @@ namespace Requests {
         public override string ToJson() {
             JObject rideJ = ride.ToJson();
             rideJ[nameof(ride.id)] = ride.Id;
+            Debug.Log(ride.Id);
             return rideJ.ToString();
         }
 

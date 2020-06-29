@@ -25,12 +25,13 @@ public class MyRideItem : Panel
     price.text = ride.Price + " " + ride.CountryInformations.Unit;
     date.text = Program.DateToString(ride.LeavingDate);
     SetPermissions(ride.SmokingAllowed, ride.AcAllowed, ride.PetsAllowed, ride.MusicAllowed, ride.KidSeat);
-  }
+    }
 
   public void OpenRideDetails()
   {
     bool owner = Program.Driver.Equals(ride.Driver);
-    Panel panel = PanelsFactory.CreateRideDetails(ride, true, Status.VIEW);
+        Panel panel = PanelsFactory.CreateRideDetails(ride, true, Status.VIEW);
+
     myRidesPanel.openCreated(panel);
   }
 

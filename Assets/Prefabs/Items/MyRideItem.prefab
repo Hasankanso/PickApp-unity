@@ -588,7 +588,6 @@ MonoBehaviour:
   to: {fileID: 3907750288814099211}
   price: {fileID: 3907750287988797282}
   date: {fileID: 3907750287218950636}
-  time: {fileID: 0}
   smokingImage: {fileID: 3051704280866704742}
   musicImage: {fileID: 3413066761074167158}
   acImage: {fileID: 4894878542843262288}
@@ -625,9 +624,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.7019608, g: 0.9019608, b: 1, a: 0.3529412}
+    m_PressedColor: {r: 0.7019608, g: 0.9019608, b: 1, a: 0.3529412}
+    m_SelectedColor: {r: 0.7019608, g: 0.9019608, b: 1, a: 0.3529412}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

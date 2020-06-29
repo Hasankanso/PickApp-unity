@@ -113,6 +113,8 @@ public void OpenProfilePanel() {
     public void OpenYourRidesPanel()
     {
         ResetButtons();
+        Debug.Log(Program.IsLoggedIn);
+
         if (!Program.IsLoggedIn)
         {
             Panel notLoginPanel = PanelsFactory.createLogin(true);
@@ -124,7 +126,7 @@ public void OpenProfilePanel() {
             currPanel.openExisted(yourRidesPanel);
             currPanel = yourRidesPanel;
             myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
-            yourRidesPanel.Init(Program.Person);
+            yourRidesPanel.Init();
         }
     }
 

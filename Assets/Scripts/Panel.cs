@@ -22,6 +22,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     private static LocationsFinderPanel locationFinderPanel;
   void Update()
   {
+        
     if (Input.GetKeyDown(KeyCode.Escape)
         && TouchScreenKeyboard.visible == false
         && !FooterMenu.IsStaticPanel(this))

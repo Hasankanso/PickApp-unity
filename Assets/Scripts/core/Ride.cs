@@ -68,16 +68,17 @@ public class Ride
 
   //constructor for ride to object
   public Ride(string id, User driver, Car car, Location from, Location to, string comment, string price, CountryInformations countryInformations, DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int availableSeats, int availableLuggages, int stopTime, string mapUrl)
-  : this(driver, car, from, to, comment, price, countryInformations, date, musicAllowed, acAllowed, smokingAllowed, petsAllowed, kidSeat, availableSeats, availableLuggages, stopTime, null, mapUrl)
+  : this(id,driver, car, from, to, comment, price, countryInformations, date, musicAllowed, acAllowed, smokingAllowed, petsAllowed, kidSeat, availableSeats, availableLuggages, stopTime, null, mapUrl)
   {
     Id = id;
   }
 
     //constructor to add full ride
-    public Ride(User user, Car car, Location from, Location to, string comment, string price, CountryInformations countryInformations,
+    public Ride(string id,User user, Car car, Location from, Location to, string comment, string price, CountryInformations countryInformations,
     DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int availableSeats, int availableLuggages,
     int stopTime, Texture2D map, string mapUrl)
   {
+        this.id = id;
     this.user = user;
     Car = car;
     From = from;
