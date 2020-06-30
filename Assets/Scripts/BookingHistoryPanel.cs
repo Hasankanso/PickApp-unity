@@ -17,13 +17,10 @@ public class BookingHistoryPanel : Panel
 
     public void Init()
     {
-        GetMyRidesHistory();
-    }
-    public void GetMyRidesHistory()
-    {
-        Request<List<Ride>> request = new GetMyRidesHistory();
+        Request<List<Ride>> request = new GetMyRidesHistory(Program.User);
         Task.Run(() => request.Send(Response));
     }
+
     private void Response(List<Ride> result, HttpStatusCode code, string message)
     {
         if (!code.Equals(HttpStatusCode.OK))
@@ -34,8 +31,17 @@ public class BookingHistoryPanel : Panel
         else
         {
             this.rides = result;
-            foreach (Ride r in rides)
-            {
+            ImplementYourRidesList(rides);
+        }
+    }
+    public void ImplementYourRidesList(List<Ride> rides) {
+        Debug.Log(213);
+        if ((rides != null)) {
+                Debug.Log(213);
+            listView.Clear();
+            Debug.Log(213);
+            foreach (Ride r in rides) {
+                Debug.Log(213);
                 var item = ItemsFactory.CreateBookingHistoryItem(listView.scrollContainer, r);
                 listView.Add(item.gameObject);
                 bookingHistoryItems.Add(item);

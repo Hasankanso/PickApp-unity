@@ -121,8 +121,9 @@ public class PanelsFactory : MonoBehaviour {
         return ride;
     }
     public static BookingHistoryPanel CreateBookingHistory() {
-        BookingHistoryPanel ride = Instantiate(defaultPanelsFactory.bookingHistory);
-        return ride;
+        BookingHistoryPanel bookingHistoryPanel = Instantiate(defaultPanelsFactory.bookingHistory);
+        bookingHistoryPanel.Init();
+        return bookingHistoryPanel;
     }
 
     public static AlertPanel createAlert(SearchInfo searchInfo) {
