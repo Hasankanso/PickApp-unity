@@ -28,11 +28,15 @@ public class MyRideItem : Panel
     }
 
   public void OpenRideDetails()
-  {
+  { 
     bool owner = Program.Driver.Equals(ride.Driver);
-        Panel panel = PanelsFactory.CreateRideDetails(ride, true, Status.VIEW);
-
+        Panel panel = PanelsFactory.CreateRideDetails(true,ride, owner, Status.VIEW);
+       
     myRidesPanel.openCreated(panel);
+        foreach(Passenger p in ride.Passengers)
+        {
+            if (p.isReserved(p)) return;
+        }
   }
 
   private void SetPermissions(bool isSmokingAllowed, bool isACAllowed, bool isPetsAllowed, bool isMusicAllowed, bool isKidsSeat)

@@ -18,7 +18,7 @@ public class RideDetails : Panel
 
   public GameObject addScheduleButton, updateScheduleButton, editScheduleButton, removeScheduleButton; //schedule
   public GameObject addRideButton, updateRideButton, editRideButton, removeRideButton; //Ride
-  public GameObject reserveSeatsButton; //reserve
+    public GameObject reserveSeatsButton, cancelReservedSeats; //reserve
 
   public Text monday, tuesday, wednesday, thursday, friday, saturday, sunday;
   public Dropdown personsDropdown;
@@ -108,7 +108,7 @@ public class RideDetails : Panel
 
   //Init SearchResult
   //Init MyRidesPanel
-  public void Init(Ride ride, bool owner, Status prevStatus)
+  public void Init(bool isUpcomingRides, Ride ride, bool owner, Status prevStatus)
   {
         Debug.Log(edit);
         Debug.Log(
@@ -139,11 +139,11 @@ public class RideDetails : Panel
         editRideButton.SetActive(true);
         removeRideButton.SetActive(true);
       }
-      else
+      else if (!isUpcomingRides)
       {
-        reserveSeatsButton.SetActive(true);
-      }
-    }
+                reserveSeatsButton.SetActive(true); }
+            else if (isUpcomingRides) cancelReservedSeats.SetActive(true); //cancel
+        }
   }
 
 
@@ -308,7 +308,7 @@ public class RideDetails : Panel
     updateRideButton.SetActive(false);
 
     reserveSeatsButton.SetActive(false);
-
+    cancelReservedSeats.SetActive(false);
     editScheduleButton.SetActive(false);
     addScheduleButton.SetActive(false);
 
@@ -374,7 +374,12 @@ public class RideDetails : Panel
     request.Send(ReserveSeatsResponse);
   }
 
-  public void RemoveRide()
+    public void CancelReservedSeats()
+    {
+        Request<Ride> request = new ReserveSeat(ride, Program.User, personsDropdown.value + 1);
+        request.Send(CancelReservedSeatsResponse);
+    }
+    public void RemoveRide()
   {
         Request<Ride> request = new RemoveRide( ride);
         request.Send(RemoveRideResponse);
@@ -417,7 +422,20 @@ public class RideDetails : Panel
         this.destroy();
 
     }
-
+    private void CancelReservedSeatsResponse(Ride result, HttpStatusCode code, string message)
+    {
+        if (!code.Equals(HttpStatusCode.OK))
+        {
+            OpenDialog("Something went wrong", false);
+        }
+        else
+        {
+            Program.Person.UpcomingRides.Remove(result);
+            OpenDialog("You have cancelled the reservation", true);
+            Panel panel = PanelsFactory.createSearch();
+            openExisted(panel);
+        }
+        }
   private void ReserveSeatsResponse(Ride result, HttpStatusCode code, string message)
   {
     if (!code.Equals(HttpStatusCode.OK))

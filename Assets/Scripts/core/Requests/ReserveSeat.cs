@@ -1,9 +1,13 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Requests;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -20,11 +24,15 @@ namespace Requests {
             HttpPath = "";
             Action = "reserveRide";
         }
-
+ 
         public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
-            return JsonConvert.DeserializeObject<Ride>(response);
-
+            JObject ride = JObject.Parse(response);
+            int luggages = -1;
+            var aL = ride[nameof(ReserveSeat.seats)];
+            if (aL != null)
+                int.TryParse(aL.ToString(), out luggages);
+            return Ride.ToObject(ride);
         }
 
         public override string ToJson() {

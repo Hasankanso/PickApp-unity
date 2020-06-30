@@ -243,11 +243,12 @@ public class PanelsFactory : MonoBehaviour {
 
 
     //to add, view, edit and remove Ride
-    public static RideDetails CreateRideDetails(Ride ride, bool owner, Status status) {
+    public static RideDetails CreateRideDetails(bool isUpcomingRides,Ride ride, bool owner, Status status) {
+       
         Debug.Log(
    status);
         RideDetails rideDetails = Instantiate(defaultPanelsFactory.rideDetails);
-        rideDetails.Init(ride, owner, status);
+        rideDetails.Init(isUpcomingRides,ride, owner, status);
         return rideDetails;
     }
 

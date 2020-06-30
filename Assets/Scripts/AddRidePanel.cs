@@ -167,7 +167,7 @@ stopTime, null, null);
   {
     if (schedule == null)
     {
-      RideDetails rideDetailsPanel = PanelsFactory.CreateRideDetails(ride, true, directionsPanel.StatusProperty);
+      RideDetails rideDetailsPanel = PanelsFactory.CreateRideDetails(true,ride, true, directionsPanel.StatusProperty);
       directionsPanel.openCreated(rideDetailsPanel);
     }
     else
