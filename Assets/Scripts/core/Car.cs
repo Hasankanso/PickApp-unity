@@ -63,6 +63,7 @@ public class Car
     }
     public static Car ToObject(JObject json)
     {
+        Debug.Log(1);
         string id = "";
         var oId = json["objectId"];
         if (oId != null)
