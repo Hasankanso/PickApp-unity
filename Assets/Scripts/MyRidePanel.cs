@@ -16,7 +16,7 @@ public class MyRidePanel : Panel
         StatusProperty = Status.VIEW;
   }
 
-    private void GetUpcomingRides(List<Ride> arg1, HttpStatusCode arg2, string arg3)
+    private void GetUpcomingRides(List<Ride> arg1, int arg2, string arg3)
     {
         Program.Person.UpcomingRides = arg1;
         ImplementYourRidesList(Program.Person.UpcomingRides);

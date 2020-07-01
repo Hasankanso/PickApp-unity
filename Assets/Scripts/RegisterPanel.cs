@@ -124,7 +124,7 @@ public class RegisterPanel : Panel {
         request.Send(GetCountriesResponse);
     }
 
-    private void GetCountriesResponse(Dictionary<string, CountryInformations> result, HttpStatusCode code, string message) {
+    private void GetCountriesResponse(Dictionary<string, CountryInformations> result, int code, string message) {
         if (!code.Equals(HttpStatusCode.OK))
             OpenDialog("Error", false);
         else {

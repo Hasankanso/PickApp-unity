@@ -21,9 +21,9 @@ namespace Requests
             HttpPath = "/RideBusiness/DeleteRide";
         }
 
-        public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<Ride> BuildResponse(JToken response, int statusCode) //TODO
         {
-            JObject ride = JObject.Parse(response);
+            JObject ride = (JObject) response;
             return Ride.ToObject(ride);
         }
 

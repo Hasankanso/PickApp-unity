@@ -20,9 +20,10 @@ namespace Requests
       Action = "searchForRides";
     }
 
-    public override async Task<List<Ride>> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    public override async Task<List<Ride>> BuildResponse(JToken response, int statusCode) //TODO
     {
-      var ridesArray = JArray.Parse(response);
+
+      var ridesArray = (JArray) response;
       List<Ride> rides = new List<Ride>();
       if (ridesArray==null) return null;
 

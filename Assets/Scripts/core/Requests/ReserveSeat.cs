@@ -21,9 +21,9 @@ namespace Requests {
             HttpPath = "/ReserveBusiness/ReserveSeat";
         }
 
-        public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<Ride> BuildResponse(JToken response, int statusCode) //TODO
         {
-            JObject json = JObject.Parse(response);
+            JObject json = (JObject) (response);
             JObject rideJ = (JObject)json["ride"];
             return Ride.ToObject(rideJ);
 

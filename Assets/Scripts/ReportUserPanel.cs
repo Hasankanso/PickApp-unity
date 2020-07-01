@@ -31,7 +31,7 @@ public class ReportUserPanel : Panel
         reason.value = 0;
         comment.Reset();
     }
-    private void response(Person result, HttpStatusCode code, string message)
+    private void response(Person result, int code, string message)
     {
         if (!code.Equals(HttpStatusCode.OK))
         {

@@ -21,7 +21,7 @@ public class BookingHistoryPanel : Panel
         Task.Run(() => request.Send(Response));
     }
 
-    private void Response(List<Ride> result, HttpStatusCode code, string message)
+    private void Response(List<Ride> result, int code, string message)
     {
         if (!code.Equals(HttpStatusCode.OK))
         {

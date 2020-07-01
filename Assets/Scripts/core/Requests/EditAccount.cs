@@ -19,15 +19,16 @@ namespace Requests
       HttpPath = "/PersonBusiness/EditPerson";
     }
 
-    public override async Task<User> BuildResponse(string response, HttpStatusCode statusCode) //TODO
-    {
-            /*JObject json = JObject.Parse(response);
-            Person p = Person.ToObject(json);
-            Texture2D image = await DownloadImage(p.ProfilePictureUrl);
-            p.ProfilePicture = image;
-            return p;*/
-            return null;
-        }
+    public override async Task<User> BuildResponse(JToken response, int statusCode) //TODO
+    {/*
+      JObject json = (JObject)response;
+      Person p = Person.ToObject(json);
+      Texture2D image = await DownloadImage(p.ProfilePictureUrl);
+      p.ProfilePicture = image;
+      return p;
+      */
+      return null;
+    }
 
     public override string ToJson()
     {

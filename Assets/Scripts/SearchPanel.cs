@@ -44,9 +44,9 @@ public class SearchPanel : Panel
     OpenDateTimePicker((dt) => OnDatePicked(dateLabel, dt));
   }
 
-  private void SearchResults(List<Ride> results, HttpStatusCode code, string message)
+  private void SearchResults(List<Ride> results, int code, string message)
   {
-    if (!code.Equals(HttpStatusCode.OK))
+    if (!code.Equals((int) HttpStatusCode.OK))
       OpenDialog("Something went wrong!", false);
     else
     {

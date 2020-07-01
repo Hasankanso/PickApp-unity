@@ -96,9 +96,9 @@ public class PhonePanel : Panel
     });
   }
 
-  private void RegistrationResponse(User user, HttpStatusCode statusCode, string arg3)
+  private void RegistrationResponse(User user, int statusCode, string arg3)
   {
-    if (statusCode == HttpStatusCode.OK)
+    if (statusCode == (int) HttpStatusCode.OK)
     {
       OpenDialog("Welcome to PickApp!", true);
       Program.User = user;

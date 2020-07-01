@@ -14,10 +14,9 @@ namespace Requests {
             this.returningUser = returningUser;
             HttpPath = "/UserBusiness/ValidLoggedIn";
         }
-        public override async Task<User> BuildResponse(string response, HttpStatusCode statusCode) //ToDo
+        public override async Task<User> BuildResponse(JToken response, int statusCode) //ToDo
         {
-            JObject json = JObject.Parse(response);
-            User u = User.ToObject(json);
+            User u = User.ToObject((JObject) response);
             Texture2D image = await DownloadImage(u.Person.ProfilePictureUrl);
             u.Person.ProfilePicture = image;
             return u;

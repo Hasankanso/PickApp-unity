@@ -19,9 +19,9 @@ namespace Requests {
             HttpPath = "/UserBusiness/Register";
         }
 
-        public override async Task<User> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<User> BuildResponse(JToken response, int statusCode) //TODO
         {
-            JObject user = JObject.Parse(response);
+            JObject user = (JObject) response;
             User u= User.ToObject(user);
             Texture2D image = await DownloadImage(u.Person.ProfilePictureUrl);
             u.Person.ProfilePicture = image;

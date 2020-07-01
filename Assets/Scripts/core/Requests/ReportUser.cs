@@ -19,7 +19,7 @@ namespace Requests {
             Action = "ReportUser";
         }
 
-        public override async Task<Person> BuildResponse(string response, HttpStatusCode statusCode) {
+        public override async Task<Person> BuildResponse(JToken response, int statusCode) {
             throw new System.NotImplementedException();
         }
 

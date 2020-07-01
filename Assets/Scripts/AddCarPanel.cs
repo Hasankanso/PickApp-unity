@@ -42,8 +42,8 @@ public class AddCarPanel : Panel {
             Task.Run(() => request.Send(response));
         }
     }
-    private void response(Car result, HttpStatusCode code, string message) {
-        if (!code.Equals(HttpStatusCode.OK)) {
+    private void response(Car result, int code, string message) {
+        if (!code.Equals((int) HttpStatusCode.OK)) {
             Panel p = PanelsFactory.CreateDialogBox("Something went wrong", false);
             OpenDialog(p);
         } else {
