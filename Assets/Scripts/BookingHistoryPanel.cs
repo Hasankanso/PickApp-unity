@@ -22,12 +22,11 @@ public class BookingHistoryPanel : Panel
         Task.Run(() => request.Send(Response));
     }
 
-    private void Response(List<Ride> result, HttpStatusCode code, string message) {
+    private void Response(List<Ride> result, int code, string message) {
         Debug.Log("hopz");
 
         if (!code.Equals(HttpStatusCode.OK)) {
             Debug.Log("hopz");
-
             Panel p = PanelsFactory.CreateDialogBox("Something went wrong", false);
             OpenDialog(p);
         }

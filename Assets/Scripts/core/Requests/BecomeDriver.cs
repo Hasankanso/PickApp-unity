@@ -16,7 +16,7 @@ namespace Requests {
             HttpPath = "/PersonBusiness/BecomeDriver";
         }
 
-        public override Task<Driver> BuildResponse(string response, HttpStatusCode statusCode) //TODO we have to use statusCode
+        public override Task<Driver> BuildResponse(JToken response, int statusCode) //TODO we have to use statusCode
         {
             //return JsonConvert.DeserializeObject<Ride>(response);
             throw new System.NotImplementedException();

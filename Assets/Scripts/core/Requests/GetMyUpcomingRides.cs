@@ -16,8 +16,9 @@ namespace Requests {
             this.user = user;
         }
 
-        public override async Task<List<Ride>> BuildResponse(string response, HttpStatusCode statusCode) {
-                var ridesArray = JArray.Parse(response);
+        public override async Task<List<Ride>> BuildResponse(JToken jRides, int statusCode) {
+
+                JArray ridesArray = (JArray) jRides;
                 List<Ride> rides = new List<Ride>();
                 if (ridesArray == null) return null;
 

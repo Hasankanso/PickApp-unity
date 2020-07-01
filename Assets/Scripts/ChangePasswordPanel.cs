@@ -29,7 +29,7 @@ public class ChangePasswordPanel : Panel {
             }
         }
     }
-    private void response(Person result, HttpStatusCode code, string message) {
+    private void response(Person result, int code, string message) {
         if (!code.Equals(HttpStatusCode.OK)) {
             Panel p = PanelsFactory.CreateDialogBox("There was an error changing password", false);
             OpenDialog(p);

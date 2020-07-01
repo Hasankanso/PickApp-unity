@@ -11,126 +11,135 @@ using System.Collections.Generic;
 using BackendlessAPI.Utils;
 using System;
 
-public class LoginPanel : Panel {
-    public InputFieldScript phone, code, password;
-    public Image backButton;
-    private Person person;
-    private bool isFromFooter;
+public class LoginPanel : Panel
+{
+  public InputFieldScript phone, code, password;
+  public Image backButton;
+  private Person person;
+  private bool isFromFooter;
 
-    public void Login() {
-        if (Validate()) {
-            User user = new User("+" + code.text.text + phone.text.text, password.GetComponent<InputField>().text);
-            Request<User> request = new Login(user);
-            request.Send(Response);
+  public void Login()
+  {
+    if (Validate())
+    {
+      User user = new User("+" + code.text.text + phone.text.text, password.GetComponent<InputField>().text);
+      Request<User> request = new Login(user);
+      request.Send(Response);
 
-        }
     }
+  }
 
-    private void Response(User u, HttpStatusCode code, string message) {
-        JObject j=null;
-        if (string.IsNullOrEmpty(message)) {
-            Debug.Log(2);
-             j = JObject.Parse(message);
-            if (!string.IsNullOrEmpty(message) && int.Parse(j["code"].ToString()) == 3003) {
-                OpenDialog(message, false);
-            }
-        }
-        else if (!code.Equals(HttpStatusCode.OK)) {
-            OpenDialog("Incorrect email or password", false);
-        } else {
-            Program.User = u;
-            Cache.User(u);
-            Cache.SetPassword(password.GetComponent<InputField>().text);
-            Debug.Log(Program.User.Token);
-            OpenDialog("Welcome back to PickApp", true);
-            Program.IsLoggedIn = true;
-            /* Dictionary<string, object> a = new Dictionary<string, object>();
-             a.Add(Program.User.Token,null);
-            LoginStorage k = new LoginStorage();
-            k.UserToken = Program.UserToken;
+  private void Response(User u, int code, string message)
+  {
+    if (!code.Equals((int)HttpStatusCode.OK))
+    {
+      OpenDialog(message, false);
+    }
+    else
+    {
+      Program.User = u;
+                    Cache.User(u);
 
-            HeadersManager.GetInstance().AddHeader(HeadersEnum.USER_TOKEN_KEY, "isValidUserToken");
-            Debug.Log(Backendless.UserService.IsValidLogin());*/
-            if (!isFromFooter)
-                back();
-            else
-                FooterMenu.dFooterMenu.OpenProfilePanel();
-        }
+      Cache.SetPassword(password.GetComponent<InputField>().text);
+      OpenDialog("Welcome back to PickApp", true);
+      Program.IsLoggedIn = true;
+      if (!isFromFooter)
+        back();
+      else
+        FooterMenu.dFooterMenu.OpenProfilePanel();
     }
+  }
 
-    public void Init(bool isFromFooter) {
-        Clear();
-        this.isFromFooter = isFromFooter;
-        if (!isFromFooter) {
-            backButton.gameObject.SetActive(true);
-        }
-        if (!string.IsNullOrEmpty(Cache.GetPhone())) {
-            phone.SetText(Cache.GetPhone());
-        }
-        if (!string.IsNullOrEmpty(Cache.GetPhoneCode())) {
-            this.code.SetText(Cache.GetPhoneCode());
-        }
-        if (!string.IsNullOrEmpty(Cache.GetPassword())) {
-            password.SetText(Cache.GetPassword());
-        }
+  public void Init(bool isFromFooter)
+  {
+    Clear();
+    this.isFromFooter = isFromFooter;
+    if (!isFromFooter)
+    {
+      backButton.gameObject.SetActive(true);
     }
+    if (!string.IsNullOrEmpty(Cache.GetPhone()))
+    {
+      phone.SetText(Cache.GetPhone());
+    }
+    if (!string.IsNullOrEmpty(Cache.GetPhoneCode()))
+    {
+      this.code.SetText(Cache.GetPhoneCode());
+    }
+    if (!string.IsNullOrEmpty(Cache.GetPassword()))
+    {
+      password.SetText(Cache.GetPassword());
+    }
+  }
 
-    private bool Validate() {
-        bool valid = true;
-        if (code.text.text.Equals("")) {
-            code.Error();
-            OpenDialog("Please enter code", false);
-            valid = false;
-        }
-        if (phone.text.text.Equals("")) {
-            phone.Error();
-            OpenDialog("Please enter phone", false);
-            valid = false;
-        }
-        if (Regex.Matches(phone.text.text, @"[a-zA-Z]").Count > 0) {
-            phone.Error();
-            OpenDialog("Invalid phone", false);
-            valid = false;
-        }
-        if (phone.text.text.Length > 15) {
-            phone.Error();
-            OpenDialog("Your phone number is invalid", false);
-            valid = false;
-        }
-        if (phone.text.text.Length < 0) {
-            phone.Error();
-            OpenDialog("Your phone number is invalid", false);
-            valid = false;
-        }
-        if (password.text.text.Equals("")) {
-            password.Error();
-            OpenDialog("Enter password", false);
-            valid = false;
-        }
-        if (password.text.text.Length < 7) {
-            password.Error();
-            OpenDialog("Invalid password", false);
-            valid = false;
-        }
-        if (password.text.text.Any(char.IsDigit)) {
-            password.Error();
-            OpenDialog("Invalid password", false);
-            valid = false;
-        }
-        return valid;
+  private bool Validate()
+  {
+    bool valid = true;
+    if (code.text.text.Equals(""))
+    {
+      code.Error();
+      OpenDialog("Please enter code", false);
+      valid = false;
     }
-    public void ForgetPassword() {
-        Panel p = PanelsFactory.createPhonePanel();
-        openCreated(p);
+    if (phone.text.text.Equals(""))
+    {
+      phone.Error();
+      OpenDialog("Please enter phone", false);
+      valid = false;
     }
-    public void CreateAccount() {
-        Panel p = PanelsFactory.createRegister();
-        openCreated(p);
+    if (Regex.Matches(phone.text.text, @"[a-zA-Z]").Count > 0)
+    {
+      phone.Error();
+      OpenDialog("Invalid phone", false);
+      valid = false;
     }
-    internal override void Clear() {
-        backButton.gameObject.SetActive(false);
-        phone.Reset();
-        password.Reset();
-        code.Reset();
+    if (phone.text.text.Length > 15)
+    {
+      phone.Error();
+      OpenDialog("Your phone number is invalid", false);
+      valid = false;
     }
+    if (phone.text.text.Length < 0)
+    {
+      phone.Error();
+      OpenDialog("Your phone number is invalid", false);
+      valid = false;
+    }
+    if (password.text.text.Equals(""))
+    {
+      password.Error();
+      OpenDialog("Enter password", false);
+      valid = false;
+    }
+    if (password.text.text.Length < 7)
+    {
+      password.Error();
+      OpenDialog("Invalid password", false);
+      valid = false;
+    }
+    if (password.text.text.Any(char.IsDigit))
+    {
+      password.Error();
+      OpenDialog("Invalid password", false);
+      valid = false;
+    }
+    return valid;
+  }
+  public void ForgetPassword()
+  {
+    Panel p = PanelsFactory.createPhonePanel();
+    openCreated(p);
+  }
+  public void CreateAccount()
+  {
+    Panel p = PanelsFactory.createRegister();
+    openCreated(p);
+  }
+  internal override void Clear()
+  {
+    backButton.gameObject.SetActive(false);
+    phone.Reset();
+    password.Reset();
+    code.Reset();
+  }
 }

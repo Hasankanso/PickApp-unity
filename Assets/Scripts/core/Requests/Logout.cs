@@ -9,8 +9,8 @@ namespace Requests {
         public Logout() {
             HttpPath = "/UserBusiness/Logout";
         }
-        public override async Task<string> BuildResponse(string response, HttpStatusCode statusCode) {
-            return response;
+        public override async Task<string> BuildResponse(JToken response, int statusCode) {
+            return ((JObject)response).ToString();
         }
 
         public override string ToJson() {

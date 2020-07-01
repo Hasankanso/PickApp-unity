@@ -31,7 +31,7 @@ public class BioPanel : Panel
       Task.Run(() => request.Send(response));
     }
   }
-  private void response(User result, HttpStatusCode code, string message)
+  private void response(User result, int code, string message)
   {
     if (!code.Equals(HttpStatusCode.OK))
     {
