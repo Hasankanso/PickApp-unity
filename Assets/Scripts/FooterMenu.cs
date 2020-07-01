@@ -31,8 +31,6 @@ public class FooterMenu : MonoBehaviour {
         profilePanel.gameObject.SetActive(false);
         currPanel = searchPanel;
         searchButton.image.sprite = searchButton.spriteState.selectedSprite;
-        //Debug.Log(Cache.GetToken());
-        /*
         if (!string.IsNullOrEmpty(Cache.GetToken())) {
             User user = new User();
             user.Id = Cache.GetUserId();
@@ -41,7 +39,7 @@ public class FooterMenu : MonoBehaviour {
             Debug.Log(Program.UserToken);
             Request<User> request = new GetUser(user);
             request.Send(Response);
-    }*/
+        }
   }
 
 private void Response(User u, HttpStatusCode code, string message) {

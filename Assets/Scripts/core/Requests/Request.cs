@@ -45,8 +45,15 @@ namespace Requests {
                 if (!string.IsNullOrEmpty(Program.UserToken)) {
                     content.Headers.Add("user-token", Program.UserToken);
                 }
-                var answer = await Client.PostAsync(Ip + HttpPath, content);
-                string result = await answer.Content.ReadAsStringAsync();
+                var answer=new HttpResponseMessage();
+                string result="";
+                try {
+                     answer = await Client.PostAsync(Ip + HttpPath, content);
+                     result = await answer.Content.ReadAsStringAsync();
+
+                } catch (HttpRequestException e) {
+                    Debug.Log(e.Message);
+                }
                 Debug.Log(result);
                 /*
                 JObject j = JObject.Parse(result);

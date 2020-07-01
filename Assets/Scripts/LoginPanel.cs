@@ -5,6 +5,11 @@ using UnityEngine.UI;
 using Requests;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using BackendlessAPI;
+using BackendlessAPI.Engine;
+using System.Collections.Generic;
+using BackendlessAPI.Utils;
+using System;
 
 public class LoginPanel : Panel {
     public InputFieldScript phone, code, password;
@@ -34,9 +39,18 @@ public class LoginPanel : Panel {
             OpenDialog("Incorrect email or password", false);
         } else {
             Program.User = u;
+            Cache.User(u);
             Cache.SetPassword(password.GetComponent<InputField>().text);
+            Debug.Log(Program.User.Token);
             OpenDialog("Welcome back to PickApp", true);
             Program.IsLoggedIn = true;
+            /* Dictionary<string, object> a = new Dictionary<string, object>();
+             a.Add(Program.User.Token,null);
+            LoginStorage k = new LoginStorage();
+            k.UserToken = Program.UserToken;
+
+            HeadersManager.GetInstance().AddHeader(HeadersEnum.USER_TOKEN_KEY, "isValidUserToken");
+            Debug.Log(Backendless.UserService.IsValidLogin());*/
             if (!isFromFooter)
                 back();
             else
