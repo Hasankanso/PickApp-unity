@@ -17,17 +17,16 @@ namespace Requests {
             this.user = user;
         }
 
-        public override async Task<List<Ride>> BuildResponse(string response, HttpStatusCode statusCode)//ToDo
+        public override async Task<List<Ride>> BuildResponse(JToken response, int statusCode)//ToDo
         {
-            var ridesArray = JArray.Parse(response);
+            var ridesArray = (JArray)response;
             List<Ride> rides = new List<Ride>();
             if (ridesArray == null) return null;
-
             foreach (JToken j in ridesArray) {
                 JObject rideJ = (JObject)j;
+                Debug.Log(rideJ);
                 rides.Add(Ride.ToObject(rideJ));
             }
-
             return rides;
         }
 

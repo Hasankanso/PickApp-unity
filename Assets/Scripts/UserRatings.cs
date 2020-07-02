@@ -37,7 +37,7 @@ public class UserRatings : Panel
     Request<List<Rate>> request = new GetUserReviews(Program.User);
     Task.Run(() => request.Send(Response));
   }
-  private void Response(List<Rate> result, HttpStatusCode code, string message)
+  private void Response(List<Rate> result, int code, string message)
   {
     if (!code.Equals(HttpStatusCode.OK))
     {

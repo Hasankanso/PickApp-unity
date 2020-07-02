@@ -16,8 +16,8 @@ namespace Requests {
             HttpPath = "/PersonBusiness/GetCountries";
         }
 
-        public override async Task<Dictionary<string, CountryInformations>> BuildResponse(string response, HttpStatusCode statusCode) {
-            var countries = JArray.Parse(response);
+        public override async Task<Dictionary<string, CountryInformations>> BuildResponse(JToken response, int statusCode) {
+            var countries = (JArray) response;
             this.countryInformations=new Dictionary<string, CountryInformations>();
             Program.CountriesInformationsNames = new List<string>();
             foreach (var countryJ in countries) {

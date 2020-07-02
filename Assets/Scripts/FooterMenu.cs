@@ -31,9 +31,7 @@ public class FooterMenu : MonoBehaviour {
         profilePanel.gameObject.SetActive(false);
         currPanel = searchPanel;
         searchButton.image.sprite = searchButton.spriteState.selectedSprite;
-        //Debug.Log(Cache.GetToken());
-        /*
-        if (!string.IsNullOrEmpty(Cache.GetToken())) {
+        /*if (!string.IsNullOrEmpty(Cache.GetToken())) {
             User user = new User();
             user.Id = Cache.GetUserId();
             user.Token = Cache.GetToken();
@@ -41,16 +39,11 @@ public class FooterMenu : MonoBehaviour {
             Debug.Log(Program.UserToken);
             Request<User> request = new GetUser(user);
             request.Send(Response);
-    }*/
+        }*/
   }
 
-private void Response(User u, HttpStatusCode code, string message) {
-    JObject j = null;
-    if (string.IsNullOrEmpty(message)) {
-        j = JObject.Parse(message);
-        if (!string.IsNullOrEmpty(message) && int.Parse(j["code"].ToString()) == 3003) {
-        }
-    } else if (!code.Equals(HttpStatusCode.OK)) {
+private void Response(User u, int code, string message) {
+    if (!code.Equals((int)HttpStatusCode.OK)) {
     } else {
         Program.User = u;
         Program.IsLoggedIn = true;

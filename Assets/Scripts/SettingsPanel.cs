@@ -65,9 +65,9 @@ public class SettingsPanel : Panel
     Request<string> request = new Logout();
     request.Send(response);
   }
-  private void response(string result, HttpStatusCode code, string message)
+  private void response(string result, int code, string message)
   {
-    if (!code.Equals(HttpStatusCode.OK))
+    if (!code.Equals((int) HttpStatusCode.OK))
     {
     }
     else

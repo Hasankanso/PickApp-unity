@@ -6,6 +6,7 @@ using System.Collections;
 using UnityEngine;
 using System.Net;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace Requests
 {
@@ -20,7 +21,7 @@ namespace Requests
       Action = "broadCastAlert";
     }
 
-    public override Task<Alert> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+    public override Task<Alert> BuildResponse(JToken response, int statusCode) //TODO
     {
       return null;
       //return JsonConvert.DeserializeObject<Alert>(response);

@@ -98,19 +98,7 @@ public static class Program {
     public static readonly string googleKey = "AIzaSyC7U0OEb9200tGZFFFTyLjQdo3goKyuSsw";
 
     public static User User {
-        get => user; set {
-            user = value;
-            if (user != null) {
-                if (user.Person!=null) {
-                    Cache.SetPhoneCode(user.Person.CountryInformations.Code.Split(new string[] { "+" }, StringSplitOptions.None)[1]);
-                }
-                if (user.phone!=null) {
-                    Cache.SetPhone(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
-                }
-                Cache.SetToken(user.Token);
-                Cache.SetUserId(user.Id);
-            }
-        }
+        get => user; set { user = value; }
     }
     public static bool IsLoggedIn { get => isLoggedIn; set => isLoggedIn = value; }
     public static CountryInformations CountryInformations { get => User.Person.CountryInformations; }
@@ -129,7 +117,7 @@ public static class Program {
     public static Sprite GetImage(Texture2D texture2D) {
         return Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 1024);
     }
-   
+
 
     public static string DateToString(DateTime date) {
         return DateToString(date, false);

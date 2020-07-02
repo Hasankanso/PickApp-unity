@@ -8,30 +8,36 @@ using System.Collections.Generic;
 using System.Net;
 using Newtonsoft.Json.Linq;
 
-namespace Requests {
-    class GetMyCars : Request<List<Car>> {
-        private User user;
-        public GetMyCars(User user) {
-            this.user = user;
-            HttpPath = "";
-            Action = "getMyCars";
-        }
-
-        public override async Task<List<Car>> BuildResponse(string response, HttpStatusCode statusCode) //TODO
-        {
-            return JsonConvert.DeserializeObject<List<Car>>(response);
-        }
-
-        public override string ToJson() {
-            JObject driverJ = new JObject();
-            driverJ[nameof(user.id)] = user.Id;
-            return driverJ.ToString();
-        }
-
-        protected override string IsValid() {
-            return string.Empty;
-        }
+namespace Requests
+{
+  class GetMyCars : Request<List<Car>>
+  {
+    private User user;
+    public GetMyCars(User user)
+    {
+      this.user = user;
+      HttpPath = "";
+      Action = "getMyCars";
     }
+
+    public override async Task<List<Car>> BuildResponse(JToken response, int statusCode) //TODO
+    {
+      return null;
+      //  return JsonConvert.DeserializeObject<List<Car>>(response);
+    }
+
+    public override string ToJson()
+    {
+      JObject driverJ = new JObject();
+      driverJ[nameof(user.id)] = user.Id;
+      return driverJ.ToString();
+    }
+
+    protected override string IsValid()
+    {
+      return string.Empty;
+    }
+  }
 }
 
 

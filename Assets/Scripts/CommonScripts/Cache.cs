@@ -1,6 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public static class Cache {
+    public static void User(User user) {
+            if (user != null) {
+                if (user.Person != null) {
+                    SetPhoneCode(user.Person.CountryInformations.Code.Split(new string[] { "+" }, StringSplitOptions.None)[1]);
+                }
+                if (user.phone != null) {
+                    SetPhone(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
+                }
+                SetToken(user.Token);
+                SetUserId(user.Id);
+            }
+    }
     public static bool GetNewsCheckbox() {
         return bool.Parse(PlayerPrefs.GetString("news", "true"));
     }

@@ -17,31 +17,34 @@ public class BookingHistoryPanel : Panel
 
     public void Init()
     {
+        Debug.Log("hopz");
         Request<List<Ride>> request = new GetMyRidesHistory(Program.User);
-        Task.Run(() => request.Send(Response));
+        request.Send(Response);
     }
 
-    private void Response(List<Ride> result, HttpStatusCode code, string message)
-    {
-        if (!code.Equals(HttpStatusCode.OK))
-        {
+    private void Response(List<Ride> result, int code, string message) {
+        Debug.Log("kkkk");
+
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+            Debug.Log("hopz");
             Panel p = PanelsFactory.CreateDialogBox("Something went wrong", false);
             OpenDialog(p);
         }
         else
         {
             this.rides = result;
+            Debug.Log("hii");
+            Debug.Log(Program.DateToString(rides[0].LeavingDate)+"  "+
+                rides[0].Price + rides[0].CountryInformations.Unit+"  "+ rides[0].From.Name+"  "+
+                rides[0].To.Name+"  "+ rides[0].User.Person.FirstName+"  "+
+                rides[0].User.Person.ProfilePicture);
             ImplementYourRidesList(rides);
         }
     }
     public void ImplementYourRidesList(List<Ride> rides) {
-        Debug.Log(213);
         if ((rides != null)) {
-                Debug.Log(213);
             listView.Clear();
-            Debug.Log(213);
             foreach (Ride r in rides) {
-                Debug.Log(213);
                 var item = ItemsFactory.CreateBookingHistoryItem(listView.scrollContainer, r);
                 listView.Add(item.gameObject);
                 bookingHistoryItems.Add(item);

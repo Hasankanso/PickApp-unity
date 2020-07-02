@@ -18,7 +18,7 @@ public class ContactUsPanel : Panel {
             Task.Run(() => request.Send(response));
         }
     }
-    private void response(string result, HttpStatusCode code, string message) {
+    private void response(string result, int code, string message) {
         if (!code.Equals(HttpStatusCode.OK)) {
             Panel p = PanelsFactory.CreateDialogBox("Some thing went wrong", false);
             OpenDialog(p);

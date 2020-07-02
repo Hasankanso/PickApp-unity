@@ -405,45 +405,46 @@ public class RideDetails : Panel
         }
     }
     public void RemoveRide()
-  {
-        Request<Ride> request = new RemoveRide( ride);
+    {
+        Request<Ride> request = new RemoveRide(ride);
         request.Send(RemoveRideResponse);
     }
 
-    public void AddScheduleResponse(ScheduleRide result, HttpStatusCode code, string message) {
+        public void AddRideResponse(Ride result, int code, string message)
+        {
+            if (!code.Equals((int)HttpStatusCode.OK)) Debug.Log("no results");
+            Program.Person.UpcomingRides.Add(result);
+            FooterMenu.dFooterMenu.OpenYourRidesPanel();
+            Debug.Log("Got Response from servaa");
+            this.destroy();
+        }
+
+    public void AddScheduleResponse(ScheduleRide result, int code, string message) {
         //check if schedule Ride add in server success
     }
 
-    public void EditScheduleResponse(ScheduleRide result, HttpStatusCode code, string message) {
+    public void EditScheduleResponse(ScheduleRide result, int code, string message) {
         //check if schedule Ride add in server success
     }
 
-    public void RemoveScheduleResponse(ScheduleRide result, HttpStatusCode code, string message) {
+    public void RemoveScheduleResponse(ScheduleRide result, int code, string message) {
         //check if schedule Ride remove in server success
     }
 
-    private void AddRideResponse(Ride result, HttpStatusCode code, string message) {
-        if (!code.Equals(HttpStatusCode.OK)) Debug.Log("no results");
-        Program.Person.UpcomingRides.Add(result);
-        FooterMenu.dFooterMenu.OpenYourRidesPanel();
-        Debug.Log("Got Response from servaa");
-        this.destroy();
 
-    }
-
-    public void EditRideResponse(ScheduleRide result, HttpStatusCode code, string message) //Not in use cause we used AddRideResponse instead.
-    {
+public void EditRideResponse(ScheduleRide result, int code, string message){ //Not in use cause we used AddRideResponse instead.    
         //check if schedule Ride add in server success
     }
 
-    private void RemoveRideResponse(Ride result, HttpStatusCode code, string message) {
+    private void RemoveRideResponse(Ride result, int code, string message)
+{
         Program.Person.UpcomingRides.Remove(result);
-        FooterMenu.dFooterMenu.OpenYourRidesPanel();
-        this.destroy();
-
+    FooterMenu.dFooterMenu.OpenYourRidesPanel();
+    this.destroy();
 
     }
-    private void CancelReservedSeatsResponse(Ride result, HttpStatusCode code, string message)
+    
+    private void CancelReservedSeatsResponse(Ride result, int code, string message)
     {
         if (!code.Equals(HttpStatusCode.OK))
         {
@@ -459,22 +460,22 @@ public class RideDetails : Panel
             result.Passengers.Remove(passenger);
         }
         }
-  private void ReserveSeatsResponse(Ride result, HttpStatusCode code, string message)
-  {
-    if (!code.Equals(HttpStatusCode.OK))
+private void ReserveSeatsResponse(Ride result, int code, string message)
+{
+    if (!code.Equals((int)HttpStatusCode.OK))
     {
-      OpenDialog("Something went wrong", false);
-    }
+        OpenDialog("Something went wrong", false); }
     else
     {
-            Passenger passenger = new Passenger(Program.User, luggagesDropdown.value);
-      OpenDialog("You reserved a seat(s).", true);
-      Panel panel = PanelsFactory.createSearch();
-      openExisted(panel);
-            result.Passengers.Add(passenger);
+        Passenger passenger = new Passenger(Program.User, luggagesDropdown.value);
+        OpenDialog("You reserved a seat(s).", true);
+        Panel panel = PanelsFactory.createSearch();
+        openExisted(panel);
+        result.Passengers.Add(passenger);
     }
-  }
-
-  // end send and receive functions
 
 }
+}
+  // end send and receive functions
+
+

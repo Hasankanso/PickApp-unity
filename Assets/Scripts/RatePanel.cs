@@ -25,7 +25,7 @@ public class RatePanel : Panel {
             Task.Run(() => request.Send(response));
         }
     }
-    private void response(Rate result, HttpStatusCode code, string message) {
+    private void response(Rate result, int code, string message) {
         if (!code.Equals(HttpStatusCode.OK))
             OpenDialog("There was an error rating this user", false);
         else {

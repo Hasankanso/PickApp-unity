@@ -21,10 +21,9 @@ namespace Requests
             HttpPath = "/RideBusiness/CancelReserved";
         }
 
-        public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<Ride> BuildResponse(JToken response, int statusCode) //TODO
         {
-            JObject ride = JObject.Parse(response);
-            return Ride.ToObject(ride);
+            return Ride.ToObject((JObject)response);
 
         }
 

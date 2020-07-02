@@ -19,12 +19,15 @@ namespace Requests {
             HttpPath = "/UserBusiness/Register";
         }
 
-        public override async Task<User> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<User> BuildResponse(JToken response, int statusCode) //TODO
         {
-            JObject user = JObject.Parse(response);
+            JObject user = (JObject) response;
             User u= User.ToObject(user);
+            Debug.Log("before starting downloading image");
             Texture2D image = await DownloadImage(u.Person.ProfilePictureUrl);
+            Debug.Log("after finishing downloading");
             u.Person.ProfilePicture = image;
+            Debug.Log("after setting image to profile picture");
             return u;
         }
 

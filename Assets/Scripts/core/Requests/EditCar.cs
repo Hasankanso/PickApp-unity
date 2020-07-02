@@ -8,36 +8,42 @@ using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace Requests {
-    class EditCar : Request<Car> {
-        private Car car;
+namespace Requests
+{
+  class EditCar : Request<Car>
+  {
+    private Car car;
 
-        public EditCar(Car car) {
-            this.car = car;
-            HttpPath = "";
-            Action = "editCar";
-        }
-
-        public override async Task<Car> BuildResponse(string response, HttpStatusCode statusCode) //TODO
-        {
-            return JsonConvert.DeserializeObject<Car>(response);
-        }
-
-        public override string ToJson() {
-            JObject carJ = car.ToJson();
-            carJ[nameof(car.id)] = car.Id;
-            return carJ.ToString();
-        }
-
-        protected override string IsValid() {
-            if (string.IsNullOrEmpty(car.Name) || car.Year < 1970 || car.Year > 2020 ||
-                car.MaxSeats < 1 || string.IsNullOrEmpty(car.Color) ||
-                car.MaxLuggage < 0)
-                return "Please make sure that you have entered the correct information.";
-            return string.Empty;
-
-        }
+    public EditCar(Car car)
+    {
+      this.car = car;
+      HttpPath = "";
+      Action = "editCar";
     }
+
+    public override async Task<Car> BuildResponse(JToken response, int statusCode) //TODO
+    {
+      return null;
+      //  return JsonConvert.DeserializeObject<Car>(response);
+    }
+
+    public override string ToJson()
+    {
+      JObject carJ = car.ToJson();
+      carJ[nameof(car.id)] = car.Id;
+      return carJ.ToString();
+    }
+
+    protected override string IsValid()
+    {
+      if (string.IsNullOrEmpty(car.Name) || car.Year < 1970 || car.Year > 2020 ||
+          car.MaxSeats < 1 || string.IsNullOrEmpty(car.Color) ||
+          car.MaxLuggage < 0)
+        return "Please make sure that you have entered the correct information.";
+      return string.Empty;
+
+    }
+  }
 }
 
 

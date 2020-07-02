@@ -24,11 +24,11 @@ namespace Requests {
             this.user = user;
             HttpPath = "/ReserveBusiness/ReserveSeat";
         }
- 
-        public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
-        {
 
-            JObject json = JObject.Parse(response);
+
+        public override async Task<Ride> BuildResponse(JToken response, int statusCode) //TODO
+        {
+            JObject json = (JObject) (response);
             JObject rideJ = (JObject)json["ride"];
             return Ride.ToObject(rideJ);
         }

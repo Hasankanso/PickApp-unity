@@ -36,7 +36,7 @@ public class AccountPanel : Panel
     Panel panel = PanelsFactory.CreateImageViewer(Program.Person.ProfilePicture);
     OpenDialog(panel);
   }
-  private void response(User result, HttpStatusCode code, string message)
+  private void response(User result, int code, string message)
   {
     if (!code.Equals(HttpStatusCode.OK))
     {

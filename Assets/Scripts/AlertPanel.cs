@@ -70,7 +70,7 @@ public class AlertPanel : Panel
   {
     dateLabel.text = Program.DateToString(d);
   }
-  private void response(Alert result, HttpStatusCode code, string message)
+  private void response(Alert result, int code, string message)
   {
     if (!code.Equals(HttpStatusCode.OK))
       OpenDialog("Something went wrong!", false);

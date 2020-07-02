@@ -20,9 +20,10 @@ namespace Requests {
             Action = "removeCar";
         }
 
-        public override async Task<Car> BuildResponse(string response, HttpStatusCode statusCode) //TODO
+        public override async Task<Car> BuildResponse(JToken response, int statusCode) //TODO
         {
-            return JsonConvert.DeserializeObject<Car>(response);
+      // return JsonConvert.DeserializeObject<Car>(response);
+      return null;
         }
 
         public override string ToJson() {

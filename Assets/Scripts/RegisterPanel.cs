@@ -35,10 +35,7 @@ public class RegisterPanel : Panel {
     }
     internal int CalculateAge() {
         DateTime birthdate = Program.StringToBirthday(birthday.text);
-        // get the difference in years
         int years = DateTime.Now.Year - birthdate.Year;
-        // subtract another year if we're before the
-        // birth day in the current year
         if (DateTime.Now.Month < birthdate.Month || (DateTime.Now.Month == birthdate.Month && DateTime.Now.Day < birthdate.Day))
             years--;
         return years;
@@ -83,17 +80,17 @@ public class RegisterPanel : Panel {
             OpenDialog(p);
             valid = false;
         }
-        if (CalculateAge() < 12) {
+        if (CalculateAge() < 14) {
             Panel p = PanelsFactory.CreateDialogBox("You are under the legal age", false);
             OpenDialog(p);
             valid = false;
         }
         Debug.Log(CalculateAge());
-        /*if (CalculateAge() > 100) {
+        if (CalculateAge() > 100) {
             Panel p = PanelsFactory.CreateDialogBox("Invalid birthday", false);
             OpenDialog(p);
             valid = false;
-        }*/
+        }
         if (email.text.text.Equals("")) {
             email.Error();
             Panel p = PanelsFactory.CreateDialogBox("Enter your email", false);
@@ -124,8 +121,8 @@ public class RegisterPanel : Panel {
         request.Send(GetCountriesResponse);
     }
 
-    private void GetCountriesResponse(Dictionary<string, CountryInformations> result, HttpStatusCode code, string message) {
-        if (!code.Equals(HttpStatusCode.OK))
+    private void GetCountriesResponse(Dictionary<string, CountryInformations> result, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK))
             OpenDialog("Error", false);
         else {
             Program.CountriesInformations = result;
@@ -139,7 +136,7 @@ public class RegisterPanel : Panel {
     internal override void Clear() {
         firstName.Reset();
         lastName.Reset();
-        birthday.text = Program.BirthdayToString(DateTime.Now.AddYears(-13));
+        birthday.text = Program.BirthdayToString(DateTime.Now.AddYears(-14));
         genderDP.value = 0;
         countryDP.value = 0;
         countryDP.ClearOptions();

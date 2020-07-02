@@ -96,9 +96,9 @@ public class PhonePanel : Panel
     });
   }
 
-  private void RegistrationResponse(User user, HttpStatusCode statusCode, string arg3)
+  private void RegistrationResponse(User user, int statusCode, string arg3)
   {
-    if (statusCode == HttpStatusCode.OK)
+    if (statusCode == (int) HttpStatusCode.OK)
     {
       OpenDialog("Welcome to PickApp!", true);
       Program.User = user;
@@ -111,13 +111,13 @@ public class PhonePanel : Panel
       OpenDialog("Error while register", false);
     }
   }
-
+/*
   void signout()
   {
     FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(Program.FirebaseApp);
     PhoneAuthProvider provider = PhoneAuthProvider.GetInstance(firebaseAuth);
     firebaseAuth.SignOut();
-  }
+  }*/
 
   IEnumerator ResendTimer()
   {
