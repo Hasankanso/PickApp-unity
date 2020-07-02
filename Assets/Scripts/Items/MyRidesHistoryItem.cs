@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class BookingHistoryItem : Panel {
+public class MyRidesHistoryItem : Panel {
     public Text  price, origin,date, target, driverName;
     public Image driverImage;
     public Ride ride;

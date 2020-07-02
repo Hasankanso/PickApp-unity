@@ -9,7 +9,7 @@ public class ItemsFactory : MonoBehaviour
   private static ItemsFactory defaultItemsFactory;
   public RideItem rideItem;
   public RoadItem roadItem;
-  public BookingHistoryItem bookingHistoryItem;
+  public MyRidesHistoryItem myRidesHistoryItem;
   public CarItem carItem;
   public MyRideItem myRideItem;
   public RatingItem ratingItem;
@@ -83,12 +83,12 @@ public class ItemsFactory : MonoBehaviour
     myRideItem.Init(ride, person, yourRidesPanel);
     return myRideItem;
   }
-  public static BookingHistoryItem CreateBookingHistoryItem(GameObject parent, Ride o)
+  public static MyRidesHistoryItem CreateMyRidesHistoryItem(GameObject parent, Ride o)
   {
-    BookingHistoryItem bookingHistoryItem = Instantiate(defaultItemsFactory.bookingHistoryItem);
-    bookingHistoryItem.transform.SetParent(parent.transform, false);
-    bookingHistoryItem.init(o);
-    return bookingHistoryItem;
+    MyRidesHistoryItem myRidesHistoryItem = Instantiate(defaultItemsFactory.myRidesHistoryItem);
+    myRidesHistoryItem.transform.SetParent(parent.transform, false);
+    myRidesHistoryItem.init(o);
+    return myRidesHistoryItem;
   }
   public static RideItem CreateRideItem(GameObject parent, Ride ride, Action<Ride> OnItemClick)
   {

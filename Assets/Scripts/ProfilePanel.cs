@@ -152,9 +152,9 @@ public class ProfilePanel : Panel
     Panel panel = PanelsFactory.CreateUserRatings(Program.User);
     openCreated(panel);
   }
-  public void OpenBookingHistory()
+  public void OpenMyRidesHistory()
   {
-    Panel panel = PanelsFactory.CreateBookingHistory();
+    Panel panel = PanelsFactory.CreateMyRidesHistory();
     openCreated(panel);
   }
   internal override void Clear()
