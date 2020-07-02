@@ -10,20 +10,31 @@ using Newtonsoft.Json.Linq;
 
 namespace Requests {
     class GetMyRidesHistory : Request<List<Ride>> {
+        private User user;
 
-
-        public GetMyRidesHistory() {
-            HttpPath = "";
-            Action = "getMyRidesHistory";
+        public GetMyRidesHistory(User user) {
+            HttpPath = "/RideBusiness/GetMyRidesHistory";
+            this.user = user;
         }
 
         public override async Task<List<Ride>> BuildResponse(string response, HttpStatusCode statusCode)//ToDo
         {
-            return JsonConvert.DeserializeObject<List<Ride>>(response);
+            var ridesArray = JArray.Parse(response);
+            List<Ride> rides = new List<Ride>();
+            if (ridesArray == null) return null;
+
+            foreach (JToken j in ridesArray) {
+                JObject rideJ = (JObject)j;
+                rides.Add(Ride.ToObject(rideJ));
+            }
+
+            return rides;
         }
 
         public override string ToJson() {
-            return "";
+            JObject userJ = new JObject();
+            userJ[nameof(this.user)] = this.user.Id;
+            return userJ.ToString();
         }
 
         protected override string IsValid() {

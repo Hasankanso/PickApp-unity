@@ -15,24 +15,22 @@ namespace Requests {
     class ReserveSeat : Request<Ride> {
         Ride ride;
         User user;
-        int seats;
+        int seats, luggages;
 
-        public ReserveSeat(Ride ride, User user, int seats) {
+        public ReserveSeat(Ride ride, User user, int seats, int luggages) {
             this.ride = ride;
             this.seats = seats;
+            this.luggages = luggages;
             this.user = user;
-            HttpPath = "";
-            Action = "reserveRide";
+            HttpPath = "/ReserveBusiness/ReserveSeat";
         }
  
         public override async Task<Ride> BuildResponse(string response, HttpStatusCode statusCode) //TODO
         {
-            JObject ride = JObject.Parse(response);
-            int luggages = -1;
-            var aL = ride[nameof(ReserveSeat.seats)];
-            if (aL != null)
-                int.TryParse(aL.ToString(), out luggages);
-            return Ride.ToObject(ride);
+
+            JObject json = JObject.Parse(response);
+            JObject rideJ = (JObject)json["ride"];
+            return Ride.ToObject(rideJ);
         }
 
         public override string ToJson() {
@@ -40,6 +38,7 @@ namespace Requests {
             reserveJ[nameof(ride)] = new JObject { [nameof(ride.id)] = ride.Id };
             reserveJ[nameof(user)] = new JObject { [nameof(user.id)] = user.Id };
             reserveJ[nameof(seats)] = this.seats;
+            reserveJ[nameof(luggages)] = this.luggages;
             return reserveJ.ToString();
         }
 

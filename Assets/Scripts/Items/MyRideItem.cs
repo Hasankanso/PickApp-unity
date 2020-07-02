@@ -33,11 +33,13 @@ public class MyRideItem : Panel
         Panel panel = PanelsFactory.CreateRideDetails(true,ride, owner, Status.VIEW);
        
     myRidesPanel.openCreated(panel);
+      //  Debug.Log("ride.Passengers 1 " + ride.Passengers);
         foreach(Passenger p in ride.Passengers)
         {
             if (p.isReserved(p)) return;
         }
-  }
+       // Debug.Log("ride.Passengers 2 " + ride.Passengers);
+    }
 
   private void SetPermissions(bool isSmokingAllowed, bool isACAllowed, bool isPetsAllowed, bool isMusicAllowed, bool isKidsSeat)
   {
