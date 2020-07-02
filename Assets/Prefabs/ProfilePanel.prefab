@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 790990231153779043}
   - component: {fileID: 790990231153779042}
   m_Layer: 5
-  m_Name: BookingHistory
+  m_Name: MyRidesHistory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -547,7 +547,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Booking history
+  m_Text: My rides history
 --- !u!114 &790990231153779042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,7 +566,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 7324479250667705568}
-          m_MethodName: OpenBookingHistory
+          m_MethodName: OpenMyRidesHistory
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

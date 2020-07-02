@@ -12,7 +12,7 @@ public class PanelsFactory : MonoBehaviour {
     public NotificationsPanel notificationsPanel;
     public LocationsFinderPanel locationResultsPanel;
     public RideResultsPanel rideResultsPanel;
-    public BookingHistoryPanel bookingHistory;
+    public MyRidesHistoryPanel myRidesHistory;
     public HowItWorksPanel howItWorks;
     public PrivacyPolicyPanel privacyPolicy;
     public TermsConditionsPanel termsConditions;
@@ -120,10 +120,10 @@ public class PanelsFactory : MonoBehaviour {
         ride.Init(rides, searchInfo);
         return ride;
     }
-    public static BookingHistoryPanel CreateBookingHistory() {
-        BookingHistoryPanel bookingHistoryPanel = Instantiate(defaultPanelsFactory.bookingHistory);
-        bookingHistoryPanel.Init();
-        return bookingHistoryPanel;
+    public static MyRidesHistoryPanel CreateMyRidesHistory() {
+        MyRidesHistoryPanel myRidesHistoryPanel = Instantiate(defaultPanelsFactory.myRidesHistory);
+        myRidesHistoryPanel.Init();
+        return myRidesHistoryPanel;
     }
 
     public static AlertPanel createAlert(SearchInfo searchInfo) {
