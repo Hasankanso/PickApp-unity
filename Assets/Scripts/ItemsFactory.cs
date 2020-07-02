@@ -87,7 +87,7 @@ public class ItemsFactory : MonoBehaviour
   {
     BookingHistoryItem bookingHistoryItem = Instantiate(defaultItemsFactory.bookingHistoryItem);
     bookingHistoryItem.transform.SetParent(parent.transform, false);
-    bookingHistoryItem.init( Program.DateToString(o.LeavingDate), o.Price + o.CountryInformations.Unit, o.From.Name, o.To.Name, o.User.Person.FirstName, o.User.Person.ProfilePicture);
+    bookingHistoryItem.init(o);
     return bookingHistoryItem;
   }
   public static RideItem CreateRideItem(GameObject parent, Ride ride, Action<Ride> OnItemClick)

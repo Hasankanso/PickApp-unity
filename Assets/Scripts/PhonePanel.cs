@@ -111,13 +111,13 @@ public class PhonePanel : Panel
       OpenDialog("Error while register", false);
     }
   }
-
+/*
   void signout()
   {
     FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(Program.FirebaseApp);
     PhoneAuthProvider provider = PhoneAuthProvider.GetInstance(firebaseAuth);
     firebaseAuth.SignOut();
-  }
+  }*/
 
   IEnumerator ResendTimer()
   {

@@ -43,12 +43,7 @@ public class FooterMenu : MonoBehaviour {
   }
 
 private void Response(User u, int code, string message) {
-    JObject j = null;
-    if (string.IsNullOrEmpty(message)) {
-        j = JObject.Parse(message);
-        if (!string.IsNullOrEmpty(message) && int.Parse(j["code"].ToString()) == 3003) {
-        }
-    } else if (!code.Equals(HttpStatusCode.OK)) {
+    if (!code.Equals((int)HttpStatusCode.OK)) {
     } else {
         Program.User = u;
         Program.IsLoggedIn = true;

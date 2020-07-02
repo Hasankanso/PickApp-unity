@@ -19,13 +19,13 @@ public class BookingHistoryPanel : Panel
     {
         Debug.Log("hopz");
         Request<List<Ride>> request = new GetMyRidesHistory(Program.User);
-        Task.Run(() => request.Send(Response));
+        request.Send(Response);
     }
 
     private void Response(List<Ride> result, int code, string message) {
-        Debug.Log("hopz");
+        Debug.Log("kkkk");
 
-        if (!code.Equals(HttpStatusCode.OK)) {
+        if (!code.Equals((int)HttpStatusCode.OK)) {
             Debug.Log("hopz");
             Panel p = PanelsFactory.CreateDialogBox("Something went wrong", false);
             OpenDialog(p);

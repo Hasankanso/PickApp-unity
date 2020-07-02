@@ -23,8 +23,11 @@ namespace Requests {
         {
             JObject user = (JObject) response;
             User u= User.ToObject(user);
+            Debug.Log("before starting downloading image");
             Texture2D image = await DownloadImage(u.Person.ProfilePictureUrl);
+            Debug.Log("after finishing downloading");
             u.Person.ProfilePicture = image;
+            Debug.Log("after setting image to profile picture");
             return u;
         }
 
