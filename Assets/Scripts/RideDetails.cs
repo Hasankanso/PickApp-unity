@@ -314,6 +314,7 @@ public class RideDetails : Panel
     cancelReservedSeats.SetActive(false);
     editScheduleButton.SetActive(false);
     addScheduleButton.SetActive(false);
+    ClosePersonDialog();
 
     from.text = "";
     to.text = "";
