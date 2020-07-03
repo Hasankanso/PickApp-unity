@@ -25,7 +25,6 @@ public class LoginPanel : Panel
       User user = new User("+" + code.text.text + phone.text.text, password.GetComponent<InputField>().text);
       Request<User> request = new Login(user);
       request.Send(Response);
-
     }
   }
 
@@ -38,8 +37,7 @@ public class LoginPanel : Panel
     else
     {
       Program.User = u;
-                    Cache.User(u);
-
+      Cache.User(u);
       Cache.SetPassword(password.GetComponent<InputField>().text);
       OpenDialog("Welcome back to PickApp", true);
       Program.IsLoggedIn = true;

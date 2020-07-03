@@ -31,99 +31,99 @@ public class FooterMenu : MonoBehaviour {
         profilePanel.gameObject.SetActive(false);
         currPanel = searchPanel;
         searchButton.image.sprite = searchButton.spriteState.selectedSprite;
-        /*if (!string.IsNullOrEmpty(Cache.GetToken())) {
+        /*string cacheToken= Cache.GetToken();
+        if (!string.IsNullOrEmpty(cacheToken)) {
             User user = new User();
             user.Id = Cache.GetUserId();
-            user.Token = Cache.GetToken();
+            user.Token = cacheToken;
+            user.Phone = "+"+Cache.GetPhoneCode()+""+Cache.GetPhone();
+            user.Email = Cache.GetEmail();
             Program.User = user;
             Debug.Log(Program.UserToken);
-            Request<User> request = new GetUser(user);
+            Request<Person> request = new GetLoggedInUser(user);
             request.Send(Response);
         }*/
-  }
-
-private void Response(User u, int code, string message) {
-    if (!code.Equals((int)HttpStatusCode.OK)) {
-    } else {
-        Program.User = u;
-        Program.IsLoggedIn = true;
     }
-}
-public void OpenSearchPanel() {
-    ResetButtons();
-    currPanel.openExisted(searchPanel);
-    currPanel = searchPanel;
-    searchButton.image.sprite = searchButton.spriteState.selectedSprite;
-}
 
-public void OpenAddRidePanel() {
-    ResetButtons();
-    currPanel.openExisted(addRidePanel);
-    addRidePanel.Init();
-    currPanel = addRidePanel;
-    addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
-
-}
-public void OpenAddRidePanel(Panel srcPanel, Ride ride) {
-    ResetButtons();
-    srcPanel.openExisted(addRidePanel);
-    currPanel = addRidePanel;
-    addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
-    addRidePanel.Init(ride);
-}
-
-public void OpenAddRidePanel(Panel srcPanel, Alert alert) {
-    ResetButtons();
-    srcPanel.openExisted(addRidePanel);
-    currPanel = addRidePanel;
-    addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
-    addRidePanel.Init(alert);
-}
-
-public void OpenAddRidePanel(Panel srcPanel, ScheduleRide schedule) {
-    ResetButtons();
-    srcPanel.openExisted(addRidePanel);
-    currPanel = addRidePanel;
-    addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
-    addRidePanel.Init(schedule);
-}
-
-public void OpenProfilePanel() {
-    ResetButtons();
-    profileButton.image.sprite = profileButton.spriteState.selectedSprite;
-    if (!Program.IsLoggedIn) {
-        Panel notLoginPanel = PanelsFactory.createLogin(true);
-        currPanel.openCreated(notLoginPanel);
-        currPanel = notLoginPanel;
-    } else {
-        currPanel.openExisted(profilePanel);
-        currPanel = profilePanel;
-        profilePanel.Init();
+    private void Response(Person u, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+            Cache.SetToken("");
+        } else {
+            Program.User.Person = u;
+            Program.IsLoggedIn = true;
+        }
     }
-}
-
-public void OpenInboxPanel(Person personToChat, Panel srcPanel) {
-    ResetButtons();
-    srcPanel.openExisted(inboxPanel);
-    currPanel = inboxPanel;
-    messagesButton.image.sprite = messagesButton.spriteState.selectedSprite;
-    inboxPanel.Init(personToChat);
-}
-
-
-    public void OpenYourRidesPanel()
-    {
+    public void OpenSearchPanel() {
         ResetButtons();
-        Debug.Log(Program.IsLoggedIn);
+        currPanel.openExisted(searchPanel);
+        currPanel = searchPanel;
+        searchButton.image.sprite = searchButton.spriteState.selectedSprite;
+    }
 
-        if (!Program.IsLoggedIn)
-        {
+    public void OpenAddRidePanel() {
+        ResetButtons();
+        currPanel.openExisted(addRidePanel);
+        addRidePanel.Init();
+        currPanel = addRidePanel;
+        addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
+
+    }
+    public void OpenAddRidePanel(Panel srcPanel, Ride ride) {
+        ResetButtons();
+        srcPanel.openExisted(addRidePanel);
+        currPanel = addRidePanel;
+        addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
+        addRidePanel.Init(ride);
+    }
+
+    public void OpenAddRidePanel(Panel srcPanel, Alert alert) {
+        ResetButtons();
+        srcPanel.openExisted(addRidePanel);
+        currPanel = addRidePanel;
+        addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
+        addRidePanel.Init(alert);
+    }
+
+    public void OpenAddRidePanel(Panel srcPanel, ScheduleRide schedule) {
+        ResetButtons();
+        srcPanel.openExisted(addRidePanel);
+        currPanel = addRidePanel;
+        addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
+        addRidePanel.Init(schedule);
+    }
+
+    public void OpenProfilePanel() {
+        ResetButtons();
+        profileButton.image.sprite = profileButton.spriteState.selectedSprite;
+        if (!Program.IsLoggedIn) {
             Panel notLoginPanel = PanelsFactory.createLogin(true);
             currPanel.openCreated(notLoginPanel);
             currPanel = notLoginPanel;
+        } else {
+            currPanel.openExisted(profilePanel);
+            currPanel = profilePanel;
+            profilePanel.Init();
         }
-        else
-        {
+    }
+
+    public void OpenInboxPanel(Person personToChat, Panel srcPanel) {
+        ResetButtons();
+        srcPanel.openExisted(inboxPanel);
+        currPanel = inboxPanel;
+        messagesButton.image.sprite = messagesButton.spriteState.selectedSprite;
+        inboxPanel.Init(personToChat);
+    }
+
+
+    public void OpenYourRidesPanel() {
+        ResetButtons();
+        Debug.Log(Program.IsLoggedIn);
+
+        if (!Program.IsLoggedIn) {
+            Panel notLoginPanel = PanelsFactory.createLogin(true);
+            currPanel.openCreated(notLoginPanel);
+            currPanel = notLoginPanel;
+        } else {
             currPanel.openExisted(yourRidesPanel);
             currPanel = yourRidesPanel;
             myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
@@ -131,15 +131,15 @@ public void OpenInboxPanel(Person personToChat, Panel srcPanel) {
         }
     }
 
-public static bool IsStaticPanel(Panel p) {
-    return p.Equals(dFooterMenu.searchPanel) || p.Equals(dFooterMenu.addRidePanel) || p.Equals(dFooterMenu.yourRidesPanel) || p.Equals(dFooterMenu.inboxPanel) || p.Equals(dFooterMenu.profilePanel);
-}
+    public static bool IsStaticPanel(Panel p) {
+        return p.Equals(dFooterMenu.searchPanel) || p.Equals(dFooterMenu.addRidePanel) || p.Equals(dFooterMenu.yourRidesPanel) || p.Equals(dFooterMenu.inboxPanel) || p.Equals(dFooterMenu.profilePanel);
+    }
 
-void ResetButtons() {
-    searchButton.image.sprite = searchButton.spriteState.disabledSprite;
-    addRideButton.image.sprite = addRideButton.spriteState.disabledSprite;
-    myRidesButton.image.sprite = myRidesButton.spriteState.disabledSprite;
-    messagesButton.image.sprite = messagesButton.spriteState.disabledSprite;
-    profileButton.image.sprite = profileButton.spriteState.disabledSprite;
-}
+    void ResetButtons() {
+        searchButton.image.sprite = searchButton.spriteState.disabledSprite;
+        addRideButton.image.sprite = addRideButton.spriteState.disabledSprite;
+        myRidesButton.image.sprite = myRidesButton.spriteState.disabledSprite;
+        messagesButton.image.sprite = messagesButton.spriteState.disabledSprite;
+        profileButton.image.sprite = profileButton.spriteState.disabledSprite;
+    }
 }

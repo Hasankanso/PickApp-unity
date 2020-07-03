@@ -3,16 +3,16 @@ using UnityEngine;
 
 public static class Cache {
     public static void User(User user) {
-            if (user != null) {
-                if (user.Person != null) {
-                    SetPhoneCode(user.Person.CountryInformations.Code.Split(new string[] { "+" }, StringSplitOptions.None)[1]);
-                }
-                if (user.phone != null) {
-                    SetPhone(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
-                }
-                SetToken(user.Token);
-                SetUserId(user.Id);
-            }
+        if (user != null) {
+            if (user.Person != null)
+                SetPhoneCode(user.Person.CountryInformations.Code.Split(new string[] { "+" }, StringSplitOptions.None)[1]);
+            if (user.phone != null)
+                SetPhone(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
+            if (user.Email != null)
+                SetEmail(user.Email);
+            SetToken(user.Token);
+            SetUserId(user.Id);
+        }
     }
     public static bool GetNewsCheckbox() {
         return bool.Parse(PlayerPrefs.GetString("news", "true"));
@@ -23,8 +23,13 @@ public static class Cache {
     public static void SetNewsCheckbox(bool news) {
         PlayerPrefs.SetString("news", news.ToString());
     }
+
+    //Cache for user
     public static void SetPhone(string phone) {
         PlayerPrefs.SetString("phone", phone);
+    }
+    public static void SetEmail(string email) {
+        PlayerPrefs.SetString("email", email);
     }
     public static void SetPhoneCode(string phoneCode) {
         PlayerPrefs.SetString("phoneCode", phoneCode);
@@ -37,6 +42,9 @@ public static class Cache {
     }
     public static void SetUserId(string userId) {
         PlayerPrefs.SetString("id", userId);
+    }
+    public static string GetEmail() {
+        return PlayerPrefs.GetString("email", "");
     }
     public static string GetUserId() {
         return PlayerPrefs.GetString("id", "");

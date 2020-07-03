@@ -8,17 +8,24 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 
 namespace Requests {
-    class GetUser : Request<User> {
+    class GetLoggedInUser : Request<Person> {
         User returningUser;
-        public GetUser(User returningUser) {
+        public GetLoggedInUser(User returningUser) {
             this.returningUser = returningUser;
-            HttpPath = "/UserBusiness/ValidLoggedIn";
+            HttpPath = "/UserBusiness/GetLoggedInUser";
         }
-        public override async Task<User> BuildResponse(JToken response, int statusCode) //ToDo
+        public override async Task<Person> BuildResponse(JToken response, int statusCode) //ToDo
         {
-            User u = User.ToObject((JObject) response);
-            Texture2D image = await DownloadImage(u.Person.ProfilePictureUrl);
-            u.Person.ProfilePicture = image;
+            JObject json = (JObject)response;
+            Person u = Person.ToObject((JObject)json["person"]);
+            Driver driver = null;
+            JObject driverJ = (JObject)json["driver"];
+            if (driverJ != null) {
+                driver = Driver.ToObject(driverJ);
+                Program.User.Driver = driver;
+            }
+            Texture2D image = await DownloadImage(u.ProfilePictureUrl);
+            u.ProfilePicture = image;
             return u;
         }
 
