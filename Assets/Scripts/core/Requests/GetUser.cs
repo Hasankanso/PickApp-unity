@@ -24,8 +24,6 @@ namespace Requests {
                 driver = Driver.ToObject(driverJ);
                 Program.User.Driver = driver;
             }
-            Texture2D image = await DownloadImage(u.ProfilePictureUrl);
-            u.ProfilePicture = image;
             return u;
         }
 

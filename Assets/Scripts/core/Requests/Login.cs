@@ -20,8 +20,6 @@ namespace Requests
     {
       JObject json = (JObject) response;
       User u = User.ToObject(json);
-      Texture2D image = await DownloadImage(u.Person.ProfilePictureUrl);
-      u.Person.ProfilePicture = image;
       return u;
     }
 

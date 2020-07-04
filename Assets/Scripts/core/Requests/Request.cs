@@ -43,15 +43,23 @@ namespace Requests {
                 Debug.Log(data);
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 if (!string.IsNullOrEmpty(Program.UserToken)) {
+                    Debug.Log("setting token"+ Program.UserToken);
                     content.Headers.Add("user-token", Program.UserToken);
                 }
-                string result = "";
-                HttpResponseMessage answer = null;
+                string result;
+                HttpResponseMessage answer;
                 try {
+                    Debug.Log("before");
                     answer = await Client.PostAsync(Ip + HttpPath, content);
                     result = await answer.Content.ReadAsStringAsync();
+                    Debug.Log("after");
                 } catch (Exception e) {
                     Debug.Log(e.Message);
+                    answer = new HttpResponseMessage(HttpStatusCode.Found);
+                    JObject js = new JObject();
+                    js["code"] = "302";
+                    js["message"] = "please login";
+                    result = js.ToString();
                 }
                 Debug.Log(result);
 

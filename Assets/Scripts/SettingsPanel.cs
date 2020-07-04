@@ -57,22 +57,22 @@ public class SettingsPanel : Panel {
             Request<string> request = new Logout();
             request.Send(response);
         } else {
-            OpenDialog("Waiting for your come back!", true);
-            Program.User = null;
-            Program.IsLoggedIn = false;
-            FooterMenu.dFooterMenu.OpenSearchPanel();
-            this.destroy();
+            LogoutDefault();
         }
     }
     private void response(string result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
+            LogoutDefault();
         } else {
-            OpenDialog("Waiting for your come back!", true);
-            Program.User = null;
-            Program.IsLoggedIn = false;
-            FooterMenu.dFooterMenu.OpenSearchPanel();
-            this.destroy();
+            LogoutDefault();
         }
+    }
+    private void LogoutDefault() {
+        OpenDialog("Waiting for you to come back!", true);
+        Program.User = null;
+        Program.IsLoggedIn = false;
+        FooterMenu.dFooterMenu.OpenSearchPanel();
+        this.destroy();
     }
     public void openNotifications() {
         Panel panel = PanelsFactory.createNotificationPanel();

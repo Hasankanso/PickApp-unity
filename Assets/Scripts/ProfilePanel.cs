@@ -26,15 +26,11 @@ public class ProfilePanel : Panel
     Person person = Program.Person;
     Driver driver = Program.Driver;
 
-   // if (Program.Person.ProfilePicture == null)
-   //   StartCoroutine(Panel.RequestImage(person.ProfilePictureUrl, Succed, Error));
+    if (Program.Person.ProfilePicture == null)
+      StartCoroutine(Program.RequestImage(person.ProfilePictureUrl, Succed, Error));
     StatusProperty = Status.VIEW;
     fullName.text = person.FirstName + " " + person.LastName;
     ratings.text = person.RateAverage.ToString() + "/5 ";
-
-    Debug.Log(Program.Person.ProfilePicture);
-    profilePicture.sprite = Program.GetImage(Program.Person.ProfilePicture);
-
     if (driver != null)
     {
       scheduleLabel.SetActive(true);
