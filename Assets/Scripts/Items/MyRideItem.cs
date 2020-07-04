@@ -28,16 +28,20 @@ public class MyRideItem : Panel
     }
 
   public void OpenRideDetails()
-  { 
-    bool owner = Program.Driver.Equals(ride.Driver);
-        Panel panel = PanelsFactory.CreateRideDetails(true,ride, owner, Status.VIEW);
-       
-    myRidesPanel.openCreated(panel);
-      //  Debug.Log("ride.Passengers 1 " + ride.Passengers);
-        foreach(Passenger p in ride.Passengers)
+  {   
+        if (ride.Driver != null)
         {
-            if (p.isReserved(p)) return;
+            bool owner = Program.Driver.Equals(ride.Driver);
+            Panel panel = PanelsFactory.CreateRideDetails(true, ride, owner, Status.VIEW);
+
+
+            myRidesPanel.openCreated(panel);
         }
+      //  Debug.Log("ride.Passengers 1 " + ride.Passengers);
+       /* foreach(Passenger p in ride.Passengers)
+        {
+          if (p.isReserved(p)) return;
+        }*/
        // Debug.Log("ride.Passengers 2 " + ride.Passengers);
     }
 

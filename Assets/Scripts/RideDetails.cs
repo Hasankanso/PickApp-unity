@@ -11,12 +11,12 @@ using UnityEngine.UI;
 public class RideDetails : Panel
 {
   public ListView listView;
-  public Text from, to, price, date, time, comment, seats, luggages, driverFullName, driverBio, driverRatings, carName, carBrand, carColor, carYear;
+  public Text from, to, price, date, time, comment, seats, luggages, driverFullName, driverBio, driverRatings, carName, carBrand, carColor, carYear, header;
   public Image carImage, profileImage, rideMapImage, smokingImage, musicImage, acImage, kidsSeatImage, petsImage;
   public Sprite smokingOnSpirite, musicOnSpirite, acOnSpirite, kidsSeatOnSpirite, petsOnSpirite;
   public Sprite smokingOffSpirite, musicOffSpirite, acOffSpirite, kidsSeatOffSpirite, petsOffSpirite;
   public GameObject dayOfWeek, passengersContainer, contentScrollView, personsDialog;
-
+    private InputField content;
   public GameObject addScheduleButton, updateScheduleButton, editScheduleButton, removeScheduleButton; //schedule
   public GameObject addRideButton, updateRideButton, editRideButton, removeRideButton; //Ride
     public GameObject reserveSeatsButton, cancelReservedSeats; //reserve
@@ -50,7 +50,20 @@ public class RideDetails : Panel
     if (isKidsSeat)
       kidsSeatImage.sprite = kidsSeatOnSpirite;
   }
-
+   private void editRideFields()
+    {
+        
+         header = GameObject.Find("Canvas/AddRidePanel/FirstView/InputFieldContainer/From/Text").GetComponent<Text>();
+         header.text = ride.From.Name.ToString();
+         header = GameObject.Find("Canvas/AddRidePanel/FirstView/InputFieldContainer/To/Text").GetComponent<Text>();
+         header.text = ride.To.Name.ToString();
+         header = GameObject.Find("Canvas/AddRidePanel/FirstView/InputFieldContainer/Comment/Text").GetComponent<Text>();
+         header.text = ride.Comment.ToString();
+         header = GameObject.Find("Canvas/AddRidePanel/FirstView/InputFieldContainer/Seats/Label").GetComponent<Text>();
+         header.text = ride.AvailableSeats.ToString();
+         header = GameObject.Find("Canvas/AddRidePanel/FirstView/InputFieldContainer/Luggages/Label").GetComponent<Text>();
+         header.text = ride.AvailableLuggages.ToString();
+    }
   public void UserDetails()
   {
     Panel panel = PanelsFactory.CreateUserDetails(ride.User);
@@ -70,17 +83,23 @@ public class RideDetails : Panel
     {
         personsDialog.gameObject.SetActive(true);
     }
-    static bool edit = false;
   public void EditRide()
-  {
-        edit = true;
-        Debug.Log(StatusProperty);
-        StatusProperty = Status.UPDATE;
-        Debug.Log(ride.id);
+    {   StatusProperty = Status.UPDATE;
     FooterMenu.dFooterMenu.OpenAddRidePanel(this, ride);
-  }
+        editRideFields();
+        header = GameObject.Find("Canvas/AddRidePanel/FirstView/Header/Title").GetComponent<Text>();
+        header.text = "Update Ride";
+        
+        header = GameObject.Find("Canvas/AddRidePanel/NextView/Header/Title").GetComponent<Text>();
+        header.text = "Update Ride";
+       
 
-  public void EditSchedule()
+        //  header.text = GameObject.Find("Canvas/AddRidePanel/NextView/Price/Text").GetComponent<Text>().text = ride.Price.ToString();
+        //  Debug.Log(header.text);
+
+    }
+
+    public void EditSchedule()
   {
     Panel p = PanelsFactory.CreateEditSchedule(schedule);
     openCreated(p);
@@ -115,33 +134,26 @@ public class RideDetails : Panel
   //Init MyRidesPanel
   public void Init(bool isUpcomingRides, Ride ride, bool owner, Status prevStatus)
   {
-        Debug.Log(edit);
-        Debug.Log(
-    StatusProperty);
-        Init(ride);
+        
         StatusProperty = prevStatus;
-        Debug.Log(edit);
+        Init(ride);
         Debug.Log(prevStatus);
         if (StatusProperty == Status.ADD) {
-            if (edit == true) { prevStatus = Status.UPDATE; updateRideButton.SetActive(true); } else {
-                Debug.Log("Add");
                 addRideButton.SetActive(true);
             }
-        } else if (StatusProperty == Status.UPDATE) {
-            edit = true;
-            Debug.Log("update");
+         else if (StatusProperty == Status.UPDATE) {
             updateRideButton.SetActive(true);
         }
     else if (StatusProperty == Status.VIEW)
     {
-      if (owner)
+            if (owner)
       {
         ImplementPassengersList(ride.Passengers);
         editRideButton.SetActive(true);
         removeRideButton.SetActive(true);
       }
       else if (!isUpcomingRides)
-      {
+            { 
                 reserveSeatsButton.SetActive(true); }
             else if (isUpcomingRides) cancelReservedSeats.SetActive(true); //cancel
             reserveSeatsButton.SetActive(false);
@@ -154,14 +166,13 @@ public class RideDetails : Panel
   private void Init(Ride ride)
   {
     Clear();
-
     this.ride = ride;
     this.car = ride.Car;
     Person person = ride.User.Person;
     date.text = Program.DateToString(ride.LeavingDate);
     from.text = ride.From.Name;
     to.text = ride.To.Name;
-    price.text = ride.Price + " " + ride.CountryInformations.Unit;
+    price.text = ride.Price.ToString() + " " + ride.CountryInformations.Unit;
     comment.text = ride.Comment;
     seats.text = ride.AvailableSeats.ToString();
     luggages.text = ride.AvailableLuggages.ToString();

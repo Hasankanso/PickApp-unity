@@ -34,7 +34,7 @@ public class InputFieldScript : MonoBehaviour {
         this.GetComponent<InputFieldScript>().placeHolder.color = new Color(236f / 255f, 28f / 255f, 36f / 255f);
     }
     public void SetText(string text) {
-        this.GetComponentInParent<InputField>().SetTextWithoutNotify(text);
+        this.GetComponent<InputField>().SetTextWithoutNotify(text);
         this.PlaceHolder();
     }
     public void clickedOut() {
@@ -48,6 +48,7 @@ public class InputFieldScript : MonoBehaviour {
         }
     }
     public void Reset() {
+        this.GetComponent<InputField>().SetTextWithoutNotify("");
         text.text = "";
         clickedOut();
     }

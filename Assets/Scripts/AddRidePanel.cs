@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class AddRidePanel : Panel
 {
   public InputFieldScript from, to, comment, price, stopTimeField;
-  public Text date;
+    public Text date, header;
   public GameObject firstView, secondView;
 
   private DirectionsFinderPanel directionsPanel;
@@ -52,13 +52,14 @@ public class AddRidePanel : Panel
             Debug.Log(ride.StopTime);
       stopTimeCheckBox.isOn = true;
       stopTimeTextToShow.SetActive(true);
-     // stopTimeField.SetText(ride.StopTime.ToString());
+      stopTimeField.SetText(ride.StopTime.ToString());
     }
         Debug.Log(ride.id);
-    from.SetText(ride.From.Name);
+    from.SetText(ride.From.Name.ToString());
     to.SetText(ride.To.Name);
     comment.SetText(ride.Comment);
-   // price.SetText(ride.Price.ToString());
+        Debug.Log(ride.From.Name.ToString());
+    price.SetText(ride.Price.ToString());
     date.text = Program.DateToString(ride.LeavingDate);
     isMusicAllowed.isOn = ride.MusicAllowed;
     isPetsAllowed.isOn = ride.PetsAllowed;
@@ -212,7 +213,7 @@ stopTime, null, null);
     {
       firstView.SetActive(false);
       secondView.SetActive(true);
-    }
+        }
 
   }
 
@@ -350,8 +351,12 @@ stopTime, null, null);
     firstView.SetActive(true);
     secondView.SetActive(true);
 
-    //clear content of all inputfields.
-    from.Reset();
+        //clear content of all inputfields.
+        header = GameObject.Find("Canvas/AddRidePanel/FirstView/Header/Title").GetComponent<Text>();
+        header.text = "Add Ride";
+        header = GameObject.Find("Canvas/AddRidePanel/NextView/Header/Title").GetComponent<Text>();
+        header.text = "Add Ride";
+        from.Reset();
     to.Reset();
     comment.Reset();
     price.Reset();

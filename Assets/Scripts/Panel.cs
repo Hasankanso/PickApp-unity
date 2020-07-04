@@ -14,9 +14,9 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   private Status status = Status.VIEW;
   public int Id { get => id; }
 
-  protected Panel Previous { get => previous; }
+  protected Panel Previous { get => previous;}
   private Panel Next { get => next; }
-  public Status StatusProperty { get => status; set => status = value; }
+    public Status StatusProperty { get => status; set => status = value; }
 
   private static DialogBox dialogBox;
     private static LocationsFinderPanel locationFinderPanel;
@@ -43,7 +43,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   protected void OpenNext()
   {
     next.transform.SetParent(transform.parent, false);
-    next.status = status;
+ 
     openExisted(next);
   }
 
@@ -60,7 +60,9 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 
   public void openExisted(Panel panel)
   {
-    gameObject.SetActive(false);
+        if (next)
+            next.status = status;
+        gameObject.SetActive(false);
     panel.previous = this;
     panel.gameObject.SetActive(true);
   }

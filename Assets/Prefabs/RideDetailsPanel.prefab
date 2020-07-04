@@ -5103,6 +5103,7 @@ MonoBehaviour:
   carBrand: {fileID: 6675128267116554957}
   carColor: {fileID: 6675128266272681600}
   carYear: {fileID: 6675128267297095882}
+  header: {fileID: 0}
   carImage: {fileID: 6675128265927578496}
   profileImage: {fileID: 2050928701745776910}
   rideMapImage: {fileID: 5823804684113491319}
