@@ -8401,7 +8401,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CANCEL
+  m_Text: REMOVE RESERVATION
 --- !u!1 &9015491485930669860
 GameObject:
   m_ObjectHideFlags: 0

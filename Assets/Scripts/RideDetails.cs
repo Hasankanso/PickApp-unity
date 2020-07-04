@@ -50,20 +50,6 @@ public class RideDetails : Panel
     if (isKidsSeat)
       kidsSeatImage.sprite = kidsSeatOnSpirite;
   }
-   private void editRideFields()
-    {
-        
-         header = GameObject.Find("Canvas/AddRidePanel/FirstView/InputFieldContainer/From/Text").GetComponent<Text>();
-         header.text = ride.From.Name.ToString();
-         header = GameObject.Find("Canvas/AddRidePanel/FirstView/InputFieldContainer/To/Text").GetComponent<Text>();
-         header.text = ride.To.Name.ToString();
-         header = GameObject.Find("Canvas/AddRidePanel/FirstView/InputFieldContainer/Comment/Text").GetComponent<Text>();
-         header.text = ride.Comment.ToString();
-         header = GameObject.Find("Canvas/AddRidePanel/FirstView/InputFieldContainer/Seats/Label").GetComponent<Text>();
-         header.text = ride.AvailableSeats.ToString();
-         header = GameObject.Find("Canvas/AddRidePanel/FirstView/InputFieldContainer/Luggages/Label").GetComponent<Text>();
-         header.text = ride.AvailableLuggages.ToString();
-    }
   public void UserDetails()
   {
     Panel panel = PanelsFactory.CreateUserDetails(ride.User);
@@ -86,12 +72,11 @@ public class RideDetails : Panel
   public void EditRide()
     {   StatusProperty = Status.UPDATE;
     FooterMenu.dFooterMenu.OpenAddRidePanel(this, ride);
-        editRideFields();
         header = GameObject.Find("Canvas/AddRidePanel/FirstView/Header/Title").GetComponent<Text>();
-        header.text = "Update Ride";
+        header.text = "Edit Ride";
         
         header = GameObject.Find("Canvas/AddRidePanel/NextView/Header/Title").GetComponent<Text>();
-        header.text = "Update Ride";
+        header.text = "Edit Ride";
        
 
         //  header.text = GameObject.Find("Canvas/AddRidePanel/NextView/Price/Text").GetComponent<Text>().text = ride.Price.ToString();

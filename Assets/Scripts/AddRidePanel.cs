@@ -45,6 +45,8 @@ public class AddRidePanel : Panel
   public void Init(Ride ride)
   { 
     Clear();
+        fromL = ride.From;
+        toL = ride.To;
         this.ride = ride;
     StatusProperty = Status.UPDATE;
     if (ride.StopTime != 0 && !ride.StopTime.ToString().Equals(""))
