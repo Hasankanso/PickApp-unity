@@ -22,7 +22,7 @@ namespace Requests
       HttpPath = "/CarBusiness/AddCar";
     }
 
-    public override async Task<Car> BuildResponse(JToken response, int statusCode) //ToDo
+    public override Car BuildResponse(JToken response) //ToDo
     {
       //  if (statusCode == HttpStatusCode.Accepted) 
       //   return JsonConvert.DeserializeObject<Car>(response);

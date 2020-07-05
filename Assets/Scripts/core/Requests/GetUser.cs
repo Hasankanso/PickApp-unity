@@ -14,7 +14,7 @@ namespace Requests {
             this.returningUser = returningUser;
             HttpPath = "/UserBusiness/GetLoggedInUser";
         }
-        public override async Task<Person> BuildResponse(JToken response, int statusCode) //ToDo
+        public override Person BuildResponse(JToken response) //ToDo
         {
             JObject json = (JObject)response;
             Person u = Person.ToObject((JObject)json["person"]);

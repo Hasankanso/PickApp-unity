@@ -17,7 +17,7 @@ namespace Requests {
             this.user = user;
         }
 
-        public override async Task<List<Ride>> BuildResponse(JToken response, int statusCode)//ToDo
+        public override List<Ride> BuildResponse(JToken response)//ToDo
         {
             var ridesArray = (JArray)response;
             List<Ride> rides = new List<Ride>();

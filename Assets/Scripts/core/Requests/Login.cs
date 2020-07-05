@@ -16,7 +16,7 @@ namespace Requests
       HttpPath = "/UserBusiness/Login";
     }
 
-    public override async Task<User> BuildResponse(JToken response, int statusCode) //TODO
+    public override User BuildResponse(JToken response) //TODO
     {
       JObject json = (JObject) response;
       User u = User.ToObject(json);

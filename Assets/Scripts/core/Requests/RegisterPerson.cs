@@ -19,7 +19,7 @@ namespace Requests {
             HttpPath = "/UserBusiness/Register";
         }
 
-        public override async Task<User> BuildResponse(JToken response, int statusCode) {
+        public override User BuildResponse(JToken response) {
             JObject user = (JObject)response;
             User u = User.ToObject(user);
             return u;

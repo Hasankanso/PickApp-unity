@@ -29,7 +29,7 @@ namespace Requests {
          * <param name = "response" >json response</param>
          * <param name = "statusCode" >check https://docs.microsoft.com/en-us/dotnet/api/system.net.httpstatuscode?view=netframework-4.8</param>
          */
-        public abstract Task<T> BuildResponse(JToken response, int statusCode);
+        public abstract T BuildResponse(JToken response);
 
 
         public async void Send(Action<T, int, string> callback) {
@@ -66,7 +66,7 @@ namespace Requests {
                 JToken json = JToken.Parse(result);
 
                 if (json.Type == JTokenType.Array) {
-                    callback(await BuildResponse(json, (int)answer.StatusCode), (int)answer.StatusCode, answer.ReasonPhrase);
+                    callback(BuildResponse(json), (int)answer.StatusCode, answer.ReasonPhrase);
                     return;
                 }
 
@@ -91,13 +91,13 @@ namespace Requests {
                     callback(default(T), int.Parse(code), message);
                     return;
                 } else {
-                    callback(await BuildResponse(json, (int)answer.StatusCode), (int)answer.StatusCode, answer.ReasonPhrase);
+                    callback(BuildResponse(json), (int)answer.StatusCode, answer.ReasonPhrase);
                 }
             }
         }
 
 
-        protected static async Task<Texture2D> DownloadImage(string urlLink) {
+        /*protected static async Task<Texture2D> DownloadImage(string urlLink) {
             Debug.Log("link" + urlLink);
             Texture2D tex = new Texture2D(1, 1);
             Debug.Log("texture");
@@ -106,7 +106,7 @@ namespace Requests {
             tex.LoadImage(data);
             tex.Apply();
             return tex;
-        }
+        }*/
 
         public static bool IsPhoneNumber(string number) {
             return Regex.Match(number, @"^(\+[0-9]{9})$").Success;

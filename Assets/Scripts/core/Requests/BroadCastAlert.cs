@@ -21,7 +21,7 @@ namespace Requests
       Action = "broadCastAlert";
     }
 
-    public override Task<Alert> BuildResponse(JToken response, int statusCode) //TODO
+    public override Alert BuildResponse(JToken response) //TODO
     {
       return null;
       //return JsonConvert.DeserializeObject<Alert>(response);

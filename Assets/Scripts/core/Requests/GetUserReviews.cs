@@ -19,7 +19,7 @@ namespace Requests
       Action = "getUserReviews";
     }
 
-    public override async Task<List<Rate>> BuildResponse(JToken response, int statusCode) //TODO
+    public override List<Rate> BuildResponse(JToken response) //TODO
     {
       //return JsonConvert.DeserializeObject<List<Rate>>(response);
       return null;

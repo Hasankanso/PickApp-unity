@@ -23,7 +23,7 @@ namespace Requests
       Action = "editRide";
     }
 
-    public override async Task<Ride> BuildResponse(JToken response, int statusCode) //TODO
+    public override Ride BuildResponse(JToken response) //TODO
     {
 
       if (response == null) return null;

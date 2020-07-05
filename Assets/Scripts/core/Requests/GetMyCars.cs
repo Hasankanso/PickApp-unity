@@ -20,7 +20,7 @@ namespace Requests
       Action = "getMyCars";
     }
 
-    public override async Task<List<Car>> BuildResponse(JToken response, int statusCode) //TODO
+    public override List<Car> BuildResponse(JToken response) //TODO
     {
       return null;
       //  return JsonConvert.DeserializeObject<List<Car>>(response);

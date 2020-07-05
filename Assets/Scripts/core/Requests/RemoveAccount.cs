@@ -21,7 +21,7 @@ namespace Requests
       Action = "removeAccount";
     }
 
-    public override async Task<Person> BuildResponse(JToken response, int statusCode) //TODO
+    public override Person BuildResponse(JToken response) //TODO
     {
       //return JsonConvert.DeserializeObject<Person>(response);
       return null;

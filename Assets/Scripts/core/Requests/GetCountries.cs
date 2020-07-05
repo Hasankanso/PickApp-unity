@@ -16,7 +16,7 @@ namespace Requests {
             HttpPath = "/PersonBusiness/GetCountries";
         }
 
-        public override async Task<Dictionary<string, CountryInformations>> BuildResponse(JToken response, int statusCode) {
+        public override Dictionary<string, CountryInformations> BuildResponse(JToken response) {
             var countries = (JArray) response;
             this.countryInformations=new Dictionary<string, CountryInformations>();
             Program.CountriesInformationsNames = new List<string>();

@@ -9,7 +9,7 @@ namespace Requests {
         public Logout() {
             HttpPath = "/UserBusiness/Logout";
         }
-        public override async Task<string> BuildResponse(JToken response, int statusCode) {
+        public override string BuildResponse(JToken response) {
             return "{}";
         }
 

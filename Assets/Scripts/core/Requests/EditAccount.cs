@@ -19,7 +19,7 @@ namespace Requests
       HttpPath = "/PersonBusiness/EditPerson";
     }
 
-    public override async Task<User> BuildResponse(JToken response, int statusCode) //TODO
+    public override User BuildResponse(JToken response) //TODO
     {/*
       JObject json = (JObject)response;
       Person p = Person.ToObject(json);

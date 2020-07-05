@@ -18,7 +18,7 @@ namespace Requests
       Action = "getMyAccountInfo";
     }
 
-    public override async Task<Person> BuildResponse(JToken response, int statusCode) //TODO
+    public override Person BuildResponse(JToken response) //TODO
     {
       return null;
       //return JsonConvert.DeserializeObject<Person>(response);

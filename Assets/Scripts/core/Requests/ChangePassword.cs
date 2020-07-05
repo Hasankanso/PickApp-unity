@@ -30,7 +30,7 @@ namespace Requests
       json["newPassword"] = newPassword;
       return json.ToString();
     }
-    public override async Task<Person> BuildResponse(JToken response, int statusCode)
+    public override Person BuildResponse(JToken response)
     {
       return null;
       //   return JsonConvert.DeserializeObject<Person>(response);

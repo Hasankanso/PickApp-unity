@@ -18,7 +18,7 @@ namespace Requests {
             Action = "addRide";
         }
 
-    public override async Task<Ride> BuildResponse(JToken response, int statusCode) //TODO
+    public override Ride BuildResponse(JToken response) //TODO
     {
       return Ride.ToObject((JObject) response);
     }

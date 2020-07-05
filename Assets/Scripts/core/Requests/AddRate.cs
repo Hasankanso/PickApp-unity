@@ -21,7 +21,7 @@ namespace Requests
       Action = "addRate";
     }
 
-    public override async Task<Rate> BuildResponse(JToken response, int statusCode) //TODO we have to use statusCode
+    public override Rate BuildResponse(JToken response) //TODO we have to use statusCode
     {
       return null;
       //return JsonConvert.DeserializeObject<Rate>(response);
