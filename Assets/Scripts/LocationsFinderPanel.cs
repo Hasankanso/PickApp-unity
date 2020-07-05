@@ -18,11 +18,18 @@ public class LocationsFinderPanel : Panel
   public Double longtitude = 33.8547;
   public Double latitude = 35.8623;
 
+  private string token;
+
   private readonly string directionsURL = "https://maps.googleapis.com/maps/api/place/autocomplete/json?";
 
   public Action<Location> itemClicked;
 
-
+  public static string GenerateToken()
+  {
+    Guid token = Guid.NewGuid();
+    print(token.ToString());
+    return token.ToString();
+  }
   internal override void Clear()
   {
     searchField.text = "";
@@ -38,16 +45,22 @@ public class LocationsFinderPanel : Panel
     itemClicked = OnLocationPicked;
     searchField.text = initText;
     searchField.Select();
+    token = GenerateToken();
   }
 
   private IEnumerator LoadLocations()
   {
     if (searchField.text != "")
     {
-      var loaded = new UnityWebRequest(directionsURL + "input=" + searchField.text + "&location=" + longtitude + "," + latitude + "&radius=" + radius + "&key=" + Program.googleKey);
+      /*
+       *       var loaded = new UnityWebRequest(directionsURL + "input=" + searchField.text + "&types=geocode" + "&location=" + longtitude + "," +
+        latitude + "&radius=" + radius + "&key=" + Program.googleKey + "&sessiontoken=" +token);
+       */
+
+      var loaded = new UnityWebRequest(directionsURL + "input=" + searchField.text + "&types=geocode" + "&key=" + Program.googleKey + "&sessiontoken=" + token);
       loaded.downloadHandler = new DownloadHandlerBuffer();
       yield return loaded.SendWebRequest();
-
+      print(loaded.downloadHandler.text);
       var list = JsonConvert.DeserializeObject<JObject>(loaded.downloadHandler.text).Value<JArray>("predictions");
       if (list != null)
       {

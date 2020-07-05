@@ -97,7 +97,7 @@ namespace Requests {
         }
 
 
-        /*protected static async Task<Texture2D> DownloadImage(string urlLink) {
+        public static async Task<Texture2D> DownloadImage(string urlLink) {
             Debug.Log("link" + urlLink);
             Texture2D tex = new Texture2D(1, 1);
             Debug.Log("texture");
@@ -106,7 +106,7 @@ namespace Requests {
             tex.LoadImage(data);
             tex.Apply();
             return tex;
-        }*/
+        }
 
         public static bool IsPhoneNumber(string number) {
             return Regex.Match(number, @"^(\+[0-9]{9})$").Success;

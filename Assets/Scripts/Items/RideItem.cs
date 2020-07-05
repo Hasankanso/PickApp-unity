@@ -45,17 +45,10 @@ public class RideItem : MonoBehaviour
 
     star.color = new Color(r, g, 0f, 1f);
 
-    StartCoroutine(Program.RequestImage(driver.ProfilePictureUrl, ImageSucceed, ImageFailed));
-
     this.OnItemClicked = OnItemClicked;
   }
 
-  private void ImageFailed(string obj)
-  {
-    Debug.Log("no image");
-  }
-
-  private void ImageSucceed(Texture2D img)
+  public void SetPPicture(Texture2D img)
   {
     ride.User.Person.profilePicture = img;
     this.profilePicture.sprite = Program.GetImage(ride.User.Person.profilePicture);
