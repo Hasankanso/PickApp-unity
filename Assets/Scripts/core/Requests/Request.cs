@@ -49,17 +49,23 @@ namespace Requests {
                 string result;
                 HttpResponseMessage answer;
                 try {
-                    Debug.Log("before");
                     answer = await Client.PostAsync(Ip + HttpPath, content);
                     result = await answer.Content.ReadAsStringAsync();
-                    Debug.Log("after");
                 } catch (Exception e) {
-                    Debug.Log(e.Message);
-                    answer = new HttpResponseMessage(HttpStatusCode.Found);
-                    JObject js = new JObject();
-                    js["code"] = "302";
-                    js["message"] = "please login";
-                    result = js.ToString();
+                    var message = e.InnerException;
+                    if (message.Equals("No Location header found for 302")) {
+                        answer = new HttpResponseMessage(HttpStatusCode.Found);
+                        JObject js = new JObject();
+                        js["code"] = "302";
+                        js["message"] = "please login";
+                        result = js.ToString();
+                    } else {
+                        answer = new HttpResponseMessage(HttpStatusCode.Found);
+                        JObject js = new JObject();
+                        js["code"] = "302";
+                        js["message"] = message.ToString();
+                        result = js.ToString();
+                    }
                 }
                 Debug.Log(result);
 
@@ -83,6 +89,10 @@ namespace Requests {
                     }
                 }
 
+                if (answer.StatusCode != HttpStatusCode.OK) {
+                    jCode = answer.StatusCode.ToString();
+                    jMessage = answer.ReasonPhrase;
+                }
                 //check if there's error
                 if (jCode != null) {
                     string code = jCode.ToString();

@@ -70,6 +70,7 @@ public class SettingsPanel : Panel {
     private void LogoutDefault() {
         OpenDialog("Waiting for you to come back!", true);
         Program.User = null;
+        Cache.SetToken("");
         Program.IsLoggedIn = false;
         FooterMenu.dFooterMenu.OpenSearchPanel();
         this.destroy();
