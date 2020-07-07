@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Driver
 {
-  List<string> regions = new List<string>();
+  public List<string> regions = new List<string>();
   List<Car> cars;
   string id;
   private List<ScheduleRide> schedules = new List<ScheduleRide>();
