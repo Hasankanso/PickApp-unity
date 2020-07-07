@@ -61,7 +61,7 @@ public class RideResultsPanel : Panel
     bool owner = false;
     if (Program.User != null && Program.Driver != null)
       owner = Program.User.Equals(r.User);
-    RideDetails rd = PanelsFactory.CreateRideDetails(false, r, owner, Status.VIEW);
+    RideDetails rd = PanelsFactory.CreateRideDetails(false, r, owner, StatusE.VIEW);
     openCreated(rd);
   }
 

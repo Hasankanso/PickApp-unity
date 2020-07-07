@@ -15,7 +15,7 @@ public static class Program {
     public static Language language = Language.language;
     private static User user;
     private static string userToken;
-    private static bool isLoggedIn = true;
+    private static bool isLoggedIn = false;
     private static FirebaseApp firebaseApp = FirebaseApp.Create();
     private static CountryInformations FakeCountry() {
         //  return new CountryInformations("0", "EUR", "Germany", 11, "+49");

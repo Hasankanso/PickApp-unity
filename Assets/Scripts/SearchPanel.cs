@@ -25,7 +25,7 @@ public class SearchPanel : Panel
   }
   public void Init()
   {
-    StatusProperty = Status.VIEW;
+    StatusProperty = StatusE.VIEW;
     var minDT = Program.StringToDate(minDate.text);
     var maxDT = Program.StringToDate(maxDate.text);
   }

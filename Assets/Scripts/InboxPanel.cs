@@ -20,7 +20,7 @@ public class InboxPanel : Panel {
     }
     public void Init(List<Chat> chats) {
         Clear();
-        StatusProperty = Status.VIEW;
+        StatusProperty = StatusE.VIEW;
         foreach (Chat c in chats) {
             var item = ItemsFactory.CreateInboxItem(listView.scrollContainer, c, person, this);
             listView.Add(item.gameObject);
@@ -51,7 +51,7 @@ public class InboxPanel : Panel {
     }
     internal void Init(Person personToChat) {
         Clear();
-        StatusProperty = Status.VIEW;
+        StatusProperty = StatusE.VIEW;
         backImage.gameObject.SetActive(true);
         title.transform.position = new Vector3(title.transform.position.x + 50, title.transform.position.y, title.transform.position.z);
         Panel panel = PanelsFactory.createChat(personToChat);

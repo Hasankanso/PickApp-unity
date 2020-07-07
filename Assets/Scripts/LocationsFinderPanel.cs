@@ -60,7 +60,7 @@ public class LocationsFinderPanel : Panel
       var loaded = new UnityWebRequest(directionsURL + "input=" + searchField.text + "&types=geocode" + "&key=" + Program.googleKey + "&sessiontoken=" + token);
       loaded.downloadHandler = new DownloadHandlerBuffer();
       yield return loaded.SendWebRequest();
-      print(loaded.downloadHandler.text);
+
       var list = JsonConvert.DeserializeObject<JObject>(loaded.downloadHandler.text).Value<JArray>("predictions");
       if (list != null)
       {

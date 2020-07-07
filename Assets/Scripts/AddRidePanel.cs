@@ -39,7 +39,7 @@ public class AddRidePanel : Panel
   public void Init()
   {
     Clear();
-    StatusProperty = Status.ADD;
+    StatusProperty = StatusE.ADD;
   }
 
   public void Init(Ride ride)
@@ -48,7 +48,7 @@ public class AddRidePanel : Panel
         fromL = ride.From;
         toL = ride.To;
         this.ride = ride;
-    StatusProperty = Status.UPDATE;
+    StatusProperty = StatusE.UPDATE;
     if (ride.StopTime != 0 && !ride.StopTime.ToString().Equals(""))
     {
             Debug.Log(ride.StopTime);
@@ -77,7 +77,7 @@ public class AddRidePanel : Panel
   public void Init(Alert alert)
   {
     Clear();
-    StatusProperty = Status.ADD;
+    StatusProperty = StatusE.ADD;
     from.SetText(alert.From.Name);
     to.SetText(alert.To.Name);
     price.SetText(alert.Price.ToString());
@@ -121,7 +121,7 @@ public class AddRidePanel : Panel
       {
         stopTime = int.Parse(stopTimeField.text.text);
       }
-      if (StatusProperty == Status.UPDATE) 
+      if (StatusProperty == StatusE.UPDATE) 
       ride = new Ride(ride.id,Program.User, null, fromL, toL, comment.text.text, price.text.text, Program.CountryInformations,
 wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
 int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),

@@ -78,7 +78,7 @@ public class RideDetails : Panel
         personsDialog.gameObject.SetActive(true);
     }
   public void EditRide()
-    {   StatusProperty = Status.UPDATE;
+    {   StatusProperty = StatusE.UPDATE;
     FooterMenu.dFooterMenu.OpenAddRidePanel(this, ride);
         header = GameObject.Find("Canvas/AddRidePanel/FirstView/Header/Title").GetComponent<Text>();
         header.text = "Edit Ride";
@@ -99,19 +99,19 @@ public class RideDetails : Panel
   }
 
 
-  public void Init(ScheduleRide schedule, Status prevStatus)
+  public void Init(ScheduleRide schedule, StatusE prevStatus)
   {
     Init(schedule.Ride);
     StatusProperty = prevStatus;
-    if (StatusProperty == Status.ADD)
+    if (StatusProperty == StatusE.ADD)
     {
       addScheduleButton.SetActive(true);
     }
-    else if (StatusProperty == Status.UPDATE)
+    else if (StatusProperty == StatusE.UPDATE)
     {
       updateScheduleButton.SetActive(true);
     }
-    else if (StatusProperty == Status.VIEW)
+    else if (StatusProperty == StatusE.VIEW)
     {
       editScheduleButton.SetActive(true);
       removeScheduleButton.SetActive(true);
@@ -125,19 +125,19 @@ public class RideDetails : Panel
 
   //Init SearchResult
   //Init MyRidesPanel
-  public void Init(bool isUpcomingRides, Ride ride, bool owner, Status prevStatus)
+  public void Init(bool isUpcomingRides, Ride ride, bool owner, StatusE prevStatus)
   {
         
         StatusProperty = prevStatus;
         Init(ride);
         Debug.Log(prevStatus);
-        if (StatusProperty == Status.ADD) {
+        if (StatusProperty == StatusE.ADD) {
                 addRideButton.SetActive(true);
             }
-         else if (StatusProperty == Status.UPDATE) {
+         else if (StatusProperty == StatusE.UPDATE) {
             updateRideButton.SetActive(true);
         }
-    else if (StatusProperty == Status.VIEW)
+    else if (StatusProperty == StatusE.VIEW)
     {
             if (owner)
       {

@@ -74,7 +74,7 @@ public class ScheduleItem : Panel {
         profilePanel.openCreated(panel);
     }
     public void OnClick() {
-        Panel panel = PanelsFactory.CreateScheduleDetails(scheduleRide, Status.VIEW);
+        Panel panel = PanelsFactory.CreateScheduleDetails(scheduleRide, StatusE.VIEW);
         profilePanel.openCreated(panel);
     }
     internal override void Clear() {

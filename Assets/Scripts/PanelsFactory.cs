@@ -244,7 +244,7 @@ public class PanelsFactory : MonoBehaviour {
 
 
     //to add, view, edit and remove Ride
-    public static RideDetails CreateRideDetails(bool isUpcomingRides,Ride ride, bool owner, Status status) {
+    public static RideDetails CreateRideDetails(bool isUpcomingRides,Ride ride, bool owner, StatusE status) {
        
         Debug.Log(
    status);
@@ -254,7 +254,7 @@ public class PanelsFactory : MonoBehaviour {
     }
 
     //to add, edit and remove Schedule
-    public static RideDetails CreateScheduleDetails(ScheduleRide schedule, Status status) {
+    public static RideDetails CreateScheduleDetails(ScheduleRide schedule, StatusE status) {
         RideDetails rideDetails = Instantiate(defaultPanelsFactory.rideDetails);
         rideDetails.Init(schedule, status);
         return rideDetails;

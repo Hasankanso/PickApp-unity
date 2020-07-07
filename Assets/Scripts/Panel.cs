@@ -6,32 +6,75 @@ using UnityEngine.Networking;
 
 public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 {
+
   public int id;
   public string panelName;
   private Panel previous, next;
-  public enum Status { ADD, UPDATE, VIEW };
+  public bool permanent = false; //for the moment this will only affect the destroy process, if permanent this panel will not be destroyed by calling Panel.Destroy()
+  public enum StatusE { ADD, UPDATE, VIEW };
 
-  private Status status = Status.VIEW;
+  private StatusE status = StatusE.VIEW;
+  private void Initialize(Panel nextPanel) // anything you want to set before the panel opens, will be here
+  {
+    nextPanel.Status = Status;
+  }
   public int Id { get => id; }
 
-  protected Panel Previous { get => previous;}
-  private Panel Next { get => next; }
-    public Status StatusProperty { get => status; set => status = value; }
+  protected Panel Previous { get => previous; }
+
+  public Panel Next
+  {
+    get => next; set
+    {
+      if (Next != null && !ReferenceEquals(value, Next))
+      {
+
+        Next.ForwardDestroy();
+      }
+
+      next = value;
+      Initialize(value);
+    }
+  }
+
+  public StatusE Status
+  {
+    get => status; set
+    {
+      status = value;
+      if (next != null)
+      {
+        next.Status = value;
+      }
+    }
+  }
+
+  public StatusE StatusProperty //deprecated
+  {
+    get => status; set
+    {
+      status = value;
+      if (Next != null)
+      {
+        Next.StatusProperty = value;
+      }
+    }
+  }
 
   private static DialogBox dialogBox;
-    private static LocationsFinderPanel locationFinderPanel;
+  private static LocationsFinderPanel locationFinderPanel;
   void Update()
   {
-        
+
     if (Input.GetKeyDown(KeyCode.Escape)
         && TouchScreenKeyboard.visible == false
         && !FooterMenu.IsStaticPanel(this))
     {
-      back();
+      Back();
     }
   }
 
-    public void back()
+  public void back() //deprecated
   {
     if (Previous != null)
     {
@@ -40,11 +83,55 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     }
   }
 
-  protected void OpenNext()
+  public void Back()
   {
-    next.transform.SetParent(transform.parent, false);
- 
-    openExisted(next);
+    if (Previous != null)
+    {
+      gameObject.SetActive(false);
+      Previous.gameObject.SetActive(true);
+    }
+    else
+    {
+      Debug.LogError("called Back or BackClose although there's no previous Panel");
+    }
+  }
+
+  public void BackClose()
+  {
+    Back();
+    ForwardDestroy();
+  }
+
+
+  protected void ForwardDestroy()
+  {
+    if (Next != null) Next.ForwardDestroy();
+    if (!permanent)
+    {
+      Destroy(gameObject);
+    }
+  }
+
+  protected void BackwardDestroy()
+  {
+    if (Previous != null) Previous.BackwardDestroy();
+    if (!permanent)
+    {
+      Destroy(gameObject);
+    }
+  }
+
+  public Panel OpenNext()
+  {
+    if (Next == null) return null;
+
+    Next.transform.SetParent(transform.parent, false);
+    Next.status = status;
+    gameObject.SetActive(false);
+    Next.previous = this;
+    Next.gameObject.SetActive(true);
+    Next.transform.SetAsLastSibling();
+    return Next;
   }
 
   public void OpenDialog(Panel newPanel)
@@ -55,37 +142,59 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 
   public void CloseDialog()
   {
-    destroy();
+    ForwardDestroy();
   }
 
-  public void openExisted(Panel panel)
+  public void openExisted(Panel newPanel) //deprecated
   {
-        if (next)
-            next.status = status;
-        gameObject.SetActive(false);
-    panel.previous = this;
-    panel.gameObject.SetActive(true);
+    Next = newPanel;
+    gameObject.SetActive(false);
+    newPanel.previous = this;
+    newPanel.gameObject.SetActive(true);
   }
 
-  public void openCreated(Panel newPanel)
+  public void openCreated(Panel newPanel) //deprecated
   {
-    if (newPanel.Equals(next))
-    {
-      newPanel.next = next.next;
-      next.next = null;
-    }
-
-    if (next != null) next.destroy();
-
-    next = newPanel;
+    Next = newPanel;
     OpenNext();
   }
+
+  public void Open(Panel newPanel) // use this only if you don't have Init(...) based on Status in your new panel
+  {
+    Next = newPanel; // inside of this there's underlying code (check Next Property's code)
+    OpenNext();
+  }
+
+  public void destroy()
+  {
+    ForwardDestroy(); //destroy all next panels that are not permanent
+  }
+
+  public void DestroyForwardBackward()
+  {
+    if (Next != null) Next.ForwardDestroy(); //destroy all next panels that are not permanent
+    BackwardDestroy(); //this will destroy this panel and all previous panels that are not permanent
+  }
+  public void MissionCompleted(Panel toOpen)
+  {
+
+    if (toOpen.permanent == false)
+    {
+      Debug.LogWarning("maybe you should set \"permanent\" in " + toOpen.panelName + " to true?");
+    }
+
+    toOpen.gameObject.SetActive(true);
+    toOpen.transform.SetAsLastSibling(); // move the panel to the fron of user screen
+
+    DestroyForwardBackward();
+  }
+
   internal abstract void Clear();
 
-  public void closeBack()
+  public void closeBack() //deprecated
   {
     previous.gameObject.SetActive(true);
-    destroy();
+    ForwardDestroy();
   }
 
   public override bool Equals(object obj)
@@ -112,17 +221,17 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     OpenDialog(dialogBox);
   }
 
-    public void OpenLocationFinder(string text, Action<Location> OnFromLocationPicked)
+  public void OpenLocationFinder(string text, Action<Location> OnFromLocationPicked)
+  {
+    if (locationFinderPanel == null)
     {
-        if (locationFinderPanel == null)
-        {
-            locationFinderPanel = PanelsFactory.CreateLocationsFinderPanel(text, OnFromLocationPicked);
-        }
-   
-        OpenDialog(locationFinderPanel);
+      locationFinderPanel = PanelsFactory.CreateLocationsFinderPanel(text, OnFromLocationPicked);
     }
 
-    public void OpenDateTimePicker(DateTime startDate, Action<DateTime> OnDatePicked)
+    OpenDialog(locationFinderPanel);
+  }
+
+  public void OpenDateTimePicker(DateTime startDate, Action<DateTime> OnDatePicked)
   {
     MobileDateTimePicker.CreateDate(startDate.Year, startDate.Month, startDate.Day, null, (dt) => OpenTimePicker(dt, OnDatePicked));
   }
@@ -135,12 +244,6 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   public void OpenDateTimePicker(Action<DateTime> OnDatePicked)
   {
     OpenDateTimePicker(DateTime.Now, OnDatePicked);
-  }
-
-  protected void destroy()
-  {
-    if (next != null) next.destroy();
-    Destroy(gameObject);
   }
 
   public override int GetHashCode()

@@ -44,7 +44,10 @@ public class LoginPanel : Panel
       if (!isFromFooter)
         back();
       else
+      {
+        BackClose();
         FooterMenu.dFooterMenu.OpenProfilePanel();
+      }
     }
   }
 
