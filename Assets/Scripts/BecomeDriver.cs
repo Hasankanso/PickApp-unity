@@ -21,8 +21,11 @@ public class BecomeDriver : Panel {
             regions.Clear();
             foreach (var item in regionItems) {
                 regions.Add(item.getRegion());
-            //    regionItems.Add(item);
+                //    regionItems.Add(item);
+                Panel p = PanelsFactory.createAddCar();
+                openCreated(p);
             }
+
             driver = new Driver(regions);
             Request<Driver> request = new BecomeDriverRequest(Program.User,driver);
             request.Send(response);
