@@ -15,7 +15,7 @@ public class RideDetails : Panel
   public Image carImage, profileImage, rideMapImage, smokingImage, musicImage, acImage, kidsSeatImage, petsImage;
   public Sprite smokingOnSpirite, musicOnSpirite, acOnSpirite, kidsSeatOnSpirite, petsOnSpirite;
   public Sprite smokingOffSpirite, musicOffSpirite, acOffSpirite, kidsSeatOffSpirite, petsOffSpirite;
-  public GameObject dayOfWeek, passengersContainer, contentScrollView, personsDialog;
+    public GameObject dayOfWeek, passengersContainer, contentScrollView, personsDialog, removeRideDialog;
     private InputField content;
   public GameObject addScheduleButton, updateScheduleButton, editScheduleButton, removeScheduleButton; //schedule
   public GameObject addRideButton, updateRideButton, editRideButton, removeRideButton; //Ride
@@ -60,8 +60,16 @@ public class RideDetails : Panel
   {
     personsDialog.gameObject.SetActive(true);
   }
+    public void OpenRideDialog()
+    {
+        removeRideDialog.gameObject.SetActive(true);
+    }
 
-  public void ClosePersonDialog()
+    public void CloseRideDialog()
+    {
+        removeRideDialog.gameObject.SetActive(false);
+    }
+    public void ClosePersonDialog()
   {
     personsDialog.gameObject.SetActive(false);
   }
@@ -311,6 +319,7 @@ public class RideDetails : Panel
     editScheduleButton.SetActive(false);
     addScheduleButton.SetActive(false);
     ClosePersonDialog();
+    CloseRideDialog();
 
     from.text = "";
     to.text = "";

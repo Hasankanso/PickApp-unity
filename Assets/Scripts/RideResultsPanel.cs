@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Requests;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,15 +27,25 @@ public class RideResultsPanel : Panel
     this.rideNumber.text = rides.Count + " rides available";
     this.searchInfo = searchInfo;
 
-
-    if (rides.Count > 0)
+    if (rides.Count == 0)
     {
-      foreach (Ride r in rides)
-      {
-        AddItemToList(r);
-      }
-    } else {
       noResultsPanel.gameObject.SetActive(true);
+      return;
+    }
+
+    //there's results
+    foreach (Ride r in rides)
+    {
+      AddItemToList(r);
+    }
+    DownloadAndAddImages();
+  }
+
+  private async void DownloadAndAddImages()
+  {
+    foreach (RideItem ri in rideItems)
+    {
+      ri.SetPPicture(await Request<object>.DownloadImage(ri.ride.User.Person.ProfilePictureUrl));
     }
   }
   private void AddItemToList(Ride r)
@@ -48,9 +59,9 @@ public class RideResultsPanel : Panel
   {
 
     bool owner = false;
-    if(Program.User !=null && Program.Driver !=null)
-    owner = Program.User.Equals(r.User);
-    RideDetails rd = PanelsFactory.CreateRideDetails(false,r, owner, Status.VIEW);
+    if (Program.User != null && Program.Driver != null)
+      owner = Program.User.Equals(r.User);
+    RideDetails rd = PanelsFactory.CreateRideDetails(false, r, owner, Status.VIEW);
     openCreated(rd);
   }
 

@@ -22,7 +22,8 @@ namespace Requests {
         protected string HttpPath { get => httpPath; set => httpPath = value; }
         protected abstract string IsValid();
         public abstract string ToJson();
-
+        private string result;
+        private HttpResponseMessage answer;
         /*<summary>
          * return null if there's no response
          * </summary>
@@ -30,7 +31,6 @@ namespace Requests {
          * <param name = "statusCode" >check https://docs.microsoft.com/en-us/dotnet/api/system.net.httpstatuscode?view=netframework-4.8</param>
          */
         public abstract T BuildResponse(JToken response);
-
 
         public async void Send(Action<T, int, string> callback) {
             string valid = IsValid();
@@ -43,23 +43,25 @@ namespace Requests {
                 Debug.Log(data);
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 if (!string.IsNullOrEmpty(Program.UserToken)) {
-                    Debug.Log("setting token"+ Program.UserToken);
+                    Debug.Log("setting token" + Program.UserToken);
                     content.Headers.Add("user-token", Program.UserToken);
                 }
-                string result;
-                HttpResponseMessage answer;
+
                 try {
-                    Debug.Log("before");
                     answer = await Client.PostAsync(Ip + HttpPath, content);
                     result = await answer.Content.ReadAsStringAsync();
-                    Debug.Log("after");
-                } catch (Exception e) {
-                    Debug.Log(e.Message);
-                    answer = new HttpResponseMessage(HttpStatusCode.Found);
-                    JObject js = new JObject();
-                    js["code"] = "302";
-                    js["message"] = "please login";
-                    result = js.ToString();
+                } catch (InvalidOperationException e) {
+                    //The request message was already sent by the HttpClient instance.
+                    BuildCatchError(HttpStatusCode.Found, e);
+                } catch (ArgumentNullException e) {
+                    //The request was null
+                    BuildCatchError(HttpStatusCode.Found, e);
+                } catch (TaskCanceledException e) {
+                    //The request timed-out or the user canceled the request's Task
+                    BuildCatchError(HttpStatusCode.Found, e);
+                } catch (HttpRequestException) {
+                    //The request failed due to an underlying issue such as network connectivity, DNS failure, server certificate validation or timeout.
+                    BuildCatchError(HttpStatusCode.ServiceUnavailable, "Please connect to the internet");
                 }
                 Debug.Log(result);
 
@@ -88,7 +90,7 @@ namespace Requests {
                     string code = jCode.ToString();
                     Debug.Log(code);
                     string message = jMessage.ToString();
-                    callback(default(T), int.Parse(code), message);
+                    callback(default, int.Parse(code), message);
                     return;
                 } else {
                     callback(BuildResponse(json), (int)answer.StatusCode, answer.ReasonPhrase);
@@ -96,8 +98,23 @@ namespace Requests {
             }
         }
 
+        void BuildCatchError(HttpStatusCode statusCode, Exception exception) {
+            answer = new HttpResponseMessage(statusCode);
+            var message = exception.InnerException;
+            JObject js = new JObject();
+            js["code"] = "302";
+            js["message"] = message.ToString();
+            result = js.ToString();
+        }
+        void BuildCatchError(HttpStatusCode statusCode, string manualMessage) {
+            answer = new HttpResponseMessage(statusCode);
+            JObject js = new JObject();
+            js["code"] = "302";
+            js["message"] = manualMessage;
+            result = js.ToString();
+        }
 
-        /*protected static async Task<Texture2D> DownloadImage(string urlLink) {
+        public static async Task<Texture2D> DownloadImage(string urlLink) {
             Debug.Log("link" + urlLink);
             Texture2D tex = new Texture2D(1, 1);
             Debug.Log("texture");
@@ -106,7 +123,7 @@ namespace Requests {
             tex.LoadImage(data);
             tex.Apply();
             return tex;
-        }*/
+        }
 
         public static bool IsPhoneNumber(string number) {
             return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
