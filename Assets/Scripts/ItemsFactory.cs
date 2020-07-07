@@ -40,18 +40,18 @@ public class ItemsFactory : MonoBehaviour
     return caritem;
   }
 
-  public static RegionItem CreateRegionItem(GameObject parent)
+  public static RegionItem CreateRegionItem(GameObject parent,BecomeDriver becomeDriver)
   {
     RegionItem obj = Instantiate(defaultItemsFactory.regionItem);
     obj.transform.SetParent(parent.transform, false);
-    obj.Init();
+    obj.Init(becomeDriver);
     return obj;
   }
-  public static RegionItem CreateRegionItem(GameObject parent, string regions)
+  public static RegionItem CreateRegionItem(GameObject parent, string regions,BecomeDriver becomeDriver)
   {
     RegionItem obj = Instantiate(defaultItemsFactory.regionItem);
     obj.transform.SetParent(parent.transform, false);
-    obj.Init(regions);
+    obj.Init(regions,becomeDriver);
     return obj;
   }
   public static RatingItem CreateRatingItem(GameObject parent, Rate o)

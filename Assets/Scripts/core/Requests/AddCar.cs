@@ -24,9 +24,8 @@ namespace Requests
 
     public override Car BuildResponse(JToken response) //ToDo
     {
-      //  if (statusCode == HttpStatusCode.Accepted) 
-      //   return JsonConvert.DeserializeObject<Car>(response);
-      return null;
+            Debug.Log(1);
+      return Car.ToObject((JObject)response);
     }
 
     public override string ToJson()

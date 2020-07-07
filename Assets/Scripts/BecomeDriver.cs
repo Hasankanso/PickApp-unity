@@ -18,15 +18,17 @@ public class BecomeDriver : Panel {
     public static int regionCounter = 0;
     public void submit() {
         if (Validate()) {
+            regions.Clear();
             foreach (var item in regionItems) {
                 regions.Add(item.getRegion());
+            //    regionItems.Add(item);
             }
             driver = new Driver(regions);
-            //    Request<BecomeDriver> request = new BecomeDriver(becomeDriver);
-            //     Task.Run(() => request.Send(response));
+            Request<Driver> request = new BecomeDriverRequest(Program.User,driver);
+            request.Send(response);
         }
     }
-    private void response(Person result, HttpStatusCode code, string message) {
+    private void response(Driver result, int code, string message) {
         if (!code.Equals(HttpStatusCode.OK)) {
             Panel p = PanelsFactory.CreateDialogBox("Something went wrong", false);
             OpenDialog(p);
@@ -59,7 +61,7 @@ public class BecomeDriver : Panel {
     }
     public void AddItemToList() {
         if (regionCounter <= 2) {
-            var obj = ItemsFactory.CreateRegionItem(listView.scrollContainer);
+            var obj = ItemsFactory.CreateRegionItem(listView.scrollContainer,this);
             listView.Add(obj.gameObject);
             regionItems.Add(obj);
             regionCounter += 1;
@@ -67,7 +69,7 @@ public class BecomeDriver : Panel {
     }
     public void AddItemToList(List<string> regions) {
         foreach (var region in regions) {
-            var obj = ItemsFactory.CreateRegionItem(listView.scrollContainer, region);
+            var obj = ItemsFactory.CreateRegionItem(listView.scrollContainer, region,this);
             listView.Add(obj.gameObject);
             regionItems.Add(obj);
             regionCounter += 1;
@@ -84,10 +86,10 @@ public class BecomeDriver : Panel {
     public void Init() {
         Clear();
         this.person = Program.Person;
-        AddItemToList(driver.Regions);
+       // AddItemToList(driver.Regions);
         title.text = "Regions";
-        editRegions.gameObject.SetActive(true);
-        becomeDriver.gameObject.SetActive(false);
+        editRegions.gameObject.SetActive(false);
+        becomeDriver.gameObject.SetActive(true);
     }
     internal override void Clear() {
         listView.Clear();
