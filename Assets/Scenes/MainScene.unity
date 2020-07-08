@@ -271,7 +271,8 @@ MonoBehaviour:
     type: 3}
   rideResultsPanel: {fileID: 3740216826575856083, guid: 17506229d74fe7a4db5b0a3dac854894,
     type: 3}
-  myRidesHistory: {fileID: 0}
+  myRidesHistory: {fileID: 21616954315460469, guid: cc4b38311c163d34b806a2f46093047b,
+    type: 3}
   howItWorks: {fileID: 1422861066071520583, guid: 66ea91f7b3a9dd442b412726cf9ee2e7,
     type: 3}
   privacyPolicy: {fileID: 600021538278134620, guid: 27e6972e2682fcb45b7003ab87fb9f94,
@@ -359,7 +360,8 @@ MonoBehaviour:
     type: 3}
   roadItem: {fileID: -5073598373933285509, guid: 871229f218f5b6e41b6048e5f3c159d8,
     type: 3}
-  myRidesHistoryItem: {fileID: 0}
+  myRidesHistoryItem: {fileID: 3220339650766623019, guid: e5c033637608e87479b8482068c8328f,
+    type: 3}
   carItem: {fileID: 7186622095950702125, guid: 0bbf2cce3cf74424ebcc1d306f1f6be3, type: 3}
   myRideItem: {fileID: 8416731652476761285, guid: 70823f18c4a1424408c4bd4fc2e0ca8f,
     type: 3}

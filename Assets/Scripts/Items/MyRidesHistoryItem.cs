@@ -16,6 +16,12 @@ public class MyRidesHistoryItem : Panel {
         this.driverName.text = driver.FirstName+" "+driver.LastName;
         StartCoroutine(Program.RequestImage(driver.ProfilePictureUrl, ImageSucceed, ImageFailed));
     }
+
+    public void SetPicture(Texture2D img) {
+        ride.User.Person.profilePicture = img;
+        this.driverImage.sprite = Program.GetImage(ride.User.Person.profilePicture);
+    }
+
     private void ImageFailed(string obj) {
         Debug.Log("no image");
     }

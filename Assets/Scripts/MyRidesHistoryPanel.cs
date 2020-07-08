@@ -26,6 +26,13 @@ public class MyRidesHistoryPanel : Panel {
         } else {
             this.rides = result;
             ImplementYourRidesList(rides);
+            DownloadAndAddImages();
+
+        }
+    }
+    private async void DownloadAndAddImages() {
+        foreach (MyRidesHistoryItem ri in myRidesHistoryItems) {
+            ri.SetPicture(await Request<object>.DownloadImage(ri.ride.User.Person.ProfilePictureUrl));
         }
     }
     public void ImplementYourRidesList(List<Ride> rides) {

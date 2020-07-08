@@ -31,70 +31,87 @@ namespace Requests {
          * <param name = "statusCode" >check https://docs.microsoft.com/en-us/dotnet/api/system.net.httpstatuscode?view=netframework-4.8</param>
          */
         public abstract T BuildResponse(JToken response);
-
+        private bool CheckConnection() {
+            try {
+                var client = new WebClient();
+                client.OpenRead("http://google.com/generate_204");
+                return true;
+            } catch {
+                return false;
+            }
+        }
         public async void Send(Action<T, int, string> callback) {
-            string valid = IsValid();
-            Debug.Log(valid);
-            if (!string.IsNullOrEmpty(valid)) {
-                Debug.Log("error");
-                callback(default, (int)HttpStatusCode.NotAcceptable, valid);
-            } else {
-                string data = ToJson();
-                Debug.Log(data);
-                var content = new StringContent(data, Encoding.UTF8, "application/json");
-                if (!string.IsNullOrEmpty(Program.UserToken)) {
-                    Debug.Log("setting token" + Program.UserToken);
-                    content.Headers.Add("user-token", Program.UserToken);
-                }
+            if (CheckConnection()) {
 
-                try {
-                    answer = await Client.PostAsync(Ip + HttpPath, content);
-                    result = await answer.Content.ReadAsStringAsync();
-                } catch (InvalidOperationException e) {
-                    //The request message was already sent by the HttpClient instance.
-                    BuildCatchError(HttpStatusCode.Found, e);
-                } catch (ArgumentNullException e) {
-                    //The request was null
-                    BuildCatchError(HttpStatusCode.Found, e);
-                } catch (TaskCanceledException e) {
-                    //The request timed-out or the user canceled the request's Task
-                    BuildCatchError(HttpStatusCode.Found, e);
-                } catch (HttpRequestException) {
-                    //The request failed due to an underlying issue such as network connectivity, DNS failure, server certificate validation or timeout.
-                    BuildCatchError(HttpStatusCode.ServiceUnavailable, "Please connect to the internet");
-                }
-                Debug.Log(result);
+                string valid = IsValid();
+                Debug.Log(valid);
+                if (!string.IsNullOrEmpty(valid)) {
+                    Debug.Log("error");
+                    callback(default, (int)HttpStatusCode.NotAcceptable, valid);
+                } else {
+                    string data = ToJson();
+                    Debug.Log(data);
+                    var content = new StringContent(data, Encoding.UTF8, "application/json");
+                    if (!string.IsNullOrEmpty(Program.UserToken)) {
+                        Debug.Log("setting token" + Program.UserToken);
+                        content.Headers.Add("user-token", Program.UserToken);
+                    }
 
-                JToken json = JToken.Parse(result);
+                    try {
+                        answer = await Client.PostAsync(Ip + HttpPath, content);
+                        result = await answer.Content.ReadAsStringAsync();
+                    } catch (InvalidOperationException e) {
+                        //The request message was already sent by the HttpClient instance.
+                        BuildCatchError(HttpStatusCode.Found, e);
+                    } catch (ArgumentNullException e) {
+                        //The request was null
+                        BuildCatchError(HttpStatusCode.Found, e);
+                    } catch (TaskCanceledException e) {
+                        //The request timed-out or the user canceled the request's Task
+                        BuildCatchError(HttpStatusCode.Found, e);
+                    } catch (HttpRequestException) {
+                        //The request failed due to an underlying issue such as network connectivity, DNS failure, server certificate validation or timeout.
+                        BuildCatchError(HttpStatusCode.Found, "Please login");
+                    }
+                    Debug.Log(result);
 
-                if (json.Type == JTokenType.Array) {
-                    callback(BuildResponse(json), (int)answer.StatusCode, answer.ReasonPhrase);
-                    return;
-                }
+                    JToken json = JToken.Parse(result);
 
-                //extracting code and message
-                var jCode = json["code"];
-                var jMessage = json["message"];
+                    if (json.Type == JTokenType.Array) {
+                        callback(BuildResponse(json), (int)answer.StatusCode, answer.ReasonPhrase);
+                        return;
+                    }
 
-                if (jCode == null) {
-                    var jbody = json["body"];
+                    //extracting code and message
+                    var jCode = json["code"];
+                    var jMessage = json["message"];
 
-                    if (jbody != null) {
-                        jCode = jbody["code"];
-                        jMessage = jbody["message"];
+                    if (jCode == null) {
+                        var jbody = json["body"];
+
+                        if (jbody != null) {
+                            jCode = jbody["code"];
+                            jMessage = jbody["message"];
+                        }
+                    }
+
+                    //check if there's error
+                    if (jCode != null) {
+                        string code = jCode.ToString();
+                        Debug.Log(code);
+                        string message = jMessage.ToString();
+                        callback(default, int.Parse(code), message);
+                        return;
+                    } else {
+                        callback(BuildResponse(json), (int)answer.StatusCode, answer.ReasonPhrase);
                     }
                 }
-
-                //check if there's error
-                if (jCode != null) {
-                    string code = jCode.ToString();
-                    Debug.Log(code);
-                    string message = jMessage.ToString();
-                    callback(default, int.Parse(code), message);
-                    return;
-                } else {
-                    callback(BuildResponse(json), (int)answer.StatusCode, answer.ReasonPhrase);
-                }
+            } else {
+                Debug.Log(123321);
+                string code = "503";
+                string message = "Please connect to the internet";
+                callback(default, int.Parse(code), message);
+                return;
             }
         }
 
