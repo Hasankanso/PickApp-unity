@@ -525,6 +525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   chatiness: {fileID: 1718821949932859607}
 --- !u!1 &1718821949060371418
 GameObject:
@@ -911,7 +912,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2740757023210603970}
-        m_MethodName: back
+        m_MethodName: Back
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

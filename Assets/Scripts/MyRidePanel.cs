@@ -13,7 +13,7 @@ public class MyRidePanel : Panel
   {
         Request<List<Ride>> request = new GetMyUpcomingRides(Program.User);
         request.Send(GetUpcomingRides);
-        StatusProperty = StatusE.VIEW;
+    Status = StatusE.VIEW;
   }
 
     private void GetUpcomingRides(List<Ride> arg1, int arg2, string arg3)

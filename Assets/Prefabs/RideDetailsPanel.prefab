@@ -5755,6 +5755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   listView: {fileID: 3546810883035884313}
   from: {fileID: 2050928702256876112}
   to: {fileID: 2050928701773873928}
@@ -6576,7 +6577,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8819354592479800504}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

@@ -41,7 +41,7 @@ public class ReportUserPanel : Panel
         {
 
             OpenDialog("Report Done", false);
-            back();
+            Back();
         }
     }
 

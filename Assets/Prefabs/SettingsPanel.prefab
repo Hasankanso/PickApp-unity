@@ -595,7 +595,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8635723903601867977}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1891,6 +1891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   englishCheck: {fileID: 9031139106775928238}
   arabicCheck: {fileID: 5303355686677984250}
 --- !u!1 &8635723904006151018

@@ -791,6 +791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
 --- !u!1 &7523050557303782124
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +884,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4877271864853501516}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

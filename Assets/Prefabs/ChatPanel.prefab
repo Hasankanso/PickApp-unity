@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollContainer: {fileID: 367070548935416599}
+  selectedItem: {fileID: 0}
 --- !u!1 &9010088848738764633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,7 +1063,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8633369078024646417}
-        m_MethodName: closeBack
+        m_MethodName: BackClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1392,6 +1393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   fullName: {fileID: 9010088848840709123}
   chatList: {fileID: 1396991875965911760}
   messageInput: {fileID: 9010088850288061380}

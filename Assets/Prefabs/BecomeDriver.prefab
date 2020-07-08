@@ -167,7 +167,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 512820154853186318}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -538,6 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   title: {fileID: 5948938252227529583}
   becomeDriver: {fileID: 1909600642717654040}
   editRegions: {fileID: 3916794289657643186}

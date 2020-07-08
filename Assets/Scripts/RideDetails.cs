@@ -79,7 +79,7 @@ public class RideDetails : Panel
   }
   public void EditRide()
   {
-    StatusProperty = StatusE.UPDATE;
+    Status = StatusE.UPDATE;
     FooterMenu.dFooterMenu.OpenAddRidePanel(this, ride);
     header = GameObject.Find("Canvas/AddRidePanel/FirstView/Header/Title").GetComponent<Text>();
     header.text = "Edit Ride";
@@ -103,16 +103,16 @@ public class RideDetails : Panel
   public void Init(ScheduleRide schedule, StatusE prevStatus)
   {
     Init(schedule.Ride);
-    StatusProperty = prevStatus;
-    if (StatusProperty == StatusE.ADD)
+    Status = prevStatus;
+    if (Status == StatusE.ADD)
     {
       addScheduleButton.SetActive(true);
     }
-    else if (StatusProperty == StatusE.UPDATE)
+    else if (Status == StatusE.UPDATE)
     {
       updateScheduleButton.SetActive(true);
     }
-    else if (StatusProperty == StatusE.VIEW)
+    else if (Status == StatusE.VIEW)
     {
       editScheduleButton.SetActive(true);
       removeScheduleButton.SetActive(true);
@@ -129,18 +129,18 @@ public class RideDetails : Panel
   public void Init(bool isUpcomingRides, Ride ride, bool owner, StatusE prevStatus)
   {
 
-    StatusProperty = prevStatus;
+    Status = prevStatus;
     Init(ride);
     Debug.Log(prevStatus);
-    if (StatusProperty == StatusE.ADD)
+    if (Status == StatusE.ADD)
     {
       addRideButton.SetActive(true);
     }
-    else if (StatusProperty == StatusE.UPDATE)
+    else if (Status == StatusE.UPDATE)
     {
       updateRideButton.SetActive(true);
     }
-    else if (StatusProperty == StatusE.VIEW)
+    else if (Status == StatusE.VIEW)
     {
       if (owner)
       {
@@ -152,9 +152,11 @@ public class RideDetails : Panel
       {
         reserveSeatsButton.SetActive(true);
       }
-      else if (isUpcomingRides) cancelReservedSeats.SetActive(true); //cancel
-      reserveSeatsButton.SetActive(false);
-      ClosePersonDialog();
+      else if (isUpcomingRides)
+      {
+        cancelReservedSeats.SetActive(true); //cancel
+        ClosePersonDialog();
+      }
     }
   }
 
@@ -427,7 +429,7 @@ public class RideDetails : Panel
     Program.Person.UpcomingRides.Add(result);
     FooterMenu.dFooterMenu.OpenYourRidesPanel();
     Debug.Log("Got Response from servaa");
-    this.destroy();
+    DestroyForwardBackward();
   }
 
   public void AddScheduleResponse(ScheduleRide result, int code, string message)
@@ -484,9 +486,9 @@ public class RideDetails : Panel
     {
       Passenger passenger = new Passenger(Program.User, luggagesDropdown.value);
       OpenDialog("You reserved a seat(s).", true);
-      Panel panel = PanelsFactory.createSearch();
-      openExisted(panel);
+      FooterMenu.dFooterMenu.OpenSearchPanel();
       result.Passengers.Add(passenger);
+      DestroyForwardBackward();
     }
 
   }

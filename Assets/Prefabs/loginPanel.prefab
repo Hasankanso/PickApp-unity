@@ -296,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   phone: {fileID: 303886291375315606}
   code: {fileID: 3592109624593451866}
   password: {fileID: 303886290169472128}
@@ -1486,7 +1487,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 303886290414128794}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

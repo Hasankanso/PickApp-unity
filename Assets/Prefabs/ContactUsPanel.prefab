@@ -180,6 +180,7 @@ MonoBehaviour:
   inputFieldClicked: {fileID: 21300000, guid: 8fc126139f099ab4297b840acb0fa607, type: 3}
   inputFieldUnclicked: {fileID: 21300000, guid: c9aff0689c843df448c80153e9cbf8b4,
     type: 3}
+  inputFieldError: {fileID: 0}
   inputFieldContainer: {fileID: 0}
 --- !u!114 &4624208200560982540
 MonoBehaviour:
@@ -606,6 +607,7 @@ MonoBehaviour:
   inputFieldClicked: {fileID: 21300000, guid: 8fc126139f099ab4297b840acb0fa607, type: 3}
   inputFieldUnclicked: {fileID: 21300000, guid: c9aff0689c843df448c80153e9cbf8b4,
     type: 3}
+  inputFieldError: {fileID: 0}
   inputFieldContainer: {fileID: 0}
 --- !u!114 &8452345174301690557
 MonoBehaviour:
@@ -817,9 +819,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   description: {fileID: 3775643401590454213}
   subject: {fileID: 8086995686438022909}
-  errorImage: {fileID: 21300000, guid: 36a9458192621414f900c6b359beadf8, type: 3}
 --- !u!1 &1434670327270343775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,7 +1095,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 260205235444841540}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

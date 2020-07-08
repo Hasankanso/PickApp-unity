@@ -42,7 +42,7 @@ public class LoginPanel : Panel
       OpenDialog("Welcome back to PickApp", true);
       Program.IsLoggedIn = true;
       if (!isFromFooter)
-        back();
+        Back();
       else
       {
         BackClose();

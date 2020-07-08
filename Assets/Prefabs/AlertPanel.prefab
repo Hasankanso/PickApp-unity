@@ -4217,7 +4217,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6840638499513913456}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4765,6 +4765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   from: {fileID: 6840638498054219301}
   to: {fileID: 6840638499400368700}
   price: {fileID: 6840638498810132861}

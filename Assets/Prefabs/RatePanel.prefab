@@ -617,6 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   firstStar: {fileID: 231038146078410440}
   secondStar: {fileID: 231038146367668989}
   thirdStar: {fileID: 231038146040780198}
@@ -1511,7 +1512,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 231038145409870930}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

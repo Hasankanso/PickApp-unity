@@ -13,7 +13,7 @@ public class NotificationsPanel : Panel {
     public void Submit() {
         Cache.SetNewsCheckbox(news.isOn);
         Cache.SetDisableAllCheckbox(disableAll.isOn);
-        closeBack();
+        BackClose();
     }
     public void Init() {
         news.isOn = Cache.GetNewsCheckbox();

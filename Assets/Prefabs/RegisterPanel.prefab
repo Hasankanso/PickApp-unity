@@ -1560,7 +1560,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 26110092955019647}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2462,6 +2462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   firstName: {fileID: 4691236473697400355}
   email: {fileID: 3560898768087980310}
   lastName: {fileID: 4691236474125272989}

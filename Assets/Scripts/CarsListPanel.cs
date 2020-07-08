@@ -37,7 +37,7 @@ public class CarsListPanel : Panel
       CarItem cI = ItemsFactory.CreateCarItem(carsList.scrollContainer, c, OnItemClicked);
       carsList.Add(cI.gameObject);
     }
-    StatusProperty = Previous.StatusProperty;
+    Status = Previous.Status;
   }
 
   public void OnItemClicked(Car c, CarItem item)

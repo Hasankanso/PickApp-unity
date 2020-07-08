@@ -1610,7 +1610,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 2089551047411437393}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1835,6 +1835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   firstName: {fileID: 2089551047134432735}
   lastName: {fileID: 2089551047645121422}
   email: {fileID: 7822762554357472113}
@@ -1842,8 +1843,6 @@ MonoBehaviour:
   countryDP: {fileID: 9017438368215154040}
   birthday: {fileID: 2710564684243753430}
   profilePicture: {fileID: 2089551047775857687}
-  largeProfilePicture: {fileID: 0}
-  viewImageModel: {fileID: 0}
 --- !u!1 &2089551047537765896
 GameObject:
   m_ObjectHideFlags: 0

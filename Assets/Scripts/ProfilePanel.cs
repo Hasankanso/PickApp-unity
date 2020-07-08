@@ -28,7 +28,7 @@ public class ProfilePanel : Panel
 
     if (Program.Person.ProfilePicture == null)
       StartCoroutine(Program.RequestImage(person.ProfilePictureUrl, Succed, Error));
-    StatusProperty = StatusE.VIEW;
+    Status = StatusE.VIEW;
     fullName.text = person.FirstName + " " + person.LastName;
     ratings.text = person.RateAverage.ToString() + "/5 ";
     if (driver != null)

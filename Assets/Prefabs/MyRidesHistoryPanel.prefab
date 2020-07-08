@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 8634253050756195730}
   - component: {fileID: 21616954315460469}
   m_Layer: 5
-  m_Name: BookingHistoryPanel
+  m_Name: MyRidesHistoryPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,6 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   listView: {fileID: 7459936440069283372}
   search: {fileID: 8634253050905073507}
 --- !u!1 &8634253050905073510
@@ -747,7 +748,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 21616954315460469}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

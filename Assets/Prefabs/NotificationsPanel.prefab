@@ -298,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   news: {fileID: 4179695288146416816}
   disableAll: {fileID: 4179695288415934153}
 --- !u!1 &4179695287681593561
@@ -885,7 +886,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4958087716655394728}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

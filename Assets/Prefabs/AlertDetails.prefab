@@ -1575,7 +1575,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 9138343060434883484}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1692,6 +1692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   rideOrigin: {fileID: 1505647843977580744}
   rideTarget: {fileID: 3506582387687606917}
   ClientsNb: {fileID: 1751793040373536320}

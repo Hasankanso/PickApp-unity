@@ -49,18 +49,6 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     }
   }
 
-  public StatusE StatusProperty //deprecated
-  {
-    get => status; set
-    {
-      status = value;
-      if (Next != null)
-      {
-        Next.StatusProperty = value;
-      }
-    }
-  }
-
   private static DialogBox dialogBox;
   private static LocationsFinderPanel locationFinderPanel;
   void Update()
@@ -74,14 +62,6 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     }
   }
 
-  public void back() //deprecated
-  {
-    if (Previous != null)
-    {
-      gameObject.SetActive(false);
-      previous.gameObject.SetActive(true);
-    }
-  }
 
   public void Back()
   {
@@ -191,11 +171,6 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 
   internal abstract void Clear();
 
-  public void closeBack() //deprecated
-  {
-    previous.gameObject.SetActive(true);
-    ForwardDestroy();
-  }
 
   public override bool Equals(object obj)
   {

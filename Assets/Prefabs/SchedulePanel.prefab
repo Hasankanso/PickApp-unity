@@ -219,7 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: Next
   key: Next
 --- !u!1 &6881471394493753352
 GameObject:
@@ -494,7 +493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: ScheduleTime
   key: ScheduleTime
 --- !u!1 &6881471394689768082
 GameObject:
@@ -814,7 +812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: Thursday
   key: Thursday
 --- !u!1 &6881471394809358631
 GameObject:
@@ -935,7 +932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: Tuesday
   key: Tuesday
 --- !u!1 &6881471394945696900
 GameObject:
@@ -1106,7 +1102,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6881471396325121706}
-          m_MethodName: closeBack
+          m_MethodName: BackClose
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1235,7 +1231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: Friday
   key: Friday
 --- !u!1 &6881471395132396206
 GameObject:
@@ -1356,7 +1351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: Wednesday
   key: Wednesday
 --- !u!1 &6881471395278930060
 GameObject:
@@ -1656,7 +1650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: Sunday
   key: Sunday
 --- !u!1 &6881471395633610055
 GameObject:
@@ -1872,7 +1865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: Price
   key: Price
 --- !u!1 &6881471395707355816
 GameObject:
@@ -2068,7 +2060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: Saturday
   key: Saturday
 --- !u!1 &6881471396016642730
 GameObject:
@@ -2189,7 +2180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: Monday
   key: Monday
 --- !u!1 &6881471396062081731
 GameObject:
@@ -2281,7 +2271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: ChooseStartAndEnd
   key: ChooseStartAndEnd
 --- !u!1 &6881471396202294756
 GameObject:
@@ -2373,7 +2362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: ScheduleTitle
   key: ScheduleTitle
 --- !u!1 &6881471396325121710
 GameObject:
@@ -2474,6 +2462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   startDate: {fileID: 6881471395633610050}
   endDate: {fileID: 6881471395317790929}
   daysText:

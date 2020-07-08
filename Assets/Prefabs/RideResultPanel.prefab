@@ -659,6 +659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: Ride Results
+  permanent: 0
   gender: {fileID: 82911420375912538}
   rate: {fileID: 82911419448595745}
   from: {fileID: 82911420893058059}
@@ -2227,7 +2228,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3740216826575856083}
-        m_MethodName: back
+        m_MethodName: Back
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3374,7 +3375,7 @@ PrefabInstance:
     - target: {fileID: 515780953745320157, guid: b23ccb671541bee49b876be3603be5ca,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: back
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 515780953745320157, guid: b23ccb671541bee49b876be3603be5ca,
         type: 3}

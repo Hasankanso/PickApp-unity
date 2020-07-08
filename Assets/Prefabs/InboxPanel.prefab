@@ -414,6 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   panelName: 
+  permanent: 0
   listView: {fileID: 1388116808845931199}
   search: {fileID: 426126332202312695}
   backImage: {fileID: 2695329503255821143}
@@ -866,7 +867,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 663081080960223869}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

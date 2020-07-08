@@ -92,7 +92,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 5997404155383888081}
-          m_MethodName: back
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4014,12 +4014,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   panelName: 
+  permanent: 0
   from: {fileID: 5997404154696890948}
   to: {fileID: 5997404154436864593}
   comment: {fileID: 5997404155638565153}
   price: {fileID: 5997404154846815871}
   stopTimeField: {fileID: 5997404154905295298}
   date: {fileID: 5997404155318923574}
+  header: {fileID: 0}
   firstView: {fileID: 5997404156222771050}
   secondView: {fileID: 5997404155176101908}
   isMusicAllowed: {fileID: 5997404154858630822}
