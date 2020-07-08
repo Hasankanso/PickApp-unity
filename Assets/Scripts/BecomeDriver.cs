@@ -22,13 +22,13 @@ public class BecomeDriver : Panel {
             foreach (var item in regionItems) {
                 regions.Add(item.getRegion());
                 //    regionItems.Add(item);
-                Panel p = PanelsFactory.createAddCar();
-                openCreated(p);
             }
 
             driver = new Driver(regions);
             Request<Driver> request = new BecomeDriverRequest(Program.User,driver);
             request.Send(response);
+            Panel p = PanelsFactory.createAddCar();
+            openCreated(p);
         }
     }
     private void response(Driver result, int code, string message) {
