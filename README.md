@@ -1,5 +1,5 @@
 # TheProject
-let normal people offer rides and drive together, this modern way is efficient, flexible and energy saving. It might helps to solve congestion problems since more people will fit in one car, which means less cars on the road.<br>
+let private drivers offer rides and drive together, this modern way is flexible and energy/money saving. It may help solving congestion problems since more people will go in one car, which means less cars on the road.<br>
 
 # TASKS
 Adel: Register, login.<br>
