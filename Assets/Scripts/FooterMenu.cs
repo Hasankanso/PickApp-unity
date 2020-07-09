@@ -21,6 +21,8 @@ public class FooterMenu : MonoBehaviour
 
   public Button searchButton, addRideButton, myRidesButton, messagesButton, profileButton;
 
+  Dictionary<string, Panel> panels;
+
   void Start()
   {
     if (dFooterMenu == null)
@@ -49,7 +51,25 @@ public class FooterMenu : MonoBehaviour
     }
   }
 
-  public void Open(Panel newPanel)
+  public static void Open(string panelName)
+  {
+    Panel p = dFooterMenu.panels[panelName];
+    if (p != null)
+    {
+      dFooterMenu.Open(p);
+    }
+  }
+
+  public static void Open(string panelName, string dialogMessage)
+  {
+    Panel p = dFooterMenu.panels[panelName];
+    if (p != null) {
+      dFooterMenu.Open(p);
+      p.OpenDialog(dialogMessage, true);
+    }
+  }
+
+  private void Open(Panel newPanel)
   {
     currPanel.gameObject.SetActive(false);
     newPanel.gameObject.SetActive(true);
@@ -125,12 +145,12 @@ public class FooterMenu : MonoBehaviour
   {
     ResetButtons();
     profileButton.image.sprite = profileButton.spriteState.selectedSprite;
-    
+
 
     if (!Program.IsLoggedIn)
     {
       Panel loginPanel = PanelsFactory.createLogin(true);
-      currPanel.Open(loginPanel);
+      currPanel.Open(loginPanel, null);
     }
     else
     {
@@ -161,7 +181,7 @@ public class FooterMenu : MonoBehaviour
     if (!Program.IsLoggedIn)
     {
       Panel loginPanel = PanelsFactory.createLogin(true);
-      currPanel.Open(loginPanel);
+      currPanel.Open(loginPanel, null);
     }
     else
     {

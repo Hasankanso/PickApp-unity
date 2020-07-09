@@ -446,7 +446,7 @@ public class RideDetails : Panel
   private void RemoveRideResponse(Ride result, int code, string message)
   {
     FooterMenu.dFooterMenu.OpenYourRidesPanel();
-    this.destroy();
+    DestroyForwardBackward();
 
   }
 

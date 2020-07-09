@@ -115,9 +115,8 @@ public class PanelsFactory : MonoBehaviour {
         chatPanel.Init(person);
         return chatPanel;
     }
-    public static RideResultsPanel CreateRideResults(List<Ride> rides, SearchInfo searchInfo) {
+    public static RideResultsPanel CreateRideResults() {
         RideResultsPanel ride = Instantiate(defaultPanelsFactory.rideResultsPanel);
-        ride.Init(rides, searchInfo);
         return ride;
     }
     public static MyRidesHistoryPanel CreateMyRidesHistory() {

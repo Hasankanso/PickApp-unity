@@ -538,6 +538,11 @@ PrefabInstance:
       propertyPath: permanent
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2340698140060916017, guid: 661850801c223f0469446e4807dd0046,
+        type: 3}
+      propertyPath: panelName
+      value: MyRides
+      objectReference: {fileID: 0}
     - target: {fileID: 4430181845300241340, guid: 661850801c223f0469446e4807dd0046,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -974,6 +979,11 @@ PrefabInstance:
         type: 3}
       propertyPath: permanent
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997404155383888081, guid: a396ab9b184ea894ea8c094d780fa43c,
+        type: 3}
+      propertyPath: panelName
+      value: AddRide
       objectReference: {fileID: 0}
     - target: {fileID: 5997404155383888085, guid: a396ab9b184ea894ea8c094d780fa43c,
         type: 3}
@@ -1542,6 +1552,11 @@ PrefabInstance:
       propertyPath: permanent
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 663081080960223869, guid: 2ccd08e3b8f1c59438c1f4bb2ee7dfdd,
+        type: 3}
+      propertyPath: panelName
+      value: Inbox
+      objectReference: {fileID: 0}
     - target: {fileID: 3517812009907294363, guid: 2ccd08e3b8f1c59438c1f4bb2ee7dfdd,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1709,7 +1724,6 @@ GameObject:
   - component: {fileID: 2217501933713679621}
   - component: {fileID: 2217501933713679624}
   - component: {fileID: 2217501933713679623}
-  - component: {fileID: 2217501933713679622}
   - component: {fileID: 2217501933713679625}
   m_Layer: 5
   m_Name: ProfileIcon
@@ -1737,34 +1751,6 @@ RectTransform:
   m_AnchoredPosition: {x: 296, y: 0}
   m_SizeDelta: {x: 78.20001, y: 71.9}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2217501933713679622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2217501933713679620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2217501934100867515}
-          m_MethodName: OpenProfilePanel
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 4
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &2217501933713679623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1846,7 +1832,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2217501934100867515}
-        m_MethodName: openProfilePanel
+        m_MethodName: OpenProfilePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2380,12 +2366,17 @@ PrefabInstance:
     - target: {fileID: 6106076923326838091, guid: 18ef0a03b13ca0b4dac830b00b203a4a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 15.350098
+      value: 15.350067
       objectReference: {fileID: 0}
     - target: {fileID: 7324479250667705568, guid: 18ef0a03b13ca0b4dac830b00b203a4a,
         type: 3}
       propertyPath: permanent
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324479250667705568, guid: 18ef0a03b13ca0b4dac830b00b203a4a,
+        type: 3}
+      propertyPath: panelName
+      value: Profile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ef0a03b13ca0b4dac830b00b203a4a, type: 3}
@@ -2705,6 +2696,11 @@ PrefabInstance:
         type: 3}
       propertyPath: permanent
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904850426700368751, guid: f6c6f563b87464e4a9c6c6817357bd0d,
+        type: 3}
+      propertyPath: panelName
+      value: Search
       objectReference: {fileID: 0}
     - target: {fileID: 6904850426700369269, guid: f6c6f563b87464e4a9c6c6817357bd0d,
         type: 3}

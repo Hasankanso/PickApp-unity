@@ -50,8 +50,8 @@ public class SearchPanel : Panel
       OpenDialog("Something went wrong!", false);
     else
     {
-      Panel p = PanelsFactory.CreateRideResults(results, info);
-      openCreated(p);
+      RideResultsPanel p = PanelsFactory.CreateRideResults();
+      Open(p, () => { p.Init(results, info); });
     }
   }
 

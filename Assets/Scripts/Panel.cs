@@ -44,7 +44,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
       status = value;
       if (next != null)
       {
-        next.Status = value;
+        next.status = value;
       }
     }
   }
@@ -111,6 +111,12 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     Next.previous = this;
     Next.gameObject.SetActive(true);
     Next.transform.SetAsLastSibling();
+
+    if (Next.permanent)
+    {
+      FooterMenu.dFooterMenu.transform.SetAsFirstSibling();
+    }
+
     return Next;
   }
 
@@ -118,6 +124,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   {
     newPanel.transform.SetParent(transform.parent, false);
     newPanel.gameObject.SetActive(true);
+    newPanel.transform.SetAsLastSibling();
   }
 
   public void CloseDialog()
@@ -139,15 +146,15 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     OpenNext();
   }
 
-  public void Open(Panel newPanel) // use this only if you don't have Init(...) based on Status in your new panel
+
+  public void Open(Panel newPanel, Action Init) // use this only if you don't have Init(...) based on Status in your new panel
   {
     Next = newPanel; // inside of this there's underlying code (check Next Property's code)
+    if (Init != null)
+    {
+      Init();
+    }
     OpenNext();
-  }
-
-  public void destroy()
-  {
-    ForwardDestroy(); //destroy all next panels that are not permanent
   }
 
   public void DestroyForwardBackward()
@@ -155,17 +162,16 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     if (Next != null) Next.ForwardDestroy(); //destroy all next panels that are not permanent
     BackwardDestroy(); //this will destroy this panel and all previous panels that are not permanent
   }
-  public void MissionCompleted(Panel toOpen)
+
+  public void MissionCompleted(string panelName, string dialogMessage)
   {
+    FooterMenu.Open(panelName, dialogMessage);
+    DestroyForwardBackward();
+  }
 
-    if (toOpen.permanent == false)
-    {
-      Debug.LogWarning("maybe you should set \"permanent\" in " + toOpen.panelName + " to true?");
-    }
-
-    toOpen.gameObject.SetActive(true);
-    toOpen.transform.SetAsLastSibling(); // move the panel to the fron of user screen
-
+  public void MissionCompleted(string panelName)
+  {
+    FooterMenu.Open(panelName);
     DestroyForwardBackward();
   }
 

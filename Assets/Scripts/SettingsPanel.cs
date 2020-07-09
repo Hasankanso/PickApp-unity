@@ -6,82 +6,105 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsPanel : Panel {
+public class SettingsPanel : Panel
+{
 
-    public Image englishCheck;
-    public Image arabicCheck;
-    public User user = null;
-    public void Start() {
-        this.user = Program.User;
-        Clear();
+  public Image englishCheck;
+  public Image arabicCheck;
+  public User user = null;
+  public void Start()
+  {
+    this.user = Program.User;
+    Clear();
+  }
+  public void ChangeLanguages(int index)
+  {
+    Clear();
+    //0 is English
+    if (index == 0)
+    {
+      englishCheck.enabled = true;
     }
-    public void ChangeLanguages(int index) {
-        Clear();
-        //0 is English
-        if (index == 0) {
-            englishCheck.enabled = true;
-        } else if (index == 1) {
-            arabicCheck.enabled = true;
-        }
+    else if (index == 1)
+    {
+      arabicCheck.enabled = true;
     }
-    public void openHowItWorks() {
-        Panel panel = PanelsFactory.createHowItWorks();
-        openCreated(panel);
+  }
+  public void openHowItWorks()
+  {
+    Panel panel = PanelsFactory.createHowItWorks();
+    openCreated(panel);
+  }
+  public void openTermsConditions()
+  {
+    Panel panel = PanelsFactory.createTermsConditions();
+    openCreated(panel);
+  }
+  public void openPrivacyPolicy()
+  {
+    Panel panel = PanelsFactory.CreatePrivacyPolicy();
+    openCreated(panel);
+  }
+  public void openLicenses()
+  {
+    Panel panel = PanelsFactory.createLicenses();
+    openCreated(panel);
+  }
+  public void openContactUs()
+  {
+    Panel panel = PanelsFactory.createContactUs();
+    openCreated(panel);
+  }
+  internal override void Clear()
+  {
+    englishCheck.enabled = false;
+    arabicCheck.enabled = false;
+  }
+  public void Logout()
+  {
+    string cacheToken = Cache.GetToken();
+    if (!string.IsNullOrEmpty(cacheToken))
+    {
+      User user = new User();
+      user.Token = cacheToken;
+      Program.User = user;
+      Request<string> request = new Logout();
+      request.Send(response);
     }
-    public void openTermsConditions() {
-        Panel panel = PanelsFactory.createTermsConditions();
-        openCreated(panel);
+    else
+    {
+      LogoutDefault();
     }
-    public void openPrivacyPolicy() {
-        Panel panel = PanelsFactory.CreatePrivacyPolicy();
-        openCreated(panel);
+  }
+  private void response(string result, int code, string message)
+  {
+    if (!code.Equals((int)HttpStatusCode.OK))
+    {
+      LogoutDefault();
     }
-    public void openLicenses() {
-        Panel panel = PanelsFactory.createLicenses();
-        openCreated(panel);
+    else
+    {
+      LogoutDefault();
     }
-    public void openContactUs() {
-        Panel panel = PanelsFactory.createContactUs();
-        openCreated(panel);
-    }
-    internal override void Clear() {
-        englishCheck.enabled = false;
-        arabicCheck.enabled = false;
-    }
-    public void Logout() {
-        string cacheToken = Cache.GetToken();
-        if (!string.IsNullOrEmpty(cacheToken)) {
-            User user = new User();
-            user.Token = cacheToken;
-            Program.User = user;
-            Request<string> request = new Logout();
-            request.Send(response);
-        } else {
-            LogoutDefault();
-        }
-    }
-    private void response(string result, int code, string message) {
-        if (!code.Equals((int)HttpStatusCode.OK)) {
-            LogoutDefault();
-        } else {
-            LogoutDefault();
-        }
-    }
-    private void LogoutDefault() {
-        OpenDialog("Waiting for you to come back!", true);
-        Program.User = null;
-        Cache.SetToken("");
-        Program.IsLoggedIn = false;
-        FooterMenu.dFooterMenu.OpenSearchPanel();
-        this.destroy();
-    }
-    public void openNotifications() {
-        Panel panel = PanelsFactory.createNotificationPanel();
-        openCreated(panel);
-    }
-    public void changePassword() {
-        Panel panel = PanelsFactory.ChangePassword(user);
-        openCreated(panel);
-    }
+  }
+  private void LogoutDefault()
+  {
+    OpenDialog("Waiting for you to come back!", true);
+    Program.User = null;
+    Cache.SetToken("");
+    Program.IsLoggedIn = false;
+    FooterMenu.dFooterMenu.OpenSearchPanel();
+    DestroyForwardBackward();
+  }
+  public void openNotifications()
+  {
+    Panel panel = PanelsFactory.createNotificationPanel();
+    openCreated(panel);
+  }
+  public void changePassword()
+  {
+    Panel panel = PanelsFactory.ChangePassword(user);
+    openCreated(panel);
+  }
 
 }

@@ -39,15 +39,17 @@ public class LoginPanel : Panel
       Program.User = u;
       Cache.User(u);
       Cache.SetPassword(password.GetComponent<InputField>().text);
-      OpenDialog("Welcome back to PickApp", true);
       Program.IsLoggedIn = true;
       if (!isFromFooter)
+      {
         Back();
+      }
       else
       {
         BackClose();
         FooterMenu.dFooterMenu.OpenProfilePanel();
       }
+      OpenDialog("Welcome back to PickApp", true);
     }
   }
 
