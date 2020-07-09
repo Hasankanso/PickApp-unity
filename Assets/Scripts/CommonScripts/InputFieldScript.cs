@@ -14,13 +14,18 @@ public class InputFieldScript : MonoBehaviour {
     public Sprite inputFieldError;
     public GameObject inputFieldContainer;
     private static bool isClicked = false;
+    string stringEdit = "";
+
     private void Start() {
         text.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
+        this.GetComponent<InputField>().onValueChanged.AddListener(delegate { OnEditting(); });
     }
-
+    public void OnEditting() {
+        stringEdit = text.text;
+    }
     public void PlaceHolder() {
         placeHolderText = placeHolder.GetComponent<Text>();
-        text.color= new Color(255f / 255f, 188f / 255f, 66f / 255f);
+        text.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
         placeHolderText.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
         gameObject.GetComponent<Image>().sprite = inputFieldClicked;
         if (placeHolderText.fontSize != 28) {
@@ -38,6 +43,9 @@ public class InputFieldScript : MonoBehaviour {
         this.PlaceHolder();
     }
     public void clickedOut() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            SetText(stringEdit);
+        }
         placeHolderText = placeHolder.GetComponent<Text>();
         if (placeHolderText.fontSize != 40 && String.IsNullOrEmpty(text.GetComponent<Text>().text)) {
             placeHolderText.transform.position -= new Vector3(-19.7f, -8.1f, 0);
@@ -53,12 +61,12 @@ public class InputFieldScript : MonoBehaviour {
         clickedOut();
     }
     public void ChangePositionUpOnTyping() {
-        if(isClicked == false) {
+        if (isClicked == false) {
             StartCoroutine(ExecuteAfterTime());
         }
     }
     public void ChangePositionDownOnEndTyping() {
-        if(isClicked == true) {
+        if (isClicked == true) {
             inputFieldContainer.transform.position = new Vector3(inputFieldContainer.transform.position.x, inputFieldContainer.transform.position.y - (float)(GetKeyboardHeightRatio()) / 1.6f, 0);
             isClicked = false;
         }
@@ -76,15 +84,15 @@ public class InputFieldScript : MonoBehaviour {
     }
 
     private float GetKeyboardHeightRatio() {
-        if(Application.isEditor) {
+        if (Application.isEditor) {
             return 100.0f; // fake TouchScreenKeyboard height ratio for debug in editor        
         }
 
 #if UNITY_ANDROID
-        using(AndroidJavaClass UnityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
+        using (AndroidJavaClass UnityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
             AndroidJavaObject View = UnityClass.GetStatic<AndroidJavaObject>("currentActivity").Get<AndroidJavaObject>("mUnityPlayer").Call<AndroidJavaObject>("getView");
 
-            using(AndroidJavaObject Rct = new AndroidJavaObject("android.graphics.Rect")) {
+            using (AndroidJavaObject Rct = new AndroidJavaObject("android.graphics.Rect")) {
                 View.Call("getWindowVisibleDisplayFrame", Rct);
 
                 return Screen.height - Rct.Call<int>("height");
