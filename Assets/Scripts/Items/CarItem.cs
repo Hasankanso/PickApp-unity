@@ -11,7 +11,7 @@ public class CarItem : Panel {
     public Action<Car, CarItem> OnItemClicked;
     public Image background;
     public Image maskImage;
-    private bool isProfile=false;
+    private bool isProfile = false;
 
     public void init(Car car, Panel profilePanel) {
         Clear();
@@ -20,7 +20,7 @@ public class CarItem : Panel {
         this.brand.text = car.Brand;
         this.year.text = car.Year.ToString();
         GetColor(car.Color);
-        if (car.Picture!=null) {
+        if (car.Picture != null) {
             this.carImage.sprite = Program.GetImage(car.Picture);
         }
         this.maxSeats.text = car.MaxSeats.ToString() + " Seats";
@@ -43,6 +43,12 @@ public class CarItem : Panel {
         this.maxSeats.text = car.MaxSeats.ToString() + " Seats";
         this.maxLuggages.text = car.MaxLuggage.ToString() + " Luggages";
         isProfile = false;
+    }
+
+    public Texture2D SetPicture(Texture2D img) {
+        car.Picture = img;
+        this.carImage.sprite = Program.GetImage(car.Picture);
+        return img;
     }
 
     public void Select() {

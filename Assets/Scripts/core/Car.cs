@@ -38,7 +38,7 @@ public class Car
         this.Brand = brand;
         this.Name = name;
         this.Color = color;
-        this.carPictureUrl = carPictureUrl;
+        this.CarPictureUrl = carPictureUrl;
     }
     public Car(string id,string name, int year, int maxLuggage, int maxSeats, string brand, string color, Texture2D picture) {
         this.id = id;
@@ -106,8 +106,9 @@ public class Car
   public Texture2D Picture { get => picture; set { picture = value; if (value != null) { pictureBase64 = Convert.ToBase64String(value.EncodeToPNG()); } } }
   public string PictureBase64 { get => pictureBase64; }
   public DateTime Updated { get => updated; set => updated = value; }
+    public string CarPictureUrl { get => carPictureUrl; set => carPictureUrl = value; }
 
-  public override bool Equals(object obj)
+    public override bool Equals(object obj)
   {
     var car = obj as Car;
     return car != null &&

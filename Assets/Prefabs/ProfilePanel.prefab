@@ -955,6 +955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   panelName: 
+  permanent: 0
   fullName: {fileID: 790990232558318824}
   ratings: {fileID: 6106076923037605654}
   scroll: {fileID: 790990231581474822}
@@ -1088,7 +1089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &790990231581474821
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1349,7 +1350,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00012397766}
+  m_AnchoredPosition: {x: 0, y: -0.00003528595}
   m_SizeDelta: {x: 0, y: 1062}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &790990232213742994
@@ -1829,7 +1830,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2163,6 +2164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   carsList: {fileID: 0}
 --- !u!1 &5999250474514170794
 GameObject:

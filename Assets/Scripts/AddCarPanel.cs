@@ -19,7 +19,7 @@ public class AddCarPanel : Panel {
     public void submit() {
         if (vadilateSecondView()) {
             car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
-            Request<Car> request = new AddCar(car,Program.Driver);
+            Request<Car> request = new AddCar(car, Program.Driver);
             request.Send(response);
         }
     }
@@ -43,19 +43,11 @@ public class AddCarPanel : Panel {
         }
     }
     private void response(Car result, int code, string message) {
-        Debug.Log(2);
-        if (!code.Equals((int) HttpStatusCode.OK)) {
-            Debug.Log(2);
-
-        }
-        else {
-            Debug.Log(22);
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+        } else {
             Program.Driver.Cars.Add(result);
             FooterMenu.dFooterMenu.OpenProfilePanel();
-            Debug.Log(2);
             this.destroy();
-            Debug.Log(2);
-
         }
     }
     public void init(Car car) {

@@ -9387,6 +9387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: AddCar
+  permanent: 0
   carName: {fileID: 6712105295935453217}
   brand: {fileID: 6712105294674262306}
   year: {fileID: 6712105294984380227}

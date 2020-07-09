@@ -134,9 +134,7 @@ namespace Requests {
         public static async Task<Texture2D> DownloadImage(string urlLink) {
             Debug.Log("link" + urlLink);
             Texture2D tex = new Texture2D(1, 1);
-            Debug.Log("texture");
             var data = await Client.GetByteArrayAsync(new Uri(urlLink));
-            Debug.Log("after await");
             tex.LoadImage(data);
             tex.Apply();
             return tex;
