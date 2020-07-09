@@ -81,16 +81,6 @@ public class RideDetails : Panel
   {
     Status = StatusE.UPDATE;
     FooterMenu.dFooterMenu.OpenAddRidePanel(this, ride);
-    header = GameObject.Find("Canvas/AddRidePanel/FirstView/Header/Title").GetComponent<Text>();
-    header.text = "Edit Ride";
-
-    header = GameObject.Find("Canvas/AddRidePanel/NextView/Header/Title").GetComponent<Text>();
-    header.text = "Edit Ride";
-
-
-    //  header.text = GameObject.Find("Canvas/AddRidePanel/NextView/Price/Text").GetComponent<Text>().text = ride.Price.ToString();
-    //  Debug.Log(header.text);
-
   }
 
   public void EditSchedule()

@@ -4021,7 +4021,8 @@ MonoBehaviour:
   price: {fileID: 5997404154846815871}
   stopTimeField: {fileID: 5997404154905295298}
   date: {fileID: 5997404155318923574}
-  header: {fileID: 0}
+  titleFirstView: {fileID: 5997404155017368134}
+  titleSecView: {fileID: 5997404154689764505}
   firstView: {fileID: 5997404156222771050}
   secondView: {fileID: 5997404155176101908}
   isMusicAllowed: {fileID: 5997404154858630822}

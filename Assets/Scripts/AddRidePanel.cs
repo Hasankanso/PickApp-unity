@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class AddRidePanel : Panel
 {
   public InputFieldScript from, to, comment, price, stopTimeField;
-    public Text date, header;
+    public Text date, titleFirstView, titleSecView;
   public GameObject firstView, secondView;
 
   private DirectionsFinderPanel directionsPanel;
@@ -45,6 +45,8 @@ public class AddRidePanel : Panel
   public void Init(Ride ride)
   { 
     Clear();
+        titleFirstView.text = "Edit Ride";
+        titleSecView.text = titleFirstView.text;
         fromL = ride.From;
         toL = ride.To;
         this.ride = ride;
@@ -354,10 +356,8 @@ stopTime, null, null);
     secondView.SetActive(true);
 
         //clear content of all inputfields.
-        header = GameObject.Find("Canvas/AddRidePanel/FirstView/Header/Title").GetComponent<Text>();
-        header.text = "Add Ride";
-        header = GameObject.Find("Canvas/AddRidePanel/NextView/Header/Title").GetComponent<Text>();
-        header.text = "Add Ride";
+        titleFirstView.text = "Add Ride";
+        titleSecView.text = titleFirstView.text;
         from.Reset();
     to.Reset();
     comment.Reset();
