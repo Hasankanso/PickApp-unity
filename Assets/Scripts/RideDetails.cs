@@ -421,9 +421,11 @@ public class RideDetails : Panel
             FooterMenu.dFooterMenu.OpenYourRidesPanel();
             Debug.Log("Got Response from servaa");
             DestroyForwardBackward();
+            OpenDialog("Ride's in public!", true);
         }
-        else Debug.Log("Add Ride Response's not OK - " + message);
-  }
+        else if (code == 302) OpenDialog("Please fix your connection", false);
+       else OpenDialog("Something went wrong", false);
+    }
 
   public void AddScheduleResponse(ScheduleRide result, int code, string message)
   {
@@ -452,8 +454,10 @@ public class RideDetails : Panel
         {
             FooterMenu.dFooterMenu.OpenYourRidesPanel();
             DestroyForwardBackward();
+            OpenDialog("Ride has been removed!", true);
         }
-        else Debug.Log("Remove Ride Response's not OK - " + code.ToString());
+        else if (code == 302) OpenDialog("Please fix your connection", false);
+        else OpenDialog("Something went wrong", false);
     }
 
   private void CancelReservedSeatsResponse(Ride result, int code, string message)
