@@ -415,11 +415,14 @@ public class RideDetails : Panel
 
   public void AddRideResponse(Ride result, int code, string message)
   {
-    if (!code.Equals((int)HttpStatusCode.OK)) Debug.Log("no results");
-    Program.Person.UpcomingRides.Add(result);
-    FooterMenu.dFooterMenu.OpenYourRidesPanel();
-    Debug.Log("Got Response from servaa");
-    DestroyForwardBackward();
+        if (code.Equals((int)HttpStatusCode.OK))
+        {
+            Program.Person.UpcomingRides.Add(result);
+            FooterMenu.dFooterMenu.OpenYourRidesPanel();
+            Debug.Log("Got Response from servaa");
+            DestroyForwardBackward();
+        }
+        else Debug.Log("Add Ride Response's not OK - " + code.ToString());
   }
 
   public void AddScheduleResponse(ScheduleRide result, int code, string message)
@@ -444,11 +447,14 @@ public class RideDetails : Panel
   }
 
   private void RemoveRideResponse(Ride result, int code, string message)
-  {
-    FooterMenu.dFooterMenu.OpenYourRidesPanel();
-    DestroyForwardBackward();
-
-  }
+    {
+        if (code.Equals((int)HttpStatusCode.OK))
+        {
+            FooterMenu.dFooterMenu.OpenYourRidesPanel();
+            DestroyForwardBackward();
+        }
+        else Debug.Log("Remove Ride Response's not OK - " + code.ToString());
+    }
 
   private void CancelReservedSeatsResponse(Ride result, int code, string message)
   {
