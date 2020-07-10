@@ -161,7 +161,7 @@ public class RideDetails : Panel
     date.text = Program.DateToString(ride.LeavingDate);
     from.text = ride.From.Name;
     to.text = ride.To.Name;
-    price.text = ride.Price.ToString() + " " + ride.CountryInformations.Unit;
+    price.text = ride.Price.ToString() + " " + Program.User.Person.CountryInformations.Unit;
     comment.text = ride.Comment;
     seats.text = ride.AvailableSeats.ToString();
     luggages.text = ride.AvailableLuggages.ToString();
@@ -422,7 +422,7 @@ public class RideDetails : Panel
             Debug.Log("Got Response from servaa");
             DestroyForwardBackward();
         }
-        else Debug.Log("Add Ride Response's not OK - " + code.ToString());
+        else Debug.Log("Add Ride Response's not OK - " + message);
   }
 
   public void AddScheduleResponse(ScheduleRide result, int code, string message)

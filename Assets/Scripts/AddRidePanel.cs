@@ -124,12 +124,12 @@ public class AddRidePanel : Panel
         stopTime = int.Parse(stopTimeField.text.text);
       }
       if (Status == StatusE.UPDATE) 
-      ride = new Ride(ride.id,Program.User, null, fromL, toL, comment.text.text, price.text.text, Program.CountryInformations,
+      ride = new Ride(ride.id,Program.User, null, fromL, toL, comment.text.text, price.text.text,
 wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
 int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
 stopTime, null, null);
       else
-                ride = new Ride(null, Program.User, null, fromL, toL, comment.text.text, price.text.text, Program.CountryInformations,
+                ride = new Ride(null, Program.User, null, fromL, toL, comment.text.text, price.text.text,
           wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
           int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
           stopTime, null, null);
