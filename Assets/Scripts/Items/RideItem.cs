@@ -23,7 +23,7 @@ public class RideItem : MonoBehaviour
       time.text = Program.DateToString(this.ride.LeavingDate, true);
     }
 
-    price.text = this.ride.Price + " " + this.ride.CountryInformations.Unit;
+    price.text = this.ride.Price + " " + this.ride.User.Person.CountryInformations.Unit;
     this.origin.text = this.ride.From.ToString();
     this.target.text = this.ride.To.ToString();
     this.driverName.text = driver.FirstName + " " + driver.LastName;
