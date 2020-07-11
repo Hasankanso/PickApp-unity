@@ -390,7 +390,7 @@ public class RideDetails : Panel {
         } else {
             //Passenger passenger = new Passenger(Program.User, luggagesDropdown.value);
             FooterMenu.dFooterMenu.OpenSearchPanel();
-            OpenDialog("You reserved " + personsDropdown.value + " seat(s).", true);
+            OpenDialog("You reserved " + (personsDropdown.value+1) + " seat(s) and " + (luggagesDropdown.value + 1) + " luggage(s).", true);
             // result.Passengers.Add(passenger);
             DestroyForwardBackward();
         }
