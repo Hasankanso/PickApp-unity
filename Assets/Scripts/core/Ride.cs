@@ -23,6 +23,8 @@ public class Ride
   private bool petsAllowed;
   private bool kidSeat;
   private int availableSeats;
+  private int maxSeats;
+  private int maxLuggages;
   private int reservedSeats;
   private int availableLuggages;
   private int reservedLuggages;
@@ -31,14 +33,14 @@ public class Ride
   private Texture2D map;
   private string mapUrl;
   private string mapBase64;
+  private bool reserved;
   private float price;
   private User user;
   private List<Passenger> passengers;
   private Car car;
   private DateTime updated;
-  private bool reserved;
 
-  public Ride(string id, Location from, Location to, DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int availableSeats, int availableLuggages, int stopTime, string comment, string price, int reservedLuggages, int reservedSeats, Texture2D map)
+  public Ride(string id, Location from, Location to, DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int maxSeats, int maxLuggages, int stopTime, string comment, string price, int reservedLuggages, int reservedSeats, Texture2D map)
   {
     Id = id;
     From = from;
@@ -49,8 +51,10 @@ public class Ride
     SmokingAllowed = smokingAllowed;
     PetsAllowed = petsAllowed;
     KidSeat = kidSeat;
-    AvailableSeats = availableSeats;
-    AvailableLuggages = availableLuggages;
+    MaxSeats = maxSeats;
+    AvailableSeats = maxSeats - reservedSeats;
+    MaxLuggages = maxLuggages;
+    AvailableLuggages = maxLuggages - reservedLuggages;
     StopTime = stopTime;
     Comment = comment;
     Map = map;
@@ -74,7 +78,7 @@ public class Ride
 
   //constructor to add full ride
   public Ride(string id, User user, Car car, Location from, Location to, string comment, string price,
-  DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int availableSeats, int availableLuggages,
+  DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int maxSeats, int maxLuggages,
   int stopTime, Texture2D map, string mapUrl)
   {
     this.id = id;
@@ -88,8 +92,10 @@ public class Ride
     SmokingAllowed = smokingAllowed;
     PetsAllowed = petsAllowed;
     KidSeat = kidSeat;
-    AvailableSeats = availableSeats;
-    AvailableLuggages = availableLuggages;
+    MaxSeats = maxSeats;
+    AvailableSeats = maxSeats - reservedSeats;
+    MaxLuggages = maxLuggages;
+    AvailableLuggages = maxLuggages - reservedLuggages;
     StopTime = stopTime;
     Comment = comment;
     Price = float.Parse(price);
@@ -99,13 +105,12 @@ public class Ride
     ReservedSeats = reservedSeats;
   }
 
-  public Ride(User user, Location from, Location to, CountryInformations countryInformations, DateTime date)
+  public Ride(User user, Location from, Location to, DateTime date)
   {
     this.user = user;
     From = from;
     To = to;
     LeavingDate = date;
-    CountryInformations = countryInformations;
   }
 
   public JObject ToJson()
@@ -120,7 +125,8 @@ public class Ride
 
     rideJ[nameof(this.availableLuggages)] = this.AvailableLuggages;
     rideJ[nameof(this.availableSeats)] = this.AvailableSeats;
-
+    rideJ[nameof(this.maxSeats)] = this.MaxSeats;
+    rideJ[nameof(this.maxLuggages)] = this.MaxLuggages;
     rideJ[nameof(this.stopTime)] = this.StopTime;
     rideJ[nameof(this.leavingDate)] = this.LeavingDate;
 
@@ -134,7 +140,6 @@ public class Ride
 
     rideJ[nameof(this.to)] = to.ToJson();
     rideJ[nameof(this.from)] = from.ToJson();
-    rideJ["countryInformations"] = user.Person.CountryInformations.ToJson();
 
 
     rideJ[nameof(this.map)] = this.mapBase64;
@@ -185,10 +190,20 @@ public class Ride
     if (aL != null)
       int.TryParse(aL.ToString(), out availableLuggages);
 
+    int maxLuggages = -1;
+    var mL = json[nameof(Ride.maxLuggages)];
+    if (mL != null)
+      int.TryParse(mL.ToString(), out maxLuggages);
+
     int availableSeats = -1;
     var aS = json[nameof(Ride.availableSeats)];
     if (aS != null)
       int.TryParse(aS.ToString(), out availableSeats);
+
+    int maxSeats = -1;
+    var mS = json[nameof(Ride.maxSeats)];
+    if (mS != null)
+      int.TryParse(mS.ToString(), out maxSeats);
 
     int stopTime = -1;
     var sT = json[nameof(Ride.stopTime)];
@@ -227,6 +242,8 @@ public class Ride
     Location from = Location.ToObject((JObject)json[nameof(Ride.from)]);
     Location to = Location.ToObject((JObject)json[nameof(Ride.to)]);
 
+
+
     JObject driverJ = (JObject)json["driver"];
     JObject personJ = (JObject)driverJ["person"];
     Person person = Person.ToObject(personJ);
@@ -256,10 +273,9 @@ public class Ride
 
     rideJ[nameof(this.Map)] = this.MapBase64;
     */
-
-    return new Ride(id, user, car, from, to, comment, price, leavingDate, musicAllowed, acAllowed, smokingAllowed, petsAllowed, kidSeat, availableSeats, availableLuggages, stopTime, mapUrl);
+    return new Ride(id, user, car, from, to, comment, price, leavingDate, musicAllowed, acAllowed, smokingAllowed, petsAllowed,
+    kidSeat, availableSeats, availableLuggages, stopTime, mapUrl);
   }
-
   public string Id { get => id; set => id = value; }
   public Location From { get => from; set => from = value; }
   public Location To { get => to; set => to = value; }
@@ -271,9 +287,11 @@ public class Ride
   public bool KidSeat { get => kidSeat; set => kidSeat = value; }
   public int AvailableSeats { get => availableSeats; set => availableSeats = value; }
   public int AvailableLuggages { get => availableLuggages; set => availableLuggages = value; }
+  public int MaxSeats { get => maxSeats; set => maxSeats = value; }
+  public int MaxLuggages { get => maxLuggages; set => maxLuggages = value; }
   public int StopTime { get => stopTime; set => stopTime = value; }
   public string Comment { get => comment; set => comment = value; }
-  public CountryInformations CountryInformations { get => User.Person.CountryInformations; set => User.Person.CountryInformations = value; }
+  public CountryInformations CountryInformations { get => Person.CountryInformations; }
   public Texture2D Map { get => map; set { map = value; if (value != null) { mapBase64 = Convert.ToBase64String(value.EncodeToPNG()); } } }
   public int ReservedLuggages { get => reservedLuggages; set => reservedLuggages = value; }
   public int ReservedSeats { get => reservedSeats; set => reservedSeats = value; }
@@ -281,6 +299,7 @@ public class Ride
 
   public string MapUrl { get => mapUrl; set => mapUrl = value; }
   public Driver Driver { get => user.Driver; }
+  public Person Person { get => user.Person; }
   public List<Passenger> Passengers { get => passengers; set => passengers = value; }
   public Car Car { get => car; set => car = value; } //has texture2d
   public string MapBase64 { get => mapBase64; }

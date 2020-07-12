@@ -8,7 +8,7 @@ using UnityEngine;
 public class MyRidePanel : Panel
 {
   public ListView listMyRidesView;
-
+  public static readonly string PANELNAME = "MyRide";
   public void Init()
   {
     Request<List<Ride>> request = new GetMyUpcomingRides(Program.User);

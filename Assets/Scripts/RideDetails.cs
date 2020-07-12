@@ -412,17 +412,7 @@ public class RideDetails : Panel
     request.Send(RemoveRideResponse);
   }
 
-  public void AddRideResponse(Ride result, int code, string message)
-  {
-    if (code.Equals((int)HttpStatusCode.OK))
-    {
-      Program.Person.UpcomingRides.Add(result);
-      FooterMenu.dFooterMenu.OpenYourRidesPanel();
-      Debug.Log("Got Response from servaa");
-      DestroyForwardBackward();
-    }
-    else Debug.Log("Add Ride Response's not OK - " + code.ToString());
-  }
+
 
   public void AddScheduleResponse(ScheduleRide result, int code, string message)
   {
@@ -445,14 +435,27 @@ public class RideDetails : Panel
     //check if schedule Ride add in server success
   }
 
+  public void AddRideResponse(Ride result, int code, string message)
+  {
+    if (code.Equals((int)HttpStatusCode.OK))
+    {
+      Program.Person.UpcomingRides.Add(result);
+      MissionCompleted(MyRidePanel.PANELNAME, "Ride's in public!");
+    }
+    else if (code == 302) OpenDialog("Please fix your connection", false);
+    else OpenDialog("Something went wrong", false);
+  }
+
   private void RemoveRideResponse(Ride result, int code, string message)
   {
     if (code.Equals((int)HttpStatusCode.OK))
     {
       FooterMenu.dFooterMenu.OpenYourRidesPanel();
       DestroyForwardBackward();
+      OpenDialog("Ride has been removed!", true);
     }
-    else Debug.Log("Remove Ride Response's not OK - " + code.ToString());
+    else if (code == 302) OpenDialog("Please fix your connection", false);
+    else OpenDialog("Something went wrong", false);
   }
 
   private void CancelReservedSeatsResponse(Ride result, int code, string message)
@@ -471,22 +474,37 @@ public class RideDetails : Panel
       result.Passengers.Remove(passenger);
     }
   }
+
   private void ReserveSeatsResponse(Ride result, int code, string message)
   {
     if (!code.Equals((int)HttpStatusCode.OK))
     {
-      OpenDialog("Something went wrong", false);
+      if (code == 302)
+      {
+        Program.User = null;
+        Cache.SetToken("");
+        Program.IsLoggedIn = false;
+        OpenDialog("Please login", false);
+        Panel login = PanelsFactory.createLogin(false);
+        openCreated(login);
+      }
+      else
+      {
+        OpenDialog(message, false);
+        Debug.Log(code);
+      }
     }
     else
     {
-      Passenger passenger = new Passenger(Program.User, luggagesDropdown.value);
-      OpenDialog("You reserved a seat(s).", true);
+      //Passenger passenger = new Passenger(Program.User, luggagesDropdown.value);
       FooterMenu.dFooterMenu.OpenSearchPanel();
-      result.Passengers.Add(passenger);
+      OpenDialog("You reserved " + (personsDropdown.value + 1) + " seat(s) and " + (luggagesDropdown.value + 1) + " luggage(s).", true);
+      // result.Passengers.Add(passenger);
       DestroyForwardBackward();
     }
 
   }
+
 }
 // end send and receive functions
 
