@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class AddRidePanel : Panel
 {
   public InputFieldScript from, to, comment, price, stopTimeField;
-    public Text date, titleFirstView, titleSecView;
+  public Text date, titleFirstView, titleSecView;
   public GameObject firstView, secondView;
 
   private DirectionsFinderPanel directionsPanel;
@@ -43,26 +43,26 @@ public class AddRidePanel : Panel
   }
 
   public void Init(Ride ride)
-  { 
+  {
     Clear();
-        titleFirstView.text = "Edit Ride";
-        titleSecView.text = titleFirstView.text;
-        fromL = ride.From;
-        toL = ride.To;
-        this.ride = ride;
+    titleFirstView.text = "Edit Ride";
+    titleSecView.text = titleFirstView.text;
+    fromL = ride.From;
+    toL = ride.To;
+    this.ride = ride;
     Status = StatusE.UPDATE;
     if (ride.StopTime != 0 && !ride.StopTime.ToString().Equals(""))
     {
-            Debug.Log(ride.StopTime);
+      Debug.Log(ride.StopTime);
       stopTimeCheckBox.isOn = true;
       stopTimeTextToShow.SetActive(true);
       stopTimeField.SetText(ride.StopTime.ToString());
     }
-        Debug.Log(ride.id);
+    Debug.Log(ride.id);
     from.SetText(ride.From.Name.ToString());
     to.SetText(ride.To.Name);
     comment.SetText(ride.Comment);
-        Debug.Log(ride.From.Name.ToString());
+    Debug.Log(ride.From.Name.ToString());
     price.SetText(ride.Price.ToString());
     date.text = Program.DateToString(ride.LeavingDate);
     isMusicAllowed.isOn = ride.MusicAllowed;
@@ -123,18 +123,18 @@ public class AddRidePanel : Panel
       {
         stopTime = int.Parse(stopTimeField.text.text);
       }
-      if (Status == StatusE.UPDATE) 
-      ride = new Ride(ride.id,Program.User, null, fromL, toL, comment.text.text, price.text.text, Program.CountryInformations,
-wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
-int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
-stopTime, null, null);
+      if (Status == StatusE.UPDATE)
+        ride = new Ride(ride.id, Program.User, null, fromL, toL, comment.text.text, price.text.text,
+  wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
+  int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
+  stopTime, null, null);
       else
-                ride = new Ride(null, Program.User, null, fromL, toL, comment.text.text, price.text.text, Program.CountryInformations,
-          wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
-          int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
-          stopTime, null, null);
+        ride = new Ride(null, Program.User, null, fromL, toL, comment.text.text, price.text.text,
+  wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
+  int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
+  stopTime, null, null);
 
-            if (carPickerPanel == null)
+      if (carPickerPanel == null)
       {
         carPickerPanel = PanelsFactory.CreateCarsListPanel(OnCarPicked, car);
         openCreated(carPickerPanel);
@@ -172,8 +172,8 @@ stopTime, null, null);
   {
     if (schedule == null)
     {
-      RideDetails rideDetailsPanel = PanelsFactory.CreateRideDetails(true,ride, true, directionsPanel.Status);
-      directionsPanel.openCreated(rideDetailsPanel);
+      RideDetails rideDetailsPanel = PanelsFactory.CreateRideDetails();
+      Open(rideDetailsPanel, () => { rideDetailsPanel.Init(ride); });
     }
     else
     {
@@ -217,7 +217,7 @@ stopTime, null, null);
     {
       firstView.SetActive(false);
       secondView.SetActive(true);
-        }
+    }
 
   }
 
@@ -246,16 +246,16 @@ stopTime, null, null);
       stopTimeTextToShow.SetActive(false);
     }
   }
-   
+
   public void OpenFromLocationPicker()
   {
-        OpenLocationFinder(from.text.text, OnFromLocationPicked);
+    OpenLocationFinder(from.text.text, OnFromLocationPicked);
   }
 
   public void OpenToLocationPicker()
   {
-        OpenLocationFinder(to.text.text, OnToLocationPicked);
-    }
+    OpenLocationFinder(to.text.text, OnToLocationPicked);
+  }
 
   public void OnFromLocationPicked(Location loc)
   {
@@ -355,10 +355,10 @@ stopTime, null, null);
     firstView.SetActive(true);
     secondView.SetActive(true);
 
-        //clear content of all inputfields.
-        titleFirstView.text = "Add Ride";
-        titleSecView.text = titleFirstView.text;
-        from.Reset();
+    //clear content of all inputfields.
+    titleFirstView.text = "Add Ride";
+    titleSecView.text = titleFirstView.text;
+    from.Reset();
     to.Reset();
     comment.Reset();
     price.Reset();

@@ -116,45 +116,16 @@ public class RideDetails : Panel
 
   //Init SearchResult
   //Init MyRidesPanel
-  public void Init(bool isUpcomingRides, Ride ride, bool owner, StatusE prevStatus)
-  {
-
-    Status = prevStatus;
-    Init(ride);
-    Debug.Log(prevStatus);
-    if (Status == StatusE.ADD)
-    {
-      addRideButton.SetActive(true);
-    }
-    else if (Status == StatusE.UPDATE)
-    {
-      updateRideButton.SetActive(true);
-    }
-    else if (Status == StatusE.VIEW)
-    {
-      if (owner)
-      {
-        ImplementPassengersList(ride.Passengers);
-        editRideButton.SetActive(true);
-        removeRideButton.SetActive(true);
-      }
-      else if (!isUpcomingRides)
-      {
-        reserveSeatsButton.SetActive(true);
-      }
-      else if (isUpcomingRides)
-      {
-        cancelReservedSeats.SetActive(true); //cancel
-        ClosePersonDialog();
-      }
-    }
-  }
-
-
-  //Basic Init
-  private void Init(Ride ride)
+  public void Init(Ride ride)
   {
     Clear();
+
+    bool owner = false;
+    if (Program.Person != null)
+    {
+      owner = Program.User.Equals(ride.User);
+    }
+
     this.ride = ride;
     this.car = ride.Car;
     Person person = ride.User.Person;
@@ -189,6 +160,34 @@ public class RideDetails : Panel
     else
     {
       rideMapImage.sprite = Program.GetImage(ride.Map);
+    }
+
+
+    if (Status == StatusE.ADD)
+    {
+      addRideButton.SetActive(true);
+    }
+    else if (Status == StatusE.UPDATE)
+    {
+      updateRideButton.SetActive(true);
+    }
+    else if (Status == StatusE.VIEW)
+    {
+      if (owner)
+      {
+        ImplementPassengersList(ride.Passengers);
+        editRideButton.SetActive(true);
+        removeRideButton.SetActive(true);
+      }
+      else if (ride.Reserved)
+      {
+        cancelReservedSeats.SetActive(true); //cancel
+        ClosePersonDialog();
+      }
+      else
+      {
+        reserveSeatsButton.SetActive(true);
+      }
     }
   }
 
@@ -415,14 +414,14 @@ public class RideDetails : Panel
 
   public void AddRideResponse(Ride result, int code, string message)
   {
-        if (code.Equals((int)HttpStatusCode.OK))
-        {
-            Program.Person.UpcomingRides.Add(result);
-            FooterMenu.dFooterMenu.OpenYourRidesPanel();
-            Debug.Log("Got Response from servaa");
-            DestroyForwardBackward();
-        }
-        else Debug.Log("Add Ride Response's not OK - " + code.ToString());
+    if (code.Equals((int)HttpStatusCode.OK))
+    {
+      Program.Person.UpcomingRides.Add(result);
+      FooterMenu.dFooterMenu.OpenYourRidesPanel();
+      Debug.Log("Got Response from servaa");
+      DestroyForwardBackward();
+    }
+    else Debug.Log("Add Ride Response's not OK - " + code.ToString());
   }
 
   public void AddScheduleResponse(ScheduleRide result, int code, string message)
@@ -447,14 +446,14 @@ public class RideDetails : Panel
   }
 
   private void RemoveRideResponse(Ride result, int code, string message)
+  {
+    if (code.Equals((int)HttpStatusCode.OK))
     {
-        if (code.Equals((int)HttpStatusCode.OK))
-        {
-            FooterMenu.dFooterMenu.OpenYourRidesPanel();
-            DestroyForwardBackward();
-        }
-        else Debug.Log("Remove Ride Response's not OK - " + code.ToString());
+      FooterMenu.dFooterMenu.OpenYourRidesPanel();
+      DestroyForwardBackward();
     }
+    else Debug.Log("Remove Ride Response's not OK - " + code.ToString());
+  }
 
   private void CancelReservedSeatsResponse(Ride result, int code, string message)
   {

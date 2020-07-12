@@ -57,12 +57,8 @@ public class RideResultsPanel : Panel
 
   public void OnRidePick(Ride r)
   {
-
-    bool owner = false;
-    if (Program.User != null && Program.Driver != null)
-      owner = Program.User.Equals(r.User);
-    RideDetails rd = PanelsFactory.CreateRideDetails(false, r, owner, StatusE.VIEW);
-    openCreated(rd);
+    RideDetails rd = PanelsFactory.CreateRideDetails();
+    Open(rd, () => { rd.Init(r); });
   }
 
   public void ApplyFilter()

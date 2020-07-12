@@ -23,12 +23,13 @@ namespace Requests
     public override List<Ride> BuildResponse(JToken response) //TODO
     {
 
-      var ridesArray = (JArray) response;
+      var ridesArray = (JArray)response;
       List<Ride> rides = new List<Ride>();
-      if (ridesArray==null) return null;
+      if (ridesArray == null) return null;
 
-      foreach (JToken j in ridesArray) {
-        JObject rideJ = (JObject) j;
+      foreach (JToken j in ridesArray)
+      {
+        JObject rideJ = (JObject)j;
         rides.Add(Ride.ToObject(rideJ));
       }
 
@@ -37,7 +38,14 @@ namespace Requests
 
     public override string ToJson()
     {
-      return searchInfo.ToJson().ToString();
+      JObject searchInfoJ = searchInfo.ToJson();
+
+      if (Program.User != null)
+      {
+        searchInfoJ[nameof(Program.User.id)] = Program.User.Id;
+      }
+
+      return searchInfoJ.ToString();
     }
 
     protected override string IsValid()

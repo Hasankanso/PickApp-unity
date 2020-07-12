@@ -25,25 +25,13 @@ public class MyRideItem : Panel
     price.text = ride.Price + " " + ride.CountryInformations.Unit;
     date.text = Program.DateToString(ride.LeavingDate);
     SetPermissions(ride.SmokingAllowed, ride.AcAllowed, ride.PetsAllowed, ride.MusicAllowed, ride.KidSeat);
-    }
+  }
 
   public void OpenRideDetails()
-  {   
-        if (ride.Driver != null)
-        {
-            bool owner = Program.Driver.Equals(ride.Driver);
-            Panel panel = PanelsFactory.CreateRideDetails(true, ride, owner, StatusE.VIEW);
-
-
-            myRidesPanel.openCreated(panel);
-        }
-      //  Debug.Log("ride.Passengers 1 " + ride.Passengers);
-       /* foreach(Passenger p in ride.Passengers)
-        {
-          if (p.isReserved(p)) return;
-        }*/
-       // Debug.Log("ride.Passengers 2 " + ride.Passengers);
-    }
+  {
+      RideDetails panel = PanelsFactory.CreateRideDetails();
+      myRidesPanel.Open(panel, () => { panel.Init(ride); });
+  }
 
   private void SetPermissions(bool isSmokingAllowed, bool isACAllowed, bool isPetsAllowed, bool isMusicAllowed, bool isKidsSeat)
   {
