@@ -25,9 +25,9 @@ public class BecomeDriver : Panel {
             }
 
             driver = new Driver(regions);
-            Request<Driver> request = new BecomeDriverRequest(Program.User,driver);
-            request.Send(response);
-            Panel p = PanelsFactory.createAddCar();
+          //  Request<Driver> request = new BecomeDriverRequest(Program.User,driver);
+          //  request.Send(response);
+            Panel p = PanelsFactory.createAddCar(driver);
             openCreated(p);
         }
     }

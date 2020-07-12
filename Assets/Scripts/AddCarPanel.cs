@@ -11,10 +11,11 @@ public class AddCarPanel : Panel
   public InputFieldScript carName, brand, year;
   public Image carImage, largeCarImage, BlackCheckMark, WhiteCheckMark, GreyCheckMark, DarkGreyCheckMark, RedCheckMark, BlueCheckMark, DarkBlueCheckMark, YellowCheckMark, PinkCheckMark, PurpleCheckMark, BrownCheckMark, OrangeCheckMark, GreenCheckMark;
   public GameObject firstView, secondView, viewImageModel;
-  public Button add, update;
+  public Button add, update,becomeDriverBtn;
   public Dropdown maxSeats;
   public Dropdown maxLuggages;
   private Car car = null;
+  private Driver driver = null;
   private string color;
 
   public void submit()
@@ -26,7 +27,17 @@ public class AddCarPanel : Panel
       request.Send(response);
     }
   }
-  public void ViewChoosenImage()
+    public void becomeDriver()
+    {
+        if (vadilateSecondView())
+        {            
+            car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
+            Request<Driver> request = new BecomeDriverRequest(Program.User, driver,car);
+            // request.Send(response);
+            Debug.Log("request have been sent");
+        }
+    }
+    public void ViewChoosenImage()
   {
     viewImageModel.gameObject.SetActive(true);
   }
@@ -82,7 +93,15 @@ public class AddCarPanel : Panel
     update.enabled = false;
     add.enabled = true;
   }
-  private bool vadilateFirstView()
+    public void init(Driver driver)
+    {    
+        Clear();
+        this.driver = driver;
+        update.enabled = false;
+        add.enabled = false;
+        becomeDriverBtn.enabled = true;
+    }
+    private bool vadilateFirstView()
   {
     bool valid = true;
     if (carName.text.text.Equals(""))

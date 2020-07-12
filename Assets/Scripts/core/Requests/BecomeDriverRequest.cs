@@ -12,7 +12,9 @@ namespace Requests {
     class BecomeDriverRequest : Request<Driver> {
         private Driver driver;
         private User user;
-        public BecomeDriverRequest(User user,Driver driver) {
+        private Car car;
+        public BecomeDriverRequest(User user,Driver driver,Car car) {
+            this.car = car;
             this.user = user;
             this.driver = driver;
             HttpPath = "/DriverBusiness/BecomeDriver";

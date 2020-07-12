@@ -230,6 +230,12 @@ public class PanelsFactory : MonoBehaviour {
         addCarPanel.init();
         return addCarPanel;
     }
+    public static AddCarPanel createAddCar(Driver driver)
+    {
+        AddCarPanel addCarPanel = Instantiate(defaultPanelsFactory.addCar);
+        addCarPanel.init(driver);
+        return addCarPanel;
+    }
 
     public static LicensesPanel createLicenses() {
         LicensesPanel licenses = Instantiate(defaultPanelsFactory.licenses);
