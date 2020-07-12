@@ -4,51 +4,46 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SearchInfo {
-    Location from, to;
-    DateTime minDate, maxDate;
-    int passengersNumber;
-    int luggagesNumber;
+public class SearchInfo
+{
+  Location from, to;
+  DateTime minDate, maxDate;
+  int passengersNumber;
+  int luggagesNumber;
+  User user;
 
-    public SearchInfo(Location from, Location to, DateTime minDate, DateTime maxDate, int passengersNumber) {
-        this.from = from;
-        this.to = to;
-        this.minDate = minDate;
-        this.maxDate = maxDate;
-        this.passengersNumber = passengersNumber;
-    }
-
-    public SearchInfo(Location from, Location to, DateTime minDate, DateTime maxDate, int passengersNumber, int luggagesNumber) {
-        this.from = from;
-        this.to = to;
-        this.minDate = minDate;
-        this.maxDate = maxDate;
-        this.passengersNumber = passengersNumber;
-        this.luggagesNumber = luggagesNumber;
-    }
+  public SearchInfo(Location from, Location to, DateTime minDate, DateTime maxDate, int passengersNumber)
+  {
+    this.from = from;
+    this.to = to;
+    this.minDate = minDate;
+    this.maxDate = maxDate;
+    this.passengersNumber = passengersNumber;
+  }
 
 
-    public JObject ToJson() {
+  public JObject ToJson()
+  {
 
-        JObject searchJ = new JObject();
+    JObject searchJ = new JObject();
 
-        JObject f = from.ToJson();
-        JObject t = To.ToJson();
+    JObject f = from.ToJson();
+    JObject t = To.ToJson();
 
-        searchJ[nameof(from)] = f;
-        searchJ[nameof(to)] = t;
-        searchJ[nameof(minDate)] = minDate;
-        searchJ[nameof(maxDate)] = MaxDate;
-        searchJ[nameof(passengersNumber)] = PassengersNumber;
+    searchJ[nameof(from)] = f;
+    searchJ[nameof(to)] = t;
+    searchJ[nameof(minDate)] = minDate;
+    searchJ[nameof(maxDate)] = MaxDate;
+    searchJ[nameof(passengersNumber)] = PassengersNumber;
 
-        return searchJ;
-    }
+    return searchJ;
+  }
 
-    public Location From { get { return from; } }
-    public Location To { get { return to; } }
-    public DateTime MinDate { get { return minDate; } }
-    public DateTime MaxDate { get { return maxDate; } }
-    public int PassengersNumber { get { return passengersNumber; } }
-    public int LuggagesNumber { get => luggagesNumber; set => luggagesNumber = value; }
+  public Location From { get { return from; } }
+  public Location To { get { return to; } }
+  public DateTime MinDate { get { return minDate; } }
+  public DateTime MaxDate { get { return maxDate; } }
+  public int PassengersNumber { get { return passengersNumber; } }
+  public int LuggagesNumber { get => luggagesNumber; set => luggagesNumber = value; }
 
 }

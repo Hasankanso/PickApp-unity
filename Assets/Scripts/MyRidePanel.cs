@@ -8,31 +8,30 @@ using UnityEngine;
 public class MyRidePanel : Panel
 {
   public ListView listMyRidesView;
-
+  public static readonly string PANELNAME = "MyRide";
   public void Init()
   {
-        Request<List<Ride>> request = new GetMyUpcomingRides(Program.User);
-        request.Send(GetUpcomingRides);
+    Request<List<Ride>> request = new GetMyUpcomingRides(Program.User);
+    request.Send(GetUpcomingRides);
     Status = StatusE.VIEW;
   }
 
-    private void GetUpcomingRides(List<Ride> arg1, int arg2, string arg3)
-    {
-        Program.Person.UpcomingRides = arg1;
-        ImplementYourRidesList(Program.Person.UpcomingRides);
+  private void GetUpcomingRides(List<Ride> arg1, int arg2, string arg3)
+  {
+    Program.Person.UpcomingRides = arg1;
+    ImplementYourRidesList(Program.Person.UpcomingRides);
 
-    }
+  }
 
-    public void ImplementYourRidesList(List<Ride> rides)
+  public void ImplementYourRidesList(List<Ride> rides)
+  {
+    listMyRidesView.Clear();
+    if (rides == null) return;
+    foreach (Ride r in rides)
     {
-        if ((rides != null))
-        {     
-        listMyRidesView.Clear();
-      foreach (Ride o in rides)
-      {
-        var item = ItemsFactory.CreateMyRideItem(listMyRidesView.scrollContainer, o, Program.Person, this);
-        listMyRidesView.Add(item.gameObject);
-      }
+      r.Reserved = true;
+      var item = ItemsFactory.CreateMyRideItem(listMyRidesView.scrollContainer, r, Program.Person, this);
+      listMyRidesView.Add(item.gameObject);
     }
   }
   internal override void Clear()

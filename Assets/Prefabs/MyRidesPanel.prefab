@@ -240,7 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  panelName: 
+  panelName: MyRides
+  permanent: 1
   listMyRidesView: {fileID: 6824882263755901378}
 --- !u!1001 &7699955143204951305
 PrefabInstance:
