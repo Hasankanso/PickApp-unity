@@ -69,6 +69,7 @@ public class RideDetails : Panel
   {
     removeRideDialog.gameObject.SetActive(false);
   }
+
   public void ClosePersonDialog()
   {
     personsDialog.gameObject.SetActive(false);

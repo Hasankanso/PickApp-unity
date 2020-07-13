@@ -33,6 +33,8 @@ public class AddRidePanel : Panel
   Texture2D map;
   Car car;
 
+  public static readonly string PANELNAME = "ADDRIDEPANEL";
+
   private Location fromL, toL;
 
   //FirstView <--> secondView <--> MapPicker <--> CarPicker <--> RideDetails

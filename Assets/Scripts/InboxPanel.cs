@@ -13,7 +13,10 @@ public class InboxPanel : Panel {
     public Text title;
     public Person person;
     private List<InboxItem> inboxItems = new List<InboxItem>();
-    internal override void Clear() {
+
+  public static readonly string PANELNAME = "INBOXPANEL";
+
+  internal override void Clear() {
         backImage.gameObject.SetActive(false);
         listView.Clear();
         title.transform.position = new Vector3(56f, title.transform.position.y, title.transform.position.z);

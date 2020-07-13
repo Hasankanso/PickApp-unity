@@ -221,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   mapResolutionX: 640
   mapResolutionY: 640
   map: {fileID: 2211394792653505255}
@@ -776,7 +777,7 @@ PrefabInstance:
     - target: {fileID: 515780953745320157, guid: b23ccb671541bee49b876be3603be5ca,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: back
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 515780953745320157, guid: b23ccb671541bee49b876be3603be5ca,
         type: 3}
