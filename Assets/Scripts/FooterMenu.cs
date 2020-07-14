@@ -117,16 +117,14 @@ public class FooterMenu : MonoBehaviour
   {
     ResetButtons();
     Open(searchPanel);
-    searchButton.image.sprite = searchButton.spriteState.selectedSprite;
+    currPanel = addRidePanel;
   }
 
   public void OpenAddRidePanel()
   {
     ResetButtons();
-    currPanel.openExisted(addRidePanel);
-    addRidePanel.Init();
+    Open(addRidePanel);
     currPanel = addRidePanel;
-    addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
   }
 
   public void OpenAddRidePanel(Panel srcPanel, Ride ride)
@@ -173,6 +171,7 @@ public class FooterMenu : MonoBehaviour
     {
       Panel loginPanel = PanelsFactory.createLogin(true);
       currPanel.Open(loginPanel, null);
+      currPanel = loginPanel;
     }
     else
     {
@@ -204,6 +203,7 @@ public class FooterMenu : MonoBehaviour
     {
       Panel loginPanel = PanelsFactory.createLogin(true);
       currPanel.Open(loginPanel, null);
+      currPanel = loginPanel;
     }
     else
     {

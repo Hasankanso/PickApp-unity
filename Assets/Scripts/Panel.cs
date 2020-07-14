@@ -150,10 +150,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   public void Open(Panel newPanel, Action Init) // use this only if you don't have Init(...) based on Status in your new panel
   {
     Next = newPanel; // inside of this there's underlying code (check Next Property's code)
-    if (Init != null)
-    {
-      Init();
-    }
+    Init?.Invoke();
     OpenNext();
   }
 
