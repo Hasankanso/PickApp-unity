@@ -91,6 +91,7 @@ public class PanelsFactory : MonoBehaviour {
         return becomeDriver;
     }
     public static CarDetails CreateCarDetails(Car car) {
+        Debug.Log(car.Name);
         CarDetails carDetails = Instantiate(defaultPanelsFactory.carDetails);
         carDetails.Init(car);
         return carDetails;

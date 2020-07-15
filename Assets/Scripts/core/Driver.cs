@@ -95,7 +95,7 @@ public class Driver
     else
       return new Driver(did, cars);
   }
-  public List<Car> Cars { get => cars; }
+  public List<Car> Cars { get => cars; set => cars = value; }
   public List<string> Regions { get => regions; set => regions = value; }
   public string Did { get => id; set => id = value; }
   public DateTime Updated { get => updated; set => updated = value; }

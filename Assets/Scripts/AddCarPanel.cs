@@ -32,11 +32,32 @@ public class AddCarPanel : Panel
         if (vadilateSecondView())
         {            
             car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
-            Request<Driver> request = new BecomeDriverRequest(Program.User, driver,car);
-            // request.Send(response);
+            driver.Cars = new List<Car>();
+            driver.Cars.Add(car);
+            Request<Driver> request = new BecomeDriverRequest(Program.User, driver);
+            request.Send(becomeDriverResponse);
             Debug.Log("request have been sent");
         }
     }
+
+    private void becomeDriverResponse(Driver result, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+            if (code == 302) {
+                Program.User = null;
+                Cache.SetToken("");
+                Program.IsLoggedIn = false;
+                OpenDialog("Please login", false);
+                Panel login = PanelsFactory.createLogin(false);
+                openCreated(login);
+            }
+          else  OpenDialog(message,false);
+        } else {
+            Program.User.Driver = result;
+            FooterMenu.dFooterMenu.OpenProfilePanel();
+            DestroyForwardBackward();
+        }
+    }
+
     public void ViewChoosenImage()
   {
     viewImageModel.gameObject.SetActive(true);
@@ -72,7 +93,8 @@ public class AddCarPanel : Panel
       DestroyForwardBackward();
     }
   }
-  public void init(Car car)
+
+    public void init(Car car)
   {
     Clear();
     this.car = car;

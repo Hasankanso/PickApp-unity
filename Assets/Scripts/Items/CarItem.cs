@@ -3,19 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class CarItem : Panel {
+public class CarItem : Item {
     private Panel profilePanel;
     public Text carName, brand, color, year, maxSeats, maxLuggages;
     public Image carImage;
     public Car car = null;
     public Action<Car, CarItem> OnItemClicked;
-    public Image background;
-    public Image maskImage;
     private bool isProfile = false;
 
     public void init(Car car, Panel profilePanel) {
         Clear();
         this.car = car;
+        Debug.Log(car.Name);
         this.carName.text = car.Name;
         this.brand.text = car.Brand;
         this.year.text = car.Year.ToString();
@@ -51,11 +50,11 @@ public class CarItem : Panel {
         return img;
     }
 
-    public void Select() {
+    internal override void Select() {
         background.color = Program.SelectedItemColor();
         maskImage.color = Program.SelectedItemColor();
     }
-    public void UnSelect() {
+    internal override void UnSelect() {
         background.color = Program.UnSelectedItemColor();
         maskImage.color = Program.UnSelectedItemColor();
     }
@@ -99,6 +98,7 @@ public class CarItem : Panel {
     }
     public void OnClick() {
         if (isProfile) {
+            Debug.Log(car.Name);
             Panel panel = PanelsFactory.CreateCarDetails(car);
             profilePanel.openCreated(panel);
         } else {

@@ -89,7 +89,7 @@ public class BecomeDriver : Panel {
     public void Init() {
         Clear();
         this.person = Program.Person;
-       // AddItemToList(driver.Regions);
+        AddItemToList();
         title.text = "Regions";
         editRegions.gameObject.SetActive(false);
         becomeDriver.gameObject.SetActive(true);

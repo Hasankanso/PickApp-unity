@@ -13,6 +13,7 @@ public class CarDetails : Panel {
 
     public void Init(Car car) {
         this.car = car;
+        Debug.Log(car.Name);
         carName.text = car.Name;
         carBrand.text= car.Brand;
         carYear.text = car.Year.ToString();

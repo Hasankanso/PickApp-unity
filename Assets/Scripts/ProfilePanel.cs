@@ -75,6 +75,7 @@ public class ProfilePanel : Panel
       listCarView.Clear();
       foreach (Car o in cars)
       {
+                Debug.Log(o.Name);
         var item = ItemsFactory.CreateCarItem(listCarView.scrollContainer, o, this);
         listCarView.Add(item.gameObject);
         carItems.Add(item);

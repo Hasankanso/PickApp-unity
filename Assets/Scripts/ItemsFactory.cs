@@ -65,7 +65,8 @@ public class ItemsFactory : MonoBehaviour
   {
     CarItem caritem = Instantiate(defaultItemsFactory.carItem);
     caritem.transform.SetParent(parent.transform, false);
-    caritem.init(car, profilePanel);
+        Debug.Log(car.Name);
+        caritem.init(car, profilePanel);
     return caritem;
   }
   public static ScheduleItem CreateScheduleItem(GameObject parent, ScheduleRide scheduleRide, Panel profilePanel)

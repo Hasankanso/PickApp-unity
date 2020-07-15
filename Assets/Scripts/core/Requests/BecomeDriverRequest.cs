@@ -12,9 +12,9 @@ namespace Requests {
     class BecomeDriverRequest : Request<Driver> {
         private Driver driver;
         private User user;
-        private Car car;
-        public BecomeDriverRequest(User user,Driver driver,Car car) {
-            this.car = car;
+       // private Car car;
+        public BecomeDriverRequest(User user,Driver driver) {
+          //  this.car = car;
             this.user = user;
             this.driver = driver;
             HttpPath = "/DriverBusiness/BecomeDriver";
@@ -28,12 +28,13 @@ namespace Requests {
         public override string ToJson() {
             JObject driverJ = new JObject();
             JArray regionsArray = new JArray();
+            driverJ["car"] = driver.Cars[0].ToJson();
             foreach (string r in driver.Regions)
             {
                 regionsArray.Add(r);
             }
             driverJ[nameof(driver.regions)] = regionsArray;
-            driverJ[nameof(user.id)] = user.id;
+            driverJ[nameof(user)] = user.id;
             return driverJ.ToString();
         }
 
