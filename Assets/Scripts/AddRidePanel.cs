@@ -38,7 +38,8 @@ public class AddRidePanel : Panel
   private Location fromL, toL;
 
   //FirstView <--> secondView <--> MapPicker <--> CarPicker <--> RideDetails
-  public void Init()
+
+  public override void Init()
   {
     Clear();
     Status = StatusE.ADD;

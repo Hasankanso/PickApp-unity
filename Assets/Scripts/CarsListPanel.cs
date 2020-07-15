@@ -34,7 +34,7 @@ public class CarsListPanel : Panel {
         Status = Previous.Status;
     }
 
-    public void OnItemClicked(Car c, CarItem item) {
+    public void OnItemClicked(Car c, Item item) {
         if (carsList.selectedItem != null) {
             carsList.selectedItem.GetComponent<CarItem>().UnSelect();
         }

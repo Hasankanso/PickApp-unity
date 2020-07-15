@@ -14,14 +14,14 @@ public class ProfilePanel : Panel
   public Text fullName, ratings;
   public Scrollbar scroll;
   public ListView listCarView;
+  private List<CarItem> carItems = new List<CarItem>(5);
   public GameObject mainContent, carContainer, scheduleContainer, scrollView, scheduleLabel, becomeDriverLabel, regionsLabel;
   public ListView listSchduleView;
   public Image profilePicture;
-  private List<CarItem> carItems = new List<CarItem>();
 
   public static readonly string PANELNAME = "PROFILEPANEL";
 
-  public void Init()
+  public override void Init()
   {
     Clear();
 
@@ -43,7 +43,9 @@ public class ProfilePanel : Panel
       DownloadAndAddCarsImages();
     }
     else
+    {
       becomeDriverLabel.SetActive(true);
+    }
   }
 
   private async void DownloadAndAddCarsImages()
@@ -51,7 +53,8 @@ public class ProfilePanel : Panel
     for (int i = 0; i < carItems.Count; i++)
       if (carItems[i].car.Picture == null)
       {
-        Texture2D downloadedImg = carItems[i].SetPicture(await Request<object>.DownloadImage(carItems[i].car.CarPictureUrl));
+        Texture2D downloadedImg = await Request<object>.DownloadImage(carItems[i].car.CarPictureUrl);
+        carItems[i].SetPicture(downloadedImg);
         Program.Driver.Cars[i].Picture = downloadedImg;
       }
   }
@@ -73,15 +76,23 @@ public class ProfilePanel : Panel
       mainContent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1345.8f);
       carContainer.SetActive(true);
       listCarView.Clear();
-      foreach (Car o in cars)
+      carItems.Clear();
+
+      foreach (Car c in cars)
       {
-                Debug.Log(o.Name);
-        var item = ItemsFactory.CreateCarItem(listCarView.scrollContainer, o, this);
-        listCarView.Add(item.gameObject);
+        CarItem item = ItemsFactory.CreateCarItem(listCarView.scrollContainer, c, OpenCarDetails);
         carItems.Add(item);
+        listCarView.Add(item);
       }
     }
   }
+
+  private void OpenCarDetails(Car car, Item arg2)
+  {
+    CarDetails carDetails = PanelsFactory.CreateCarDetails();
+    Open(carDetails, () => { carDetails.Init(car); });
+  }
+
   public void AddScheduleItemsInList(List<ScheduleRide> schedules)
   {
     Person person = Program.Person;
@@ -142,6 +153,7 @@ public class ProfilePanel : Panel
       OpenDialog("Please add a car first.", false);
     }
   }
+
   public void AddCar()
   {
     Driver driver = Program.Driver;
@@ -152,7 +164,6 @@ public class ProfilePanel : Panel
     }
     else
       OpenDialog("You have added the maximum number of cars", false);
-
   }
   public void OpenSettings()
   {

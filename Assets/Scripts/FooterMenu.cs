@@ -75,7 +75,7 @@ public class FooterMenu : MonoBehaviour
 
   public static void Open(string panelName, string dialogMessage)
   {
-    Panel p = dFooterMenu.panels[panelName];
+    Panel  p = dFooterMenu.panels [panelName];
     Button b = dFooterMenu.buttons[panelName];
 
     if (p != null)
@@ -94,6 +94,7 @@ public class FooterMenu : MonoBehaviour
   {
     currPanel.gameObject.SetActive(false);
     newPanel.gameObject.SetActive(true);
+    newPanel.Init();
     newPanel.transform.SetAsLastSibling();
     currPanel = newPanel;
 
@@ -113,18 +114,17 @@ public class FooterMenu : MonoBehaviour
       Program.IsLoggedIn = true;
     }
   }
+
   public void OpenSearchPanel()
   {
     ResetButtons();
     Open(searchPanel);
-    currPanel = addRidePanel;
   }
 
   public void OpenAddRidePanel()
   {
     ResetButtons();
     Open(addRidePanel);
-    currPanel = addRidePanel;
   }
 
   public void OpenAddRidePanel(Panel srcPanel, Ride ride)

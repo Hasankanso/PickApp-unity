@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -14,10 +15,17 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   public enum StatusE { ADD, UPDATE, VIEW };
 
   private StatusE status = StatusE.VIEW;
+
+  public virtual void Init()
+  {
+
+  }
+
   private void Initialize(Panel nextPanel) // anything you want to set before the panel opens, will be here
   {
     nextPanel.Status = Status;
   }
+
   public int Id { get => id; }
 
   protected Panel Previous { get => previous; }
@@ -147,10 +155,24 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   }
 
 
-  public void Open(Panel newPanel, Action Init) // use this only if you don't have Init(...) based on Status in your new panel
+  public void Open(Panel nextPanel)
+  {
+    Open(nextPanel, null);
+  }
+
+  public void Open(Panel newPanel, Action Init)
   {
     Next = newPanel; // inside of this there's underlying code (check Next Property's code)
-    Init?.Invoke();
+
+    if (Init != null)
+    {
+      Init.Invoke();
+    }
+    else
+    {
+      this.Init();
+    }
+
     OpenNext();
   }
 

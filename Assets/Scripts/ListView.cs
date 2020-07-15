@@ -9,13 +9,12 @@ public class ListView : MonoBehaviour {
     public GameObject selectedItem;
 
     public List<GameObject> Items { get => items; }
-    public List<Item> Itemss { get => itemss; }
 
     public void Clear() {
         foreach (Transform child in scrollContainer.transform) {
             Destroy(child.gameObject);
         }
-        items.Clear();
+        itemss.Clear();
     }
 
     public bool IsEmpty() {

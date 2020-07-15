@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollContainer: {fileID: 3813887941948597285}
+  selectedItem: {fileID: 0}
 --- !u!1 &3813887941948597285
 GameObject:
   m_ObjectHideFlags: 0

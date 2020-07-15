@@ -118,7 +118,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7507899174100872642}
+      - m_Target: {fileID: 0}
         m_MethodName: DeleteCar
         m_Mode: 1
         m_Arguments:
@@ -1292,8 +1292,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7507899174100872642}
-          m_MethodName: back
+        - m_Target: {fileID: 8856665933780306855}
+          m_MethodName: Back
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1314,7 +1314,7 @@ GameObject:
   - component: {fileID: 7952815072833513745}
   - component: {fileID: 7952815072833513751}
   - component: {fileID: 7952815072833513750}
-  - component: {fileID: 7507899174100872642}
+  - component: {fileID: 8856665933780306855}
   m_Layer: 5
   m_Name: CarDetails
   m_TagString: Untagged
@@ -1393,7 +1393,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7507899174100872642
+--- !u!114 &8856665933780306855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1407,6 +1407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   carName: {fileID: 8065080330637927439}
   carBrand: {fileID: 3943759834122856089}
   carYear: {fileID: 1061893707562211535}
@@ -1609,7 +1610,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7507899174100872642}
+      - m_Target: {fileID: 0}
         m_MethodName: UpdateCar
         m_Mode: 1
         m_Arguments:
@@ -1789,7 +1790,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7507899174100872642}
+        - m_Target: {fileID: 0}
           m_MethodName: ViewModel
           m_Mode: 1
           m_Arguments:

@@ -90,10 +90,8 @@ public class PanelsFactory : MonoBehaviour {
         becomeDriver.Init();
         return becomeDriver;
     }
-    public static CarDetails CreateCarDetails(Car car) {
-        Debug.Log(car.Name);
+    public static CarDetails CreateCarDetails() {
         CarDetails carDetails = Instantiate(defaultPanelsFactory.carDetails);
-        carDetails.Init(car);
         return carDetails;
     }
     public static NotificationsPanel createNotificationPanel() {

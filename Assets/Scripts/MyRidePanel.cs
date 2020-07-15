@@ -11,11 +11,7 @@ public class MyRidePanel : Panel
   public static readonly string PANELNAME = "MyRides";
 
 
-  void OnEnable(){
-    Init();
-  }
-
-  public void Init()
+  public override void Init()
   {
     Request<List<Ride>> request = new GetMyUpcomingRides(Program.User);
     request.Send(GetUpcomingRides);

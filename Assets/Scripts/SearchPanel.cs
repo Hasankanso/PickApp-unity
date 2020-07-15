@@ -26,7 +26,7 @@ public class SearchPanel : Panel
     //this should be in init
     Clear();
   }
-  public void Init()
+  public override void Init()
   {
     Status = StatusE.VIEW;
     var minDT = Program.StringToDate(minDate.text);

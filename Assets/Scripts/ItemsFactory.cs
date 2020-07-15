@@ -32,7 +32,7 @@ public class ItemsFactory : MonoBehaviour
     return mItem;
   }
 
-  public static CarItem CreateCarItem(GameObject parent, Car car, Action<Car, CarItem> OnClickFunction)
+  public static CarItem CreateCarItem(GameObject parent, Car car, Action<Car, Item> OnClickFunction)
   {
     CarItem caritem = Instantiate(defaultItemsFactory.carItem);
     caritem.transform.SetParent(parent.transform, false);
@@ -61,14 +61,7 @@ public class ItemsFactory : MonoBehaviour
     ratingItem.init(o.Date, o.Grade, o.Comment, o.Reviewer.FirstName + " " + o.Reviewer.LastName, o.Reviewer.ProfilePicture);
     return ratingItem;
   }
-  public static CarItem CreateCarItem(GameObject parent, Car car, Panel profilePanel)
-  {
-    CarItem caritem = Instantiate(defaultItemsFactory.carItem);
-    caritem.transform.SetParent(parent.transform, false);
-        Debug.Log(car.Name);
-        caritem.init(car, profilePanel);
-    return caritem;
-  }
+
   public static ScheduleItem CreateScheduleItem(GameObject parent, ScheduleRide scheduleRide, Panel profilePanel)
   {
     ScheduleItem scheduleItem = Instantiate(defaultItemsFactory.scheduleItem);

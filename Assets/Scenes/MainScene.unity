@@ -316,7 +316,7 @@ MonoBehaviour:
     type: 3}
   dialogBox: {fileID: 7089188048141148719, guid: ce4c371e03cbea040b332a37221f5d93,
     type: 3}
-  carDetails: {fileID: 7507899174100872642, guid: 3fd85886c355bcd48a7880c46c491316,
+  carDetails: {fileID: 8856665933780306855, guid: 3fd85886c355bcd48a7880c46c491316,
     type: 3}
   directionsFinderPanel: {fileID: 1723063400304913265, guid: 87d5635c1895f654ab70c108b48b8b39,
     type: 3}

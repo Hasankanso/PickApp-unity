@@ -210,9 +210,9 @@ public class RideDetails : Panel
       listView.Clear();
       contentScrollView.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 2399.4f);
       passengersContainer.SetActive(true);
-      foreach (Passenger o in passengers)
+      foreach (Passenger p in passengers)
       {
-        var obj = ItemsFactory.CreatPassengerItem(o, this);
+        var obj = ItemsFactory.CreatPassengerItem(p, this);
         listView.Add(obj.gameObject);
       }
     }

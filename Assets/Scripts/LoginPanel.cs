@@ -43,13 +43,12 @@ public class LoginPanel : Panel
       if (!isFromFooter)
       {
         Back();
+        OpenDialog("Welcome back to PickApp", true);
       }
       else
       {
-        BackClose();
-        FooterMenu.dFooterMenu.OpenProfilePanel();
+        MissionCompleted(ProfilePanel.PANELNAME, "Welcome back to PickApp");
       }
-      OpenDialog("Welcome back to PickApp", true);
     }
   }
 
