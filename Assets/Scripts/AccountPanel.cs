@@ -93,7 +93,7 @@ public class AccountPanel : Panel
     if (country.Equals("Lebanon"))
       countryDP.value = 0;
   }
-  public void Init()
+  public override void Init()
   {
     Clear();
     Person person = Program.Person;

@@ -101,12 +101,15 @@ public class AddRidePanel : Panel {
         }
     }
 
+
+
+
     public void OpenMyCarsPicker() {
 
         if (ValidateSecondView()) {
             if (!Program.IsLoggedIn) {
-                Panel login = PanelsFactory.createLogin(false);
-                openCreated(login);
+                LoginPanel login = PanelsFactory.CreateLogin();
+                Open(login, () => { login.Init(false); });
                 return; //end this function
             }
 
@@ -130,7 +133,6 @@ public class AddRidePanel : Panel {
                 carPickerPanel = PanelsFactory.CreateCarsListPanel();
             }
             Open(carPickerPanel, () => { carPickerPanel.Init(OnCarPicked, car); });
-
         }
     }
 
@@ -139,7 +141,6 @@ public class AddRidePanel : Panel {
             directionsPanel = PanelsFactory.CreateDirectionFinderPanel();
         }
         carPickerPanel.Open(directionsPanel, () => { directionsPanel.Init(map, from.text.text, to.text.text, true, OnMapPicked); });
-
     }
 
     private void OnMapPicked(Texture2D map) {
@@ -168,8 +169,8 @@ public class AddRidePanel : Panel {
     }
 
     public void OpenNotLoginPanel() {
-        Panel p = PanelsFactory.createLogin(false);
-        openCreated(p);
+        LoginPanel p = PanelsFactory.CreateLogin();
+        Open(p, () => { p.Init(false); });
     }
 
     public void OpenDateTimePicker() {
@@ -313,4 +314,5 @@ public class AddRidePanel : Panel {
         numberOfSeats.enabled = true;
         price.GetComponent<InputField>().enabled = true;
     }
+
 }

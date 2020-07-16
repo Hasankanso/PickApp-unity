@@ -169,8 +169,8 @@ public class FooterMenu : MonoBehaviour
 
     if (!Program.IsLoggedIn)
     {
-      Panel loginPanel = PanelsFactory.createLogin(true);
-      currPanel.Open(loginPanel, null);
+      LoginPanel loginPanel = PanelsFactory.CreateLogin();
+      currPanel.Open(loginPanel, () => { loginPanel.Init(true);} );
       currPanel = loginPanel;
     }
     else
@@ -201,8 +201,8 @@ public class FooterMenu : MonoBehaviour
 
     if (!Program.IsLoggedIn)
     {
-      Panel loginPanel = PanelsFactory.createLogin(true);
-      currPanel.Open(loginPanel, null);
+      LoginPanel loginPanel = PanelsFactory.CreateLogin();
+      currPanel.Open(loginPanel, () => { loginPanel.Init(true); });
       currPanel = loginPanel;
     }
     else
