@@ -17,7 +17,7 @@ public class SchedulePanel : Panel
   public Sprite errorImage;
 
 
-  public void Init()
+  public override void Init()
   {
     Clear();
   }

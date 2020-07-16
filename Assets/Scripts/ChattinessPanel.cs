@@ -12,10 +12,11 @@ public class ChattinessPanel : Panel
   public Dropdown chatiness;
 
 
-  private void Start()
+  public override void Init()
   {
-    GetChoosenChattiness();
+    SetChosenChattiness();
   }
+
   public void submit()
   {
     if (vadilate())
@@ -48,7 +49,7 @@ public class ChattinessPanel : Panel
     }
   }
 
-  private void GetChoosenChattiness()
+  private void SetChosenChattiness()
   {
     Person person = Program.Person;
     if (person.Chattiness.Equals("I'm a quiet person"))

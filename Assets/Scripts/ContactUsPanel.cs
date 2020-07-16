@@ -25,8 +25,8 @@ public class ContactUsPanel : Panel {
         } else {
             Panel p = PanelsFactory.CreateDialogBox("Message sent successfully", true);
             OpenDialog(p);
-            Panel panel = PanelsFactory.createSettings();
-            openCreated(panel);
+            Panel panel = PanelsFactory.CreateSettings();
+            Open(panel);
         }
     }
     public void Init(Person user) {

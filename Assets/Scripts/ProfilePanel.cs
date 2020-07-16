@@ -112,27 +112,27 @@ public class ProfilePanel : Panel
   public void EditAccount()
   {
     Panel panel = PanelsFactory.CreateAccountPanel();
-    openCreated(panel);
+    Open(panel);
   }
   public void BecomeDriver()
   {
     Panel panel = PanelsFactory.CreateBecomeDriver();
-    openCreated(panel);
+    Open(panel);
   }
   public void EditRegions()
   {
     Panel panel = PanelsFactory.CreateBecomeDriver();
-    openCreated(panel);
+    Open(panel);
   }
   public void EditBio()
   {
     Panel panel = PanelsFactory.CreateBioPanel();
-    openCreated(panel);
+    Open(panel);
   }
   public void EditChattiness()
   {
     Panel panel = PanelsFactory.CreateChattinessPanel();
-    openCreated(panel);
+    Open(panel);
   }
   public void AddSchedule()
   {
@@ -142,8 +142,7 @@ public class ProfilePanel : Panel
       if (driver.Schedules.Count < Program.MaxSchedulesPerUser)
       {
         SchedulePanel panel = PanelsFactory.CreateAddSchedule();
-        panel.Init();
-        openCreated(panel);
+        Open(panel);
       }
       else
         OpenDialog("You have added the maximum number of schedule rides", false);
@@ -159,26 +158,26 @@ public class ProfilePanel : Panel
     Driver driver = Program.Driver;
     if (driver.Cars.Count < 4)
     {
-      Panel panel = PanelsFactory.createAddCar();
-      openCreated(panel);
+      Panel panel = PanelsFactory.CreateAddCar();
+      Open(panel);
     }
     else
       OpenDialog("You have added the maximum number of cars", false);
   }
   public void OpenSettings()
   {
-    Panel panel = PanelsFactory.createSettings();
-    openCreated(panel);
+    Panel panel = PanelsFactory.CreateSettings();
+    Open(panel);
   }
   public void OpenUserRatings()
   {
-    Panel panel = PanelsFactory.CreateUserRatings(Program.User);
-    openCreated(panel);
+    Panel panel = PanelsFactory.CreateUserRatings();
+    Open(panel);
   }
   public void OpenMyRidesHistory()
   {
     Panel panel = PanelsFactory.CreateMyRidesHistory();
-    openCreated(panel);
+    Open(panel);
   }
   internal override void Clear()
   {

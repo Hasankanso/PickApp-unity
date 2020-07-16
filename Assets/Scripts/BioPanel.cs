@@ -11,7 +11,7 @@ public class BioPanel : Panel
 {
   public InputFieldScript bio;
 
-  public void Init()
+  public override void Init()
   {
     Clear();
     bio.SetText(Program.Person.Bio);

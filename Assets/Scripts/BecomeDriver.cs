@@ -28,8 +28,8 @@ public class BecomeDriver : Panel {
             driver = new Driver(regions);
           //  Request<Driver> request = new BecomeDriverRequest(Program.User,driver);
           //  request.Send(response);
-            Panel p = PanelsFactory.createAddCar(driver);
-            openCreated(p);
+            AddCarPanel p = PanelsFactory.CreateAddCar();
+            Open(p, () => { p.Init(driver);});
         }
     }
     private void response(Driver result, int code, string message) {
@@ -39,8 +39,8 @@ public class BecomeDriver : Panel {
         } else {
             Panel p = PanelsFactory.CreateDialogBox("You become a driver", true);
             OpenDialog(p);
-            Panel panel = PanelsFactory.createAddCar();
-            openCreated(panel);
+            Panel panel = PanelsFactory.CreateAddCar();
+            Open(panel);
         }
     }
     public void EditRegions() {
@@ -59,8 +59,8 @@ public class BecomeDriver : Panel {
         } else {
             Panel p = PanelsFactory.CreateDialogBox("Your regions ha been edited", true);
             OpenDialog(p);
-            Panel panel = PanelsFactory.createAddCar();
-            openCreated(panel);
+            Panel panel = PanelsFactory.CreateAddCar();
+            Open(panel);
         }
     }
     public void AddItemToList() {
@@ -87,7 +87,7 @@ public class BecomeDriver : Panel {
         this.person = person;
         AddItemToList();
     }
-    public void Init() {
+    public override void Init() {
         Clear();
         this.person = Program.Person;
         AddItemToList();

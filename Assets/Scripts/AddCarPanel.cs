@@ -11,7 +11,7 @@ public class AddCarPanel : Panel
   public InputFieldScript carName, brand, year;
   public Image carImage, largeCarImage, BlackCheckMark, WhiteCheckMark, GreyCheckMark, DarkGreyCheckMark, RedCheckMark, BlueCheckMark, DarkBlueCheckMark, YellowCheckMark, PinkCheckMark, PurpleCheckMark, BrownCheckMark, OrangeCheckMark, GreenCheckMark;
   public GameObject firstView, secondView, viewImageModel;
-  public Button add, update,becomeDriverBtn;
+  public Button add, update, becomeDriverBtn;
   public Dropdown maxSeats;
   public Dropdown maxLuggages;
   private Car car = null;
@@ -27,41 +27,48 @@ public class AddCarPanel : Panel
       request.Send(response);
     }
   }
-    public void becomeDriver()
+  public void becomeDriver()
+  {
+    if (vadilateSecondView())
     {
-        if (vadilateSecondView())
-        {            
-            car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
-            driver.Cars = new List<Car>();
-            driver.Cars.Add(car);
-            Request<Driver> request = new BecomeDriverRequest(Program.User, driver);
-            request.Send(becomeDriverResponse);
-            Debug.Log("request have been sent");
-        }
+      car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
+      driver.Cars = new List<Car>();
+      driver.Cars.Add(car);
+      Request<Driver> request = new BecomeDriverRequest(Program.User, driver);
+      request.Send(becomeDriverResponse);
+      Debug.Log("request have been sent");
     }
+  }
 
-    private void becomeDriverResponse(Driver result, int code, string message) {
-        if (!code.Equals((int)HttpStatusCode.OK)) {
-            if (code == 302) {
-                Program.User = null;
-                Cache.SetToken("");
-                Program.IsLoggedIn = false;
-                OpenDialog("Please login", false);
-                Panel login = PanelsFactory.createLogin(false);
-                openCreated(login);
-            }
-          else  OpenDialog(message,false);
-        } else {
-            Program.User.Driver = result;
-            FooterMenu.dFooterMenu.OpenProfilePanel();
-            DestroyForwardBackward();
-        }
+  private void becomeDriverResponse(Driver result, int code, string message)
+  {
+    if (!code.Equals((int)HttpStatusCode.OK))
+    {
+      if (code == 302)
+      {
+        Program.User = null;
+        Cache.SetToken("");
+        Program.IsLoggedIn = false;
+        OpenDialog("Please login", false);
+        LoginPanel login = PanelsFactory.CreateLogin();
+        Open(login, () => { login.Init(false); } );
+
+      }
+      else OpenDialog(message, false);
     }
+    else
+    {
+      Program.User.Driver = result;
+      FooterMenu.dFooterMenu.OpenProfilePanel();
+      DestroyForwardBackward();
+    }
+  }
 
-    public void ViewChoosenImage()
+  public void ViewChoosenImage()
   {
     viewImageModel.gameObject.SetActive(true);
   }
+
   public void CloseViewChoosenImage()
   {
     viewImageModel.gameObject.SetActive(false);
@@ -94,7 +101,7 @@ public class AddCarPanel : Panel
     }
   }
 
-    public void init(Car car)
+  public void Init(Car car)
   {
     Clear();
     this.car = car;
@@ -109,21 +116,21 @@ public class AddCarPanel : Panel
     carImage.sprite = Program.GetImage(car.Picture);
     largeCarImage.sprite = Program.GetImage(car.Picture);
   }
-  public void init()
+  public override void Init()
   {
     Clear();
     update.enabled = false;
     add.enabled = true;
   }
-    public void init(Driver driver)
-    {    
-        Clear();
-        this.driver = driver;
-        update.enabled = false;
-        add.enabled = false;
-        becomeDriverBtn.enabled = true;
-    }
-    private bool vadilateFirstView()
+  public void Init(Driver driver)
+  {
+    Clear();
+    this.driver = driver;
+    update.enabled = false;
+    add.enabled = false;
+    becomeDriverBtn.enabled = true;
+  }
+  private bool vadilateFirstView()
   {
     bool valid = true;
     if (carName.text.text.Equals(""))

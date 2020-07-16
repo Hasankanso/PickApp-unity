@@ -115,8 +115,8 @@ public class AddRidePanel : Panel
     {
       if (!Program.IsLoggedIn)
       {
-        Panel login = PanelsFactory.createLogin(false);
-        openCreated(login);
+        LoginPanel login = PanelsFactory.CreateLogin();
+        Open(login, () => { login.Init(false);});
         return; //end this function
       }
 
@@ -196,8 +196,8 @@ public class AddRidePanel : Panel
 
   public void OpenNotLoginPanel()
   {
-    Panel p = PanelsFactory.createLogin(false);
-    openCreated(p);
+    LoginPanel p = PanelsFactory.CreateLogin();
+    Open(p, () => { p.Init(false);});
   }
 
   public void OpenDateTimePicker()

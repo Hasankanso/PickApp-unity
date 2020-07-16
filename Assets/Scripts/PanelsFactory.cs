@@ -70,9 +70,8 @@ public class PanelsFactory : MonoBehaviour {
         phonePanel.Init(user);
         return phonePanel;
     }
-    public static LoginPanel createLogin(bool isFromFooter) {
+    public static LoginPanel CreateLogin() {
         LoginPanel loginPanel = Instantiate(defaultPanelsFactory.loginPanel);
-        loginPanel.Init(isFromFooter);
         return loginPanel;
     }
     public static CarsListPanel CreateCarsListPanel(Action<Car> OnCarPicked, Car chosenCar) {
@@ -87,7 +86,6 @@ public class PanelsFactory : MonoBehaviour {
     }
     public static BecomeDriver CreateBecomeDriver() {
         BecomeDriver becomeDriver = Instantiate(defaultPanelsFactory.becomeDriver);
-        becomeDriver.Init();
         return becomeDriver;
     }
     public static CarDetails CreateCarDetails() {
@@ -99,9 +97,8 @@ public class PanelsFactory : MonoBehaviour {
         notificationsPanel.Init();
         return notificationsPanel;
     }
-    public static UserRatings CreateUserRatings(User user) {
+    public static UserRatings CreateUserRatings() {
         UserRatings userRatings = Instantiate(defaultPanelsFactory.userRatings);
-        userRatings.Init(user);
         return userRatings;
     }
     public static ChatPanel createChat(Chat chat) {
@@ -120,7 +117,6 @@ public class PanelsFactory : MonoBehaviour {
     }
     public static MyRidesHistoryPanel CreateMyRidesHistory() {
         MyRidesHistoryPanel myRidesHistoryPanel = Instantiate(defaultPanelsFactory.myRidesHistory);
-        myRidesHistoryPanel.Init();
         return myRidesHistoryPanel;
     }
 
@@ -163,7 +159,7 @@ public class PanelsFactory : MonoBehaviour {
         return searchPanel;
     }
 
-    public static SettingsPanel createSettings() {
+    public static SettingsPanel CreateSettings() {
         SettingsPanel settingsPanel = Instantiate(defaultPanelsFactory.settingsPanel);
         return settingsPanel;
     }
@@ -203,13 +199,11 @@ public class PanelsFactory : MonoBehaviour {
 
     public static AccountPanel CreateAccountPanel() {
         AccountPanel accountPanel = Instantiate(defaultPanelsFactory.accountPanel);
-        accountPanel.Init();
         return accountPanel;
     }
 
     public static BioPanel CreateBioPanel() {
         BioPanel bioPanel = Instantiate(defaultPanelsFactory.bioPanel);
-        bioPanel.Init();
         return bioPanel;
     }
 
@@ -220,19 +214,12 @@ public class PanelsFactory : MonoBehaviour {
 
     public static AddCarPanel createEditCar(Car car) {
         AddCarPanel addCarPanel = Instantiate(defaultPanelsFactory.addCar);
-        addCarPanel.init(car);
+        addCarPanel.Init(car);
         return addCarPanel;
     }
 
-    public static AddCarPanel createAddCar() {
+    public static AddCarPanel CreateAddCar() {
         AddCarPanel addCarPanel = Instantiate(defaultPanelsFactory.addCar);
-        addCarPanel.init();
-        return addCarPanel;
-    }
-    public static AddCarPanel createAddCar(Driver driver)
-    {
-        AddCarPanel addCarPanel = Instantiate(defaultPanelsFactory.addCar);
-        addCarPanel.init(driver);
         return addCarPanel;
     }
 

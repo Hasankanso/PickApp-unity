@@ -26,13 +26,14 @@ public class UserRatings : Panel
       }
     }
   }
-  public void Init(User user)
+  public override void Init()
   {
     Clear();
-    this.user = user;
-    GetMyRatings();
+    this.user = Program.User;
+    SetMyRatings();
   }
-  public void GetMyRatings()
+
+  private void SetMyRatings()
   {
     Request<List<Rate>> request = new GetUserReviews(Program.User);
     Task.Run(() => request.Send(Response));

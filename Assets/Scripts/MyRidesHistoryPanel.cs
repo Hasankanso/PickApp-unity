@@ -14,7 +14,7 @@ public class MyRidesHistoryPanel : Panel {
     private List<Ride> rides = null;
     private List<MyRidesHistoryItem> myRidesHistoryItems = new List<MyRidesHistoryItem>();
 
-    public void Init() {
+    public override void Init() {
         Request<List<Ride>> request = new GetMyRidesHistory(Program.User);
         request.Send(Response);
     }

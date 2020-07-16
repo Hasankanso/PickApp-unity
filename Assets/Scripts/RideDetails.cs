@@ -379,8 +379,8 @@ public class RideDetails : Panel
     {
       if (!Program.IsLoggedIn)
       {
-        Panel login = PanelsFactory.createLogin(false);
-        openCreated(login);
+        LoginPanel login = PanelsFactory.CreateLogin();
+        Open(login, () => { login.Init(false); });
       }
       else
       {
@@ -397,7 +397,8 @@ public class RideDetails : Panel
     {
       if (!Program.IsLoggedIn)
       {
-        Panel login = PanelsFactory.createLogin(false);
+        LoginPanel login = PanelsFactory.CreateLogin();
+        Open(login, () => { login.Init(false); });
         openCreated(login);
       }
       else
@@ -486,8 +487,8 @@ public class RideDetails : Panel
         Cache.SetToken("");
         Program.IsLoggedIn = false;
         OpenDialog("Please login", false);
-        Panel login = PanelsFactory.createLogin(false);
-        openCreated(login);
+        LoginPanel login = PanelsFactory.CreateLogin();
+        Open(login, () => { login.Init(false); });
       }
       else
       {

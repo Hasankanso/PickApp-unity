@@ -36,8 +36,8 @@ public class ChangePasswordPanel : Panel {
         } else {
             Panel p = PanelsFactory.CreateDialogBox("Password has been changed", true);
             OpenDialog(p);
-            Panel panel = PanelsFactory.createSettings();
-            openCreated(panel);
+            Panel panel = PanelsFactory.CreateSettings();
+            Open(panel);
         }
     }
     public void Register() {
