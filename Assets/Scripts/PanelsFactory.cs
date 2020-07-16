@@ -75,9 +75,8 @@ public class PanelsFactory : MonoBehaviour {
         loginPanel.Init(isFromFooter);
         return loginPanel;
     }
-    public static CarsListPanel CreateCarsListPanel(Action<Car> OnCarPicked, Car chosenCar) {
+    public static CarsListPanel CreateCarsListPanel() {
         CarsListPanel clPanel = Instantiate(defaultPanelsFactory.carsListPanel);
-        clPanel.Init(OnCarPicked, chosenCar);
         return clPanel;
     }
     public static BecomeDriver CreateBecomeDriver(Person person) {
@@ -136,9 +135,8 @@ public class PanelsFactory : MonoBehaviour {
         return locResultsPanel;
     }
 
-    public static DirectionsFinderPanel CreateDirectionFinderPanel(Texture2D map, string origin, string destination, bool alternatives, Action<Texture2D> OnItemPicked) {
+    public static DirectionsFinderPanel CreateDirectionFinderPanel() {
         DirectionsFinderPanel dirResultsPanel = Instantiate(defaultPanelsFactory.directionsFinderPanel);
-        dirResultsPanel.Init(map, origin, destination, alternatives, OnItemPicked);
         return dirResultsPanel;
     }
 
@@ -229,8 +227,7 @@ public class PanelsFactory : MonoBehaviour {
         addCarPanel.init();
         return addCarPanel;
     }
-    public static AddCarPanel createAddCar(Driver driver)
-    {
+    public static AddCarPanel createAddCar(Driver driver) {
         AddCarPanel addCarPanel = Instantiate(defaultPanelsFactory.addCar);
         addCarPanel.init(driver);
         return addCarPanel;
@@ -248,16 +245,8 @@ public class PanelsFactory : MonoBehaviour {
 
 
     //to add, view, edit and remove Ride
-  public static RideDetails CreateRideDetails()
-  {
-    RideDetails rideDetails = Instantiate(defaultPanelsFactory.rideDetails);
-    return rideDetails;
-  }
-
-  //to add, edit and remove Schedule
-  public static RideDetails CreateScheduleDetails(ScheduleRide schedule, StatusE status) {
+    public static RideDetails CreateRideDetails() {
         RideDetails rideDetails = Instantiate(defaultPanelsFactory.rideDetails);
-        rideDetails.Init(schedule, status);
         return rideDetails;
     }
 

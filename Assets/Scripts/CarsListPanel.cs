@@ -38,7 +38,6 @@ public class CarsListPanel : Panel {
         if (carsList.selectedItem != null) {
             carsList.selectedItem.GetComponent<CarItem>().UnSelect();
         }
-
         item.Select();
         carsList.selectedItem = item.gameObject;
         CarPickedCallBack(c);

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ScheduleItem : Panel {
     private Panel profilePanel;
-    public Text from, to, price, startDate,endDate, date, seats, luggages;
+    public Text from, to, price, startDate, endDate, date, seats, luggages;
     public Image smokingImage, musicImage, acImage, kidsSeatImage, petsImage;
     public Sprite smokingOnSpirite, musicOnSpirite, acOnSpirite, kidsSeatOnSpirite, petsOnSpirite;
     public Sprite smokingOffSpirite, musicOffSpirite, acOffSpirite, kidsSeatOffSpirite, petsOffSpirite;
@@ -74,8 +74,8 @@ public class ScheduleItem : Panel {
         profilePanel.openCreated(panel);
     }
     public void OnClick() {
-        Panel panel = PanelsFactory.CreateScheduleDetails(scheduleRide, StatusE.VIEW);
-        profilePanel.openCreated(panel);
+        RideDetails rideDetailsPanel = PanelsFactory.CreateRideDetails();
+        profilePanel.Open(rideDetailsPanel, () => { rideDetailsPanel.Init(scheduleRide, StatusE.VIEW); });
     }
     internal override void Clear() {
         from.text = "";

@@ -438,7 +438,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 376.09998, y: 71.9}
+  m_SizeDelta: {x: 524.8, y: 71.9}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8304738826634728208
 CanvasRenderer:
@@ -468,11 +468,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 29
+    m_FontSize: 32
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 3
+    m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 8304738826657856826}
   - component: {fileID: 3220339650766623019}
   m_Layer: 5
-  m_Name: BookingHistory
+  m_Name: MyRideHistory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -604,6 +604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  permanent: 0
   price: {fileID: 8304738826520388508}
   origin: {fileID: 8304738825494268665}
   date: {fileID: 8304738826634728209}
@@ -644,7 +645,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130.6, y: -11.85}
+  m_AnchoredPosition: {x: 139.20001, y: -11.850006}
   m_SizeDelta: {x: 420.8, y: 69.7}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8304738826862205255
