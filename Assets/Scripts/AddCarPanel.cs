@@ -18,29 +18,29 @@ public class AddCarPanel : Panel
   private Driver driver = null;
   private string color;
 
-  public void submit()
+  public void Submit()
   {
-    if (vadilateSecondView())
+    if (VadilateSecondView())
     {
       car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
       Request<Car> request = new AddCar(car, Program.Driver);
       request.Send(response);
     }
   }
-  public void becomeDriver()
+  public void BecomeDriver()
   {
-    if (vadilateSecondView())
+    if (VadilateSecondView())
     {
       car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
       driver.Cars = new List<Car>();
       driver.Cars.Add(car);
       Request<Driver> request = new BecomeDriverRequest(Program.User, driver);
-      request.Send(becomeDriverResponse);
+      request.Send(BecomeDriverResponse);
       Debug.Log("request have been sent");
     }
   }
 
-  private void becomeDriverResponse(Driver result, int code, string message)
+  private void BecomeDriverResponse(Driver result, int code, string message)
   {
     if (!code.Equals((int)HttpStatusCode.OK))
     {
@@ -75,7 +75,7 @@ public class AddCarPanel : Panel
   }
   public void submitUpdate()
   {
-    if (vadilateSecondView())
+    if (VadilateSecondView())
     {
       car.Name = carName.text.text;
       car.Year = int.Parse(year.text.text);
@@ -130,7 +130,7 @@ public class AddCarPanel : Panel
     add.enabled = false;
     becomeDriverBtn.enabled = true;
   }
-  private bool vadilateFirstView()
+  private bool VadilateFirstView()
   {
     bool valid = true;
     if (carName.text.text.Equals(""))
@@ -173,7 +173,7 @@ public class AddCarPanel : Panel
     return valid;
   }
 
-  private bool vadilateSecondView()
+  private bool VadilateSecondView()
   {
     bool valid = true;
     if (!BlackCheckMark.isActiveAndEnabled && !WhiteCheckMark.isActiveAndEnabled && !GreyCheckMark.isActiveAndEnabled && !DarkGreyCheckMark.isActiveAndEnabled && !RedCheckMark.isActiveAndEnabled && !BlueCheckMark.isActiveAndEnabled && !DarkBlueCheckMark.isActiveAndEnabled && !YellowCheckMark.isActiveAndEnabled && !PinkCheckMark.isActiveAndEnabled && !PurpleCheckMark.isActiveAndEnabled && !BrownCheckMark.isActiveAndEnabled && !OrangeCheckMark.isActiveAndEnabled && !GreenCheckMark.isActiveAndEnabled)
@@ -321,14 +321,14 @@ public class AddCarPanel : Panel
       color = "#00DB00";
     }
   }
-  public void openView(int index)
+  public void OpenView(int index)
   {
     if (index == 0)
     {
       firstView.SetActive(true);
       secondView.SetActive(false);
     }
-    else if (index == 1 && vadilateFirstView())
+    else if (index == 1 && VadilateFirstView())
     {
       firstView.SetActive(false);
       secondView.SetActive(true);
@@ -355,7 +355,7 @@ public class AddCarPanel : Panel
     }, "Select a PNG image", "image/png");
     Debug.Log("Permission result: " + permission);
   }
-  public void closeView(int index)
+  public void CloseView(int index)
   {
     if (index == 0)
     {
@@ -396,6 +396,6 @@ public class AddCarPanel : Panel
     GreenCheckMark.enabled = false;
     CloseViewChoosenImage();
     //open first view
-    openView(0);
+    OpenView(0);
   }
 }

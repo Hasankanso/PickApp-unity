@@ -119,7 +119,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6712105296454797058}
-        m_MethodName: becomeDriver
+        m_MethodName: BecomeDriver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4416,7 +4416,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6712105296454797058}
-          m_MethodName: closeView
+          m_MethodName: CloseView
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5436,7 +5436,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6712105296454797058}
-        m_MethodName: openView
+        m_MethodName: OpenView
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5778,7 +5778,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6712105296454797058}
-        m_MethodName: submit
+        m_MethodName: Submit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
