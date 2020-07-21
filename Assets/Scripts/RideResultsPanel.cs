@@ -169,7 +169,7 @@ public class RideResultsPanel : Panel
 
   public void OnAlertClicked()
   {
-    AlertPanel alertPanel = PanelsFactory.createAlert(searchInfo);
-    openCreated(alertPanel);
+    AlertPanel alertPanel = PanelsFactory.CreateAlert();
+    Open(alertPanel, () => { alertPanel.Init(searchInfo); });
   }
 }

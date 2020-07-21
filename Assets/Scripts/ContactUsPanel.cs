@@ -34,7 +34,7 @@ public class ContactUsPanel : Panel {
     }
     public void openPrivacyPolicy() {
         Panel panel = PanelsFactory.CreatePrivacyPolicy();
-        openCreated(panel);
+        Open(panel);
     }
     internal override void Clear() {
         description.Reset();

@@ -19,7 +19,7 @@ public class ChattinessPanel : Panel
 
   public void submit()
   {
-    if (vadilate())
+    if (Vadilate())
     {
       var chattiness = chatiness.options[chatiness.value].text;
 
@@ -43,9 +43,7 @@ public class ChattinessPanel : Panel
     }
     else
     {
-      OpenDialog("Chattiness has been added", false);
-      Panel panel = PanelsFactory.createProfile();
-      openCreated(panel);
+      MissionCompleted(ProfilePanel.PANELNAME, "Chattiness has been added");
     }
   }
 
@@ -59,7 +57,7 @@ public class ChattinessPanel : Panel
     else
       chatiness.value = 1;
   }
-  private bool vadilate()
+  private bool Vadilate()
   {
     if (chatiness.options[chatiness.value].text.Equals("") || chatiness.options[chatiness.value].text == null)
     {

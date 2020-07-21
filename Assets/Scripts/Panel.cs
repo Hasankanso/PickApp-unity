@@ -140,39 +140,24 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     ForwardDestroy();
   }
 
-  public void openExisted(Panel newPanel) //deprecated
-  {
-    Next = newPanel;
-    gameObject.SetActive(false);
-    newPanel.previous = this;
-    newPanel.gameObject.SetActive(true);
-  }
-
   public void openCreated(Panel newPanel) //deprecated
   {
     Next = newPanel;
     OpenNext();
   }
 
-
   public void Open(Panel nextPanel)
   {
-    Open(nextPanel, null);
+    Next = nextPanel; // inside of this there's underlying code (check Next Property's code)
+    Init();
+    OpenNext();
   }
 
-  public void Open(Panel newPanel, Action Init)
+
+  public void Open(Panel nextPanel, Action Init)
   {
-    Next = newPanel; // inside of this there's underlying code (check Next Property's code)
-
-    if (Init != null)
-    {
-      Init.Invoke();
-    }
-    else
-    {
-      this.Init();
-    }
-
+    Next = nextPanel; // inside of this there's underlying code (check Next Property's code)
+    Init?.Invoke(); //this line is equal to if(Init !=null) { Init();}
     OpenNext();
   }
 
@@ -216,7 +201,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     }
     else
     {
-      dialogBox.init(message, success);
+      dialogBox.Init(message, success);
     }
     OpenDialog(dialogBox);
   }

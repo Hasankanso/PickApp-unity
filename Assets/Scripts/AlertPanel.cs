@@ -18,7 +18,7 @@ public class AlertPanel : Panel
   public Dropdown nbPersons, luggages, region;
   private Alert alert;
 
-  public void init(SearchInfo searchInfo)
+  public void Init(SearchInfo searchInfo)
   {
     Clear();
     this.from.SetText(searchInfo.From.ToString());
@@ -29,10 +29,10 @@ public class AlertPanel : Panel
   }
   public void submit()
   {
-    if (validate())
+    if (Validate())
     {
       alert = null;
-      alert = new Alert(Program.User, fromL, toL,price.text.text, DateTime.Parse(minDate.text), DateTime.Parse(maxDate.text), int.Parse(nbPersons.options[nbPersons.value].text), int.Parse(luggages.options[luggages.value].text), new CountryInformations("l.l"), comment.text.text);
+      alert = new Alert(Program.User, fromL, toL, price.text.text, DateTime.Parse(minDate.text), DateTime.Parse(maxDate.text), int.Parse(nbPersons.options[nbPersons.value].text), int.Parse(luggages.options[luggages.value].text), new CountryInformations("l.l"), comment.text.text);
       Request<Alert> request = new BroadCastAlert(alert);
       Task.Run(() => request.Send(response));
     }
@@ -40,13 +40,13 @@ public class AlertPanel : Panel
 
   public void OpenFromLocationPicker()
   {
-        OpenLocationFinder(from.text.text, OnFromLocationPicked);
-    }
+    OpenLocationFinder(from.text.text, OnFromLocationPicked);
+  }
 
   public void OpenToLocationPicker()
   {
-        OpenLocationFinder(to.text.text, OnToLocationPicked);
-    }
+    OpenLocationFinder(to.text.text, OnToLocationPicked);
+  }
 
   public void OnFromLocationPicked(Location loc)
   {
@@ -76,12 +76,10 @@ public class AlertPanel : Panel
       OpenDialog("Something went wrong!", false);
     else
     {
-      OpenDialog("Your alert has been sent!", true);
-      Panel panel = PanelsFactory.createSearch();
-      openExisted(panel);
+      MissionCompleted(SearchPanel.PANELNAME, "Your alert has been sent!");
     }
   }
-  private bool validate()
+  private bool Validate()
   {
     bool valid = true;
     if (from.text.text.Equals(""))

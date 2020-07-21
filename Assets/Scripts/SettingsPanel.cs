@@ -34,28 +34,28 @@ public class SettingsPanel : Panel
   }
   public void openHowItWorks()
   {
-    Panel panel = PanelsFactory.createHowItWorks();
-    openCreated(panel);
+    Panel panel = PanelsFactory.CreateHowItWorks();
+    Open(panel);
   }
   public void openTermsConditions()
   {
-    Panel panel = PanelsFactory.createTermsConditions();
-    openCreated(panel);
+    Panel panel = PanelsFactory.CreateTermsConditions();
+    Open(panel);
   }
   public void openPrivacyPolicy()
   {
     Panel panel = PanelsFactory.CreatePrivacyPolicy();
-    openCreated(panel);
+    Open(panel);
   }
   public void openLicenses()
   {
-    Panel panel = PanelsFactory.createLicenses();
-    openCreated(panel);
+    Panel panel = PanelsFactory.CreateLicenses();
+    Open(panel);
   }
   public void openContactUs()
   {
-    Panel panel = PanelsFactory.createContactUs();
-    openCreated(panel);
+    Panel panel = PanelsFactory.CreateContactUs();
+    Open(panel);
   }
   internal override void Clear()
   {
@@ -94,19 +94,17 @@ public class SettingsPanel : Panel
     Program.User = null;
     Cache.SetToken("");
     Program.IsLoggedIn = false;
-    FooterMenu.dFooterMenu.OpenSearchPanel();
-    OpenDialog("Waiting for you to come back!", true);
-    DestroyForwardBackward();
+    MissionCompleted(SearchPanel.PANELNAME, "Waiting for you to come back!");
   }
   public void openNotifications()
   {
-    Panel panel = PanelsFactory.createNotificationPanel();
-    openCreated(panel);
+    Panel panel = PanelsFactory.CreateNotificationPanel();
+    Open(panel);
   }
   public void changePassword()
   {
     Panel panel = PanelsFactory.ChangePassword(user);
-    openCreated(panel);
+    Open(panel);
   }
 
 }

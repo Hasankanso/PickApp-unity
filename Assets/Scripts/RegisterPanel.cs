@@ -141,7 +141,7 @@ public class RegisterPanel : Panel
       return false;
     }
   }
-  public void Init()
+  public override void Init()
   {
     Clear();
     Request<Dictionary<string, CountryInformations>> request = new GetCountries();
