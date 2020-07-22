@@ -29,6 +29,7 @@ public class PanelsFactory : MonoBehaviour {
     public RegisterPanel registerPanel;
     public ReportUserPanel reportUserPanel;
     public SettingsPanel settingsPanel;
+    public Spinner spinner;
     public UserDetails userDetails;
     public AddCarPanel addCar;
     public BioPanel bioPanel;
@@ -136,6 +137,10 @@ public class PanelsFactory : MonoBehaviour {
         return dirResultsPanel;
     }
 
+    public static Spinner CreateSpinner() {
+        Spinner spinner = Instantiate(defaultPanelsFactory.spinner);
+        return spinner;
+    }
 
     public static AlertPanel createAlert() {
         AlertPanel alertPanel = Instantiate(defaultPanelsFactory.alertPanel);
