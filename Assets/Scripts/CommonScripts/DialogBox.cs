@@ -12,7 +12,7 @@ public class DialogBox : Panel
             Destroy(gameObject);
         }
     }
-    public void init(string text, bool isSuccess) {
+    public void Init(string text, bool isSuccess) {
         messageText.text = text;
         if (isSuccess)
             background.color = new Color(0f / 255f, 255f / 255f, 21f / 255f);

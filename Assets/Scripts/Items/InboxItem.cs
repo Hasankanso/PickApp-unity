@@ -25,8 +25,8 @@ public class InboxItem : Panel {
         }
     }
     public void OpenChat() {
-        Panel panel = PanelsFactory.createChat(chat);
-        inboxPanel.openCreated(panel);
+        ChatPanel panel = PanelsFactory.CreateChat();
+        inboxPanel.Open(panel, () => {panel.Init(chat);} );
     }
     public void Search() {
 

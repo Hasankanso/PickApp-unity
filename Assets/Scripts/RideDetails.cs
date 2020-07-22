@@ -52,8 +52,8 @@ public class RideDetails : Panel
   }
   public void UserDetails()
   {
-    Panel panel = PanelsFactory.CreateUserDetails(ride.User);
-    openCreated(panel);
+    UserDetails panel = PanelsFactory.CreateUserDetails();
+    Open(panel, () => { panel.Init(ride.User); });
   }
 
   public void GoWithHim()
@@ -86,8 +86,8 @@ public class RideDetails : Panel
 
   public void EditSchedule()
   {
-    Panel p = PanelsFactory.CreateEditSchedule(schedule);
-    openCreated(p);
+    SchedulePanel p = PanelsFactory.CreateAddSchedule();
+    Open(p, () => { p.Init(schedule); });
   }
 
 
@@ -469,11 +469,10 @@ public class RideDetails : Panel
     else
     {
       Program.Person.UpcomingRides.Remove(result);
-      OpenDialog("You have cancelled the reservation", true);
-      Panel panel = PanelsFactory.createSearch();
-      openExisted(panel);
       Passenger passenger = new Passenger(Program.User, luggagesDropdown.value);
       result.Passengers.Remove(passenger);
+
+      MissionCompleted(SearchPanel.PANELNAME, "You have cancelled the reservation");
     }
   }
 

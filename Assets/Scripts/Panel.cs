@@ -105,86 +105,9 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
             FooterMenu.dFooterMenu.transform.SetAsFirstSibling();
         }
 
-        return Next;
-    }
-
-    public void OpenDialog(Panel newPanel) {
-        newPanel.transform.SetParent(transform.parent, false);
-        newPanel.gameObject.SetActive(true);
-        newPanel.transform.SetAsLastSibling();
-    }
-
-    public void CloseDialog() {
-        ForwardDestroy();
-    }
-
-    public void openExisted(Panel newPanel) //deprecated
-    {
-        Next = newPanel;
-        gameObject.SetActive(false);
-        newPanel.previous = this;
-        newPanel.gameObject.SetActive(true);
-    }
-
-    public void openCreated(Panel newPanel) //deprecated
-    {
-        Next = newPanel;
-        OpenNext();
-    }
-
-
-    public void Open(Panel nextPanel) {
-        Open(nextPanel, null);
-    }
-
-    public void Open(Panel newPanel, Action Init) {
-        Next = newPanel; // inside of this there's underlying code (check Next Property's code)
-
-        if (Init != null) {
-            Init.Invoke();
-        } else {
-            this.Init();
-        }
-
-        OpenNext();
-    }
-
-    public void DestroyForwardBackward() {
-        if (Next != null) Next.ForwardDestroy(); //destroy all next panels that are not permanent
-        BackwardDestroy(); //this will destroy this panel and all previous panels that are not permanent
-    }
-
-    public void MissionCompleted(string panelName, string dialogMessage) {
-        FooterMenu.Open(panelName, dialogMessage);
-        DestroyForwardBackward();
-    }
-
-    public void MissionCompleted(string panelName) {
-        FooterMenu.Open(panelName);
-        DestroyForwardBackward();
-    }
-
-    internal abstract void Clear();
-
-
-    public override bool Equals(object obj) {
-        return Equals(obj as Panel);
-    }
-
-    public bool Equals(Panel other) {
-        return other != null &&
-               id == other.id;
-    }
-
-    public void OpenDialog(string message, bool success) {
-        if (dialogBox == null) {
-            dialogBox = PanelsFactory.CreateDialogBox(message, success);
-        } else {
-            dialogBox.init(message, success);
-        }
-        OpenDialog(dialogBox);
-    }
-    public void OpenSpinner() {
+    return Next;
+  }
+      public void OpenSpinner() {
         if (spinner == null) {
             spinner = PanelsFactory.CreateSpinner();
         }
@@ -193,29 +116,114 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
     public void CloseSpinner() {
         spinner.DestroyForwardBackward();
     }
-    public void OpenLocationFinder(string text, Action<Location> OnFromLocationPicked) {
-        if (locationFinderPanel == null) {
-            locationFinderPanel = PanelsFactory.CreateLocationsFinderPanel(text, OnFromLocationPicked);
-        }
+  public void OpenDialog(Panel newPanel)
+  {
+    newPanel.transform.SetParent(transform.parent, false);
+    newPanel.gameObject.SetActive(true);
+    newPanel.transform.SetAsLastSibling();
+  }
 
-        OpenDialog(locationFinderPanel);
+  public void CloseDialog()
+  {
+    ForwardDestroy();
+  }
+
+  public void openCreated(Panel newPanel) //deprecated
+  {
+    Next = newPanel;
+    OpenNext();
+  }
+
+  public void Open(Panel nextPanel)
+  {
+    Next = nextPanel; // inside of this there's underlying code (check Next Property's code)
+    Init();
+    OpenNext();
+  }
+
+
+  public void Open(Panel nextPanel, Action Init)
+  {
+    Next = nextPanel; // inside of this there's underlying code (check Next Property's code)
+    Init?.Invoke(); //this line is equal to if(Init !=null) { Init();}
+    OpenNext();
+  }
+
+  public void DestroyForwardBackward()
+  {
+    if (Next != null) Next.ForwardDestroy(); //destroy all next panels that are not permanent
+    BackwardDestroy(); //this will destroy this panel and all previous panels that are not permanent
+  }
+
+  public void MissionCompleted(string panelName, string dialogMessage)
+  {
+    FooterMenu.Open(panelName, dialogMessage);
+    DestroyForwardBackward();
+  }
+
+  public void MissionCompleted(string panelName)
+  {
+    FooterMenu.Open(panelName);
+    DestroyForwardBackward();
+  }
+
+  internal abstract void Clear();
+
+
+  public override bool Equals(object obj)
+  {
+    return Equals(obj as Panel);
+  }
+
+  public bool Equals(Panel other)
+  {
+    return other != null &&
+           id == other.id;
+  }
+
+  public void OpenDialog(string message, bool success)
+  {
+    if (dialogBox == null)
+    {
+      dialogBox = PanelsFactory.CreateDialogBox(message, success);
+    }
+    else
+    {
+      dialogBox.Init(message, success);
+    }
+    OpenDialog(dialogBox);
+  }
+
+  public void OpenLocationFinder(string text, Action<Location> OnFromLocationPicked)
+  {
+    if (locationFinderPanel == null)
+    {
+      locationFinderPanel = PanelsFactory.CreateLocationsFinderPanel(text, OnFromLocationPicked);
     }
 
-    public void OpenDateTimePicker(DateTime startDate, Action<DateTime> OnDatePicked) {
-        MobileDateTimePicker.CreateDate(startDate.Year, startDate.Month, startDate.Day, null, (dt) => OpenTimePicker(dt, OnDatePicked));
-    }
+    OpenDialog(locationFinderPanel);
+  }
 
-    private void OpenTimePicker(DateTime date, Action<DateTime> OnDatePicked) {
-        MobileDateTimePicker.CreateTime(null, (time) => { OnDatePicked(Program.CombineDateTime(date, time)); });
-    }
+  public void OpenDateTimePicker(DateTime startDate, Action<DateTime> OnDatePicked)
+  {
+    MobileDateTimePicker.CreateDate(startDate.Year, startDate.Month, startDate.Day, null, (dt) => OpenTimePicker(dt, OnDatePicked));
+  }
 
-    public void OpenDateTimePicker(Action<DateTime> OnDatePicked) {
-        OpenDateTimePicker(DateTime.Now, OnDatePicked);
-    }
+  private void OpenTimePicker(DateTime date, Action<DateTime> OnDatePicked)
+  {
+    MobileDateTimePicker.CreateTime(null, (time) => { OnDatePicked(Program.CombineDateTime(date, time)); });
+  }
 
-    public override int GetHashCode() {
-        var hashCode = 1550466422;
-        hashCode = hashCode * -1521134295 + id.GetHashCode();
-        return hashCode;
-    }
+  public void OpenDateTimePicker(Action<DateTime> OnDatePicked)
+  {
+    OpenDateTimePicker(DateTime.Now, OnDatePicked);
+  }
+
+  public override int GetHashCode()
+  {
+    var hashCode = 1550466422;
+    hashCode = hashCode * -1521134295 + id.GetHashCode();
+    return hashCode;
+  }
+
 }

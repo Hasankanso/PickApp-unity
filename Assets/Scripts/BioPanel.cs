@@ -18,7 +18,7 @@ public class BioPanel : Panel
   }
   public void submit()
   {
-    if (validate())
+    if (Validate())
     {
       Person oldPerson = Program.Person;
       User oldUser = Program.User;
@@ -28,47 +28,41 @@ public class BioPanel : Panel
       DateTime.Now, oldPerson.profilePictureUrl);
       User editedUser = new User(editedPerson, oldUser.Driver, oldUser.phone, oldUser.password, oldUser.Email, oldUser.Id, oldUser.Token);
       Request<User> request = new EditAccount(editedUser);
-      Task.Run(() => request.Send(response));
+      Task.Run(() => request.Send(Response));
     }
   }
-  private void response(User result, int code, string message)
+  private void Response(User result, int code, string message)
   {
     if (!code.Equals(HttpStatusCode.OK))
     {
-      Panel p = PanelsFactory.CreateDialogBox("There was an error adding bio", false);
-      OpenDialog(p);
+      OpenDialog("There was an error adding bio", false);
     }
     else
     {
-      Panel p = PanelsFactory.CreateDialogBox("Bio has been added", true);
-      OpenDialog(p);
-      Panel panel = PanelsFactory.createProfile();
-      openCreated(panel);
+      OpenDialog("Bio has been added", true);
+      MissionCompleted(ProfilePanel.PANELNAME, "Bio has been added");
     }
   }
 
-  private bool validate()
+  private bool Validate()
   {
     bool valid = true;
     if (bio.text.text.Equals(""))
     {
       bio.Error();
-      Panel p = PanelsFactory.CreateDialogBox("There was an error adding bio", false);
-      OpenDialog(p);
+      OpenDialog("There was an error adding bio", false);
       valid = false;
     }
     if (bio.text.text.Length < 20)
     {
       bio.Error();
-      Panel p = PanelsFactory.CreateDialogBox("Bio is too short", false);
-      OpenDialog(p);
+      OpenDialog("Bio is too short", false);
       valid = false;
     }
     if (bio.text.text.Length > 190)
     {
       bio.Error();
-      Panel p = PanelsFactory.CreateDialogBox("Bio is too long", false);
-      OpenDialog(p);
+      OpenDialog("Bio is too long", false);
       valid = false;
     }
     return valid;

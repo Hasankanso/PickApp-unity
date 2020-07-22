@@ -40,15 +40,11 @@ public class AccountPanel : Panel
   {
     if (!code.Equals(HttpStatusCode.OK))
     {
-      Panel p = PanelsFactory.CreateDialogBox("There was an error editing your account", false);
-      OpenDialog(p);
+      OpenDialog("There was an error editing your account", false);
     }
     else
     {
-      Panel p = PanelsFactory.CreateDialogBox("Account has been edited", true);
-      OpenDialog(p);
-      Panel panel = PanelsFactory.createProfile();
-      openCreated(panel);
+      MissionCompleted(ProfilePanel.PANELNAME, "Account has been edited");
     }
   }
   private void OnDatePicked(DateTime d)
