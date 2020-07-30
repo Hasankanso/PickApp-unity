@@ -56,20 +56,14 @@ public class FooterMenu : MonoBehaviour {
         user.Phone = "+" + Cache.GetPhoneCode() + "" + Cache.GetPhone();
         user.password = Cache.GetPassword();
         user.Email = Cache.GetEmail();
+        Debug.Log("cache"+token);
         if (!string.IsNullOrEmpty(token)) {
-            Debug.Log(1);
+            Debug.Log("auto login");
             Program.User = user;
             user.Token = token;
             Request<Person> request = new GetLoggedInUser(user);
             request.Send(ResponseOfAutoLogin);
         }
-    }
-    private void Login() {
-        Debug.Log(4);
-        Debug.Log(Program.User.password);
-        Program.User.Token = null;
-        Request<User> request = new Login(Program.User);
-        request.Send(ResponseOfLogin);
     }
     private void ResponseOfLogin(User u, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
@@ -85,9 +79,12 @@ public class FooterMenu : MonoBehaviour {
     private void ResponseOfAutoLogin(Person u, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
             Cache.SetToken("");
-            if (!string.IsNullOrEmpty(Program.User.password) && !string.IsNullOrEmpty(Program.User.phone))
-                Login();
-            else
+            Program.User.Token = null;
+            if (!string.IsNullOrEmpty(Program.User.password) && !string.IsNullOrEmpty(Program.User.phone)) {
+                Debug.Log("auto login faild(cache is outdated), trying to login from cache credentials"+Program.User.phone+" "+Program.User.password);
+                Request<User> request = new Login(Program.User);
+                request.Send(ResponseOfLogin);
+            } else
                 Program.User = null;
         } else {
             Program.User.Person = u;

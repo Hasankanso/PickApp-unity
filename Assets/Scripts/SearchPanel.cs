@@ -26,6 +26,7 @@ public class SearchPanel : Panel {
     }
     public void Search() {
         if (Vadilate()) {
+            OpenSpinner();
             info = new SearchInfo(fromL, toL, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), int.Parse(numberOfPersons.options[numberOfPersons.value].text));
             Request<List<Ride>> request = new SearchForRides(info);
             request.Send(SearchResults);
@@ -37,6 +38,7 @@ public class SearchPanel : Panel {
     }
 
     private void SearchResults(List<Ride> results, int code, string message) {
+        CloseSpinner();
         if (!code.Equals((int)HttpStatusCode.OK))
             OpenDialog("Something went wrong!", false);
         else {
