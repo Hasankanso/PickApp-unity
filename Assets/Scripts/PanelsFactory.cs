@@ -58,16 +58,11 @@ public class PanelsFactory : MonoBehaviour {
         return panel;
     }
 
-    public static PhonePanel createPhonePanel() {
+    public static PhonePanel CreatePhonePanel() {
         PhonePanel phonePanel = Instantiate(defaultPanelsFactory.phonePanel);
-        phonePanel.Init();
         return phonePanel;
     }
-    public static PhonePanel CreatePhonePanel(User user) {
-        PhonePanel phonePanel = Instantiate(defaultPanelsFactory.phonePanel);
-        phonePanel.Init(user);
-        return phonePanel;
-    }
+
     public static LoginPanel CreateLogin() {
         LoginPanel loginPanel = Instantiate(defaultPanelsFactory.loginPanel);
         return loginPanel;
@@ -134,9 +129,8 @@ public class PanelsFactory : MonoBehaviour {
         ReportUserPanel reportUserPanel = Instantiate(defaultPanelsFactory.reportUserPanel);
         return reportUserPanel;
     }
-    public static RegisterPanel createRegister() {
+    public static RegisterPanel CreateRegister() {
         RegisterPanel register = Instantiate(defaultPanelsFactory.registerPanel);
-        register.Init();
         return register;
     }
 
@@ -215,14 +209,8 @@ public class PanelsFactory : MonoBehaviour {
         return dialogBox;
     }
 
-    public static ChangePasswordPanel ChangePassword(User user) {
+    public static ChangePasswordPanel ChangePassword() {
         ChangePasswordPanel changePassword = Instantiate(defaultPanelsFactory.changePassword);
-        changePassword.Init(user);
-        return changePassword;
-    }
-    public static ChangePasswordPanel ChangePassword(bool isForgetPassword, User user) {
-        ChangePasswordPanel changePassword = Instantiate(defaultPanelsFactory.changePassword);
-        changePassword.Init(isForgetPassword, user);
         return changePassword;
     }
 }

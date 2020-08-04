@@ -399,7 +399,6 @@ public class RideDetails : Panel
       {
         LoginPanel login = PanelsFactory.CreateLogin();
         Open(login, () => { login.Init(false); });
-        openCreated(login);
       }
       else
       {

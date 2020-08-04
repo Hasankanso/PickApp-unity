@@ -105,12 +105,12 @@ public class LoginPanel : Panel {
         return valid;
     }
     public void ForgetPassword() {
-        Panel p = PanelsFactory.createPhonePanel();
-        openCreated(p);
+        Panel p = PanelsFactory.CreatePhonePanel();
+        Open(p);
     }
     public void CreateAccount() {
-        Panel p = PanelsFactory.createRegister();
-        openCreated(p);
+        Panel p = PanelsFactory.CreateRegister();
+        Open(p);
     }
     internal override void Clear() {
         backButton.gameObject.SetActive(false);

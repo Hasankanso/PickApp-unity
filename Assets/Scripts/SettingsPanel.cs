@@ -103,8 +103,8 @@ public class SettingsPanel : Panel
   }
   public void changePassword()
   {
-    Panel panel = PanelsFactory.ChangePassword(user);
-    Open(panel);
+    ChangePasswordPanel panel = PanelsFactory.ChangePassword();
+    Open(panel, () => panel.Init(user) );
   }
 
 }

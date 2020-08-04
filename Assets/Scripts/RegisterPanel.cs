@@ -33,8 +33,8 @@ public class RegisterPanel : Panel
       person.CountryInformations = country;
       person.Gender = genderDP.value == 0;
       user = new User(person, email.text.text);
-      Panel panel = PanelsFactory.ChangePassword(false, user);
-      openCreated(panel);
+      ChangePasswordPanel panel = PanelsFactory.ChangePassword();
+      Open(panel, () => { panel.Init(false, user); }) ;
     }
   }
   internal int CalculateAge()

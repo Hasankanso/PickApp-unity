@@ -39,10 +39,10 @@ public class AddRidePanel : Panel {
 
     public override void Init() {
         Clear();
-        if (Program.User.Driver == null)
+        if (Program.Driver == null)
         {
             Panel b = PanelsFactory.CreateBecomeDriver();
-            openCreated(b); //Open(b) causes crach in unity, cause the AddRide panel and BecomeDriver trying to open at the same time ---Serhan
+            Open(b); //Open(b) causes crach in unity, cause the AddRide panel and BecomeDriver trying to open at the same time ---Serhan
         }
         Status = StatusE.ADD;
     }
