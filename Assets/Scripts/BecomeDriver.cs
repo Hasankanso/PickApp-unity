@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class BecomeDriver : Panel {
     public Person person = null;
-    public Driver driver = null;
+    public  Driver driver = null;
     public Text title;
     public Button becomeDriver, editRegions;
     public ListView listView;

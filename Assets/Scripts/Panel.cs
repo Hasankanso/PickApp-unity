@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
-
     public int id;
     public string panelName;
     private Panel previous, next;

@@ -9,7 +9,6 @@ public class AddRidePanel : Panel {
     public InputFieldScript from, to, comment, price, stopTimeField;
     public Text date, titleFirstView, titleSecView;
     public GameObject firstView, secondView;
-
     private DirectionsFinderPanel directionsPanel;
     private CarsListPanel carPickerPanel;
 
@@ -40,9 +39,13 @@ public class AddRidePanel : Panel {
 
     public override void Init() {
         Clear();
+        if (Program.User.Driver == null)
+        {
+            Panel b = PanelsFactory.CreateBecomeDriver();
+            openCreated(b); //Open(b) causes crach in unity, cause the AddRide panel and BecomeDriver trying to open at the same time ---Serhan
+        }
         Status = StatusE.ADD;
     }
-
     public void Init(Ride ride) {
         Clear();
         titleFirstView.text = "Edit Ride";
