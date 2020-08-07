@@ -41,8 +41,7 @@ public class AddRidePanel : Panel {
         Clear();
         if (Program.Driver == null)
         {
-            Panel b = PanelsFactory.CreateBecomeDriver();
-            Open(b); //Open(b) causes crach in unity, cause the AddRide panel and BecomeDriver trying to open at the same time ---Serhan
+ //Open(b) causes crach in unity, cause the AddRide panel and BecomeDriver trying to open at the same time ---Serhan
         }
         Status = StatusE.ADD;
     }
@@ -108,8 +107,13 @@ public class AddRidePanel : Panel {
 
 
     public void OpenMyCarsPicker() {
+        if (Program.Driver == null)
+        {
+            Panel b = PanelsFactory.CreateBecomeDriver();
+            Open(b);
+        }
+        else if (ValidateSecondView()) {
 
-        if (ValidateSecondView()) {
             if (!Program.IsLoggedIn) {
                 LoginPanel login = PanelsFactory.CreateLogin();
                 Open(login, () => { login.Init(false); });
