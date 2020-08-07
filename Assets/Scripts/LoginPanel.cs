@@ -19,7 +19,6 @@ public class LoginPanel : Panel {
 
     public void Login() {
         if (Validate()) {
-            OpenSpinner();
             User user = new User("+" + code.text.text + phone.text.text, password.GetComponent<InputField>().text);
             Request<User> request = new Login(user);
             request.Send(Response);
@@ -40,7 +39,6 @@ public class LoginPanel : Panel {
                 MissionCompleted(ProfilePanel.PANELNAME, "Welcome back to PickApp");
             }
         }
-        CloseSpinner();
     }
 
     public void Init(bool isFromFooter) {

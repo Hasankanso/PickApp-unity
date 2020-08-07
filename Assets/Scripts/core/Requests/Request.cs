@@ -41,6 +41,7 @@ namespace Requests {
             }
         }
         public async void Send(Action<T, int, string> callback) {
+            Panel.spinnerOpenEvent.Invoke();
             if (!CheckConnection()) {
                 Debug.Log(123321);
                 string code = "503";
@@ -85,6 +86,7 @@ namespace Requests {
 
                 if (json.Type == JTokenType.Array) {
                     callback(BuildResponse(json), (int)answer.StatusCode, answer.ReasonPhrase);
+                    Panel.spinnerCloseEvent.Invoke();
                     return;
                 }
 
@@ -107,9 +109,11 @@ namespace Requests {
                     Debug.Log(code);
                     string message = jMessage.ToString();
                     callback(default, int.Parse(code), message);
+                    Panel.spinnerCloseEvent.Invoke();
                     return;
                 } else {
                     callback(BuildResponse(json), (int)answer.StatusCode, answer.ReasonPhrase);
+                    Panel.spinnerCloseEvent.Invoke();
                 }
             }
         }
