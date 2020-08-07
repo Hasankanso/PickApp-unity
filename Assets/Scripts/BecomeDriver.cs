@@ -22,12 +22,8 @@ public class BecomeDriver : Panel {
             regions.Clear();
             foreach (var item in regionItems) {
                 regions.Add(item.getRegion());
-                //    regionItems.Add(item);
             }
-
             driver = new Driver(regions);
-          //  Request<Driver> request = new BecomeDriverRequest(Program.User,driver);
-          //  request.Send(response);
             AddCarPanel p = PanelsFactory.CreateAddCar();
             Open(p, () => { p.Init(driver);});
         }
@@ -48,8 +44,7 @@ public class BecomeDriver : Panel {
             foreach (var item in regionItems) {
                 driver.Regions.Add(item.getRegion());
             }
-            //    Request<BecomeDriver> request = new BecomeDriver(becomeDriver);
-            //     Task.Run(() => request.Send(EditResponse));
+
         }
     }
     private void EditResponse(Person result, HttpStatusCode code, string message) {
