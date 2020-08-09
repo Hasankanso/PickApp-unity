@@ -54,8 +54,11 @@ public class DirectionsFinderPanel : Panel
   }
   private void RequestDirections()
   {
-    StartCoroutine(RequestRoads());
-  }
+        if (!this.isActiveAndEnabled) gameObject.SetActive(true);
+        Debug.Log("Active1? " + gameObject.activeInHierarchy);
+        StartCoroutine(RequestRoads());
+        Debug.Log("Active2? " + gameObject.activeInHierarchy);
+    }
 
   internal override void Clear()
   {
