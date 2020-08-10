@@ -54,11 +54,8 @@ public class DirectionsFinderPanel : Panel
   }
   private void RequestDirections()
   {
-        if (!this.isActiveAndEnabled) gameObject.SetActive(true);
-        Debug.Log("Active1? " + gameObject.activeInHierarchy);
-        StartCoroutine(RequestRoads());
-        Debug.Log("Active2? " + gameObject.activeInHierarchy);
-    }
+    StartCoroutine(RequestRoads());
+  }
 
   internal override void Clear()
   {
@@ -71,17 +68,21 @@ public class DirectionsFinderPanel : Panel
 
   public IEnumerator RequestRoads()
   {
+    print("drid");
     var uwr = new UnityWebRequest(directionsURL + "origin=" + origin + "&destination=" + destination + "&mode=driving&alternatives=" + alternatives.ToString().ToLower() + "&key=" + Program.googleKey);
     uwr.downloadHandler = new DownloadHandlerBuffer();
+    print("gfdg");
     yield return uwr.SendWebRequest();
 
     if (uwr.isNetworkError || uwr.isHttpError)
     {
+      print("adsa");
       Panel dialog = PanelsFactory.CreateDialogBox(uwr.error, false);
       OpenDialog(dialog);
     }
     else
     {
+      print("gdfgf");
       Debug.Log(uwr.downloadHandler.text);
       var data = JsonConvert.DeserializeObject<JObject>(uwr.downloadHandler.text);
       var summary = data.Value<JArray>("routes");

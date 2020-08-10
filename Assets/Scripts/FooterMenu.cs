@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using Requests;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -16,6 +17,7 @@ public class FooterMenu : MonoBehaviour
   [SerializeField] private MyRidePanel yourRidesPanel;
   [SerializeField] private InboxPanel inboxPanel;
   [SerializeField] private ProfilePanel profilePanel;
+  private LoginPanel loginPanel = null;
 
   public static FooterMenu dFooterMenu;
 
@@ -30,11 +32,11 @@ public class FooterMenu : MonoBehaviour
     {
       dFooterMenu = this;
     }
-    searchPanel.gameObject.SetActive(true);
-    addRidePanel.gameObject.SetActive(false);
-    yourRidesPanel.gameObject.SetActive(false);
-    inboxPanel.gameObject.SetActive(false);
-    profilePanel.gameObject.SetActive(false);
+    searchPanel.Show();
+    addRidePanel.Hide();
+    yourRidesPanel.Hide();
+    inboxPanel.Hide();
+    profilePanel.Hide();
     currPanel = searchPanel;
     searchButton.image.sprite = searchButton.spriteState.selectedSprite;
 
@@ -105,6 +107,7 @@ public class FooterMenu : MonoBehaviour
       Program.IsLoggedIn = true;
     }
   }
+
   public static void Open(string panelName)
   {
     Open(panelName, null);
@@ -129,61 +132,65 @@ public class FooterMenu : MonoBehaviour
 
   private void Open(Panel newPanel)
   {
-    currPanel.gameObject.SetActive(false);
-    newPanel.gameObject.SetActive(true);
+    currPanel.Hide();
+    newPanel.Show();
     newPanel.Init();
     newPanel.transform.SetAsLastSibling();
     currPanel = newPanel;
-
     transform.SetAsLastSibling();
-    newPanel.OpenTail();
+
+    newPanel.OpenTail(); //OpenNext in it
+  }
+
+  private void Open(Panel newPanel, Action Init)
+  {
+    currPanel.Hide();
+    newPanel.Show();
+    Init?.Invoke();
+    newPanel.transform.SetAsLastSibling();
+    currPanel = newPanel;
+    transform.SetAsLastSibling();
+
+    newPanel.OpenTail(); //OpenNext in it
   }
 
 
   public void OpenSearchPanel()
   {
     ResetButtons();
+    searchButton.image.sprite = searchButton.spriteState.selectedSprite;
     Open(searchPanel);
   }
 
   public void OpenAddRidePanel()
   {
     ResetButtons();
+    addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
     Open(addRidePanel);
   }
 
   public void OpenAddRidePanel(Panel srcPanel, Ride ride)
   {
     ResetButtons();
-
-    srcPanel.Next = addRidePanel;
-    addRidePanel.Init(ride);
-    srcPanel.OpenNext();
-    currPanel = addRidePanel;
     addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
-
+    srcPanel.Open(addRidePanel, () =>addRidePanel.Init(ride));
+    currPanel = addRidePanel;
   }
 
   public void OpenAddRidePanel(Panel srcPanel, Alert alert)
   {
     ResetButtons();
-
-    srcPanel.Next = addRidePanel;
-    addRidePanel.Init(alert);
-    srcPanel.OpenNext();
-    currPanel = addRidePanel;
     addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
+    srcPanel.Open(addRidePanel, () => addRidePanel.Init(alert));
+    currPanel = addRidePanel;
   }
 
   public void OpenAddRidePanel(Panel srcPanel, ScheduleRide schedule)
   {
     ResetButtons();
-
-    srcPanel.Next = addRidePanel;
-    addRidePanel.Init(schedule);
-    srcPanel.OpenNext();
-    currPanel = addRidePanel;
     addRideButton.image.sprite = addRideButton.spriteState.selectedSprite;
+    srcPanel.Open(addRidePanel, () => addRidePanel.Init(schedule));
+    currPanel = addRidePanel;
   }
 
   public void OpenProfilePanel()
@@ -194,47 +201,39 @@ public class FooterMenu : MonoBehaviour
 
     if (!Program.IsLoggedIn)
     {
-      LoginPanel loginPanel = PanelsFactory.CreateLogin();
-      currPanel.Open(loginPanel, () => { loginPanel.Init(true); });
-      currPanel = loginPanel;
+      if(loginPanel ==null) loginPanel = PanelsFactory.CreateLogin();
+      loginPanel.transform.SetParent(transform.parent, false);
+      Open(loginPanel, () => { loginPanel.Init(true); });
     }
     else
     {
       Open(profilePanel);
-      profilePanel.Init();
     }
   }
 
   public void OpenInboxPanel(Person personToChat, Panel srcPanel)
   {
     ResetButtons();
-
-    srcPanel.Next = inboxPanel;
-    inboxPanel.Init(personToChat);
-    srcPanel.OpenNext();
-    currPanel = inboxPanel;
-
     messagesButton.image.sprite = messagesButton.spriteState.selectedSprite;
+    srcPanel.Open(inboxPanel, () => inboxPanel.Init(personToChat));
+    currPanel = inboxPanel;
   }
 
 
   public void OpenYourRidesPanel()
   {
     ResetButtons();
-    Debug.Log(Program.IsLoggedIn);
+    myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
 
 
     if (!Program.IsLoggedIn)
     {
-      LoginPanel loginPanel = PanelsFactory.CreateLogin();
-      currPanel.Open(loginPanel, () => { loginPanel.Init(true); });
-      currPanel = loginPanel;
+      if (loginPanel == null) loginPanel = PanelsFactory.CreateLogin();
+      Open(loginPanel, () =>loginPanel.Init(true));
     }
     else
     {
       Open(yourRidesPanel);
-      myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
-      yourRidesPanel.Init();
     }
   }
 
