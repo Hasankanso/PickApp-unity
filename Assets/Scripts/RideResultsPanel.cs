@@ -18,6 +18,7 @@ public class RideResultsPanel : Panel
   private List<RideItem> rideItems = new List<RideItem>();
   public Text filterButton, clearFilterButton;
   public Transform noResultsPanel;
+  public Dropdown sortByDd;
   public void Init(List<Ride> rides, SearchInfo searchInfo)
   {
     Clear();
@@ -165,6 +166,73 @@ public class RideResultsPanel : Panel
     filterButton.gameObject.SetActive(true);
     clearFilterButton.gameObject.SetActive(false);
     noResultsPanel.gameObject.SetActive(false);
+  }
+
+  public void SortBy()
+  {
+    if (sortByDd.value == 1)
+    {
+      rides.Sort(new DepartureComparer(true));
+    }
+    else if (sortByDd.value == 2)
+    {
+      rides.Sort(new DepartureComparer(false));
+    }
+    else if (sortByDd.value == 3)
+    {
+      rides.Sort(new RateComparer(false));
+    }
+    resultsList.Clear();
+
+    foreach (Ride ri in rides)
+    {
+      AddItemToList(ri);
+    }
+  }
+
+  private class DepartureComparer : IComparer<Ride>
+  {
+    private bool ascending = true;
+    public DepartureComparer(bool ascending)
+    {
+      this.ascending = ascending;
+    }
+    public int Compare(Ride x, Ride y)
+    {
+      // Ride x = ri1.ride;
+      // Ride y = ri2.ride;
+      if (ascending)
+        return x.LeavingDate > y.LeavingDate ? 1 : x.LeavingDate < y.LeavingDate ? -1 : 0;
+      else
+        return x.LeavingDate > y.LeavingDate ? -1 : x.LeavingDate < y.LeavingDate ? 1 : 0;
+    }
+  }
+
+  /*  private class ArrivingComparer : IComparer<Ride>
+    {
+      public int Compare(Ride x, Ride y)
+      {
+        return x.arrive > y.LeavingDate ? 1 : x.LeavingDate == y.LeavingDate ? 0 : -1;
+      }
+    }*/
+
+  private class RateComparer : IComparer<Ride>
+  {
+    private bool ascending = true;
+    public RateComparer(bool ascending)
+    {
+      this.ascending = ascending;
+    }
+
+    public int Compare(Ride x, Ride y)
+    {
+      //     Ride x = ri1.ride;
+      //   Ride y = ri2.ride;
+      if (ascending)
+        return x.Person.RateAverage > y.Person.RateAverage ? 1 : x.Person.RateAverage < y.Person.RateAverage ? -1 : 0;
+      else
+        return x.Person.RateAverage > y.Person.RateAverage ? -1 : x.Person.RateAverage < y.Person.RateAverage ? 1 : 0;
+    }
   }
 
   public void OnAlertClicked()

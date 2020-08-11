@@ -91,10 +91,9 @@ public class RideDetails : Panel
   }
 
 
-  public void Init(ScheduleRide schedule, StatusE prevStatus)
+  public void Init(ScheduleRide schedule)
   {
     Init(schedule.Ride);
-    Status = prevStatus;
     if (Status == StatusE.ADD)
     {
       addScheduleButton.SetActive(true);

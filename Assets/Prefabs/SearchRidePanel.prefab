@@ -2351,10 +2351,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   panelName: 
+  permanent: 0
   from: {fileID: 6904850426700368705}
   to: {fileID: 6904850426700368732}
-  minDateText: {fileID: 6904850426700368717}
-  maxDateText: {fileID: 6904850426700368749}
+  minDate: {fileID: 6904850426700368717}
+  maxDate: {fileID: 6904850426700368749}
   numberOfPersons: {fileID: 6904850426700368746}
 --- !u!1 &6904850426700369486
 GameObject:
