@@ -27,9 +27,9 @@ namespace Requests {
             JObject driverJ = new JObject();
             JArray regionsArray = new JArray();
             driverJ["car"] = driver.Cars[0].ToJson();
-            foreach (string r in driver.Regions)
+            foreach (Location r in driver.Regions)
             {
-                regionsArray.Add(r);
+                regionsArray.Add(r.ToJson());
             }
             driverJ[nameof(driver.regions)] = regionsArray;
             driverJ[nameof(user)] = user.id;

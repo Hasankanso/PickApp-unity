@@ -117,7 +117,7 @@ public class ProfilePanel : Panel
   public void BecomeDriver()
   {
     Panel panel = PanelsFactory.CreateBecomeDriver();
-    Open(panel);
+    Open(panel, () => { panel.Init(); });
   }
   public void EditRegions()
   {

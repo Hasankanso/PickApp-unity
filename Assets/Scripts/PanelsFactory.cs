@@ -71,11 +71,6 @@ public class PanelsFactory : MonoBehaviour {
         CarsListPanel clPanel = Instantiate(defaultPanelsFactory.carsListPanel);
         return clPanel;
     }
-    public static BecomeDriver CreateBecomeDriver(Person person) {
-        BecomeDriver becomeDriver = Instantiate(defaultPanelsFactory.becomeDriver);
-        becomeDriver.Init(person);
-        return becomeDriver;
-    }
     public static BecomeDriver CreateBecomeDriver() {
         BecomeDriver becomeDriver = Instantiate(defaultPanelsFactory.becomeDriver);
         return becomeDriver;

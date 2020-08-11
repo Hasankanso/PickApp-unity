@@ -15,7 +15,7 @@ public class BecomeDriver : Panel {
     public Button becomeDriver, editRegions;
     public ListView listView;
     private List<RegionItem> regionItems = new List<RegionItem>();
-    private List<string> regions = new List<string>();
+    private List<Location> regions = new List<Location>();
     public static int regionCounter = 0;
     public void submit() {
         if (Validate()) {
@@ -75,11 +75,6 @@ public class BecomeDriver : Panel {
         }
     }
     public void AddRegion() {
-        AddItemToList();
-    }
-    public void Init(Person person) {
-        Clear();
-        this.person = person;
         AddItemToList();
     }
     public override void Init() {

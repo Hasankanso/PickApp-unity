@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Driver
 {
-  public List<string> regions = new List<string>();
+  public List<Location> regions = new List<Location>();
   List<Car> cars;
   string id;
   private List<ScheduleRide> schedules = new List<ScheduleRide>();
@@ -24,7 +24,7 @@ public class Driver
     this.cars = cars;
     this.id = dId;
   }
-  public Driver(List<string> regions)
+  public Driver(List<Location> regions)
   {
     this.Regions = regions;
   }
@@ -45,7 +45,7 @@ public class Driver
     JArray carsArray = new JArray();
     JArray schedulesArray = new JArray();
 
-    foreach (string r in regions)
+    foreach (Location r in regions)
     {
       //JObject regionJ = new JObject();
       //regionJ["Region"] = r;
@@ -96,7 +96,7 @@ public class Driver
       return new Driver(did, cars);
   }
   public List<Car> Cars { get => cars; set => cars = value; }
-  public List<string> Regions { get => regions; set => regions = value; }
+  public List<Location> Regions { get => regions; set => regions = value; }
   public string Did { get => id; set => id = value; }
   public DateTime Updated { get => updated; set => updated = value; }
   public List<ScheduleRide> Schedules { get => schedules; set => schedules = value; }

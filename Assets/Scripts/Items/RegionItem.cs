@@ -56,9 +56,9 @@ public class RegionItem : Panel
         }
         return valid;
     }
-    public string getRegion()
+    public Location getRegion()
     {
-        return region.text.text;
+        return regionL;
     }
     internal override void Clear()
     {
