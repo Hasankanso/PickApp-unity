@@ -36,7 +36,7 @@ public class AddRidePanel : Panel
 
   private Location fromL, toL;
 
-  //FirstView <--> secondView <--> MapPicker <--> CarPicker <--> RideDetails
+  //FirstView <--> secondView <--> CarPicker <--> MapPicker <--> RideDetails
 
   public override void Init()
   {
@@ -173,13 +173,13 @@ public class AddRidePanel : Panel
     if (schedule == null)
     {
       RideDetails rideDetailsPanel = PanelsFactory.CreateRideDetails();
-      Open(rideDetailsPanel, () => { rideDetailsPanel.Init(ride); });
+      directionsPanel.Open(rideDetailsPanel, () => { rideDetailsPanel.Init(ride); });
     }
     else
     {
       schedule.Ride = ride;
       RideDetails rideDetailsPanel = PanelsFactory.CreateRideDetails();
-      directionsPanel.Open(rideDetailsPanel, () => { rideDetailsPanel.Init(schedule, directionsPanel.Status); });
+      directionsPanel.Open(rideDetailsPanel, () => { rideDetailsPanel.Init(schedule); });
 
     }
   }

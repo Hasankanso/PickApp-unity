@@ -87,7 +87,7 @@ public class ScheduleItem : Panel
   public void OnClick()
   {
     RideDetails rideDetailsPanel = PanelsFactory.CreateRideDetails();
-    profilePanel.Open(rideDetailsPanel, () => { rideDetailsPanel.Init(scheduleRide, StatusE.VIEW); });
+    profilePanel.Open(rideDetailsPanel, () => { rideDetailsPanel.Init(scheduleRide); });
   }
   internal override void Clear()
   {
