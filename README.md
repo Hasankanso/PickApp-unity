@@ -7,6 +7,18 @@ Ali: Becomedriver, Addcar.<br>
 Hassan S.: AddRide.<br>
 Hassan K.: SearchRide.<br>
 
+Ads System.
+Ratings System.
+My Rides.
+All edits.(Profile, MyRides, Cancel Reservation, Remove Reservation) changePassword forgetpassword, Update Regions)
+Alert System.
+Splash Screen.
+Remove unity splash screen.
+Arabic/Lanaguage.
+Feedback/Bugs Report.
+Contact System.
+Implement Validation.
+
 # Unity Version
 <h4>Version 2019.3.2f1 Personal</h4>
 
