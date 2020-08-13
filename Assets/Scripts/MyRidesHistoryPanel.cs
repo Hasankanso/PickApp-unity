@@ -16,6 +16,8 @@ public class MyRidesHistoryPanel : Panel {
 
     public override void Init() {
         Request<List<Ride>> request = new GetMyRidesHistory(Program.User);
+        request.sendRequest.AddListener(OpenSpinner);
+        request.receiveResponse.AddListener(CloseSpinner);
         request.Send(Response);
     }
 

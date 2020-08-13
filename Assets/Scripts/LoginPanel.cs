@@ -21,6 +21,8 @@ public class LoginPanel : Panel {
         if (Validate()) {
             User user = new User("+" + code.text.text + phone.text.text, password.GetComponent<InputField>().text);
             Request<User> request = new Login(user);
+            request.sendRequest.AddListener(OpenSpinner);
+            request.receiveResponse.AddListener(CloseSpinner);
             request.Send(Response);
         }
     }

@@ -67,7 +67,7 @@ public class AddRidePanel : Panel
     from.SetText(ride.From.Name.ToString());
     to.SetText(ride.To.Name);
     comment.SetText(ride.Comment);
-    Debug.Log(ride.From.Name.ToString());
+        Debug.Log(ride.From.Name.ToString());
     price.SetText(ride.Price.ToString());
     date.text = Program.DateToString(ride.LeavingDate);
     isMusicAllowed.isOn = ride.MusicAllowed;

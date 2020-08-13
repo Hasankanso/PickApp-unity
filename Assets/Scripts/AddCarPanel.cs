@@ -21,7 +21,7 @@ public class AddCarPanel : Panel {
         if (VadilateSecondView()) {
             car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
             Request<Car> request = new AddCar(car, Program.Driver);
-            request.Send(response);
+            request.sendRequest.AddListener(OpenSpinner); request.receiveResponse.AddListener(CloseSpinner); request.Send(response);
         }
     }
     public void BecomeDriver() {
@@ -30,7 +30,7 @@ public class AddCarPanel : Panel {
             driver.Cars = new List<Car>();
             driver.Cars.Add(car);
             Request<Driver> request = new BecomeDriverRequest(Program.User, driver);
-            request.Send(BecomeDriverResponse);
+            request.sendRequest.AddListener(OpenSpinner); request.receiveResponse.AddListener(CloseSpinner); request.Send(BecomeDriverResponse);
         }
     }
 
@@ -68,6 +68,8 @@ public class AddCarPanel : Panel {
             car.Color = color;
             car.Picture = carImage.sprite.texture;
             Request<Car> request = new EditCar(car);
+            request.sendRequest.AddListener(OpenSpinner);
+            request.receiveResponse.AddListener(CloseSpinner);
             request.Send(response);
         }
     }
