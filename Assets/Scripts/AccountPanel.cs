@@ -25,8 +25,8 @@ public class AccountPanel : Panel {
             User editedUser = new User(editedPerson, null, user.phone, user.password, email.text.text, user.Id, user.Token);
 
             Request<User> request = new EditAccount(editedUser);
-            request.sendRequest.AddListener(OpenSpinner);
-            request.receiveResponse.AddListener(CloseSpinner);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
             request.Send(response);
         }
     }

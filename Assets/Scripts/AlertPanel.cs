@@ -30,8 +30,8 @@ public class AlertPanel : Panel {
             alert = null;
             alert = new Alert(Program.User, fromL, toL, price.text.text, DateTime.Parse(minDate.text), DateTime.Parse(maxDate.text), int.Parse(nbPersons.options[nbPersons.value].text), int.Parse(luggages.options[luggages.value].text), new CountryInformations("l.l"), comment.text.text);
             Request<Alert> request = new BroadCastAlert(alert);
-            request.sendRequest.AddListener(OpenSpinner);
-            request.receiveResponse.AddListener(CloseSpinner);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
             request.Send(response);
         }
     }

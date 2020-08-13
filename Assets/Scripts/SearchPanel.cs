@@ -28,10 +28,8 @@ public class SearchPanel : Panel {
         if (Vadilate()) {
             info = new SearchInfo(fromL, toL, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), int.Parse(numberOfPersons.options[numberOfPersons.value].text));
             Request<List<Ride>> request = new SearchForRides(info);
-            request.sendRequest.AddListener(OpenSpinner);
-            request.receiveResponse.AddListener(CloseSpinner);
-            request.sendRequest.AddListener(OpenSpinner);
-            request.receiveResponse.AddListener(CloseSpinner);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
             request.Send(SearchResults);
         }
     }

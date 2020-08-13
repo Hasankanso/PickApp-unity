@@ -27,6 +27,12 @@ namespace Requests {
         private HttpResponseMessage answer;
         public UnityEvent sendRequest = new UnityEvent();
         public UnityEvent receiveResponse = new UnityEvent();
+        public void AddSendListener(UnityAction unityAction) {
+            sendRequest.AddListener(unityAction);
+        }
+        public void AddReceiveListener(UnityAction unityAction) {
+            receiveResponse.AddListener(unityAction);
+        }
         /*<summary>
             * return null if there's no response
             * </summary>

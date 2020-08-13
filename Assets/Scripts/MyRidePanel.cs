@@ -12,8 +12,8 @@ public class MyRidePanel : Panel {
 
     public override void Init() {
         Request<List<Ride>> request = new GetMyUpcomingRides(Program.User);
-        request.sendRequest.AddListener(OpenSpinner);
-        request.receiveResponse.AddListener(CloseSpinner);
+        request.AddSendListener(OpenSpinner);
+        request.AddReceiveListener(CloseSpinner);
         request.Send(GetUpcomingRides);
         Status = StatusE.VIEW;
     }

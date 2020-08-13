@@ -21,7 +21,9 @@ public class AddCarPanel : Panel {
         if (VadilateSecondView()) {
             car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
             Request<Car> request = new AddCar(car, Program.Driver);
-            request.sendRequest.AddListener(OpenSpinner); request.receiveResponse.AddListener(CloseSpinner); request.Send(response);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(response);
         }
     }
     public void BecomeDriver() {
@@ -30,7 +32,9 @@ public class AddCarPanel : Panel {
             driver.Cars = new List<Car>();
             driver.Cars.Add(car);
             Request<Driver> request = new BecomeDriverRequest(Program.User, driver);
-            request.sendRequest.AddListener(OpenSpinner); request.receiveResponse.AddListener(CloseSpinner); request.Send(BecomeDriverResponse);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(BecomeDriverResponse);
         }
     }
 
@@ -68,8 +72,8 @@ public class AddCarPanel : Panel {
             car.Color = color;
             car.Picture = carImage.sprite.texture;
             Request<Car> request = new EditCar(car);
-            request.sendRequest.AddListener(OpenSpinner);
-            request.receiveResponse.AddListener(CloseSpinner);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
             request.Send(response);
         }
     }
@@ -85,8 +89,7 @@ public class AddCarPanel : Panel {
     public void Init(Car car) {
         Clear();
         this.car = car;
-        update.enabled = true;
-        add.enabled = false;
+        update.gameObject.SetActive(true);
         carName.SetText(car.Name);
         year.SetText(car.Year.ToString());
         maxSeats.value = car.MaxSeats - 1;
@@ -98,15 +101,12 @@ public class AddCarPanel : Panel {
     }
     public override void Init() {
         Clear();
-        update.enabled = false;
-        add.enabled = true;
+        add.gameObject.SetActive(true);
     }
     public void Init(Driver driver) {
         Clear();
         this.driver = driver;
-        update.enabled = false;
-        add.enabled = false;
-        becomeDriverBtn.enabled = true;
+        becomeDriverBtn.gameObject.SetActive(true);
     }
     private bool VadilateFirstView() {
         bool valid = true;
@@ -296,6 +296,8 @@ public class AddCarPanel : Panel {
         OrangeCheckMark.enabled = false;
         GreenCheckMark.enabled = false;
         CloseViewChoosenImage();
+        update.gameObject.SetActive(false);
+        add.gameObject.SetActive(false);
         //open first view
         OpenView(0);
     }

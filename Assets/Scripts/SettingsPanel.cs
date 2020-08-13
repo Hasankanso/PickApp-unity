@@ -57,8 +57,8 @@ public class SettingsPanel : Panel {
             user.Token = cacheToken;
             Program.User = user;
             Request<string> request = new Logout();
-            request.sendRequest.AddListener(OpenSpinner);
-            request.receiveResponse.AddListener(CloseSpinner);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
             request.Send(response);
         } else {
             LogoutDefault();

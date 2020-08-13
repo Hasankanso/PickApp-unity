@@ -18,18 +18,15 @@ public class ChattinessPanel : Panel {
     public void submit() {
         if (Vadilate()) {
             var chattiness = chatiness.options[chatiness.value].text;
-
             Person oldPerson = Program.Person;
             User oldUser = Program.User;
-
             Person editedPerson = new Person(oldPerson.id, oldPerson.FirstName, oldPerson.LastName, chattiness, oldPerson.Phone,
             oldPerson.CountryInformations, oldPerson.Bio, oldPerson.RateAverage, oldPerson.Gender, oldPerson.Birthday,
             DateTime.Now, oldPerson.profilePictureUrl);
             User editedUser = new User(editedPerson, oldUser.Driver, oldUser.phone, oldUser.password, oldUser.Email, oldUser.Id, oldUser.Token);
-
             Request<User> request = new EditAccount(editedUser);
-            request.sendRequest.AddListener(OpenSpinner);
-            request.receiveResponse.AddListener(CloseSpinner);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
             request.Send(response);
         }
     }

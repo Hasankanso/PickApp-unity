@@ -15,8 +15,8 @@ public class ContactUsPanel : Panel {
     public void sendMessage(Person user) {
         if (validate()) {
             Request<string> request = new SendContactUs(user, subject.text.text, description.text.text);
-            request.sendRequest.AddListener(OpenSpinner);
-            request.receiveResponse.AddListener(CloseSpinner);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
             request.Send(response);
         }
     }

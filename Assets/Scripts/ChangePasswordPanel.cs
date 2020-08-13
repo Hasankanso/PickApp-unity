@@ -20,17 +20,15 @@ public class ChangePasswordPanel : Panel {
 
     public void submit() {
         if (validate()) {
+            Request<Person> request;
             if (isForgetPassword) {
-                Request<Person> request = new ForgetPassword(user, newPassword.GetComponent<InputField>().text);
-                request.sendRequest.AddListener(OpenSpinner);
-                request.receiveResponse.AddListener(CloseSpinner);
-                request.Send(response);
+                request = new ForgetPassword(user, newPassword.GetComponent<InputField>().text);
             } else {
-                Request<Person> request = new ChangePassword(user, currentPassword.GetComponent<InputField>().text, newPassword.GetComponent<InputField>().text);
-                request.sendRequest.AddListener(OpenSpinner);
-                request.receiveResponse.AddListener(CloseSpinner);
-                request.Send(response);
+                request = new ChangePassword(user, currentPassword.GetComponent<InputField>().text, newPassword.GetComponent<InputField>().text);
             }
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(response);
         }
     }
     private void response(Person result, int code, string message) {
