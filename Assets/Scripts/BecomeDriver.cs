@@ -62,11 +62,7 @@ public class BecomeDriver : Panel {
         if (regionCounter <= 2) {
             var obj = ItemsFactory.CreateRegionItem(listView.scrollContainer,this);
             listView.Add(obj.gameObject);
-            if (ValidateAddingRegions())
-            {
-                Debug.Log(5);
-                regionItems.Add(obj);
-            }
+            regionItems.Add(obj);           
             regionCounter += 1;
         } else OpenDialog("You have added the maximum number of regions", false);
     }
@@ -81,7 +77,6 @@ public class BecomeDriver : Panel {
     public void AddRegion() {
         if (ValidateAddingRegions())
         {
-            Debug.Log("vaidation of add region");
             AddItemToList();
         }
     }
@@ -102,8 +97,6 @@ public class BecomeDriver : Panel {
     }
     public bool Validate() {
         bool valid = true;
-        //   for (int i = 0; i < regionItems.Count; i++) {
-        // if (!regionItems[i].Validate()) {
         if (!regionItems[0].Validate())
         {
             OpenDialog("Please Add a region first", false);
@@ -125,7 +118,19 @@ public class BecomeDriver : Panel {
             if (!regionItems[i].Validate())
             {
                 OpenDialog("Please add the region"+" "+(i+1)+" first", false);
-               // Debug.Log("1 is null");
+                valid = false;
+            }
+        }
+        return valid;
+    }
+    public bool ValidateRegionName(string region)
+    {
+        bool valid = true;
+        for (int i = 0; i < regionItems.Count; i++)
+        {   
+            if (regionItems[i].ToString().Equals(region))
+            {
+                OpenDialog("This region is already exist", false);
                 valid = false;
             }
         }
