@@ -50,7 +50,7 @@ public class RegionItem : Panel
     public bool Validate()
     {
         bool valid = true;
-        if (region.text.Equals(""))
+        if (region.text.text.Equals(""))
         {
             valid = false;
         }
