@@ -64,7 +64,8 @@ public class BecomeDriver : Panel {
             listView.Add(obj.gameObject);
             regionItems.Add(obj);           
             regionCounter += 1;
-        } else OpenDialog("You have added the maximum number of regions", false);
+        } 
+        else OpenDialog("You have added the maximum number of regions", false);
     }
     public void AddItemToList(List<string> regions) {
         foreach (var region in regions) {
@@ -117,13 +118,13 @@ public class BecomeDriver : Panel {
         {
             if (!regionItems[i].Validate())
             {
-                OpenDialog("Please add the region"+" "+(i+1)+" first", false);
+                OpenDialog("Please add the previous region first", false);
                 valid = false;
             }
         }
         return valid;
     }
-    public bool ValidateRegionName(string region)
+    public  bool ValidateRegionName(string region)
     {
         bool valid = true;
         for (int i = 0; i < regionItems.Count; i++)

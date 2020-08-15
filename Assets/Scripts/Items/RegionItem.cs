@@ -12,8 +12,12 @@ public class RegionItem : Panel
     private BecomeDriver becomeDriver;
     public void DeleteRegion()
     {
-        BecomeDriver.regionCounter -= 1;
-        Destroy(gameObject);
+        if (BecomeDriver.regionCounter >=2)
+        {
+            BecomeDriver.regionCounter -= 1;
+            Destroy(gameObject);
+        }
+        else OpenDialog("You should have at least one region", false);
     }
     public void EditRegion(Dropdown regionDropdown)
     {
@@ -23,13 +27,14 @@ public class RegionItem : Panel
     {
         this.becomeDriver = becomeDriver;
 
-        if (BecomeDriver.regionCounter == 0)
+        if (BecomeDriver.regionCounter > 1)
         {
-            deleteButton.gameObject.SetActive(false);
+            deleteButton.gameObject.SetActive(true);
         }
     }
     public void Init(string region,BecomeDriver becomeDriver)
     {
+
         this.becomeDriver = becomeDriver;
         if (BecomeDriver.regionCounter == 0)
         {
