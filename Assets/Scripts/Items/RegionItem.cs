@@ -6,67 +6,74 @@ using UnityEngine.UI;
 
 public class RegionItem : Panel
 {
-    public Image deleteButton;
-    private Location regionL;
-    public InputFieldScript region;
-    private BecomeDriver becomeDriver;
-    public void DeleteRegion()
+  public Image deleteButton;
+  private Location regionL;
+  public InputFieldScript region;
+  private BecomeDriver becomeDriver;
+  public void DeleteRegion()
+  {
+    if (BecomeDriver.regionCounter >= 2)
     {
-        if (BecomeDriver.regionCounter >=2)
-        {
-            BecomeDriver.regionCounter -= 1;
-            Destroy(gameObject);
-        }
-        else OpenDialog("You should have at least one region", false);
+      BecomeDriver.regionCounter -= 1;
+      Destroy(gameObject);
+      becomeDriver.regionItems.Remove(this);
     }
-    public void EditRegion(Dropdown regionDropdown)
-    {
-        //    this.regionDropdown = regionDropdown;
-    }
-    public void Init(BecomeDriver becomeDriver)
-    {
-        this.becomeDriver = becomeDriver;
+    else OpenDialog("You should have at least one region", false);
+  }
+  public void EditRegion(Dropdown regionDropdown)
+  {
+    //    this.regionDropdown = regionDropdown;
+  }
+  public void Init(BecomeDriver becomeDriver)
+  {
+    this.becomeDriver = becomeDriver;
 
-        if (BecomeDriver.regionCounter > 1)
-        {
-            deleteButton.gameObject.SetActive(true);
-        }
-    }
-    public void Init(string region,BecomeDriver becomeDriver)
+    if (BecomeDriver.regionCounter > 1)
     {
+      deleteButton.gameObject.SetActive(true);
+    }
+  }
+  public void Init(string region, BecomeDriver becomeDriver)
+  {
 
-        this.becomeDriver = becomeDriver;
-        if (BecomeDriver.regionCounter == 0)
-        {
-            deleteButton.gameObject.SetActive(false);
-        }
+    this.becomeDriver = becomeDriver;
+    if (BecomeDriver.regionCounter == 0)
+    {
+      deleteButton.gameObject.SetActive(false);
     }
+  }
 
-    public void OnLocationPicked(Location loc)
+  public void OnLocationPicked(Location loc)
+  {
+    regionL = loc;
+    region.GetComponent<InputField>().text = regionL.Name;
+    region.PlaceHolder();
+  }
+  public void OpenLocationPicker()
+  {
+    becomeDriver.OpenLocationFinder(region.text.text, OnLocationPicked);
+  }
+  public bool Validate()
+  {
+    bool valid = true;
+    if (region.text.text.Equals(""))
     {
-        regionL = loc;
-        region.GetComponent<InputField>().text = regionL.Name;
-        region.PlaceHolder();
+      valid = false;
     }
-    public void OpenLocationPicker()
-    {
-        becomeDriver.OpenLocationFinder(region.text.text, OnLocationPicked);
-    }
-    public bool Validate()
-    {
-        bool valid = true;
-        if (region.text.text.Equals(""))
-        {
-            valid = false;
-        }
-        return valid;
-    }
-    public Location getRegion()
-    {
-        return regionL;
-    }
-    internal override void Clear()
-    {
-        throw new NotImplementedException();
-    }
+    return valid;
+  }
+
+  public override bool Equals(object obj)
+  {
+    return obj == this;
+  }
+
+  public Location getRegion()
+  {
+    return regionL;
+  }
+  internal override void Clear()
+  {
+    throw new NotImplementedException();
+  }
 }
