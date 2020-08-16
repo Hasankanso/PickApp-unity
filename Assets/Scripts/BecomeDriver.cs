@@ -92,10 +92,12 @@ public class BecomeDriver : Panel
       listView.Add(obj.gameObject);
       regionItems.Add(obj);
       regionCounter += 1;
-    }
+      ValidateDeleteRegion();
+        }
   }
   public void AddRegion()
   {
+        
     if (ValidateAddingRegions())
     {
       AddItemToList();
@@ -121,19 +123,24 @@ public class BecomeDriver : Panel
   public bool Validate()
   {
     bool valid = true;
-    if (!regionItems[0].Validate())
-    {
-      OpenDialog("Please Add a region first", false);
-      valid = false;
-    }
-    else if (regionItems.Count == 4)
-    {
-      OpenDialog("You have Add The Maximum Number Of Regions", false);
-      valid = false;
+    for (int i = 0; i < regionItems.Count; i++)
+        {
+            if (!regionItems[i].Validate())
+            {
+                OpenDialog("Insert the region then click next", false);
+                valid = false;
+            }
 
-    }
+        }
+        if (regionItems.Count == 4)
+        {
+            OpenDialog("You have Add The Maximum Number Of Regions", false);
+            valid = false;
 
-    return valid;
+        }
+
+
+        return valid;
   }
   public bool ValidateAddingRegions()
   {
@@ -162,4 +169,15 @@ public class BecomeDriver : Panel
     }
     return valid;
   }
+    public void ValidateDeleteRegion()
+    {
+        for(int i = 0; i < regionCounter; i++)
+        {
+            if (i > 0)
+            {
+                regionItems[i].deleteButton.gameObject.SetActive(true);
+            }
+            else regionItems[i].deleteButton.gameObject.SetActive(false);
+        }
+    }
 }
