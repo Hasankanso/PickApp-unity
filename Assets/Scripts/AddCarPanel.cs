@@ -51,6 +51,7 @@ public class AddCarPanel : Panel {
             } else OpenDialog(message, false);
         } else {
             Program.User.Driver = result;
+            Debug.Log(1);
             MissionCompleted(AddRidePanel.PANELNAME, "Now you are a driver");
         }
     }
