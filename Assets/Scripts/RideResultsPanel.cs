@@ -25,7 +25,7 @@ public class RideResultsPanel : Panel
     this.rides = rides;
     this.from.text = searchInfo.From.ToString();
     this.to.text = searchInfo.To.ToString();
-    this.rideNumber.text = rides.Count + " rides available";
+    this.rideNumber.text = rides.Count.ToString();
     this.searchInfo = searchInfo;
 
     if (rides.Count == 0)

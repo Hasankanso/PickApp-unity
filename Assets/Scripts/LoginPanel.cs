@@ -36,9 +36,9 @@ public class LoginPanel : Panel {
             Program.IsLoggedIn = true;
             if (!isFromFooter) {
                 Back();
-                OpenDialog("Welcome back to PickApp", true);
+                OpenDialog("Welcome back to PickApp " + Program.User.Person.FirstName, true);
             } else {
-                MissionCompleted(ProfilePanel.PANELNAME, "Welcome back to PickApp");
+                MissionCompleted(ProfilePanel.PANELNAME, "Welcome back to PickApp " + Program.User.Person.FirstName+" !");
             }
         }
     }
