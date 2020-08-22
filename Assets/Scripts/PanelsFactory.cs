@@ -36,7 +36,7 @@ public class PanelsFactory : MonoBehaviour {
     public ChattinessPanel chattinessPanel;
     public AccountPanel accountPanel;
     public Spinner spinner;
-
+    public SeatsLuggagePanel seatsLuggagePanel;
     public DialogBox dialogBox;
     public CarDetails carDetails;
     public DirectionsFinderPanel directionsFinderPanel;
@@ -62,7 +62,10 @@ public class PanelsFactory : MonoBehaviour {
         PhonePanel phonePanel = Instantiate(defaultPanelsFactory.phonePanel);
         return phonePanel;
     }
-
+    public static SeatsLuggagePanel CreateSeatsLuggagePanel() {
+        SeatsLuggagePanel seatsLuggagePanel = Instantiate(defaultPanelsFactory.seatsLuggagePanel);
+        return seatsLuggagePanel;
+    }
     public static LoginPanel CreateLogin() {
         LoginPanel loginPanel = Instantiate(defaultPanelsFactory.loginPanel);
         return loginPanel;

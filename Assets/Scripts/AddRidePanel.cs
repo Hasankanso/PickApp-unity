@@ -11,6 +11,7 @@ public class AddRidePanel : Panel {
     public GameObject firstView, secondView;
     private DirectionsFinderPanel directionsPanel;
     private CarsListPanel carPickerPanel;
+    private SeatsLuggagePanel seatsLuggagePanel;
 
     public ToggleUi isMusicAllowed, isPetsAllowed, isAcAllowed, isSmokingAllowed;
     public Toggle kidSeats;
@@ -18,8 +19,6 @@ public class AddRidePanel : Panel {
     public Toggle stopTimeCheckBox;
     public GameObject stopTimeTextToShow;
 
-    public Dropdown numberOfSeats;
-    public Dropdown numberOfLuggages;
     private ScheduleRide schedule;
 
     public GameObject backButton;
@@ -28,6 +27,7 @@ public class AddRidePanel : Panel {
     private bool isAlertDetail = false;
     private Alert alert;
 
+    int maxSeats, maxLuggage;
     Texture2D map;
     Car car;
 
@@ -46,11 +46,11 @@ public class AddRidePanel : Panel {
     }
     public void Init(Ride ride) {
         Clear();
+        this.ride = ride;
         titleFirstView.text = "Edit Ride";
         titleSecView.text = titleFirstView.text;
         fromL = ride.From;
         toL = ride.To;
-        this.ride = ride;
         Status = StatusE.UPDATE;
         if (ride.StopTime != 0 && !ride.StopTime.ToString().Equals("")) {
             Debug.Log(ride.StopTime);
@@ -70,10 +70,12 @@ public class AddRidePanel : Panel {
         isAcAllowed.isOn = ride.AcAllowed;
         isSmokingAllowed.isOn = ride.SmokingAllowed;
         kidSeats.isOn = ride.KidSeat;
-        numberOfLuggages.value = ride.AvailableLuggages - 1;
-        numberOfSeats.value = ride.AvailableSeats - 1;
+        // numberOfLuggages.value = ride.AvailableLuggages - 1;
+        // numberOfSeats.value = ride.AvailableSeats - 1;
         map = ride.Map;
         car = ride.Car;
+        maxSeats = ride.MaxSeats;
+        maxLuggage = ride.MaxLuggages;
     }
 
     public void Init(Alert alert) {
@@ -82,14 +84,14 @@ public class AddRidePanel : Panel {
         from.SetText(alert.From.Name);
         to.SetText(alert.To.Name);
         price.SetText(alert.Price.ToString());
-        numberOfLuggages.value = alert.NumberOfLuggages - 1;
-        numberOfSeats.value = alert.NumberOfPersons - 1;
+        // numberOfLuggages.value = alert.NumberOfLuggages - 1;
+        // numberOfSeats.value = alert.NumberOfPersons - 1;
         from.GetComponent<InputField>().enabled = false;
         from.GetComponent<InputField>().readOnly = true;
         to.GetComponent<InputField>().enabled = false;
         price.GetComponent<InputField>().enabled = false;
-        numberOfLuggages.enabled = false;
-        numberOfSeats.enabled = false;
+        // numberOfLuggages.enabled = false;
+        // numberOfSeats.enabled = false;
         isAlertDetail = true;
         this.alert = alert;
     }
@@ -122,12 +124,12 @@ public class AddRidePanel : Panel {
             if (Status == StatusE.UPDATE)
                 ride = new Ride(ride.id, Program.User, null, fromL, toL, comment.text.text, price.text.text,
           wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
-          int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
+          0, 0,
           stopTime, null, null);
             else
                 ride = new Ride(null, Program.User, null, fromL, toL, comment.text.text, price.text.text,
           wholeDate, isMusicAllowed.isOn, isAcAllowed.isOn, isSmokingAllowed.isOn, isPetsAllowed.isOn, kidSeats.isOn,
-          int.Parse(numberOfSeats.options[numberOfSeats.value].text), int.Parse(numberOfLuggages.options[numberOfLuggages.value].text),
+          0, 0,
           stopTime, null, null);
 
             if (carPickerPanel == null) {
@@ -136,12 +138,23 @@ public class AddRidePanel : Panel {
             Open(carPickerPanel, () => { carPickerPanel.Init(OnCarPicked, car); });
         }
     }
-
+    public void OpenSeatsLuggagePanel() {
+        Debug.Log(ride.MaxSeats);
+        if (seatsLuggagePanel == null) {
+            seatsLuggagePanel = PanelsFactory.CreateSeatsLuggagePanel();
+        }
+        carPickerPanel.Open(seatsLuggagePanel, () => { seatsLuggagePanel.Init(OnSeatsLuggagePicked, maxSeats, maxLuggage, car.MaxSeats, car.MaxLuggage); });
+    }
+    public void OnSeatsLuggagePicked(int seats, int luggage) {
+        ride.MaxSeats = seats;
+        ride.MaxLuggages = luggage;
+        OpenDirectionsPanel();
+    }
     private void OpenDirectionsPanel() {
         if (directionsPanel == null) {
             directionsPanel = PanelsFactory.CreateDirectionFinderPanel();
         }
-        carPickerPanel.Open(directionsPanel, () => { directionsPanel.Init(map, from.text.text, to.text.text, true, OnMapPicked); });
+        seatsLuggagePanel.Open(directionsPanel, () => { directionsPanel.Init(map, from.text.text, to.text.text, true, OnMapPicked); });
     }
 
     private void OnMapPicked(Texture2D map) {
@@ -161,12 +174,10 @@ public class AddRidePanel : Panel {
 
         }
     }
-
-
     public void OnCarPicked(Car car) {
         ride.Car = car;
         this.car = car;
-        OpenDirectionsPanel();
+        OpenSeatsLuggagePanel();
     }
 
     public void OpenNotLoginPanel() {
@@ -311,8 +322,6 @@ public class AddRidePanel : Panel {
         openView(0);
         from.GetComponent<InputField>().enabled = true;
         to.GetComponent<InputField>().enabled = true;
-        numberOfLuggages.enabled = true;
-        numberOfSeats.enabled = true;
         price.GetComponent<InputField>().enabled = true;
     }
 
