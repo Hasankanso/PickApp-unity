@@ -35,10 +35,7 @@ public class RideResultsPanel : Panel
     }
 
     //there's results
-    foreach (Ride r in rides)
-    {
-      AddItemToList(r);
-    }
+    SortBy(); //sort and add rides.
     DownloadAndAddImages();
   }
 
@@ -170,17 +167,21 @@ public class RideResultsPanel : Panel
 
   public void SortBy()
   {
-    if (sortByDd.value == 1)
+    if (sortByDd.value == 0)
     {
-      rides.Sort(new DepartureComparer(true));
+      rides.Sort(new PriceComparer(true));
+    }
+    else if (sortByDd.value == 1)
+    {
+      rides.Sort(new RateComparer(false));
     }
     else if (sortByDd.value == 2)
     {
-      rides.Sort(new DepartureComparer(false));
+      rides.Sort(new DepartureComparer(true));
     }
     else if (sortByDd.value == 3)
     {
-      rides.Sort(new RateComparer(false));
+      rides.Sort(new DepartureComparer(false));
     }
     resultsList.Clear();
 
@@ -215,6 +216,23 @@ public class RideResultsPanel : Panel
         return x.arrive > y.LeavingDate ? 1 : x.LeavingDate == y.LeavingDate ? 0 : -1;
       }
     }*/
+
+  private class PriceComparer : IComparer<Ride>
+  {
+    private bool ascending = true;
+    public PriceComparer(bool ascending)
+    {
+      this.ascending = ascending;
+    }
+
+    public int Compare(Ride x, Ride y)
+    {
+      if (ascending)
+        return x.Price > y.Price ? 1 : x.Price < y.Price ? -1 : 0;
+      else
+        return x.Price > y.Price ? -1 : x.Price < y.Price ? 1 : 0;
+    }
+  }
 
   private class RateComparer : IComparer<Ride>
   {

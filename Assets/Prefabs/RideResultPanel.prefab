@@ -2275,7 +2275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.79999, y: 238.87}
+  m_AnchoredPosition: {x: -0.7999878, y: 238.87}
   m_SizeDelta: {x: 0, y: -1139.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8475416959782318504
@@ -2553,7 +2553,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -22.1, y: 88}
-  m_SizeDelta: {x: -44.2, y: 111.3}
+  m_SizeDelta: {x: -44.2, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8802807183772862037
 CanvasRenderer:
@@ -2852,16 +2852,16 @@ MonoBehaviour:
   m_CaptionImage: {fileID: 0}
   m_ItemText: {fileID: 6645695935983191911}
   m_ItemImage: {fileID: 0}
-  m_Value: 0
+  m_Value: 2
   m_Options:
     m_Options:
-    - m_Text: Sort By
-      m_Image: {fileID: 0}
-    - m_Text: Departue ^
-      m_Image: {fileID: 0}
-    - m_Text: ' Departue V'
+    - m_Text: Price
       m_Image: {fileID: 0}
     - m_Text: Rate
+      m_Image: {fileID: 0}
+    - m_Text: earliest first
+      m_Image: {fileID: 0}
+    - m_Text: latest first
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3137,7 +3137,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sort By
+  m_Text: earliest first
 --- !u!1 &6446319365663468608
 GameObject:
   m_ObjectHideFlags: 0
