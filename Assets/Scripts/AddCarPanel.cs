@@ -64,7 +64,8 @@ public class AddCarPanel : Panel {
         viewImageModel.gameObject.SetActive(false);
     }
     public void submitUpdate() {
-        if (VadilateSecondView()) {
+        // if (VadilateSecondView()) {
+        Debug.Log("submit update");
             car.Name = carName.text.text;
             car.Year = int.Parse(year.text.text);
             car.MaxSeats = int.Parse(maxSeats.options[maxSeats.value].text);
@@ -75,13 +76,24 @@ public class AddCarPanel : Panel {
             Request<Car> request = new EditCar(car);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
-            request.Send(response);
-        }
+            request.Send(response2);
+        
     }
     private void response(Car result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
         } else {
             Program.Driver.Cars.Add(result);
+            FooterMenu.dFooterMenu.OpenProfilePanel();
+            DestroyForwardBackward();
+        }
+    }
+    private void response2(Car result, int code, string message)
+    {
+        if (!code.Equals((int)HttpStatusCode.OK))
+        {
+        }
+        else
+        {
             FooterMenu.dFooterMenu.OpenProfilePanel();
             DestroyForwardBackward();
         }

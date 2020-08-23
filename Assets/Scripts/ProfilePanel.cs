@@ -13,7 +13,7 @@ public class ProfilePanel : Panel {
     public Text fullName, ratings;
     public Scrollbar scroll;
     public ListView listCarView;
-    private List<CarItem> carItems = new List<CarItem>(5);
+    public List<CarItem> carItems = new List<CarItem>(5);
     public GameObject mainContent, carContainer, scheduleContainer, scrollView, scheduleLabel, becomeDriverLabel, regionsLabel;
     public ListView listSchduleView;
     public Image profilePicture;
@@ -146,6 +146,11 @@ public class ProfilePanel : Panel {
         Panel panel = PanelsFactory.CreateMyRidesHistory();
         Open(panel, () => { panel.Init(); });
     }
+
+
+
+
+
     internal override void Clear() {
         scroll.value = 1;
         carItems.Clear();

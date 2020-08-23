@@ -24,7 +24,6 @@ namespace Requests
 
     public override Car BuildResponse(JToken response) //ToDo
     {
-            Debug.Log(1);
       return Car.ToObject((JObject)response);
     }
 

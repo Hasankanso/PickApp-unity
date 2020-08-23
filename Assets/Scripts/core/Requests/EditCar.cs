@@ -17,15 +17,13 @@ namespace Requests
     public EditCar(Car car)
     {
       this.car = car;
-      HttpPath = "";
-      Action = "editCar";
+      HttpPath = "/CarBusiness/UpdateCar";
     }
 
     public override Car BuildResponse(JToken response) //TODO
     {
-      return null;
-      //  return JsonConvert.DeserializeObject<Car>(response);
-    }
+            return Car.ToObject((JObject)response);
+        }
 
     public override string ToJson()
     {
