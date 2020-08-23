@@ -27,7 +27,7 @@ public class AddRidePanel : Panel {
     private bool isAlertDetail = false;
     private Alert alert;
 
-    int maxSeats, maxLuggage;
+    int availableSeats, availableLuggage;
     Texture2D map;
     Car car;
 
@@ -74,8 +74,8 @@ public class AddRidePanel : Panel {
         // numberOfSeats.value = ride.AvailableSeats - 1;
         map = ride.Map;
         car = ride.Car;
-        maxSeats = ride.MaxSeats;
-        maxLuggage = ride.MaxLuggages;
+        availableSeats = ride.AvailableSeats;
+        availableLuggage = ride.AvailableLuggages;
     }
 
     public void Init(Alert alert) {
@@ -139,15 +139,16 @@ public class AddRidePanel : Panel {
         }
     }
     public void OpenSeatsLuggagePanel() {
-        Debug.Log(ride.MaxSeats);
         if (seatsLuggagePanel == null) {
             seatsLuggagePanel = PanelsFactory.CreateSeatsLuggagePanel();
         }
-        carPickerPanel.Open(seatsLuggagePanel, () => { seatsLuggagePanel.Init(OnSeatsLuggagePicked, maxSeats, maxLuggage, car.MaxSeats, car.MaxLuggage); });
+        carPickerPanel.Open(seatsLuggagePanel, () => { seatsLuggagePanel.Init(OnSeatsLuggagePicked, availableSeats, availableLuggage, car.MaxSeats, car.MaxLuggage); });
     }
     public void OnSeatsLuggagePicked(int seats, int luggage) {
-        ride.MaxSeats = seats;
-        ride.MaxLuggages = luggage;
+        ride.AvailableSeats = seats;
+        ride.AvailableLuggages = luggage;
+        availableSeats = seats;
+        availableLuggage = luggage;
         OpenDirectionsPanel();
     }
     private void OpenDirectionsPanel() {

@@ -7,21 +7,44 @@ using UnityEngine;
 
 public class MyRidePanel : Panel {
     public ListView listMyRidesView;
+    public GameObject scrollContainer;
     public static readonly string PANELNAME = "MyRides";
+    float distance;
 
 
     public override void Init() {
-        Request<List<Ride>> request = new GetMyUpcomingRides(Program.User);
-        request.AddSendListener(OpenSpinner);
-        request.AddReceiveListener(CloseSpinner);
-        request.Send(GetUpcomingRides);
-        Status = StatusE.VIEW;
-    }
-
-    private void GetUpcomingRides(List<Ride> arg1, int arg2, string arg3) {
-        Program.Person.UpcomingRides = arg1;
         ImplementYourRidesList(Program.Person.UpcomingRides);
-
+        Status = StatusE.VIEW;
+        distance = Vector3.Distance(listMyRidesView.transform.position, scrollContainer.transform.position);
+    }
+    public void GetMyUpcomingsRidesOnPull() {
+        float newDistance= Vector3.Distance(listMyRidesView.transform.position, scrollContainer.transform.position);
+        if (newDistance+150<distance) {
+            Debug.Log("get my upcoming rides");
+            Request<List<Ride>> request = new GetMyUpcomingRides(Program.User);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(GetUpcomingRides);
+        }
+    }
+   
+    private void GetUpcomingRides(List<Ride> rides, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+            if (code == 302) {
+                Program.User = null;
+                Cache.SetToken("");
+                Program.IsLoggedIn = false;
+                OpenDialog("Please login", false);
+                LoginPanel login = PanelsFactory.CreateLogin();
+                Open(login, () => { login.Init(false); });
+            } else {
+                OpenDialog(message, false);
+                Debug.Log(code);
+            }
+        } else {
+            Program.Person.UpcomingRides = rides;
+            ImplementYourRidesList(Program.Person.UpcomingRides);
+        }
     }
 
     public void ImplementYourRidesList(List<Ride> rides) {

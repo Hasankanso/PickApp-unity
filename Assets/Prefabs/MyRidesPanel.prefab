@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2875887225560034546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4471221721988565986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 14
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2340698140060916017}
+          m_MethodName: GetMyUpcomingsRidesOnPull
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5050130342718371525
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +271,7 @@ MonoBehaviour:
   panelName: MyRides
   permanent: 1
   listMyRidesView: {fileID: 6824882263755901378}
+  scrollContainer: {fileID: 5781883676900347122}
 --- !u!1001 &7699955143204951305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -372,6 +401,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 611bef3826d3d8a4e91b511020570690, type: 3}
+--- !u!1 &4471221721988565986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6113429920892837611, guid: 611bef3826d3d8a4e91b511020570690,
+    type: 3}
+  m_PrefabInstance: {fileID: 7699955143204951305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &9017483823476829158 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1729159789868924655, guid: 611bef3826d3d8a4e91b511020570690,
@@ -384,9 +419,15 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7699955143204951305}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4471221721988565986}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b698be8bfc61084419861dd19ec84bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5781883676900347122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4244322665670253051, guid: 611bef3826d3d8a4e91b511020570690,
+    type: 3}
+  m_PrefabInstance: {fileID: 7699955143204951305}
+  m_PrefabAsset: {fileID: 0}

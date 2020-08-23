@@ -15,7 +15,7 @@ public class LoginPanel : Panel {
     public InputFieldScript phone, code, password;
     public Image backButton;
     private Person person;
-    private bool isFromFooter;
+    private bool isFromProfilePanel;
 
     public void Login() {
         if (Validate()) {
@@ -34,7 +34,7 @@ public class LoginPanel : Panel {
             Cache.User(u);
             Cache.SetPassword(password.GetComponent<InputField>().text);
             Program.IsLoggedIn = true;
-            if (!isFromFooter) {
+            if (!isFromProfilePanel) {
                 Back();
                 OpenDialog("Welcome back to PickApp " + Program.User.Person.FirstName, true);
             } else {
@@ -43,10 +43,10 @@ public class LoginPanel : Panel {
         }
     }
 
-    public void Init(bool isFromFooter) {
+    public void Init(bool isFromProfilePanel) {
         Clear();
-        this.isFromFooter = isFromFooter;
-        if (!isFromFooter) {
+        this.isFromProfilePanel = isFromProfilePanel;
+        if (!isFromProfilePanel) {
             backButton.gameObject.SetActive(true);
         }
         if (!string.IsNullOrEmpty(Cache.GetPhone())) {
