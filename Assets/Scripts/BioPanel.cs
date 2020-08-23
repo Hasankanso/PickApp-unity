@@ -13,6 +13,7 @@ public class BioPanel : Panel {
     public override void Init() {
         Clear();
         bio.SetText(Program.Person.Bio);
+        //bvcbvcbvcbv
     }
     public void submit() {
         if (Validate()) {
