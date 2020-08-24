@@ -76,7 +76,7 @@ public class AddCarPanel : Panel {
             Request<Car> request = new EditCar(car);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
-            request.Send(response2);
+            request.Send(response);
         
     }
     public void DeleteCar(Car car)
@@ -93,8 +93,7 @@ public class AddCarPanel : Panel {
         if (!code.Equals((int)HttpStatusCode.OK)) {
         } else {
             Program.Driver.Cars.Add(result);
-            FooterMenu.dFooterMenu.OpenProfilePanel();
-            DestroyForwardBackward();
+            MissionCompleted(ProfilePanel.PANELNAME, "Car has been edited");
         }
     }
     private void response2(Car result, int code, string message)
@@ -119,6 +118,7 @@ public class AddCarPanel : Panel {
         maxSeats.value = car.MaxSeats - 1;
         maxLuggages.value = car.MaxLuggage - 1;
         brand.SetText(car.Brand);
+        color = car.Color;
         GetColor(car.Color);
         carImage.sprite = Program.GetImage(car.Picture);
         largeCarImage.sprite = Program.GetImage(car.Picture);

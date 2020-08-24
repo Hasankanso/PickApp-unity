@@ -7,55 +7,47 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Requests
-{
-  public class EditAccount : Request<User>
-  {
-    User newUser;
+namespace Requests {
+    public class EditAccount : Request<Person> {
+        Person newUser;
 
-    public EditAccount(User newUser)
-    {
-      this.newUser = newUser;
-      HttpPath = "/PersonBusiness/EditPerson";
+        public EditAccount(Person newUser) {
+            this.newUser = newUser;
+            HttpPath = "/PersonBusiness/EditPerson";
+        }
+
+        public override Person BuildResponse(JToken response) //TODO
+        {
+            JObject json = (JObject)response;
+            Person p = Person.ToObject(json);
+            return p;
+        }
+
+        public override string ToJson() {
+            JObject personJ = newUser.ToJson();
+            personJ["user"] = Program.User.Id;
+            personJ["email"] = Program.User.Email;
+            return personJ.ToString();
+        }
+
+        protected override string IsValid() {
+            /*if (string.IsNullOrEmpty(newUser.FirstName) || string.IsNullOrEmpty(newUser.LastName)
+              || string.IsNullOrEmpty(newUser.Email) || string.IsNullOrEmpty(newUser.Phone)
+              || string.IsNullOrEmpty(newUser.Password)) {
+                return "Please fill empty fields.";
+            }
+
+            if (!newUser.Email.Contains("@")) {
+                return "This email doesn't match.";
+            }
+            if (!IsPhoneNumber(newUser.Phone)) {
+                return "The phone number is wrong, please enter a valid one";
+            }
+
+            if (!ValidPassword(newUser.Password)) {
+                return "Make sure your password has at least 8 characters and contains at least one number and one letter";
+            }*/
+            return string.Empty;
+        }
     }
-
-    public override User BuildResponse(JToken response) //TODO
-    {/*
-      JObject json = (JObject)response;
-      Person p = Person.ToObject(json);
-      Texture2D image = await DownloadImage(p.ProfilePictureUrl);
-      p.ProfilePicture = image;
-      return p;
-      */
-      return null;
-    }
-
-    public override string ToJson()
-    {
-      JObject personJ = newUser.ToJson();
-      personJ[nameof(newUser.id)] = newUser.Id;
-      return personJ.ToString();
-    }
-
-    protected override string IsValid()
-    {
-      /*if (string.IsNullOrEmpty(newUser.FirstName) || string.IsNullOrEmpty(newUser.LastName)
-        || string.IsNullOrEmpty(newUser.Email) || string.IsNullOrEmpty(newUser.Phone)
-        || string.IsNullOrEmpty(newUser.Password)) {
-          return "Please fill empty fields.";
-      }
-
-      if (!newUser.Email.Contains("@")) {
-          return "This email doesn't match.";
-      }
-      if (!IsPhoneNumber(newUser.Phone)) {
-          return "The phone number is wrong, please enter a valid one";
-      }
-
-      if (!ValidPassword(newUser.Password)) {
-          return "Make sure your password has at least 8 characters and contains at least one number and one letter";
-      }*/
-      return string.Empty;
-    }
-  }
 }

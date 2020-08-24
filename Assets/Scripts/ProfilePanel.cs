@@ -95,7 +95,7 @@ public class ProfilePanel : Panel {
     }
     public void EditAccount() {
         Panel panel = PanelsFactory.CreateAccountPanel();
-        Open(panel);
+        Open(panel, () => { panel.Init(); });
     }
     public void BecomeDriver() {
         Panel panel = PanelsFactory.CreateBecomeDriver();
