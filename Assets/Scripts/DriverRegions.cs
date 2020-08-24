@@ -68,6 +68,7 @@ public class DriverRegions : Panel
         AddItemToList();
         title.text = "Regions";
     }
+
     internal override void Clear()
     {
         listView.Clear();

@@ -19,18 +19,16 @@ public class ChattinessPanel : Panel {
         if (Vadilate()) {
             var chattiness = chatiness.options[chatiness.value].text;
             Person oldPerson = Program.Person;
-            User oldUser = Program.User;
             Person editedPerson = new Person(oldPerson.id, oldPerson.FirstName, oldPerson.LastName, chattiness, oldPerson.Phone,
             oldPerson.CountryInformations, oldPerson.Bio, oldPerson.RateAverage, oldPerson.Gender, oldPerson.Birthday,
-            DateTime.Now, oldPerson.profilePictureUrl);
-            User editedUser = new User(editedPerson, oldUser.Driver, oldUser.phone, oldUser.password, oldUser.Email, oldUser.Id, oldUser.Token);
-            /*Request<User> request = new EditAccount(editedUser);
+             oldPerson.profilePictureUrl);
+            Request<Person> request = new EditAccount(editedPerson);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
-            request.Send(response);*/
+            request.Send(response);
         }
     }
-    private void response(User result, int code, string message) {
+    private void response(Person result, int code, string message) {
         if (!code.Equals(HttpStatusCode.OK)) {
             OpenDialog("There was an error adding chattiness", false);
         } else {

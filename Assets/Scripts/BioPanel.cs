@@ -18,18 +18,16 @@ public class BioPanel : Panel {
     public void submit() {
         if (Validate()) {
             Person oldPerson = Program.Person;
-            User oldUser = Program.User;
             Person editedPerson = new Person(oldPerson.id, oldPerson.FirstName, oldPerson.LastName, oldPerson.Chattiness, oldPerson.Phone,
             oldPerson.CountryInformations, bio.text.text, oldPerson.RateAverage, oldPerson.Gender, oldPerson.Birthday,
-            DateTime.Now, oldPerson.profilePictureUrl);
-            User editedUser = new User(editedPerson, oldUser.Driver, oldUser.phone, oldUser.password, oldUser.Email, oldUser.Id, oldUser.Token);
-            /*Request<User> request = new EditAccount(editedUser);
+             oldPerson.profilePictureUrl);
+            Request<Person> request = new EditAccount(editedPerson);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
-            request.Send(Response);*/
+            request.Send(Response);
         }
     }
-    private void Response(User result, int code, string message) {
+    private void Response(Person result, int code, string message) {
         if (!code.Equals(HttpStatusCode.OK)) {
             OpenDialog("There was an error adding bio", false);
         } else {

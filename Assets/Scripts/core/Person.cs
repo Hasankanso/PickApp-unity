@@ -25,7 +25,7 @@ public class Person {
     public Person() {
     }
     //Constructor for login
-    public Person(string id, string firstName, string lastName, string chattiness, string phone, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday, DateTime updated, string profilePictureUrl) {
+    public Person(string id, string firstName, string lastName, string chattiness, string phone, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday, string profilePictureUrl) {
         this.id = id;
         this.firstName = firstName;
         this.bio = bio;
@@ -37,7 +37,6 @@ public class Person {
         this.gender = gender;
         this.countryInformations = countryInformations;
         this.birthday = birthday;
-        this.updated = updated;
     }
 
     //Constructor for Edit
@@ -134,7 +133,7 @@ public class Person {
             bool.TryParse(gn.ToString(), out gender);
 
         string image = json[nameof(image)].ToString();
-        Person p = new Person(id, firstName, lastName, chattiness, phone, countryInformations, bio, rateAverage, gender, birthday, updated, image);
+        Person p = new Person(id, firstName, lastName, chattiness, phone, countryInformations, bio, rateAverage, gender, birthday, image);
 
         JArray upcomingRidesArray = (JArray)json.GetValue("upcomingRides");
         List<Ride> rides = new List<Ride>();

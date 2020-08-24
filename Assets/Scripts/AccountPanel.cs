@@ -18,11 +18,8 @@ public class AccountPanel : Panel {
     public void submit() {
         if (vadilate()) {
             CountryInformations cI = Program.CountriesInformations[countryDP.options[countryDP.value].text];
-
-
             Person editedPerson = new Person(firstName.text.text, lastName.text.text, Program.StringToBirthday(birthday.text),
             profilePicture.sprite.texture, cI, genderDP.value == 0);
-
             Request<Person> request = new EditAccount(editedPerson);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
