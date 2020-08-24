@@ -11,7 +11,6 @@ public class CarDetails : Panel
   public Text carName, carBrand, carYear, carSeats, carColor, carLuggages;
   public Image carImage;
   public Car car=null;
-  public AddCarPanel addCarPanel;
   
   public void Init(Car car)
   {
@@ -37,13 +36,35 @@ public class CarDetails : Panel
     }
     public void Delete()
     {
-        Debug.Log("Deleting car1");
-        addCarPanel.DeleteCar(car);
-        Debug.Log("Deleting car2");
-        Destroy(gameObject);
+            Request<Car> request = new DeleteCar(car, Program.Driver);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(response);
+        
     }
+    private void response(Car result, int code, string message)
+    {
+        if (!code.Equals((int)HttpStatusCode.OK))
+        {
+        }
+        if (code == 1)
+        {
+            Destroy(gameObject);
+            FooterMenu.dFooterMenu.OpenProfilePanel();
+            OpenDialog(message, false);
+            // MissionCompleted(ProfilePanel.PANELNAME, message);
 
-  internal override void Clear()
+        }
+
+        else 
+        {
+            FooterMenu.dFooterMenu.OpenProfilePanel();
+            OpenDialog(message, true);
+            DestroyForwardBackward();
+
+        }
+    }
+    internal override void Clear()
   {
     carName.text = "";
     carBrand.text = "";
@@ -52,5 +73,6 @@ public class CarDetails : Panel
     carColor.text = "";
     carLuggages.text = "";
   }
+
 
 }

@@ -79,16 +79,7 @@ public class AddCarPanel : Panel {
             request.Send(response2);
         
     }
-    public void DeleteCar(Car car)
-    {
-        Request<Car> request = new DeleteCar(car);
-        request.AddSendListener(OpenSpinner);
-        request.AddReceiveListener(CloseSpinner);
-        request.Send(response2);
 
-
-
-    }
     private void response(Car result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
         } else {

@@ -13,9 +13,11 @@ namespace Requests
     class DeleteCar : Request<Car>
     {
         private Car car;
-
-        public DeleteCar(Car car)
+        private Driver driver;
+        
+        public DeleteCar(Car car,Driver driver)
         {
+            this.driver = driver;
             this.car = car;
             HttpPath = "/CarBusiness/DeleteCar";
         }
@@ -29,6 +31,7 @@ namespace Requests
         {
             JObject carJ = car.ToJson();
             carJ[nameof(car.id)] = car.Id;
+            carJ[nameof(driver)] = driver.Did;
             return carJ.ToString();
         }
 

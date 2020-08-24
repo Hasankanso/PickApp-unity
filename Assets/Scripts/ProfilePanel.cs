@@ -146,7 +146,16 @@ public class ProfilePanel : Panel {
         Panel panel = PanelsFactory.CreateMyRidesHistory();
         Open(panel, () => { panel.Init(); });
     }
-
+    public bool ValidateDelete()
+    {
+        bool valid = true;
+        if (carItems.Count < 1)
+        {
+            valid = false;
+            OpenDialog("You can't delete the last car", false);
+        }
+        return valid;
+    }
 
 
 
