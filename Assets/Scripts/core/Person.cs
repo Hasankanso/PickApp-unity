@@ -41,10 +41,9 @@ public class Person {
     }
 
     //Constructor for Edit
-    public Person(string firstName, string lastName, string phone, DateTime birthday, Texture2D profilePicture, CountryInformations countryInformations, bool gender) {
+    public Person(string firstName, string lastName, DateTime birthday, Texture2D profilePicture, CountryInformations countryInformations, bool gender) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phone;
         this.birthday = birthday;
         this.ProfilePicture = profilePicture;
         this.gender = gender;

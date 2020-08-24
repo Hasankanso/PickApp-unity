@@ -1,5 +1,6 @@
 ﻿using Requests;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -19,12 +20,10 @@ public class AccountPanel : Panel {
             CountryInformations cI = Program.CountriesInformations[countryDP.options[countryDP.value].text];
 
 
-            Person editedPerson = new Person(firstName.text.text, lastName.text.text, user.phone, Program.StringToBirthday(birthday.text),
+            Person editedPerson = new Person(firstName.text.text, lastName.text.text, Program.StringToBirthday(birthday.text),
             profilePicture.sprite.texture, cI, genderDP.value == 0);
 
-            User editedUser = new User(editedPerson, null, user.phone, user.password, email.text.text, user.Id, user.Token);
-
-            Request<User> request = new EditAccount(editedUser);
+            Request<Person> request = new EditAccount(editedPerson);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);
@@ -34,9 +33,9 @@ public class AccountPanel : Panel {
         Panel panel = PanelsFactory.CreateImageViewer(Program.Person.ProfilePicture);
         OpenDialog(panel);
     }
-    private void response(User result, int code, string message) {
-        if (!code.Equals(HttpStatusCode.OK)) {
-            OpenDialog("There was an error editing your account", false);
+    private void response(Person result, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+            OpenDialog(message, false);
         } else {
             MissionCompleted(ProfilePanel.PANELNAME, "Account has been edited");
         }
@@ -69,23 +68,33 @@ public class AccountPanel : Panel {
         else
             genderDP.value = 1;
     }
-    private void CheckCountry(string country) {
-        if (country.Equals("Lebanon"))
-            countryDP.value = 0;
-    }
     public override void Init() {
         Clear();
+        user = Program.User;
         Person person = Program.Person;
         firstName.SetText(person.FirstName);
         lastName.SetText(person.LastName);
         email.SetText(Program.User.Email);
+        Debug.Log(person.Birthday);
         birthday.text = Program.BirthdayToString(person.Birthday);
         CheckGender(person.Gender);
-        CheckCountry(person.CountryInformations.Name);
         profilePicture.sprite = Program.GetImage(person.ProfilePicture);
+        Request<Dictionary<string, CountryInformations>> request = new GetCountries();
+        request.AddSendListener(OpenSpinner);
+        request.AddReceiveListener(CloseSpinner);
+        request.Send(GetCountriesResponse);
+    }
+    private void GetCountriesResponse(Dictionary<string, CountryInformations> result, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK))
+            OpenDialog("Error", false);
+        else {
+            Program.CountriesInformations = result;
+            countryDP.AddOptions(Program.CountriesInformationsNames);
+            countryDP.value = countryDP.options.FindIndex((i) => { return i.text.Equals(Program.Person.CountryInformations.Name); });
+        }
     }
     internal int CalculateAge() {
-        DateTime birthday = DateTime.Parse(this.birthday.text);
+        DateTime birthday = Program.StringToBirthday(this.birthday.text);
         // get the difference in years
         int years = DateTime.Now.Year - birthday.Year;
         // subtract another year if we're before the
