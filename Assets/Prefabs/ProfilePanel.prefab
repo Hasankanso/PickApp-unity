@@ -960,6 +960,7 @@ MonoBehaviour:
   ratings: {fileID: 6106076923037605654}
   scroll: {fileID: 790990231581474822}
   listCarView: {fileID: 6485255586794808301}
+  carItems: []
   mainContent: {fileID: 790990232197236668}
   carContainer: {fileID: 3644924034501908741}
   scheduleContainer: {fileID: 790990232234642119}

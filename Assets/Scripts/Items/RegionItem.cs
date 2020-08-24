@@ -9,6 +9,7 @@ public class RegionItem : Panel {
     private Location regionL;
     public InputFieldScript region;
     private BecomeDriver becomeDriver;
+    private DriverRegions driverRegions;
     public void DeleteRegion() {
         if (BecomeDriver.regionCounter >= 2) {
             BecomeDriver.regionCounter -= 1;
@@ -24,11 +25,10 @@ public class RegionItem : Panel {
     }
     public void Init(BecomeDriver becomeDriver) {
         this.becomeDriver = becomeDriver;
-
-        //if (BecomeDriver.regionCounter >= 0)
-        //  {
-        //  deleteButton.gameObject.SetActive(true);
-        //}
+    }
+    public void Init(DriverRegions driverRegions)
+    {
+        this.driverRegions = driverRegions;
     }
     public void Init(string region, BecomeDriver becomeDriver) {
 
