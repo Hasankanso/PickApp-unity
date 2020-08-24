@@ -8,7 +8,6 @@ public class CarItem : Item
   public Text carName, brand, color, year, maxSeats, maxLuggages;
   public Image carImage;
   public Car car;
-  private ProfilePanel profilePanel;
   public Action<Car, CarItem> OnItemClicked;
 
   internal void Init(Car c, Action<Car, Item> OnItemClicked)
@@ -116,12 +115,7 @@ public class CarItem : Item
       OnItemClicked(car, this);
  
     }
-    public void DeleteCarItem(Car car)
-    {
-        this.car = car;
-        profilePanel.carItems.Remove(this);
 
-    }
 
 
 }

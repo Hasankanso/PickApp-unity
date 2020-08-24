@@ -10,12 +10,11 @@ public class CarDetails : Panel
 {
   public Text carName, carBrand, carYear, carSeats, carColor, carLuggages;
   public Image carImage;
-  public Car car;
-  public CarItem carItem;
+  public Car car=null;
+  public AddCarPanel addCarPanel;
   
   public void Init(Car car)
   {
-    Clear();
     this.car = car;
     carName.text = car.Name;
     carBrand.text = car.Brand;
@@ -23,7 +22,7 @@ public class CarDetails : Panel
     carSeats.text = car.MaxSeats.ToString();
     carLuggages.text = car.MaxLuggage.ToString();
     carColor.text = car.Color.ToString();
-    //carImage.sprite = Program.GetImage(car.Picture);
+    carImage.sprite = Program.GetImage(car.Picture);
 
   }
   public void ViewModel()
@@ -31,15 +30,15 @@ public class CarDetails : Panel
     Panel panel = PanelsFactory.CreateImageViewer(car.Picture);
     OpenDialog(panel);
   }
-  public void UpdateCar()
-  {
-    AddCarPanel panel = PanelsFactory.CreateAddCar();
-    Open(panel, () => { panel.Init(car); });
-  }
-  public void Delete()
+    public void UpdateCar()
+    {
+        AddCarPanel panel = PanelsFactory.CreateAddCar();
+        Open(panel, () => { panel.Init(car); });
+    }
+    public void Delete()
     {
         Debug.Log("Deleting car1");
-        carItem.DeleteCarItem(this.car);
+        addCarPanel.DeleteCar(car);
         Debug.Log("Deleting car2");
         Destroy(gameObject);
     }

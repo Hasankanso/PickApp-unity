@@ -52,6 +52,7 @@ public class Car
     }
     public JObject ToJson() {
         JObject carJ = new JObject();
+        carJ[nameof(this.id)] = this.Id;
         carJ[nameof(this.year)] = this.Year;
         carJ[nameof(this.maxLuggage)] = this.MaxLuggage;
         carJ[nameof(this.maxSeats)] = this.MaxSeats;
@@ -61,6 +62,7 @@ public class Car
         carJ[nameof(this.picture)] = this.pictureBase64;
         return carJ;
     }
+
     public static Car ToObject(JObject json)
     {
         string id = "";
