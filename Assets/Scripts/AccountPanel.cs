@@ -34,6 +34,11 @@ public class AccountPanel : Panel {
         if (!code.Equals((int)HttpStatusCode.OK)) {
             OpenDialog(message, false);
         } else {
+            List<Ride> upcomingRides = Program.Person.UpcomingRides;
+            List<Rate> rates = Program.Person.Rates;
+            Program.User.Person = result;
+            Program.Person.UpcomingRides = upcomingRides;
+            Program.Person.Rates = rates;
             MissionCompleted(ProfilePanel.PANELNAME, "Account has been edited");
         }
     }

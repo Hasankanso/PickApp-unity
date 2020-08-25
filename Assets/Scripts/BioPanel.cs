@@ -29,10 +29,14 @@ public class BioPanel : Panel {
     }
     private void Response(Person result, int code, string message) {
         if (!code.Equals(HttpStatusCode.OK)) {
-            OpenDialog("There was an error adding bio", false);
+            OpenDialog(message, false);
         } else {
-            OpenDialog("Bio has been added", true);
-            MissionCompleted(ProfilePanel.PANELNAME, "Bio has been added");
+            List<Ride> upcomingRides = Program.Person.UpcomingRides;
+            List<Rate> rates = Program.Person.Rates;
+            Program.User.Person = result;
+            Program.Person.UpcomingRides = upcomingRides;
+            Program.Person.Rates = rates;
+            MissionCompleted(ProfilePanel.PANELNAME, "Bio has been edited");
         }
     }
 

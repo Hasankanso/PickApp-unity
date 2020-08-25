@@ -32,7 +32,12 @@ public class ChattinessPanel : Panel {
         if (!code.Equals(HttpStatusCode.OK)) {
             OpenDialog("There was an error adding chattiness", false);
         } else {
-            MissionCompleted(ProfilePanel.PANELNAME, "Chattiness has been added");
+            List<Ride> upcomingRides = Program.Person.UpcomingRides;
+            List<Rate> rates = Program.Person.Rates;
+            Program.User.Person = result;
+            Program.Person.UpcomingRides = upcomingRides;
+            Program.Person.Rates = rates;
+            MissionCompleted(ProfilePanel.PANELNAME, "Chattiness has been edited");
         }
     }
 
