@@ -64,7 +64,6 @@ public class AddCarPanel : Panel {
     }
     public void submitUpdate() {
         // if (VadilateSecondView()) {
-        Debug.Log("submit update");
             car.Name = carName.text.text;
             car.Year = int.Parse(year.text.text);
             car.MaxSeats = int.Parse(maxSeats.options[maxSeats.value].text);

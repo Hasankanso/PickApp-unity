@@ -10,8 +10,7 @@ public class CarDetails : Panel
 {
   public Text carName, carBrand, carYear, carSeats, carColor, carLuggages;
   public Image carImage;
-  public Car car=null;
-  
+  public Car car=null;  
   public void Init(Car car)
   {
     this.car = car;
@@ -36,10 +35,14 @@ public class CarDetails : Panel
     }
     public void Delete()
     {
+        if (ValidateDelete())
+        {
             Request<Car> request = new DeleteCar(car, Program.Driver);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);
+        }
+        
         
     }
     private void response(Car result, int code, string message)
@@ -47,21 +50,13 @@ public class CarDetails : Panel
         if (!code.Equals((int)HttpStatusCode.OK))
         {
         }
-        if (code == 1)
+         if (code == 1)
         {
-            Destroy(gameObject);
-            FooterMenu.dFooterMenu.OpenProfilePanel();
-            OpenDialog(message, false);
-            // MissionCompleted(ProfilePanel.PANELNAME, message);
-
+            OpenDialog("You Cant delete the last car", false);
         }
-
         else 
         {
-            FooterMenu.dFooterMenu.OpenProfilePanel();
-            OpenDialog(message, true);
-            DestroyForwardBackward();
-
+            MissionCompleted(ProfilePanel.PANELNAME, message);
         }
     }
     internal override void Clear()
@@ -73,6 +68,15 @@ public class CarDetails : Panel
     carColor.text = "";
     carLuggages.text = "";
   }
+    public bool ValidateDelete()
+    {
+        bool valid = true;
+        if (Program.Driver.Cars.Count < 1)
+        {
+            valid = false;
+        }
+        return valid;
+    }
 
 
 }

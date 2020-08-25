@@ -33,7 +33,6 @@ public class Language : MonoBehaviour
     {
       language = this;
     }
-    Debug.Log("language path:" + Path.Combine(Application.persistentDataPath, relativeFolderPath));
     var currlang = PlayerPrefs.GetString(currentLanguageKey, defaultLanguage);
     if(currlang !=null)
     OpenLocalXML(currlang);

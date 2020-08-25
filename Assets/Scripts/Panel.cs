@@ -21,8 +21,12 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   {
 
   }
+    public virtual void Init(StatusE statusE)
+    {
 
-  private void Initialize(Panel nextPanel) // anything you want to set before the panel opens, will be here
+    }
+
+    private void Initialize(Panel nextPanel) // anything you want to set before the panel opens, will be here
   {
     nextPanel.Status = Status;
     nextPanel.opened = true;

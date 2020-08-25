@@ -81,7 +81,6 @@ public class Person {
     //Constructor for adding bio
 
     public static Person ToObject(JObject json) {
-        Debug.Log(json);
         string phone = "";
         var ph = json[nameof(phone)];
         if (ph != null)

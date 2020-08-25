@@ -103,8 +103,8 @@ public class ProfilePanel : Panel {
     }
     public void EditRegions()
     {
-        Panel panel = PanelsFactory.CreateDriverRegions();
-        Open(panel);
+        Panel panel = PanelsFactory.CreateBecomeDriver();
+        Open(panel, () => { panel.Init(StatusE.VIEW); });
     }
     public void EditBio() {
         Panel panel = PanelsFactory.CreateBioPanel();

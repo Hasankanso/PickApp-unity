@@ -84,6 +84,18 @@ public class BecomeDriver : Panel {
         editRegions.gameObject.SetActive(false);
         becomeDriver.gameObject.SetActive(true);
     }
+    public override void Init(StatusE statusE){
+        if(statusE==StatusE.VIEW)
+        {
+            Clear();
+            this.person = Program.Person;
+            AddItemToList();
+            title.text = "Regions";
+            editRegions.gameObject.SetActive(false);
+            becomeDriver.gameObject.SetActive(false);
+        }
+    }
+
     internal override void Clear() {
         listView.Clear();
         regionCounter = 0;

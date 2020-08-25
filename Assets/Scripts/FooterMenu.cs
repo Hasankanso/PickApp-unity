@@ -58,9 +58,7 @@ public class FooterMenu : MonoBehaviour {
         user.Phone = "+" + Cache.GetPhoneCode() + "" + Cache.GetPhone();
         user.password = Cache.GetPassword();
         user.Email = Cache.GetEmail();
-        Debug.Log("cache" + token);
         if (!string.IsNullOrEmpty(token)) {
-            Debug.Log("auto login");
             Program.User = user;
             user.Token = token;
             Request<Person> request = new GetLoggedInUser(user);

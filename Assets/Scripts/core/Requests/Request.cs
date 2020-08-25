@@ -60,16 +60,13 @@ namespace Requests {
             }
 
             string valid = IsValid();
-            Debug.Log(valid);
             if (!string.IsNullOrEmpty(valid)) {
                 Debug.Log("error");
                 callback(default, (int)HttpStatusCode.NotAcceptable, valid);
             } else {
                 string data = ToJson();
-                Debug.Log(data);
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 if (!string.IsNullOrEmpty(Program.UserToken)) {
-                    Debug.Log("setting token" + Program.UserToken);
                     content.Headers.Add("user-token", Program.UserToken);
                 }
 
@@ -89,7 +86,6 @@ namespace Requests {
                     //The request failed due to an underlying issue such as network connectivity, DNS failure, server certificate validation or timeout.
                     BuildCatchError(HttpStatusCode.Found, "Please login");
                 }
-                Debug.Log(result);
 
                 JToken json = JToken.Parse(result);
 
@@ -115,7 +111,6 @@ namespace Requests {
                 //check if there's error
                 if (jCode != null) {
                     string code = jCode.ToString();
-                    Debug.Log(code);
                     string message = jMessage.ToString();
                     callback(default, int.Parse(code), message);
                     receiveResponse.Invoke();
