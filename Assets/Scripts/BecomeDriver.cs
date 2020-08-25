@@ -54,7 +54,6 @@ public class BecomeDriver : Panel {
             listView.Add(obj.gameObject);
             regionItems.Add(obj);
             regionCounter += 1;
-            Debug.Log(1);
             if (regionCounter == 1) {
                 regionItems[0].deleteButton.gameObject.SetActive(false);
             } else {

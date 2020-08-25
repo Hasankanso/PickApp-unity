@@ -107,7 +107,7 @@ public class AddRidePanel : Panel {
     public void OpenMyCarsPicker() {
         if (Program.Driver == null) {
             Panel panel = PanelsFactory.CreateBecomeDriver();
-            Open(panel, () => { panel.Init(); });
+            Open(panel);
         } else if (ValidateSecondView()) {
 
             if (!Program.IsLoggedIn) {
