@@ -118,6 +118,7 @@ public class FooterMenu : MonoBehaviour {
         {
             b.image.sprite = b.spriteState.selectedSprite;
             dFooterMenu.OpenAlreadyExists(p);
+            dFooterMenu.enabled = true;
             if (dialogMessage != null)
             {
                 p.OpenDialog(dialogMessage, true);

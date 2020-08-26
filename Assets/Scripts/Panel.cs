@@ -205,10 +205,15 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   public void MissionCompleted(string panelName, string dialogMessage)
   {
     DestroyForwardBackward();
-    FooterMenu.OpenAlreadyExisted(panelName, dialogMessage);
+    FooterMenu.Open(panelName, dialogMessage);
   }
+    public void MissionCompletedV2(string panelName, string dialogMessage)
+    {
+        DestroyForwardBackward();
+        FooterMenu.OpenAlreadyExisted(panelName, dialogMessage);
+    }
 
-  public void MissionCompleted(string panelName)
+    public void MissionCompleted(string panelName)
   {
     FooterMenu.Open(panelName);
     DestroyForwardBackward();
