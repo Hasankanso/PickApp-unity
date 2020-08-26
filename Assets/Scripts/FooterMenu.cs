@@ -109,11 +109,36 @@ public class FooterMenu : MonoBehaviour {
             }
         }
     }
+    public static void OpenAlreadyExisted(string panelName, string dialogMessage)
+    {
+        Panel p = dFooterMenu.panels[panelName];
+        Button b = dFooterMenu.buttons[panelName];
+
+        if (p != null)
+        {
+            b.image.sprite = b.spriteState.selectedSprite;
+            dFooterMenu.OpenAlreadyExists(p);
+            if (dialogMessage != null)
+            {
+                p.OpenDialog(dialogMessage, true);
+            }
+        }
+    }
 
     private void Open(Panel newPanel) {
         currPanel.Hide();
         newPanel.Show();
         newPanel.Init();
+        newPanel.transform.SetAsLastSibling();
+        currPanel = newPanel;
+        transform.SetAsLastSibling();
+
+        newPanel.OpenTail(); //OpenNext in it
+    }
+    private void OpenAlreadyExists(Panel newPanel)
+    {
+        currPanel.Hide();
+        newPanel.Show();
         newPanel.transform.SetAsLastSibling();
         currPanel = newPanel;
         transform.SetAsLastSibling();
