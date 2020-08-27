@@ -141,7 +141,7 @@ public class BackendlessPlugin : MonoBehaviour
             HttpEngine httpEngine = new Weborb.Client.HttpEngine("http://api.backendless.com", idInfo);
             httpEngine.SendRequest<Boolean>(null, null, null, null, null);
             httpEngine.SendRequest<Int64>(null, null, null, null, null);
-        } catch (Exception e) {
+        } catch (Exception) {
             // ignore
         }
 #endif

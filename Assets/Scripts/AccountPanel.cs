@@ -96,7 +96,6 @@ public class AccountPanel : Panel {
         firstName.SetText(person.FirstName);
         lastName.SetText(person.LastName);
         email.SetText(Program.User.Email);
-        Debug.Log(person.Birthday);
         birthday.text = Program.BirthdayToString(person.Birthday);
         CheckGender(person.Gender);
         if (person.ProfilePicture != null) {
