@@ -58,9 +58,7 @@ public class FooterMenu : MonoBehaviour {
         user.Phone = "+" + Cache.GetPhoneCode() + "" + Cache.GetPhone();
         user.password = Cache.GetPassword();
         user.Email = Cache.GetEmail();
-        Debug.Log("cache" + token);
         if (!string.IsNullOrEmpty(token)) {
-            Debug.Log("auto login");
             Program.User = user;
             user.Token = token;
             Request<Person> request = new GetLoggedInUser(user);
@@ -111,11 +109,37 @@ public class FooterMenu : MonoBehaviour {
             }
         }
     }
+    public static void OpenAlreadyExisted(string panelName, string dialogMessage)
+    {
+        Panel p = dFooterMenu.panels[panelName];
+        Button b = dFooterMenu.buttons[panelName];
+
+        if (p != null)
+        {
+            b.image.sprite = b.spriteState.selectedSprite;
+            dFooterMenu.OpenAlreadyExists(p);
+            dFooterMenu.enabled = true;
+            if (dialogMessage != null)
+            {
+                p.OpenDialog(dialogMessage, true);
+            }
+        }
+    }
 
     private void Open(Panel newPanel) {
         currPanel.Hide();
         newPanel.Show();
         newPanel.Init();
+        newPanel.transform.SetAsLastSibling();
+        currPanel = newPanel;
+        transform.SetAsLastSibling();
+
+        newPanel.OpenTail(); //OpenNext in it
+    }
+    private void OpenAlreadyExists(Panel newPanel)
+    {
+        currPanel.Hide();
+        newPanel.Show();
         newPanel.transform.SetAsLastSibling();
         currPanel = newPanel;
         transform.SetAsLastSibling();

@@ -42,12 +42,7 @@ public class ItemsFactory : MonoBehaviour {
         obj.Init(becomeDriver);
         return obj;
     }
-    public static RegionItem CreateRegionItem(GameObject parent, DriverRegions driverRegions) {
-        RegionItem obj = Instantiate(defaultItemsFactory.regionItem);
-        obj.transform.SetParent(parent.transform, false);
-        obj.Init(driverRegions);
-        return obj;
-    }
+
     public static RegionItem CreateRegionItem(GameObject parent, string regions, BecomeDriver becomeDriver) {
         RegionItem obj = Instantiate(defaultItemsFactory.regionItem);
         obj.transform.SetParent(parent.transform, false);

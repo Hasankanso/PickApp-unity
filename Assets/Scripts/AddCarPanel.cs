@@ -51,7 +51,7 @@ public class AddCarPanel : Panel {
             } else OpenDialog(message, false);
         } else {
             Program.User.Driver = result;
-            MissionCompleted(AddRidePanel.PANELNAME, "Now you are a driver");
+            MissionCompletedV2(AddRidePanel.PANELNAME, "Now you are a driver");
         }
     }
 
@@ -64,7 +64,6 @@ public class AddCarPanel : Panel {
     }
     public void submitUpdate() {
         // if (VadilateSecondView()) {
-        Debug.Log("submit update");
             car.Name = carName.text.text;
             car.Year = int.Parse(year.text.text);
             car.MaxSeats = int.Parse(maxSeats.options[maxSeats.value].text);

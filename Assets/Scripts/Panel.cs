@@ -21,8 +21,12 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   {
 
   }
+    public virtual void Init(StatusE statusE)
+    {
 
-  private void Initialize(Panel nextPanel) // anything you want to set before the panel opens, will be here
+    }
+
+    private void Initialize(Panel nextPanel) // anything you want to set before the panel opens, will be here
   {
     nextPanel.Status = Status;
     nextPanel.opened = true;
@@ -203,8 +207,13 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     DestroyForwardBackward();
     FooterMenu.Open(panelName, dialogMessage);
   }
+    public void MissionCompletedV2(string panelName, string dialogMessage)
+    {
+        DestroyForwardBackward();
+        FooterMenu.OpenAlreadyExisted(panelName, dialogMessage);
+    }
 
-  public void MissionCompleted(string panelName)
+    public void MissionCompleted(string panelName)
   {
     FooterMenu.Open(panelName);
     DestroyForwardBackward();
