@@ -10,11 +10,9 @@ using UnityEngine.UI;
 public class ChattinessPanel : Panel {
     public Dropdown chatiness;
 
-
     public override void Init() {
         SetChosenChattiness();
     }
-
     public void submit() {
         if (Vadilate()) {
             var chattiness = chatiness.options[chatiness.value].text;
@@ -29,18 +27,27 @@ public class ChattinessPanel : Panel {
         }
     }
     private void response(Person result, int code, string message) {
-        if (!code.Equals(HttpStatusCode.OK)) {
-            OpenDialog("There was an error adding chattiness", false);
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+            if (code == 302) {
+                Program.User = null;
+                Cache.SetToken("");
+                Program.IsLoggedIn = false;
+                OpenDialog("Please login", false);
+                LoginPanel login = PanelsFactory.CreateLogin();
+                Open(login, () => { login.Init(false); });
+            } else {
+                OpenDialog(message, false);
+                Debug.Log(code);
+            }
         } else {
             List<Ride> upcomingRides = Program.Person.UpcomingRides;
             List<Rate> rates = Program.Person.Rates;
             Program.User.Person = result;
             Program.Person.UpcomingRides = upcomingRides;
             Program.Person.Rates = rates;
-            MissionCompleted(ProfilePanel.PANELNAME, "Chattiness has been edited");
+            MissionCompleted(ProfilePanel.PANELNAME, "Your chattiness has been edited!");
         }
     }
-
     private void SetChosenChattiness() {
         Person person = Program.Person;
         if (person.Chattiness.Equals("I'm a quiet person"))
@@ -57,6 +64,6 @@ public class ChattinessPanel : Panel {
         return true;
     }
     internal override void Clear() {
-        throw new NotImplementedException();
+        
     }
 }

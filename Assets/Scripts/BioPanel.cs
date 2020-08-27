@@ -13,7 +13,6 @@ public class BioPanel : Panel {
     public override void Init() {
         Clear();
         bio.SetText(Program.Person.Bio);
-        //bvcbvcbvcbv
     }
     public void submit() {
         if (Validate()) {
@@ -28,15 +27,25 @@ public class BioPanel : Panel {
         }
     }
     private void Response(Person result, int code, string message) {
-        if (!code.Equals(HttpStatusCode.OK)) {
-            OpenDialog(message, false);
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+            if (code == 302) {
+                Program.User = null;
+                Cache.SetToken("");
+                Program.IsLoggedIn = false;
+                OpenDialog("Please login", false);
+                LoginPanel login = PanelsFactory.CreateLogin();
+                Open(login, () => { login.Init(false); });
+            } else {
+                OpenDialog(message, false);
+                Debug.Log(code);
+            }
         } else {
             List<Ride> upcomingRides = Program.Person.UpcomingRides;
             List<Rate> rates = Program.Person.Rates;
             Program.User.Person = result;
             Program.Person.UpcomingRides = upcomingRides;
             Program.Person.Rates = rates;
-            MissionCompleted(ProfilePanel.PANELNAME, "Bio has been edited");
+            MissionCompleted(ProfilePanel.PANELNAME, "Your bio has been edited!");
         }
     }
 
@@ -60,7 +69,6 @@ public class BioPanel : Panel {
         return valid;
     }
     internal override void Clear() {
-        //clear content of all inptfield.
         bio.Reset();
     }
 }

@@ -14,13 +14,21 @@ public class AccountPanel : Panel {
     public Text birthday;
     public Image profilePicture;
     public User user = null;
+    private bool haveProfile = false;
 
     public void submit() {
         if (vadilate()) {
+            Debug.Log(countryDP.options[countryDP.value].text);
             CountryInformations cI = Program.CountriesInformations[countryDP.options[countryDP.value].text];
-            Person editedPerson = new Person(firstName.text.text, lastName.text.text, Program.StringToBirthday(birthday.text),
-            profilePicture.sprite.texture, cI, genderDP.value == 0);
-            Request<Person> request = new EditAccount(editedPerson);
+            Person editedPerson = new Person(firstName.text.text, lastName.text.text,
+            Program.StringToBirthday(birthday.text),
+            null, cI, genderDP.value == 0);
+            editedPerson.Bio = Program.Person.Bio;
+            editedPerson.Chattiness = Program.Person.Chattiness;
+            if (haveProfile) {
+                editedPerson.ProfilePicture = profilePicture.sprite.texture;
+            }
+            Request<Person> request = new EditAccount(editedPerson, email.text.text);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);
@@ -32,14 +40,24 @@ public class AccountPanel : Panel {
     }
     private void response(Person result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-            OpenDialog(message, false);
+            if (code == 302) {
+                Program.User = null;
+                Cache.SetToken("");
+                Program.IsLoggedIn = false;
+                OpenDialog("Please login", false);
+                LoginPanel login = PanelsFactory.CreateLogin();
+                Open(login, () => { login.Init(false); });
+            } else {
+                OpenDialog(message, false);
+                Debug.Log(code);
+            }
         } else {
             List<Ride> upcomingRides = Program.Person.UpcomingRides;
             List<Rate> rates = Program.Person.Rates;
             Program.User.Person = result;
             Program.Person.UpcomingRides = upcomingRides;
             Program.Person.Rates = rates;
-            MissionCompleted(ProfilePanel.PANELNAME, "Account has been edited");
+            MissionCompleted(ProfilePanel.PANELNAME, "Your account has been edited!");
         }
     }
     private void OnDatePicked(DateTime d) {
@@ -59,6 +77,7 @@ public class AccountPanel : Panel {
                     return;
                 } else {
                     profilePicture.sprite = Program.GetImage(texture);
+                    haveProfile = true;
                 }
             }
         }, "Select a PNG image", "image/png");
@@ -80,7 +99,9 @@ public class AccountPanel : Panel {
         Debug.Log(person.Birthday);
         birthday.text = Program.BirthdayToString(person.Birthday);
         CheckGender(person.Gender);
-        profilePicture.sprite = Program.GetImage(person.ProfilePicture);
+        if (person.ProfilePicture != null) {
+            profilePicture.sprite = Program.GetImage(person.ProfilePicture);
+        }
         Request<Dictionary<string, CountryInformations>> request = new GetCountries();
         request.AddSendListener(OpenSpinner);
         request.AddReceiveListener(CloseSpinner);
@@ -137,9 +158,9 @@ public class AccountPanel : Panel {
         }
         if (!IsValidEmail(email.text.text)) {
             email.Error();
-
             Panel p = PanelsFactory.CreateDialogBox("Invalid email", false);
             OpenDialog(p);
+            valid = false;
         }
         return valid;
     }

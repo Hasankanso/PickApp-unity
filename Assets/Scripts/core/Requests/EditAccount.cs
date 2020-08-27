@@ -10,15 +10,23 @@ using UnityEngine;
 namespace Requests {
     public class EditAccount : Request<Person> {
         Person newUser;
+        string email;
 
-        public EditAccount(Person newUser) {
+        public EditAccount(Person newUser, string email) {
             this.newUser = newUser;
+            this.email = email;
             HttpPath = "/PersonBusiness/EditPerson";
         }
-
+        public EditAccount(Person newUser) {
+            this.newUser = newUser;
+            this.email = Program.User.Email;
+            HttpPath = "/PersonBusiness/EditPerson";
+        }
         public override Person BuildResponse(JToken response) //TODO
         {
             JObject json = (JObject)response;
+            Program.User.Email = (string)json["email"];
+            Cache.SetEmail(Program.User.Email);
             Person p = Person.ToObject(json);
             return p;
         }
@@ -26,7 +34,7 @@ namespace Requests {
         public override string ToJson() {
             JObject personJ = newUser.ToJson();
             personJ["user"] = Program.User.Id;
-            personJ["email"] = Program.User.Email;
+            personJ["email"] = email;
             return personJ.ToString();
         }
 
