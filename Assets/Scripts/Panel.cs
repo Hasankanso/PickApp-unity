@@ -113,7 +113,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     if (Next != null) Next.ForwardDestroy();
     if (!permanent)
     {
-      Destroy(gameObject);
+      DestroyImmediate(gameObject);
     }
   }
 
@@ -145,7 +145,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 
   public void CloseSpinner()
   {
-    spinner.DestroyForwardBackward();
+    Destroy(spinner.gameObject);
   }
   public void OpenDialog(Panel newPanel)
   {
