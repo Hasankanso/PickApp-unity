@@ -1415,8 +1415,6 @@ MonoBehaviour:
   carColor: {fileID: 5128718118944611498}
   carLuggages: {fileID: 5348358489819668946}
   carImage: {fileID: 4960796657653491774}
-  addCarPanel: {fileID: 6712105296454797058, guid: 269eba4356df5f447abced8119e7262d,
-    type: 3}
 --- !u!1 &7952815073150685390
 GameObject:
   m_ObjectHideFlags: 0
