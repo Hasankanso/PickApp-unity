@@ -21,12 +21,12 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   {
 
   }
-    public virtual void Init(StatusE statusE)
-    {
+  public virtual void Init(StatusE statusE)
+  {
 
-    }
+  }
 
-    private void Initialize(Panel nextPanel) // anything you want to set before the panel opens, will be here
+  private void Initialize(Panel nextPanel) // anything you want to set before the panel opens, will be here
   {
     nextPanel.Status = Status;
     nextPanel.opened = true;
@@ -202,22 +202,27 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     BackwardDestroy(); //this will destroy this panel and all previous panels that are not permanent
   }
 
+  public void MissionCompleted(string panelName)
+  {
+    MissionCompleted(panelName, null, true);
+  }
+
+  public void MissionCompleted(string panelName, bool initialize)
+  {
+    MissionCompleted(panelName, null, initialize);
+  }
+
   public void MissionCompleted(string panelName, string dialogMessage)
   {
-    DestroyForwardBackward();
-    FooterMenu.Open(panelName, dialogMessage);
+    MissionCompleted(panelName,  dialogMessage, true);
   }
-    public void MissionCompletedV2(string panelName, string dialogMessage)
-    {
-        DestroyForwardBackward();
-        FooterMenu.OpenAlreadyExisted(panelName, dialogMessage);
-    }
 
-    public void MissionCompleted(string panelName)
+  public void MissionCompleted(string panelName, string dialogMessage, bool initialize)
   {
-    FooterMenu.Open(panelName);
     DestroyForwardBackward();
+    FooterMenu.Open(panelName, dialogMessage, initialize);
   }
+
 
   internal abstract void Clear();
 
