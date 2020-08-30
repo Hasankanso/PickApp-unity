@@ -110,7 +110,18 @@ UIDatePicker *datePicker;
     
     // NSLog(@"dtp mode: %ld", (long)datePicker.datePickerMode);
     
+    [datePicker setValue:[UIColor blackColor] forKey:@"textColor"];
     
+    if ([datePicker respondsToSelector:sel_registerName("setHighlightsToday:")]) {
+
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wundeclared-selector"
+
+            [datePicker performSelector:@selector(setHighlightsToday:) withObject:[NSNumber numberWithBool:NO]];
+
+    #pragma clang diagnostic pop
+
+    }
     [vc.view addSubview:datePicker];
     
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, vc.view.bounds.size.height, [self GetW], 44)];
