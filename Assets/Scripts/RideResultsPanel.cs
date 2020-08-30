@@ -2,27 +2,35 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RideResultsPanel : Panel
 {
 
-  private List<Ride> rides;
-  public Dropdown gender;
-  public InputFieldScript rate;
+  private List<Ride> allRides;
+  private List<Ride> filteredRides;
   public Text from, to, rideNumber;
   public GameObject filterView;
   public SearchInfo searchInfo;
   public ListView resultsList;
   private List<RideItem> rideItems = new List<RideItem>();
-  public Text filterButton, clearFilterButton;
-  public Transform noResultsPanel;
+  public Text clearFilterButton;
+  public Transform noResultsView;
   public Dropdown sortByDd;
+
+  //Filter UI
+  public Toggle onlyFemales;
+  public Toggle onlyEmptyCars;
+  public Toggle atLeast3Stars;
+  public Text onlyFemalesText;
+  public InputField minPrice, maxPrice;
+
   public void Init(List<Ride> rides, SearchInfo searchInfo)
   {
     Clear();
-    this.rides = rides;
+    this.allRides = rides;
     this.from.text = searchInfo.From.ToString();
     this.to.text = searchInfo.To.ToString();
     this.rideNumber.text = rides.Count.ToString();
@@ -30,7 +38,7 @@ public class RideResultsPanel : Panel
 
     if (rides.Count == 0)
     {
-      noResultsPanel.gameObject.SetActive(true);
+      noResultsView.gameObject.SetActive(true);
       return;
     }
 
@@ -63,46 +71,56 @@ public class RideResultsPanel : Panel
   {
     if (Validate())
     {
+
+      filteredRides = allRides.FindAll(r => true);
+      int minPriceInt = 0;
+      int.TryParse(minPrice.text, out minPriceInt);
+
+      int maxPriceInt = int.MaxValue;
+      int.TryParse(maxPrice.text, out maxPriceInt);
+
+      if (!string.IsNullOrEmpty(minPrice.text))
+      {
+        filteredRides = filteredRides.FindAll(r => r.Price >= minPriceInt);
+      }
+
+      if(!string.IsNullOrEmpty(maxPrice.text))
+      {
+        filteredRides = filteredRides.FindAll(r => r.Price <= maxPriceInt);
+      }
+
+      if (onlyFemales.isOn)
+      {
+        filteredRides = filteredRides.FindAll(r => r.Person.Gender == false);
+      }
+
+      /*
+      if (onlyEmptyCars.isOn)
+      {
+        filteredRides = filteredRides.FindAll(r => r.ReservedSeats == 0);
+      }
+
+      if(atLeast3Stars.isOn){
+        filteredRides = filteredRides.FindAll(r => r.Person.RateAverage >= 3);
+      }
+      */
+
       resultsList.Clear();
-      bool isNoResult = true;
-      if (gender.value != 0)
+      foreach (Ride ri in filteredRides)
       {
-        for (int i = 0; i < rideItems.Count; i++)
-        {
-          if ((gender.value == 1) == rideItems[i].ride.User.Person.Gender)
-          {
-            rideItems[i].gameObject.SetActive(true);
-            isNoResult = false;
-          }
-          else
-          {
-            rideItems[i].gameObject.SetActive(false);
-          }
-        }
+        AddItemToList(ri);
       }
-      if (!rate.text.text.Equals(""))
+
+      if (filteredRides.Count == 0)
       {
-        for (int i = 0; i < rideItems.Count; i++)
-        {
-          if (float.Parse(rate.text.text) == rideItems[i].ride.User.Person.RateAverage)
-          {
-            rideItems[i].gameObject.SetActive(true);
-            isNoResult = false;
-          }
-          else
-          {
-            rideItems[i].gameObject.SetActive(false);
-          }
-        }
+        noResultsView.gameObject.SetActive(true);
       }
-      if (isNoResult)
+      else
       {
-        OpenDialog("No results found", false);
+        noResultsView.gameObject.SetActive(false);
       }
-      rate.Reset();
-      gender.value = 0;
+
       CloseFilter();
-      filterButton.gameObject.SetActive(false);
       clearFilterButton.gameObject.SetActive(true);
     }
   }
@@ -111,29 +129,27 @@ public class RideResultsPanel : Panel
   {
     resultsList.Clear();
     clearFilterButton.gameObject.SetActive(false);
-    filterButton.gameObject.SetActive(true);
-    foreach (Ride r in rides)
+    onlyFemales.isOn = false;
+    onlyEmptyCars.isOn = false;
+    atLeast3Stars.isOn = false;
+    minPrice.text = "";
+    maxPrice.text = "";
+    if (allRides != null)
     {
-      AddItemToList(r);
+      foreach (Ride r in allRides)
+      {
+        AddItemToList(r);
+      }
+      noResultsView.gameObject.SetActive(false);
     }
 
   }
   private bool Validate()
   {
     bool valid = true;
-    if (gender.value == 0 && rate.text.text.Equals(""))
-    {
-      OpenDialog("Please choose filter", false);
-      valid = false;
-    }
-    if (!rate.text.text.Equals("") && (float.Parse(rate.text.text) < 0 || float.Parse(rate.text.text) > 5))
-    {
-      rate.Error();
-      OpenDialog("Invalid rate", false);
-      valid = false;
-    }
     return valid;
   }
+
   public void OpenFilter()
   {
     filterView.SetActive(true);
@@ -142,50 +158,40 @@ public class RideResultsPanel : Panel
   {
     filterView.SetActive(false);
   }
-  public void OnRideBook(bool confirmed)
-  {
-    if (confirmed)
-    {
-      //book;
-    }
 
-  }
   internal override void Clear()
   {
-    rides = null;
+    allRides = null;
     from.text = "";
     to.text = "";
     rideNumber.text = "";
     CloseFilter();
+    ClearFilter();
     searchInfo = null;
-    rate.Reset();
-    gender.value = 0;
-    filterButton.gameObject.SetActive(true);
-    clearFilterButton.gameObject.SetActive(false);
-    noResultsPanel.gameObject.SetActive(false);
+    noResultsView.gameObject.SetActive(false);
   }
 
   public void SortBy()
   {
     if (sortByDd.value == 0)
     {
-      rides.Sort(new PriceComparer(true));
+      allRides.Sort(new PriceComparer(true));
     }
     else if (sortByDd.value == 1)
     {
-      rides.Sort(new RateComparer(false));
+      allRides.Sort(new RateComparer(false));
     }
     else if (sortByDd.value == 2)
     {
-      rides.Sort(new DepartureComparer(true));
+      allRides.Sort(new DepartureComparer(true));
     }
     else if (sortByDd.value == 3)
     {
-      rides.Sort(new DepartureComparer(false));
+      allRides.Sort(new DepartureComparer(false));
     }
     resultsList.Clear();
 
-    foreach (Ride ri in rides)
+    foreach (Ride ri in allRides)
     {
       AddItemToList(ri);
     }
