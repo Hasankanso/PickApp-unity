@@ -9,7 +9,6 @@ public class User {
     public string password;
     private string email;
     public string id;
-    private string token;
 
 
     private Person person;
@@ -25,10 +24,6 @@ public class User {
     }
 
     public static User ToObject(JObject json) {
-        string token = "";
-        var tk = json["user-token"];
-        if (tk != null)
-            token = tk.ToString();
         string userId = "";
         var uId = json["objectId"];
         if (uId != null)
@@ -55,7 +50,7 @@ public class User {
             driver = Driver.ToObject(driverJ);
         }
 
-        return new User(person, driver, phone, password, email, userId, token);
+        return new User(person, driver, phone, password, email, userId);
     }
 
     public User(Person person, Driver driver) {
@@ -64,14 +59,13 @@ public class User {
     }
     public User() {
     }
-    public User(Person person, Driver driver, string phone, string password, string email, string userId, string token) {
+    public User(Person person, Driver driver, string phone, string password, string email, string userId) {
         this.person = person;
         this.driver = driver;
         this.phone = phone;
         this.password = password;
         this.email = email;
         this.id = userId;
-        this.token = token;
     }
 
     public User(string phone, string password) {
@@ -93,5 +87,4 @@ public class User {
     public string Id { get => id; set => id = value; }
     public Person Person { get => person; set => person = value; }
     public Driver Driver { get => driver; set => driver = value; }
-    public string Token { get => token; set => token = value; }
 }

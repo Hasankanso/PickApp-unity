@@ -64,7 +64,6 @@ public class FooterMenu : MonoBehaviour
     if (!string.IsNullOrEmpty(token))
     {
       Program.User = user;
-      user.Token = token;
       Request<Person> request = new GetLoggedInUser(user);
       request.Send(ResponseOfAutoLogin);
     }
@@ -78,7 +77,7 @@ public class FooterMenu : MonoBehaviour
     }
     else
     {
-      Cache.SetToken(u.Token);
+      Cache.SetUserId(u.id);
       Program.User.Person = u.Person;
       Program.User.Driver = u.Driver;
       Program.IsLoggedIn = true;
@@ -88,8 +87,10 @@ public class FooterMenu : MonoBehaviour
   {
     if (!code.Equals((int)HttpStatusCode.OK))
     {
+      Cache.SetUserId("");
       Cache.SetToken("");
-      Program.User.Token = null;
+      Program.User.id = null;
+
       if (!string.IsNullOrEmpty(Program.User.password) && !string.IsNullOrEmpty(Program.User.phone))
       {
         Debug.Log("auto login faild(cache is outdated), trying to login from cache credentials" + Program.User.phone + " " + Program.User.password);
