@@ -12,7 +12,9 @@ public class BioPanel : Panel {
 
     public override void Init() {
         Clear();
-        bio.SetText(Program.Person.Bio);
+        if (!string.IsNullOrEmpty(Program.Person.Bio)) {
+            bio.SetText(Program.Person.Bio);
+        }
     }
     public void submit() {
         if (Validate()) {

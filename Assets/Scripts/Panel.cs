@@ -125,7 +125,12 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
       DestroyImmediate(gameObject);
     }
   }
-
+protected void SpinnerDestroy() {
+        if (Next != null) Next.ForwardDestroy();
+        if (!permanent) {
+            Destroy(gameObject);
+        }
+    }
   public Panel OpenNext()
   {
     if (Next == null) return null;
@@ -145,7 +150,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 
   public void CloseSpinner()
   {
-    Destroy(spinner.gameObject);
+    spinner.SpinnerDestroy();
   }
   public void OpenDialog(Panel newPanel)
   {
@@ -153,6 +158,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     newPanel.Show();
     newPanel.transform.SetAsLastSibling();
   }
+
   public void OpenSpinner()
   {
     spinner = PanelsFactory.CreateSpinner();
@@ -219,8 +225,8 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 
   public void MissionCompleted(string panelName, string dialogMessage, bool initialize)
   {
-    DestroyForwardBackward();
     FooterMenu.Open(panelName, dialogMessage, initialize);
+	DestroyForwardBackward();
   }
 
 

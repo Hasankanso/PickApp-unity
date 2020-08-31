@@ -58,7 +58,6 @@ namespace Requests {
                 callback(default, int.Parse(code), message);
                 return;
             }
-
             string valid = IsValid();
             Debug.Log(valid);
             if (!string.IsNullOrEmpty(valid)) {
@@ -69,6 +68,7 @@ namespace Requests {
                 Debug.Log(data);
                 var content = new StringContent(data, Encoding.UTF8, "application/json");
                 if (!string.IsNullOrEmpty(Program.UserToken)) {
+                    Debug.Log("Adding token");
                     content.Headers.Add("user-token", Program.UserToken);
                 }
                 try {

@@ -76,6 +76,6 @@ public class MyRidesHistoryPanel : Panel {
 
     }
     internal override void Clear() {
-        throw new System.NotImplementedException();
+        
     }
 }

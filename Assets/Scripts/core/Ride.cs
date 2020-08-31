@@ -208,7 +208,10 @@ public class Ride {
             comment = c.ToString();
 
         JObject carJ = (JObject)json[nameof(Ride.car)];
-        Car car = Car.ToObject(carJ);
+        Car car = null;
+        if (carJ != null) {
+            car = Car.ToObject(carJ);
+        }
 
         double leavingDateDouble = -1;
         var ld = json[nameof(Ride.leavingDate)];

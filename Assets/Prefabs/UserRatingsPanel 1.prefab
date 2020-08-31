@@ -92,6 +92,7 @@ MonoBehaviour:
   panelName: 
   permanent: 0
   listView: {fileID: 6818629965567215666}
+  scrollContainer: {fileID: 5776738451654790402}
 --- !u!1 &2761608339372375558
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,3 +499,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b698be8bfc61084419861dd19ec84bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5776738451654790402 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4244322665670253051, guid: 611bef3826d3d8a4e91b511020570690,
+    type: 3}
+  m_PrefabInstance: {fileID: 7696025015582676217}
+  m_PrefabAsset: {fileID: 0}
