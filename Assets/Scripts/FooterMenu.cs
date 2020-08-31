@@ -17,7 +17,7 @@ public class FooterMenu : MonoBehaviour
   [SerializeField] private MyRidePanel yourRidesPanel;
   [SerializeField] private InboxPanel inboxPanel;
   [SerializeField] private ProfilePanel profilePanel;
-  private LoginPanel loginPanel = null;
+  private LoginRegisterPanel loginRegister = null;
 
   public static FooterMenu dFooterMenu;
 
@@ -212,9 +212,9 @@ public class FooterMenu : MonoBehaviour
 
     if (!Program.IsLoggedIn)
     {
-      if (loginPanel == null) loginPanel = PanelsFactory.CreateLogin();
-      loginPanel.transform.SetParent(transform.parent, false);
-      Open(loginPanel, () => { loginPanel.Init(true); });
+      if (loginRegister == null) loginRegister = PanelsFactory.CreateLoginRegisterPanel();
+      loginRegister.transform.SetParent(transform.parent, false);
+      Open(loginRegister, () => { loginRegister.Init(true); });
     }
     else
     {
@@ -237,9 +237,9 @@ public class FooterMenu : MonoBehaviour
     myRidesButton.image.sprite = myRidesButton.spriteState.selectedSprite;
     if (!Program.IsLoggedIn)
     {
-      if (loginPanel == null) loginPanel = PanelsFactory.CreateLogin();
-      loginPanel.transform.SetParent(transform.parent, false);
-      Open(loginPanel, () => loginPanel.Init(false));
+      if (loginRegister == null) loginRegister = PanelsFactory.CreateLoginRegisterPanel();
+      loginRegister.transform.SetParent(transform.parent, false);
+      Open(loginRegister, () => loginRegister.Init(false));
     }
     else
     {
