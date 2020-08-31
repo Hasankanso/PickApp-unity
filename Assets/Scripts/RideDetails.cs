@@ -15,7 +15,6 @@ public class RideDetails : Panel {
     public Sprite smokingOnSpirite, musicOnSpirite, acOnSpirite, kidsSeatOnSpirite, petsOnSpirite;
     public Sprite smokingOffSpirite, musicOffSpirite, acOffSpirite, kidsSeatOffSpirite, petsOffSpirite;
     public GameObject dayOfWeek, passengersContainer, contentScrollView, personsDialog, removeRideDialog;
-    private InputField content;
     public GameObject addScheduleButton, updateScheduleButton, editScheduleButton, removeScheduleButton; //schedule
     public GameObject addRideButton, updateRideButton, editRideButton, removeRideButton; //Ride
     public GameObject reserveSeatsButton, cancelReservedSeats; //reserve
