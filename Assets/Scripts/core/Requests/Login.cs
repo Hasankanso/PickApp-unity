@@ -27,7 +27,6 @@ namespace Requests
     {
       JObject personJ = new JObject();
       personJ[nameof(user.phone)] = user.Phone;
-      personJ[nameof(user.password)] = user.Password;
       return personJ.ToString();
     }
 

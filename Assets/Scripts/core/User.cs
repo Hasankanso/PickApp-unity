@@ -18,7 +18,7 @@ public class User {
         JObject userJ = new JObject();
         userJ[nameof(this.phone)] = this.phone;
         userJ[nameof(this.email)] = this.email;
-        userJ[nameof(this.password)] = this.password;
+        userJ["verificationCode"] = this.password;
         userJ[nameof(this.person)] = person.ToJson();
         return userJ;
     }
