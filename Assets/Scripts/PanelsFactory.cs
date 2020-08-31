@@ -10,6 +10,7 @@ using static Panel;
 
 public class PanelsFactory : MonoBehaviour {
     private static PanelsFactory defaultPanelsFactory;
+    public LoginRegisterPanel loginRegisterPanel;
     public NotificationsPanel notificationsPanel;
     public LocationsFinderPanel locationResultsPanel;
     public RideResultsPanel rideResultsPanel;
@@ -61,6 +62,11 @@ public class PanelsFactory : MonoBehaviour {
     public static PhonePanel CreatePhonePanel() {
         PhonePanel phonePanel = Instantiate(defaultPanelsFactory.phonePanel);
         return phonePanel;
+    }
+    public static LoginRegisterPanel CreateLoginRegisterPanel()
+    {
+        LoginRegisterPanel loginRegister = Instantiate(defaultPanelsFactory.loginRegisterPanel);
+        return loginRegister;
     }
     public static SeatsLuggagePanel CreateSeatsLuggagePanel() {
         SeatsLuggagePanel seatsLuggagePanel = Instantiate(defaultPanelsFactory.seatsLuggagePanel);
