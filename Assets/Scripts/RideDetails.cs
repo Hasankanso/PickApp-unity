@@ -285,12 +285,18 @@ public class RideDetails : Panel {
 
     public void AddRide() {
         Request<Ride> request = new AddRide(ride);
+        request.AddSendListener(OpenSpinner);
+        request.AddReceiveListener(CloseSpinner);
         request.Send(AddRideResponse);
     }
 
     public void UpdateRide() {
         Request<Ride> request = new EditRide(Program.Person, ride);
+        request.AddSendListener(OpenSpinner);
+        request.AddReceiveListener(CloseSpinner);
         request.Send(AddRideResponse);
+
+        
     }
 
     public void ReserveSeat() {
