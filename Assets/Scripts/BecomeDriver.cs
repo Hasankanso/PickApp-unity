@@ -31,11 +31,11 @@ public class BecomeDriver : Panel {
 
     public void EditRegions() {
         if (Validate()) {
-            foreach (var item in regionItems) {
-                driver.Regions.Add(item.getRegion());
+            foreach (var item in regionItems)
+            {
+                regions=Program.Driver.regions;
             }
-
-        }
+            }
     }
     private void EditResponse(Person result, HttpStatusCode code, string message) {
         if (!code.Equals(HttpStatusCode.OK)) {
@@ -77,24 +77,28 @@ public class BecomeDriver : Panel {
         }
     }
     public override void Init() {
-        Clear();
-        this.person = Program.Person;
-        AddItemToList();
-        title.text = "Regions";
-        editRegions.gameObject.SetActive(false);
-        becomeDriver.gameObject.SetActive(true);
-    }
-    public override void Init(StatusE statusE){
-        if(statusE==StatusE.VIEW)
-        {
+
+        if (Status==StatusE.ADD) {
             Clear();
             this.person = Program.Person;
             AddItemToList();
-            title.text = "Regions";
+            title.text = "Become A Driver";
             editRegions.gameObject.SetActive(false);
+            becomeDriver.gameObject.SetActive(true);
+
+        }
+        else if (Status == StatusE.VIEW) {
+            Clear();
+            this.person = Program.Person;
+            AddItemToList();
+            EditRegions();
+            title.text = "Regions";
+            editRegions.gameObject.SetActive(true);
             becomeDriver.gameObject.SetActive(false);
         }
+
     }
+
 
     internal override void Clear() {
         listView.Clear();

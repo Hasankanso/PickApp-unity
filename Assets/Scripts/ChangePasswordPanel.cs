@@ -44,7 +44,6 @@ public class ChangePasswordPanel : Panel {
     }
     public void Register() {
         if (validate()) {
-            user.Password = newPassword.GetComponent<InputField>().text;
             PhonePanel panel = PanelsFactory.CreatePhonePanel();
             Open(panel, () => panel.Init(user));
         }
