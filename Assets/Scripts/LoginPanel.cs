@@ -26,12 +26,12 @@ public class LoginPanel : Panel
   public InputFieldScript verificationCode;
 
   private int viewId = 0;
-
+  private bool showFirstBack;
   public void SendAccountVerification()
   {
     if (ValidatePhone())
     {
-      Request<string> request = new VerifyAccount(VerifyEmailText.text);
+      Request<string> request = new VerifyAccount("+" + code.text.text + phone.text.text);
       request.AddSendListener(OpenSpinner);
       request.AddReceiveListener(CloseSpinner);
       request.Send(RespondAccountVerification);
@@ -65,9 +65,16 @@ public class LoginPanel : Panel
 
   private void RespondAccountVerification(string email, int status, string message)
   {
-    string hiddenEmail = HideEmail(email);
-    VerifyEmailText.text = "we've sent you a verification email on " + hiddenEmail;
-    OpenVerifyEmail();
+    if (!status.Equals((int)HttpStatusCode.OK))
+    {
+      OpenDialog(message, false);
+    }
+    else
+    {
+      string hiddenEmail = HideEmail(email);
+      VerifyEmailText.text = "we've sent you a verification email on " + hiddenEmail;
+      OpenVerifyEmail();
+    }
   }
 
   public void LoginCode()
@@ -95,7 +102,7 @@ public class LoginPanel : Panel
       Program.IsLoggedIn = true;
       if (!isFromProfilePanel)
       {
-        Back();
+        BackClose();
         OpenDialog("Welcome back to PickApp " + Program.User.Person.FirstName, true);
       }
       else
@@ -112,6 +119,7 @@ public class LoginPanel : Panel
     if (!isFromProfilePanel)
     {
       backButton.gameObject.SetActive(true);
+      showFirstBack = true;
     }
   }
 
@@ -175,14 +183,21 @@ public class LoginPanel : Panel
       viewId = 0;
       phoneNumberView.SetActive(true);
       verifyEmailView.SetActive(false);
+      if(showFirstBack){
+        backButton.gameObject.SetActive(true);
+      } else {
+        backButton.gameObject.SetActive(false);
+      }
     }
   }
 
   public void OpenVerifyEmail()
   {
-    viewId = 1;
     phoneNumberView.SetActive(false);
     verifyEmailView.SetActive(true);
+
+    viewId = 1;
+    backButton.gameObject.SetActive(true);
   }
 
 
