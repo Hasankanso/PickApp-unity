@@ -14,7 +14,6 @@ public static class Program {
     public static Font font;
     public static Language language = Language.language;
     private static User user;
-    private static string userToken;
     private static bool isLoggedIn = false;
     private static FirebaseApp firebaseApp = FirebaseApp.Create();
     private static CountryInformations FakeCountry() {
@@ -110,7 +109,6 @@ public static class Program {
     public static string AppName => appName;
 
     public static FirebaseApp FirebaseApp { get => firebaseApp; set => firebaseApp = value; }
-    public static string UserToken { get => User == null ? null : User.Token; }
     public static Driver Driver { get => User == null ? null : User.Driver; }
     public static Person Person { get => User == null ? null : User.Person; }
 

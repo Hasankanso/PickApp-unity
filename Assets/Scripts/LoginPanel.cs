@@ -19,11 +19,11 @@ public class LoginPanel : Panel {
 
     public void Login() {
         if (Validate()) {
-            User user = new User("+" + code.text.text + phone.text.text, password.GetComponent<InputField>().text);
-            Request<User> request = new Login(user);
-            request.AddSendListener(OpenSpinner);
-            request.AddReceiveListener(CloseSpinner);
-            request.Send(Response);
+         //   User user = new User("+" + code.text.text + phone.text.text, password.GetComponent<InputField>().text);
+          //  Request<User> request = new Login(user);
+         //   request.AddSendListener(OpenSpinner);
+        //    request.AddReceiveListener(CloseSpinner);
+        //    request.Send(Response);
         }
     }
     private void Response(User u, int code, string message) {

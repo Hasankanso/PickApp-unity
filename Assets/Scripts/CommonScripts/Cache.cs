@@ -10,7 +10,6 @@ public static class Cache {
                 SetPhone(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
             if (user.Email != null)
                 SetEmail(user.Email);
-            SetToken(user.Token);
             SetUserId(user.Id);
         }
     }
