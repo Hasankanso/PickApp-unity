@@ -99,13 +99,15 @@ public class ProfilePanel : Panel {
     }
     public void BecomeDriver() {
         Panel panel = PanelsFactory.CreateBecomeDriver();
+        Status = StatusE.ADD;
         Open(panel, () => { panel.Init(); });
     }
 
     public void EditRegions()
     {
         Panel panel = PanelsFactory.CreateBecomeDriver();
-        Open(panel, () => { panel.Init(StatusE.VIEW); });
+        Status = StatusE.VIEW;
+        Open(panel, () => { panel.Init(); });
     }
     public void EditBio() {
         Panel panel = PanelsFactory.CreateBioPanel();

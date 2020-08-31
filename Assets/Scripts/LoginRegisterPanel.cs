@@ -12,7 +12,18 @@ using BackendlessAPI.Utils;
 using System;
 
 public class LoginRegisterPanel : Panel
-{ 
+{
+    public Image backButton;
+    private bool isFromProfilePanel;
+    public void Init(bool isFromProfilePanel)
+    {
+        Clear();
+        this.isFromProfilePanel = isFromProfilePanel;
+        if (!isFromProfilePanel)
+        {
+            backButton.gameObject.SetActive(true);
+        }
+    }    
     public void Login()
     {
         Panel p = PanelsFactory.CreateLogin();
@@ -31,6 +42,6 @@ public class LoginRegisterPanel : Panel
 
     internal override void Clear()
     {
-        throw new NotImplementedException();
+        backButton.gameObject.SetActive(false);
     }
 }
