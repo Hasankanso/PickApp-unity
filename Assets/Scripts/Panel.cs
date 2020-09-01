@@ -77,8 +77,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   void Update()
   {
     if (Input.GetKeyDown(KeyCode.Escape)
-        && TouchScreenKeyboard.visible == false
-        && !FooterMenu.IsStaticPanel(this))
+        && TouchScreenKeyboard.visible == false)
     {
       Back();
     }
@@ -90,10 +89,6 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     {
       Hide();
       Previous.Show();
-    }
-    else
-    {
-      Debug.LogError("called Back or BackClose although there's no previous Panel");
     }
   }
 

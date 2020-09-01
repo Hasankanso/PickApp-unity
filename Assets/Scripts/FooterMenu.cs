@@ -242,11 +242,6 @@ public class FooterMenu : MonoBehaviour
     }
   }
 
-  public static bool IsStaticPanel(Panel p)
-  {
-    return p.Equals(dFooterMenu.searchPanel) || p.Equals(dFooterMenu.addRidePanel) || p.Equals(dFooterMenu.yourRidesPanel) || p.Equals(dFooterMenu.inboxPanel) || p.Equals(dFooterMenu.profilePanel);
-  }
-
   void ResetButtons()
   {
     searchButton.image.sprite = searchButton.spriteState.disabledSprite;
