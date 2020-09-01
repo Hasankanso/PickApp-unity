@@ -55,13 +55,13 @@ public class FooterMenu : MonoBehaviour
     buttons.Add(InboxPanel.PANELNAME, messagesButton);
     buttons.Add(ProfilePanel.PANELNAME, profileButton);
 
-    /*User user = new User();
+    User user = new User();
     user.Id = Cache.GetUserId();
     user.Phone = "+" + Cache.GetPhoneCode() + "" + Cache.GetPhone();
     user.Email = Cache.GetEmail();
     Program.User = user;
     Request<Person> request = new GetLoggedInUser(user);
-    request.Send(ResponseOfAutoLogin);*/
+    request.Send(ResponseOfAutoLogin);
   }
   private void ResponseOfLogin(User u, int code, string message)
   {
