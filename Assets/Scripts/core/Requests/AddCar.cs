@@ -14,10 +14,10 @@ namespace Requests
   class AddCar : Request<Car>
   {
     private Car car;
-    private Driver driver;
-    public AddCar(Car car, Driver driver)
+    private User user;
+    public AddCar(Car car, User user)
     {
-      this.driver = driver;
+      this.user = user;
       this.car = car;
       HttpPath = "/CarBusiness/AddCar";
     }
@@ -30,7 +30,7 @@ namespace Requests
     public override string ToJson()
     {
       JObject carJ = car.ToJson();
-      carJ[nameof(driver)] = driver.Did;
+      carJ[nameof(user)] = user.Id;
       return carJ.ToString();
     }
 

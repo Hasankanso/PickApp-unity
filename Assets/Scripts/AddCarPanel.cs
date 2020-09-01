@@ -20,7 +20,7 @@ public class AddCarPanel : Panel {
     public void Submit() {
         if (VadilateSecondView()) {
             car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
-            Request<Car> request = new AddCar(car, Program.Driver);
+            Request<Car> request = new AddCar(car, Program.User);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);
