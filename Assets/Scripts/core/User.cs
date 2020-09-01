@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class User {
     public string phone;
-    public string password;
+    public string verificationCode;
     private string email;
     public string id;
 
@@ -18,7 +18,7 @@ public class User {
         JObject userJ = new JObject();
         userJ[nameof(this.phone)] = this.phone;
         userJ[nameof(this.email)] = this.email;
-        userJ["verificationCode"] = this.password;
+        userJ[nameof(this.verificationCode)] = this.verificationCode;
         userJ[nameof(this.person)] = person.ToJson();
         return userJ;
     }
@@ -65,7 +65,7 @@ public class User {
 
     public User(string phone, string verificationCode) {
         this.phone = phone;
-        this.password = verificationCode;
+        this.verificationCode = verificationCode;
     }
 
     public User(Person person, string email) {
