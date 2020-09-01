@@ -36,9 +36,6 @@ public static class Cache {
     public static void SetPassword(string password) {
         PlayerPrefs.SetString("password", password);
     }
-    public static void SetToken(string token) {
-        PlayerPrefs.SetString("token", token);
-    }
     public static void SetUserId(string userId) {
         PlayerPrefs.SetString("id", userId);
     }
@@ -47,9 +44,6 @@ public static class Cache {
     }
     public static string GetUserId() {
         return PlayerPrefs.GetString("id", "");
-    }
-    public static string GetToken() {
-        return PlayerPrefs.GetString("token", "");
     }
     public static string GetPhone() {
         return PlayerPrefs.GetString("phone", "");

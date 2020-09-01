@@ -79,9 +79,6 @@ namespace Requests {
                 } catch (TaskCanceledException e) {
                     //The request timed-out or the user canceled the request's Task
                     BuildCatchError(HttpStatusCode.Found, e);
-                } catch (HttpRequestException) {
-                    //The request failed due to an underlying issue such as network connectivity, DNS failure, server certificate validation or timeout.
-                    BuildCatchError(HttpStatusCode.Found, "Please login");
                 }
                 Debug.Log(result);
                 JToken json = JToken.Parse(result);
@@ -125,13 +122,6 @@ namespace Requests {
             JObject js = new JObject();
             js["code"] = "302";
             js["message"] = message.ToString();
-            result = js.ToString();
-        }
-        void BuildCatchError(HttpStatusCode statusCode, string manualMessage) {
-            answer = new HttpResponseMessage(statusCode);
-            JObject js = new JObject();
-            js["code"] = "302";
-            js["message"] = manualMessage;
             result = js.ToString();
         }
 

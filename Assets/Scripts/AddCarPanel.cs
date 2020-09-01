@@ -40,15 +40,7 @@ public class AddCarPanel : Panel {
 
     private void BecomeDriverResponse(Driver result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-            if (code == 302) {
-                Program.User = null;
-                Cache.SetToken("");
-                Program.IsLoggedIn = false;
-                OpenDialog("Please login", false);
-                LoginPanel login = PanelsFactory.CreateLogin();
-                Open(login, () => { login.Init(false); });
-
-            } else OpenDialog(message, false);
+            OpenDialog(message, false);
         } else {
             Program.User.Driver = result;
             MissionCompleted(AddRidePanel.PANELNAME, "Now you are a driver", false);

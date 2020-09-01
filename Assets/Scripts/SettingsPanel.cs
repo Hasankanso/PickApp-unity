@@ -62,42 +62,6 @@ public class SettingsPanel : Panel
     englishCheck.enabled = false;
     arabicCheck.enabled = false;
   }
-  public void Logout()
-  {
-    string cacheToken = Cache.GetToken();
-    if (!string.IsNullOrEmpty(cacheToken))
-    {
-      User user = new User();
-      user.id = Cache.GetUserId();
-      Program.User = user;
-      Request<string> request = new Logout();
-      request.AddSendListener(OpenSpinner);
-      request.AddReceiveListener(CloseSpinner);
-      request.Send(response);
-    }
-    else
-    {
-      LogoutDefault();
-    }
-  }
-  private void response(string result, int code, string message)
-  {
-    if (!code.Equals((int)HttpStatusCode.OK))
-    {
-      LogoutDefault();
-    }
-    else
-    {
-      LogoutDefault();
-    }
-  }
-  private void LogoutDefault()
-  {
-    Program.User = null;
-    Cache.SetToken("");
-    Program.IsLoggedIn = false;
-    MissionCompleted(SearchPanel.PANELNAME, "Waiting for you to come back!");
-  }
   public void openNotifications()
   {
     Panel panel = PanelsFactory.CreateNotificationPanel();

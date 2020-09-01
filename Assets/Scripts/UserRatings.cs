@@ -44,17 +44,8 @@ public class UserRatings : Panel {
     }
     private void Response(List<Rate> result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-            if (code == 302) {
-                Program.User = null;
-                Cache.SetToken("");
-                Program.IsLoggedIn = false;
-                OpenDialog("Please login", false);
-                LoginPanel login = PanelsFactory.CreateLogin();
-                Open(login, () => { login.Init(false); });
-            } else {
                 OpenDialog(message, false);
                 Debug.Log(code);
-            }
         } else {
         }
     }

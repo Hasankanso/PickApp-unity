@@ -30,17 +30,8 @@ public class BioPanel : Panel {
     }
     private void Response(Person result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-            if (code == 302) {
-                Program.User = null;
-                Cache.SetToken("");
-                Program.IsLoggedIn = false;
-                OpenDialog("Please login", false);
-                LoginPanel login = PanelsFactory.CreateLogin();
-                Open(login, () => { login.Init(false); });
-            } else {
                 OpenDialog(message, false);
                 Debug.Log(code);
-            }
         } else {
             List<Ride> upcomingRides = Program.Person.UpcomingRides;
             List<Rate> rates = Program.Person.Rates;

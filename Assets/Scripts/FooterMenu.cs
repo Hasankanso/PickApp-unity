@@ -55,17 +55,13 @@ public class FooterMenu : MonoBehaviour
     buttons.Add(InboxPanel.PANELNAME, messagesButton);
     buttons.Add(ProfilePanel.PANELNAME, profileButton);
 
-    User user = new User();
+    /*User user = new User();
     user.Id = Cache.GetUserId();
-    string token = Cache.GetToken();
     user.Phone = "+" + Cache.GetPhoneCode() + "" + Cache.GetPhone();
     user.Email = Cache.GetEmail();
-    if (!string.IsNullOrEmpty(token))
-    {
-      Program.User = user;
-      Request<Person> request = new GetLoggedInUser(user);
-      request.Send(ResponseOfAutoLogin);
-    }
+    Program.User = user;
+    Request<Person> request = new GetLoggedInUser(user);
+    request.Send(ResponseOfAutoLogin);*/
   }
   private void ResponseOfLogin(User u, int code, string message)
   {
@@ -87,7 +83,6 @@ public class FooterMenu : MonoBehaviour
     if (!code.Equals((int)HttpStatusCode.OK))
     {
       Cache.SetUserId("");
-      Cache.SetToken("");
       Program.User.id = null;
 
       if (!string.IsNullOrEmpty(Program.User.phone))

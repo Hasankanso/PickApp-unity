@@ -343,17 +343,8 @@ public class RideDetails : Panel {
 
     public void AddRideResponse(Ride result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-            if (code == 302) {
-                Program.User = null;
-                Cache.SetToken("");
-                Program.IsLoggedIn = false;
-                OpenDialog("Please login", false);
-                LoginPanel login = PanelsFactory.CreateLogin();
-                Open(login, () => { login.Init(false); });
-            } else {
                 OpenDialog(message, false);
                 Debug.Log(code);
-            }
         }
         else  {
             Program.Person.UpcomingRides.Add(result);
@@ -363,17 +354,8 @@ public class RideDetails : Panel {
 
     private void RemoveRideResponse(Ride result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-            if (code == 302) {
-                Program.User = null;
-                Cache.SetToken("");
-                Program.IsLoggedIn = false;
-                OpenDialog("Please login", false);
-                LoginPanel login = PanelsFactory.CreateLogin();
-                Open(login, () => { login.Init(false); });
-            } else {
                 OpenDialog(message, false);
                 Debug.Log(code);
-            }
         } else {
             FooterMenu.dFooterMenu.OpenYourRidesPanel();
             DestroyForwardBackward();
@@ -383,17 +365,8 @@ public class RideDetails : Panel {
 
     private void CancelReservedSeatsResponse(Ride result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-            if (code == 302) {
-                Program.User = null;
-                Cache.SetToken("");
-                Program.IsLoggedIn = false;
-                OpenDialog("Please login", false);
-                LoginPanel login = PanelsFactory.CreateLogin();
-                Open(login, () => { login.Init(false); });
-            } else {
                 OpenDialog(message, false);
                 Debug.Log(code);
-            }
         } else {
             Program.Person.UpcomingRides.Remove(result);
             Passenger passenger = new Passenger(Program.User, luggagesDropdown.value);
@@ -405,17 +378,8 @@ public class RideDetails : Panel {
 
     private void ReserveSeatsResponse(Ride result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-            if (code == 302) {
-                Program.User = null;
-                Cache.SetToken("");
-                Program.IsLoggedIn = false;
-                OpenDialog("Please login", false);
-                LoginPanel login = PanelsFactory.CreateLogin();
-                Open(login, () => { login.Init(false); });
-            } else {
                 OpenDialog(message, false);
                 Debug.Log(code);
-            }
         } else {
             Program.Person.UpcomingRides.Add(result);
             FooterMenu.dFooterMenu.OpenSearchPanel();
