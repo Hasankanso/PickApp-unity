@@ -9,7 +9,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BecomeDriver : Panel {
-    public Person person = null;
     public Driver driver = null;
     public Text title;
     public Button becomeDriver, editRegions;
@@ -61,7 +60,7 @@ public class BecomeDriver : Panel {
             }
         } else OpenDialog("You have added the maximum number of regions", false);
     }
-    public void AddItemToList(List<string> regions) {
+    public void AddItemToList(List<Location> regions) {
         foreach (var region in regions) {
             var obj = ItemsFactory.CreateRegionItem(listView.scrollContainer, region, this);
             listView.Add(obj.gameObject);
@@ -80,7 +79,6 @@ public class BecomeDriver : Panel {
 
         if (Status==StatusE.ADD) {
             Clear();
-            this.person = Program.Person;
             AddItemToList();
             title.text = "Become A Driver";
             editRegions.gameObject.SetActive(false);
@@ -89,8 +87,7 @@ public class BecomeDriver : Panel {
         }
         else if (Status == StatusE.VIEW) {
             Clear();
-            this.person = Program.Person;
-            AddItemToList();
+            AddItemToList(Program.Driver.regions);
             EditRegions();
             title.text = "Regions";
             editRegions.gameObject.SetActive(true);

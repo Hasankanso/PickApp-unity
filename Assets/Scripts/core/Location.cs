@@ -3,6 +3,7 @@ using Requests;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public class Location
 {
@@ -45,16 +46,20 @@ public class Location
   {
   //  string id = json[nameof(id)].ToString();
     string name = json[nameof(name)].ToString();
-
+    string placeId = json[nameof(placeId)].ToString();
     double longitude=0, latitude=0;
 
-    JToken coor = json["position"]["coordinates"];
-    if (coor != null)
+    var position = json["position"];
+
+    if (position.HasValues)
     {
-      Double.TryParse(((JArray)coor)[0].ToString(), out longitude);
-      Double.TryParse(((JArray)coor)[1].ToString(), out latitude);
+      JToken coor = position["coordinates"];
+      if (coor != null)
+      {
+        Double.TryParse(((JArray)coor)[0].ToString(), out longitude);
+        Double.TryParse(((JArray)coor)[1].ToString(), out latitude);
+      }
     }
-    string placeId = "A";
     return new Location(placeId, name, latitude, longitude);
   }
 

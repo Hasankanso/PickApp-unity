@@ -13,11 +13,13 @@ public class Driver
   private List<ScheduleRide> schedules = new List<ScheduleRide>();
 
   private DateTime updated;
-  public Driver(string dId, List<Car> cars, List<ScheduleRide> schedules)
+  public Driver(string dId, List<Car> cars, List<ScheduleRide> schedules, List<Location> regions)
   {
     this.cars = cars;
     this.schedules = schedules;
     this.id = dId;
+    this.regions = regions;
+
   }
   public Driver(string dId, List<Car> cars)
   {
@@ -33,11 +35,11 @@ public class Driver
     this.id = id;
     this.cars = cars;
   }
-    public override bool Equals(object d)
-    {
-        return id == ((Driver)d).id;
-    }
-    public JObject ToJson()
+  public override bool Equals(object d)
+  {
+    return id == ((Driver)d).id;
+  }
+  public JObject ToJson()
   {
 
     JObject driverJ = new JObject();
@@ -73,6 +75,10 @@ public class Driver
       did = dId.ToString();
     JArray carsJ = (JArray)driver.GetValue("cars");
     List<Car> cars = null;
+
+    List<ScheduleRide> schedules = new List<ScheduleRide>();
+    List<Location> regions = new List<Location>(3);
+    
     if (carsJ != null)
     {
       cars = new List<Car>();
@@ -82,18 +88,42 @@ public class Driver
       }
     }
 
+    var reg1 = driver["region1"];
+    Location regL1 = null;
+    if (reg1 != null)
+    {
+      regL1 = Location.ToObject((JObject)reg1);
+      regions.Add(regL1);
+    }
+
+
+    var reg2 = driver["region2"];
+    Location regL2 = null;
+    if (reg2 != null)
+    {
+      regL2 = Location.ToObject((JObject)reg2);
+      regions.Add(regL2);
+    }
+
+    var reg3 = driver["region3"];
+    Location regL3 = null;
+    if (reg3 != null)
+    {
+      regL3 = Location.ToObject((JObject)reg3);
+      regions.Add(regL3);
+    }
+
     if (driver.GetValue("schedules") != null && !string.IsNullOrEmpty(driver.GetValue("schedules").ToString()) && !driver.GetValue("schedules").ToString().Equals("[]"))
     {
       JArray schedulesJ = (JArray)driver.GetValue("schedules");
-      List<ScheduleRide> schedules = new List<ScheduleRide>();
+
       foreach (var schedule in schedulesJ)
       {
         schedules.Add(ScheduleRide.ToObject((JObject)schedule));
       }
-      return new Driver(did, cars, schedules);
     }
-    else
-      return new Driver(did, cars);
+
+    return new Driver(did, cars, schedules, regions);
   }
   public List<Car> Cars { get => cars; set => cars = value; }
   public List<Location> Regions { get => regions; set => regions = value; }

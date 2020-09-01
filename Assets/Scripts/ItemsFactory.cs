@@ -43,10 +43,10 @@ public class ItemsFactory : MonoBehaviour {
         return obj;
     }
 
-    public static RegionItem CreateRegionItem(GameObject parent, string regions, BecomeDriver becomeDriver) {
+    public static RegionItem CreateRegionItem(GameObject parent, Location loc, BecomeDriver becomeDriver) {
         RegionItem obj = Instantiate(defaultItemsFactory.regionItem);
         obj.transform.SetParent(parent.transform, false);
-        obj.Init(regions, becomeDriver);
+        obj.Init(becomeDriver, loc);
         return obj;
     }
     public static RatingItem CreateRatingItem(GameObject parent, Rate o) {

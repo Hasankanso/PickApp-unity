@@ -26,13 +26,16 @@ public class RegionItem : Panel {
         this.becomeDriver = becomeDriver;
     }
 
-    public void Init(string region, BecomeDriver becomeDriver) {
+    public void Init(BecomeDriver becomeDriver, Location loc) {
 
         this.becomeDriver = becomeDriver;
         if (BecomeDriver.regionCounter == 0) {
             deleteButton.gameObject.SetActive(false);
         }
-    }
+    this.regionL = loc;
+    region.GetComponent<InputField>().text = regionL.Name;
+    region.PlaceHolder();
+  }
 
     public void OnLocationPicked(Location loc) {
         regionL = loc;
