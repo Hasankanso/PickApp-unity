@@ -15,7 +15,6 @@ using System;
 public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 {
   public int id;
-    public static bool emailVerified;
   public string panelName;
   private Panel previous, next;
    public Image verifyEmail;

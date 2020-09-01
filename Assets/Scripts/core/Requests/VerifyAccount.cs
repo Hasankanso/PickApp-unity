@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using Requests;
+using System;
 
 internal class VerifyAccount : Request<string>
 {
@@ -19,9 +20,9 @@ internal class VerifyAccount : Request<string>
 
   public override string ToJson()
   {
-    JObject json = new JObject();
-    json[nameof(User.phone)] = phoneNumber;
-    return json.ToString();
+    JObject jPhone = new JObject();
+    jPhone[nameof(User.phone)] = phoneNumber;
+    return jPhone.ToString();
   }
 
   protected override string IsValid()

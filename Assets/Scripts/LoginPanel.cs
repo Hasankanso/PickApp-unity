@@ -17,7 +17,6 @@ public class LoginPanel : Panel
   public Image backButton;
   public GameObject phoneNumberView;
 
-  private Person person;
   private bool isFromProfilePanel;
 
   //verifyCode
@@ -72,7 +71,7 @@ public class LoginPanel : Panel
     else
     {
       string hiddenEmail = HideEmail(email);
-      VerifyEmailText.text = "we've sent you a verification email on " + hiddenEmail;
+      VerifyEmailText.text = "Verification Code Sent to " + hiddenEmail;
       OpenVerifyEmail();
     }
   }
@@ -115,7 +114,6 @@ public class LoginPanel : Panel
   public void Init(bool isFromProfilePanel)
   {
     Clear();
-        Debug.Log("yes");
     this.isFromProfilePanel = isFromProfilePanel;
     if (!isFromProfilePanel)
     {
