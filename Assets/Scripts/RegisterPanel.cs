@@ -115,7 +115,7 @@ public class RegisterPanel : Panel {
             return false;
         }
     }
-    public override void Init() {
+    public override void Init() { //ToDo
         Clear();
         Request<Dictionary<string, CountryInformations>> request = new GetCountries();
         request.AddSendListener(OpenSpinner);

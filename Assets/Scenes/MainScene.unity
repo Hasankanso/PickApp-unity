@@ -265,6 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8fb76b6cb46330439fe2acde3b02dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loginRegisterPanel: {fileID: 8739510310983726422, guid: a28bdf154a7e7e84e9fde37ed943daa6,
+    type: 3}
   notificationsPanel: {fileID: 4958087716655394728, guid: a8b7e39dd42ed6d4081734e6d1349a2b,
     type: 3}
   locationResultsPanel: {fileID: 5528097980255838681, guid: 348e5c24b6622ea40b6bfdc5fe984483,
@@ -2341,6 +2343,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.00043281613
       objectReference: {fileID: 0}
+    - target: {fileID: 790990232234784647, guid: 18ef0a03b13ca0b4dac830b00b203a4a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -33.02417
+      objectReference: {fileID: 0}
     - target: {fileID: 790990232567884103, guid: 18ef0a03b13ca0b4dac830b00b203a4a,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2369,7 +2376,7 @@ PrefabInstance:
     - target: {fileID: 6106076923326838091, guid: 18ef0a03b13ca0b4dac830b00b203a4a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 15.350037
+      value: 15.350098
       objectReference: {fileID: 0}
     - target: {fileID: 7324479250667705568, guid: 18ef0a03b13ca0b4dac830b00b203a4a,
         type: 3}
