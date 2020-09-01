@@ -63,6 +63,7 @@ public class FooterMenu : MonoBehaviour
     Request<Person> request = new GetLoggedInUser(user);
     request.Send(ResponseOfAutoLogin);
   }
+
   private void ResponseOfLogin(User u, int code, string message)
   {
     if (!code.Equals((int)HttpStatusCode.OK))
