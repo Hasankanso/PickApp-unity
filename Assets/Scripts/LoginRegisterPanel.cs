@@ -26,18 +26,17 @@ public class LoginRegisterPanel : Panel
     }    
     public void Login()
     {
-        Panel p = PanelsFactory.CreateLogin();
-        Open(p);
+        LoginPanel p = PanelsFactory.CreateLogin();
+        Open(p, () => { p.Init(false); });
     }
     public void Register()
     {
-        Panel p = PanelsFactory.CreateRegister();
-        Open(p);
+        RegisterPanel p = PanelsFactory.CreateRegister();
+        Open(p, () => { p.Init(); });
     }
     public void NeedHelp()
     {
-        //Panel p = PanelsFactory.CreateHowItWorks();  need help panel
-        //Open(p);
+      //need help panel
     }
 
     internal override void Clear()

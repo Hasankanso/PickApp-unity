@@ -42,9 +42,8 @@ public class ChangePasswordPanel : Panel {
             Open(panel);
         }
     }
-    public void Register() {
+    public void Register() {//ToDo verication code
         if (validate()) {
-            user.Password = newPassword.GetComponent<InputField>().text;
             PhonePanel panel = PanelsFactory.CreatePhonePanel();
             Open(panel, () => panel.Init(user));
         }

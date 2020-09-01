@@ -97,7 +97,6 @@ public class PhonePanel : Panel {
             Program.User = user;
             Cache.User(user);
             Program.IsLoggedIn = true;
-            Cache.SetPassword(this.user.Password);
             FooterMenu.dFooterMenu.OpenSearchPanel();
             OpenDialog("Welcome to PickApp!", true);
             DestroyForwardBackward();

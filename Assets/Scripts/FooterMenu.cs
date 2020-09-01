@@ -26,7 +26,7 @@ public class FooterMenu : MonoBehaviour
   Dictionary<string, Panel> panels;
   Dictionary<string, Button> buttons;
 
-  void Start()
+  void Start() //ToDo verification code
   {
     if (dFooterMenu == null)
     {
@@ -59,7 +59,6 @@ public class FooterMenu : MonoBehaviour
     user.Id = Cache.GetUserId();
     string token = Cache.GetToken();
     user.Phone = "+" + Cache.GetPhoneCode() + "" + Cache.GetPhone();
-    user.password = Cache.GetPassword();
     user.Email = Cache.GetEmail();
     if (!string.IsNullOrEmpty(token))
     {
@@ -83,7 +82,7 @@ public class FooterMenu : MonoBehaviour
       Program.IsLoggedIn = true;
     }
   }
-  private void ResponseOfAutoLogin(Person u, int code, string message)
+  private void ResponseOfAutoLogin(Person u, int code, string message) //ToDo we have to check here i fsomething is missed
   {
     if (!code.Equals((int)HttpStatusCode.OK))
     {
@@ -91,9 +90,9 @@ public class FooterMenu : MonoBehaviour
       Cache.SetToken("");
       Program.User.id = null;
 
-      if (!string.IsNullOrEmpty(Program.User.password) && !string.IsNullOrEmpty(Program.User.phone))
+      if (!string.IsNullOrEmpty(Program.User.phone))
       {
-        Debug.Log("auto login faild(cache is outdated), trying to login from cache credentials" + Program.User.phone + " " + Program.User.password);
+        Debug.Log("auto login faild(cache is outdated), trying to login from cache credentials" + Program.User.phone + " ");
         Request<User> request = new Login(Program.User);
         request.Send(ResponseOfLogin);
       }

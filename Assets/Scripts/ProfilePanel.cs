@@ -42,7 +42,10 @@ public class ProfilePanel : Panel {
             becomeDriverLabel.SetActive(true);
         }
     }
+    public void SendCode()
+    {
 
+    }
     private async void DownloadAndAddCarsImages() {
         for (int i = 0; i < carItems.Count; i++)
             if (carItems[i].car.Picture == null) {

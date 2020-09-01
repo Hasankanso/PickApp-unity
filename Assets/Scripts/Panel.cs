@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Linq;
+using System.Net;
+using System.Text.RegularExpressions;
+using UnityEngine.UI;
+using Requests;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Networking;
+using BackendlessAPI;
+using BackendlessAPI.Engine;
+using System.Collections.Generic;
+using BackendlessAPI.Utils;
+using System;
+
 
 public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 {
   public int id;
+    public static bool emailVerified;
   public string panelName;
   private Panel previous, next;
-  private bool opened = false;
+   public Image verifyEmail;
+    private bool opened = false;
   public bool permanent = false; //for the moment this will only affect the destroy process, if permanent this panel will not be destroyed by calling Panel.Destroy()
   public enum StatusE { ADD, UPDATE, VIEW };
 

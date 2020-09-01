@@ -115,6 +115,7 @@ public class LoginPanel : Panel
   public void Init(bool isFromProfilePanel)
   {
     Clear();
+        Debug.Log("yes");
     this.isFromProfilePanel = isFromProfilePanel;
     if (!isFromProfilePanel)
     {
@@ -199,9 +200,22 @@ public class LoginPanel : Panel
     viewId = 1;
     backButton.gameObject.SetActive(true);
   }
+    public void openView(int index)
+    {
+        if (index == 0)
+        {
+            phoneNumberView.SetActive(true);
+            verifyEmailView.SetActive(false);
+        }
+        else if (index == 1 && ValidatePhone())
+        {
+            phoneNumberView.SetActive(false);
+            verifyEmailView.SetActive(true);
+        }
 
+    }
 
-  internal override void Clear()
+    internal override void Clear()
   {
     backButton.gameObject.SetActive(false);
     phone.Reset();
