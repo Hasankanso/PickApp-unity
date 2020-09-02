@@ -32,19 +32,24 @@ public class BecomeDriver : Panel {
         if (Validate()) {
             foreach (var item in regionItems)
             {
-                regions=Program.Driver.regions;
+                regions.Add(item.getRegion());
             }
-            }
+            Program.Driver.regions = regions;
+            driver = Program.Driver;
+            Request<Driver> request = new EditRegions(Program.User, driver);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(EditResponse);
+            
+        }
     }
-    private void EditResponse(Person result, HttpStatusCode code, string message) {
-        if (!code.Equals(HttpStatusCode.OK)) {
+    private void EditResponse(Driver driver, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK)) {
             Panel p = PanelsFactory.CreateDialogBox("Something went wrong", false);
             OpenDialog(p);
         } else {
-            Panel p = PanelsFactory.CreateDialogBox("Your regions ha been edited", true);
-            OpenDialog(p);
-            Panel panel = PanelsFactory.CreateAddCar();
-            Open(panel);
+            Program.User.Driver = driver;
+            MissionCompleted(ProfilePanel.PANELNAME, "Regions Updated", true);
         }
     }
     public void AddItemToList() {
@@ -88,7 +93,6 @@ public class BecomeDriver : Panel {
         else if (Status == StatusE.VIEW) {
             Clear();
             AddItemToList(Program.Driver.regions);
-            EditRegions();
             title.text = "Regions";
             editRegions.gameObject.SetActive(true);
             becomeDriver.gameObject.SetActive(false);
