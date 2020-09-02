@@ -51,8 +51,7 @@ public class PhonePanel : Panel {
           },
             codeAutoRetrievalTimeOut: (id) => {
                 verificationId = id;
-                Debug.Log("time out, make sure phone number is correct");
-                print("time out, make sure phone number is correct");
+                OpenDialog("Make sure your phone number is correct!", false);
             });
     }
 
@@ -71,8 +70,7 @@ public class PhonePanel : Panel {
                     OpenDialog("TokenAsync was canceled.", false);
                     Debug.LogError("TokenAsync was canceled.");
                     return;
-                }
-                if (task2.IsFaulted) {
+                } else if (task2.IsFaulted) {
                     OpenDialog("TokenAsync encountered an error: ", false);
                     Debug.LogError("TokenAsync encountered an error: " + task.Exception);
                     return;
@@ -82,7 +80,9 @@ public class PhonePanel : Panel {
                 registerRequest.AddSendListener(OpenSpinner);
                 registerRequest.AddReceiveListener(CloseSpinner);
                 registerRequest.Send(RegistrationResponse);
+                return;
             });
+            return;
         });
     }
 

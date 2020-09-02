@@ -85,7 +85,7 @@ public class AddCarPanel : Panel {
         else
         {
             FooterMenu.dFooterMenu.OpenAddRidePanel();
-            DestroyForwardBackward();
+            DestroyImediateForwardBackward();
 
         }
     }
