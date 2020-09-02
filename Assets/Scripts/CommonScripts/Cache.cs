@@ -11,6 +11,7 @@ public static class Cache {
             if (user.Email != null)
                 SetEmail(user.Email);
             SetUserId(user.Id);
+            Debug.Log(user.Id);
         }
     }
     public static bool GetNewsCheckbox() {
@@ -33,9 +34,6 @@ public static class Cache {
     public static void SetPhoneCode(string phoneCode) {
         PlayerPrefs.SetString("phoneCode", phoneCode);
     }
-    public static void SetPassword(string password) {
-        PlayerPrefs.SetString("password", password);
-    }
     public static void SetUserId(string userId) {
         PlayerPrefs.SetString("id", userId);
     }
@@ -50,9 +48,6 @@ public static class Cache {
     }
     public static string GetPhoneCode() {
         return PlayerPrefs.GetString("phoneCode", "");
-    }
-    public static string GetPassword() {
-        return PlayerPrefs.GetString("password", "");
     }
     public static void SetDisableAllCheckbox(bool disableAll) {
         PlayerPrefs.SetString("disableAll", disableAll.ToString());

@@ -358,7 +358,7 @@ public class RideDetails : Panel {
                 Debug.Log(code);
         } else {
             FooterMenu.dFooterMenu.OpenYourRidesPanel();
-            DestroyForwardBackward();
+            DestroyImediateForwardBackward();
             OpenDialog("Ride has been removed!", true);
         }
     }
@@ -384,7 +384,7 @@ public class RideDetails : Panel {
             Program.Person.UpcomingRides.Add(result);
             FooterMenu.dFooterMenu.OpenSearchPanel();
             OpenDialog("You reserved " + (personsDropdown.value + 1) + " seat(s) and " + (luggagesDropdown.value + 1) + " luggage(s).", true);
-            DestroyForwardBackward();
+            DestroyImediateForwardBackward();
         }
 
     }
