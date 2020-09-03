@@ -13,16 +13,15 @@ public class PhonePanel : Panel {
     public InputFieldScript phone, code;
     public Text phoneLabel, resendCodeLabel;
     public Image codeImage;
-    public Button nextReset, nextRegister, reset, register;
-    public Text countryCode;
-    public GameObject firstView, secondView;
+    public Text countryCode,alreadyRegistredPhone;
+    public GameObject firstView, secondView, UserAlreadyExistView;
     private User user = null;
     private static string idToken;
     private static uint timeout = 120000;
     private IEnumerator timer;
     ForceResendingToken token = null;
-
     string verificationId = "";
+
     public void SendCode() {
         FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(Program.FirebaseApp);
         PhoneAuthProvider provider = PhoneAuthProvider.GetInstance(firebaseAuth);
@@ -85,11 +84,17 @@ public class PhonePanel : Panel {
             return;
         });
     }
+    public void OpenLoginPanel() {
+        LoginPanel p = PanelsFactory.CreateLogin();
+        Open(p, () => { p.Init(true); });
+    }
 
     private void RegistrationResponse(User user, int statusCode, string message) {
         if (statusCode != (int)HttpStatusCode.OK) {
-            if (statusCode == 1155) {
-                OpenDialog("User Already registred!", false);
+             if (statusCode == 3033) {
+                UserAlreadyExistView.gameObject.SetActive(true);
+                alreadyRegistredPhone.text = "User "+ countryCode.text+phone.text.text+" already registred, " +
+                    "if it's not your account you can skip it.";
             } else {
                 OpenDialog(message, false);
             }
@@ -126,27 +131,10 @@ public class PhonePanel : Panel {
         codeImage.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
     }
 
-
     public void Register() {
         if (vadilateSecondView()) {
             user.Phone = phone.text.text;
             FirebaseVerification();
-        }
-    }
-
-    public void ResetPassword() {
-        if (vadilateSecondView()) {
-            //IMPLEMENT
-        }
-    }
-
-    private void ResetPasswordResponse(User result, HttpStatusCode code, string message) {
-        if (!code.Equals(HttpStatusCode.OK))
-            OpenDialog("Wrong Code", false);
-        else {
-            OpenDialog("Please add a new password!", true);
-            ChangePasswordPanel panel = PanelsFactory.ChangePassword();
-            Open(panel, () => panel.Init(true, result));
         }
     }
     public void openView(int index) {
@@ -170,7 +158,6 @@ public class PhonePanel : Panel {
         } else if (index == 1)
             secondView.SetActive(true);
     }
-
 
     bool vadilateFirstView() {
         bool valid = true;
@@ -203,27 +190,17 @@ public class PhonePanel : Panel {
     }
     public void Init(User user) {
         Clear();
-        register.gameObject.SetActive(true);
-        nextRegister.gameObject.SetActive(true);
         this.user = user;
         CountryInformations country = user.Person.CountryInformations;
         phone.GetComponentInParent<InputField>().characterLimit = country.Digits;
         countryCode.text = country.Code;
-    }
-    public override void Init() {
-        Clear();
-        reset.gameObject.SetActive(true);
-        nextReset.gameObject.SetActive(true);
     }
     internal override void Clear() {
         phone.Reset();
         if (timer != null) {
             StopCoroutine(timer);
         }
-        reset.gameObject.SetActive(false);
-        register.gameObject.SetActive(false);
-        nextReset.gameObject.SetActive(false);
-        nextRegister.gameObject.SetActive(false);
+        UserAlreadyExistView.gameObject.SetActive(false);
         openView(0);
     }
 }
