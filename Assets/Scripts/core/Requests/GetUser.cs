@@ -18,6 +18,8 @@ namespace Requests {
         {
             JObject json = (JObject)response;
             Person u = Person.ToObject((JObject)json["person"]);
+            string userStatus = json["userStatus"].ToString();
+            Program.User.UserStatus = userStatus;
             Driver driver = null;
             JObject driverJ = (JObject)json["driver"];
             if (driverJ != null) {

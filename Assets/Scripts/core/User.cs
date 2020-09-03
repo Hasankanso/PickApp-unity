@@ -9,6 +9,7 @@ public class User {
     public string verificationCode;
     private string email;
     public string id;
+    public string userStatus;
 
 
     private Person person;
@@ -36,7 +37,10 @@ public class User {
         var em = json[nameof(email)];
         if (em != null)
             email = em.ToString();
-
+        string userStatus = "";
+        var status = json[nameof(userStatus)];
+        if (status != null)
+            userStatus = status.ToString();
         JObject driverJ = (JObject)json["driver"];
         JObject personJ = (JObject)json["person"];
 
@@ -46,7 +50,7 @@ public class User {
             driver = Driver.ToObject(driverJ);
         }
 
-        return new User(person, driver, phone, email, userId);
+        return new User(person, driver, phone, email, userId, userStatus);
     }
 
     public User(Person person, Driver driver) {
@@ -55,12 +59,13 @@ public class User {
     }
     public User() {
     }
-    public User(Person person, Driver driver, string phone, string email, string userId) {
+    public User(Person person, Driver driver, string phone, string email, string userId, string userStatus) {
         this.person = person;
-        this.driver = driver;
+        this.driver = driver; 
         this.phone = phone;    
         this.email = email;
         this.id = userId;
+        this.userStatus = userStatus;
     }
 
     public User(string phone, string verificationCode) {
@@ -78,6 +83,7 @@ public class User {
     }
     public string Phone { get => phone; set => phone = value; }
     public string Email { get => email; set => email = value; }
+    public string UserStatus { get => userStatus; set => userStatus = value; }
     public string Id { get => id; set => id = value; }
     public Person Person { get => person; set => person = value; }
     public Driver Driver { get => driver; set => driver = value; }

@@ -5,7 +5,16 @@ using System;
 
     public class NativeDialog
     {
-        public static void OpenDialog(string title, string message, string ok = "Ok", Action okAction = null)
+    private string v1;
+    private string v2;
+
+    public NativeDialog(string v1, string v2)
+    {
+        this.v1 = v1;
+        this.v2 = v2;
+    }
+
+    public static void OpenDialog(string title, string message, string ok = "Ok", Action okAction = null)
         {
             MobileDialogInfo.Create(title, message, ok, okAction);
         }
@@ -13,7 +22,18 @@ using System;
         {
             MobileDialogConfirm.Create(title, message, yes, no, yesAction, noAction);
         }
-        public static void OpenDialog(string title, string message, string accept, string neutral, string decline, Action acceptAction = null, Action neutralAction = null, Action declineAction = null)
+
+    public void SetUrlString(string v)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void init()
+    {
+        throw new NotImplementedException();
+    }
+
+    public static void OpenDialog(string title, string message, string accept, string neutral, string decline, Action acceptAction = null, Action neutralAction = null, Action declineAction = null)
         {
             MobileDialogNeutral.Create(title, message, accept, neutral, decline, acceptAction, neutralAction, declineAction);
         }
