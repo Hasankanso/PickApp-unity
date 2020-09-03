@@ -52,14 +52,16 @@ public class FooterMenu : MonoBehaviour {
         buttons.Add(MyRidePanel.PANELNAME, myRidesButton);
         buttons.Add(InboxPanel.PANELNAME, messagesButton);
         buttons.Add(ProfilePanel.PANELNAME, profileButton);
-
-        User user = new User();
-        user.Id = Cache.GetUserId();
-        user.Phone = "+" + Cache.GetPhoneCode() + "" + Cache.GetPhone();
-        user.Email = Cache.GetEmail();
-        Program.User = user;
-        Request<Person> request = new GetLoggedInUser(user);
-        request.Send(ResponseGetLoggedInUser);
+        string userId = Cache.GetUserId();
+        if (!string.IsNullOrEmpty(userId)) {
+            User user = new User();
+            user.Id = Cache.GetUserId();
+            user.Phone = "+" + Cache.GetPhoneCode() + "" + Cache.GetPhone();
+            user.Email = Cache.GetEmail();
+            Program.User = user;
+            Request<Person> request = new GetLoggedInUser(user);
+            request.Send(ResponseGetLoggedInUser);
+        }
     }
 
     private void ResponseGetLoggedInUser(Person u, int code, string message) //ToDo we have to check here i fsomething is missed

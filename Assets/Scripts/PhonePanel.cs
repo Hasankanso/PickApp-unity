@@ -13,7 +13,7 @@ public class PhonePanel : Panel {
     public InputFieldScript phone, code;
     public Text phoneLabel, resendCodeLabel;
     public Image codeImage;
-    public Text countryCode,alreadyRegistredPhone;
+    public Text countryCode, alreadyRegistredPhone;
     public GameObject firstView, secondView, UserAlreadyExistView;
     private User user = null;
     private static string idToken;
@@ -21,6 +21,7 @@ public class PhonePanel : Panel {
     private IEnumerator timer;
     ForceResendingToken token = null;
     string verificationId = "";
+    private bool isForceRegister = false;
 
     public void SendCode() {
         FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(Program.FirebaseApp);
@@ -75,10 +76,18 @@ public class PhonePanel : Panel {
                     return;
                 }
                 idToken = task2.Result;
-                Request<User> registerRequest = new RegisterPerson(user, idToken);
-                registerRequest.AddSendListener(OpenSpinner);
-                registerRequest.AddReceiveListener(CloseSpinner);
-                registerRequest.Send(RegistrationResponse);
+                if (!isForceRegister) {
+                    Request<User> registerRequest = new RegisterPerson(user, idToken);
+                    registerRequest.AddSendListener(OpenSpinner);
+                    registerRequest.AddReceiveListener(CloseSpinner);
+                    registerRequest.Send(RegistrationResponse);
+                } else {
+                    Request<User> registerRequest = new ForceRegisterPerson(user, idToken);
+                    registerRequest.AddSendListener(OpenSpinner);
+                    registerRequest.AddReceiveListener(CloseSpinner);
+                    registerRequest.Send(RegistrationResponse);
+                }
+
                 return;
             });
             return;
@@ -86,14 +95,14 @@ public class PhonePanel : Panel {
     }
     public void OpenLoginPanel() {
         LoginPanel p = PanelsFactory.CreateLogin();
-        Open(p, () => { p.Init(true); });
+        Open(p, () => { p.Init(false); });
     }
 
     private void RegistrationResponse(User user, int statusCode, string message) {
         if (statusCode != (int)HttpStatusCode.OK) {
-             if (statusCode == 3033) {
+            if (statusCode == 3033) {
                 UserAlreadyExistView.gameObject.SetActive(true);
-                alreadyRegistredPhone.text = "User "+ countryCode.text+phone.text.text+" already registred, " +
+                alreadyRegistredPhone.text = "User " + countryCode.text + phone.text.text + " already registred, " +
                     "if it's not your account you can skip it.";
             } else {
                 OpenDialog(message, false);
@@ -130,7 +139,36 @@ public class PhonePanel : Panel {
         resendCodeLabel.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
         codeImage.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
     }
+    public void CheckIfUserExist() {
+        if (vadilateFirstView()) {
+            User checkUser = new User {
+                Phone = countryCode.text + phone.text.text
+            };
+            Request<bool> registerRequest = new CheckUserExist(checkUser);
+            registerRequest.AddSendListener(OpenSpinner);
+            registerRequest.AddReceiveListener(CloseSpinner);
+            registerRequest.Send(CheckUserExistResponse);
+        }
+    }
 
+    private void CheckUserExistResponse(bool userExist, int statusCode, string message) {
+        if (statusCode != (int)HttpStatusCode.OK) {
+            OpenDialog(message, false);
+        } else {
+            firstView.SetActive(false);
+            if (userExist == true) {
+                UserAlreadyExistView.SetActive(true);
+                alreadyRegistredPhone.text = "User " + countryCode.text + phone.text.text + " already registred, " +
+                "if it's not your account you can skip it.";
+            } else {
+                openView(1);
+            }
+        }
+    }
+    public void Skip() {
+        isForceRegister = true;
+        openView(1);
+    }
     public void Register() {
         if (vadilateSecondView()) {
             user.Phone = phone.text.text;
@@ -140,6 +178,7 @@ public class PhonePanel : Panel {
     public void openView(int index) {
         firstView.SetActive(false);
         secondView.SetActive(false);
+        UserAlreadyExistView.SetActive(false);
         if (index == 0) {
             firstView.SetActive(true);
         } else if (index == 1 && vadilateFirstView()) {
@@ -197,10 +236,11 @@ public class PhonePanel : Panel {
     }
     internal override void Clear() {
         phone.Reset();
+        isForceRegister = false;
         if (timer != null) {
             StopCoroutine(timer);
         }
-        UserAlreadyExistView.gameObject.SetActive(false);
+        UserAlreadyExistView.SetActive(false);
         openView(0);
     }
 }
