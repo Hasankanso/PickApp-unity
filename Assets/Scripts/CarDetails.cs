@@ -37,7 +37,7 @@ public class CarDetails : Panel
     {
         if (ValidateDelete())
         {
-            Request<Car> request = new DeleteCar(car, Program.Driver);
+            Request<Car> request = new DeleteCar(car, Program.User);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);

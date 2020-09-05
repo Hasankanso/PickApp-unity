@@ -63,7 +63,7 @@ public class AddCarPanel : Panel {
             car.Brand = brand.text.text;
             car.Color = color;
             car.Picture = carImage.sprite.texture;
-            Request<Car> request = new EditCar(car);
+            Request<Car> request = new EditCar(car,Program.User);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);

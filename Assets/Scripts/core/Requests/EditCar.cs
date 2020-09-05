@@ -13,9 +13,11 @@ namespace Requests
   class EditCar : Request<Car>
   {
     private Car car;
+    private User user;
 
-    public EditCar(Car car)
+    public EditCar(Car car,User user)
     {
+      this.user = user;
       this.car = car;
       HttpPath = "/CarBusiness/UpdateCar";
     }
@@ -23,12 +25,14 @@ namespace Requests
     public override Car BuildResponse(JToken response) //TODO
     {
             return Car.ToObject((JObject)response);
+            this.user = Program.User;
         }
 
     public override string ToJson()
     {
       JObject carJ = car.ToJson();
       carJ[nameof(car.id)] = car.Id;
+      carJ[nameof(user)] = user.Id;
       return carJ.ToString();
     }
 

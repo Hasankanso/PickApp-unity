@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using UnityEngine;
 using System.Net;
+using System.Web;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
@@ -13,16 +14,15 @@ namespace Requests
     class DeleteCar : Request<Car>
     {
         private Car car;
-        private Driver driver;
-        
-        public DeleteCar(Car car,Driver driver)
+        private User user;
+        public DeleteCar(Car car, User user)
         {
-            this.driver = driver;
+            this.user = user;
             this.car = car;
             HttpPath = "/CarBusiness/DeleteCar";
         }
 
-        public override Car BuildResponse(JToken response) //TODO
+        public override Car BuildResponse(JToken response) //ToDo
         {
             return Car.ToObject((JObject)response);
         }
@@ -30,14 +30,13 @@ namespace Requests
         public override string ToJson()
         {
             JObject carJ = car.ToJson();
-            carJ[nameof(car.id)] = car.Id;
-            carJ[nameof(driver)] = driver.Did;
+            carJ[nameof(user)] = user.Id;
             return carJ.ToString();
         }
 
         protected override string IsValid()
         {
-            if (string.IsNullOrEmpty(car.Name) || car.Year < 1970 || car.Year > 2020 ||
+            if (string.IsNullOrEmpty(car.Name) || car.Year < 1970 ||
                 car.MaxSeats < 1 || string.IsNullOrEmpty(car.Color) ||
                 car.MaxLuggage < 0)
                 return "Please make sure that you have entered the correct information.";
