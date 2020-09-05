@@ -10,10 +10,8 @@ public class SearchPanel : Panel {
     public InputFieldScript from, to;
     public Text minDate, maxDate;
     public Dropdown numberOfPersons;
-    public GameObject popup;
     private Location fromL, toL;
     private SearchInfo info = null;
-    private static int popupOneTime = 0;
 
     public static readonly string PANELNAME = "SEARCHPANEL";
 
@@ -22,24 +20,10 @@ public class SearchPanel : Panel {
         Clear();
     }
     public override void Init() {
-        Debug.Log(Program.User.userStatus);
-        if (Program.User.UserStatus == "ENABLED") 
-        //  popup.gameObject.SetActive(false);
-        NativeDialog.OpenDialog("Alert", "Please verify your email address to get all secured!", "Ok", null);
-        else if (Program.User.UserStatus == "EMAIL_CONFIRMATION_PENDING" && popupOneTime == 0)
-        {
-            //popup.gameObject.SetActive(true);
-             popupOneTime = 1;
-            //   NativeDialog n = new NativeDialog();
-            NativeDialog.OpenDialog("Alert", "Please verify your email address to get all secured!", "Ok", null);
-        }
+        
         Status = StatusE.VIEW;
         var minDT = Program.StringToDate(minDate.text);
         var maxDT = Program.StringToDate(maxDate.text);
-    }
-    public void PopUp_OnClick()
-    {
-        popup.gameObject.SetActive(false);
     }
     public void Search() {
         if (Vadilate()) {
