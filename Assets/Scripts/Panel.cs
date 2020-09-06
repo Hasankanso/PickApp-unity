@@ -44,7 +44,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
         get => next; set {
             if (Next != null && !ReferenceEquals(value, Next)) {
 
-                Next.ForwardDestroy();
+                Next.ForwardDestroyImmediate();
             }
             next = value;
             next.transform.SetParent(transform.parent, false);
@@ -81,7 +81,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
 
     public void BackClose() {
         Back();
-        ForwardDestroy();
+        ForwardDestroyImmediate();
     }
 
     public void Hide() {
@@ -94,28 +94,28 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
         opened = true;
     }
 
-    protected void ForwardDestroy() {
-        if (Next != null) Next.ForwardDestroy();
+    protected void ForwardDestroyImmediate() {
+        if (Next != null) Next.ForwardDestroyImmediate();
         if (!permanent) {
             DestroyImmediate(gameObject);
         }
     }
 
-    protected void BackwardDestroy() {
-        if (Previous != null) Previous.BackwardDestroy();
+    protected void BackwardDestroyImmediate() {
+        if (Previous != null) Previous.BackwardDestroyImmediate();
         if (!permanent) {
             DestroyImmediate(gameObject);
         }
     }
-    protected void ForwardDestroy2() {
-        if (Next != null) Next.ForwardDestroy2();
+    protected void ForwardDestroy() {
+        if (Next != null) Next.ForwardDestroy();
         if (!permanent) {
             Destroy(gameObject);
         }
     }
 
-    protected void BackwardDestroy2() {
-        if (Previous != null) Previous.BackwardDestroy2();
+    protected void BackwardDestroy() {
+        if (Previous != null) Previous.BackwardDestroy();
         if (!permanent) {
             Destroy(gameObject);
         }
@@ -151,7 +151,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
         spinner.transform.SetAsLastSibling();
     }
     public void CloseDialog() {
-        ForwardDestroy();
+        ForwardDestroyImmediate();
     }
 
     public void OpenTail() {
@@ -172,7 +172,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
 
     public void Open(Panel nextPanel, Action Init) {
         if (!opened) {
-            nextPanel.ForwardDestroy();
+            nextPanel.ForwardDestroyImmediate();
             return;
         }
         Next = nextPanel; // inside of this there's underlying code (check Next Property's code)
@@ -181,12 +181,12 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
     }
 
     public void DestroyImediateForwardBackward() {
-        if (Next != null) Next.ForwardDestroy(); //destroy all next panels that are not permanent
-        BackwardDestroy(); //this will destroy this panel and all previous panels that are not permanent
+        if (Next != null) Next.ForwardDestroyImmediate(); //destroy all next panels that are not permanent
+        BackwardDestroyImmediate(); //this will destroy this panel and all previous panels that are not permanent
     }
     public void DestroyForwardBackward() {
-        if (Next != null) Next.ForwardDestroy2(); //destroy all next panels that are not permanent
-        BackwardDestroy2(); //this will destroy this panel and all previous panels that are not permanent
+        if (Next != null) Next.ForwardDestroy(); //destroy all next panels that are not permanent
+        BackwardDestroy(); //this will destroy this panel and all previous panels that are not permanent
     }
     public void MissionCompleted(string panelName) {
         MissionCompleted(panelName, null, true);

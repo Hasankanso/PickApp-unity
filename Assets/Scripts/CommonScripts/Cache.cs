@@ -11,7 +11,6 @@ public static class Cache {
             if (user.Email != null)
                 SetEmail(user.Email);
             SetUserId(user.Id);
-            Debug.Log(user.Id);
         }
     }
     public static bool GetNewsCheckbox() {

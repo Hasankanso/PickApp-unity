@@ -81,14 +81,14 @@ public class PhonePanel : Panel {
                     registerRequest.AddSendListener(OpenSpinner);
                     registerRequest.AddReceiveListener(CloseSpinner);
                     registerRequest.Send(RegistrationResponse);
+                    return;
                 } else {
                     Request<User> registerRequest = new ForceRegisterPerson(user, idToken);
                     registerRequest.AddSendListener(OpenSpinner);
                     registerRequest.AddReceiveListener(CloseSpinner);
                     registerRequest.Send(RegistrationResponse);
+                    return;
                 }
-
-                return;
             });
             return;
         });
@@ -100,13 +100,7 @@ public class PhonePanel : Panel {
 
     private void RegistrationResponse(User user, int statusCode, string message) {
         if (statusCode != (int)HttpStatusCode.OK) {
-            if (statusCode == 3033) {
-                UserAlreadyExistView.gameObject.SetActive(true);
-                alreadyRegistredPhone.text = "User " + countryCode.text + phone.text.text + " already registred, " +
-                    "if it's not your account you can skip it.";
-            } else {
-                OpenDialog(message, false);
-            }
+            OpenDialog(message, false);
         } else {
             Program.User = user;
             Cache.User(user);
