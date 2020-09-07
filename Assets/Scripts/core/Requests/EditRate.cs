@@ -18,7 +18,6 @@ namespace Requests
     {
       this.rate = rate;
       HttpPath = "";
-      Action = "editRate";
     }
 
     public override Rate BuildResponse(JToken response) //TODO

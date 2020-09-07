@@ -22,8 +22,8 @@ public class AlertDetails : Panel
         this.rideOrigin.text= alert.From.ToString();
         this.rideTarget.text = alert.To.ToString();
         this.ClientsNb.text = alert.NumberOfPersons.ToString();
-        this.luggage.text = alert.NumberOfLuggages.ToString();
-        this.ridePrice.text = alert.Price.ToString()+ alert.CountryInfo.Unit.ToString();
+        this.luggage.text = alert.NumberOfLuggage.ToString();
+        this.ridePrice.text = alert.Price.ToString()+ Program.Person.CountryInformations.Unit.ToString();
         this.rideComment.text = alert.Comment;
         this.person = alert.User.Person;
         this.minDate.text = alert.MinDate.ToString();

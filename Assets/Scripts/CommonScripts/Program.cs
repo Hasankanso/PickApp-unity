@@ -16,11 +16,6 @@ public static class Program {
     private static User user;
     private static bool isLoggedIn = false;
     private static FirebaseApp firebaseApp = FirebaseApp.Create();
-    private static CountryInformations FakeCountry() {
-        //  return new CountryInformations("0", "EUR", "Germany", 11, "+49");
-        return new CountryInformations("F85258BF-63A7-F939-FF31-C78BB1837300", "L.L", "Lebanon", 8, "+961");
-    }
-
     private static Dictionary<string, CountryInformations> countriesInformations;//this list is for countries dropdown in registeration panel
     private static string cultureInfo = CultureInfo.CurrentCulture.Name;
     private static DateTime maxAlertDate;
@@ -49,14 +44,6 @@ public static class Program {
     public static Texture2D FakeCarImage() {
         return new Texture2D(400, 500);
     }
-    public static List<Car> FakeCars() {
-        List<Car> cars = new List<Car>(4);
-        cars.Add(new Car("wizii", 1995, 4, 4, "Nissan", "#000000", FakeCarImage()));
-        cars.Add(new Car("c300", 2000, 4, 4, "Mercedes", "#ffffff", FakeCarImage()));
-        cars.Add(new Car("pikanto", 2003, 4, 2, "PIKA", "#ffffff", FakeCarImage()));
-        //  cars.Add(new Car("HammerX", 2005, 5, 5, "Hammer", "#ffffff", FakeCarImage()));
-        return cars;
-    }
     public static List<Chat> FakeChats() {
         List<Chat> chats = new List<Chat>();
         return chats;
@@ -74,26 +61,6 @@ public static class Program {
         return messages;
     }
 
-
-    public static Person FakeReviewer() {
-        Person p = new Person("wdedwed", "Mr", "Judge", new DateTime(2000, 10, 10), "0111222333", FakeProfileImage(), true, null, 4.0f);
-        return p;
-    }
-
-    public static Texture2D FakeMap() {
-        return new Texture2D(100, 100);
-    }
-
-
-
-    public static Dictionary<string, CountryInformations> FakeCountries() {
-        Dictionary<string, CountryInformations> countriesInformations = new Dictionary<string, CountryInformations>();
-        var c1 = new CountryInformations("id asnhdjasdnasd", "L.L", "Lebanon", 8, "+961");
-        var c2 = new CountryInformations("asdasdasdsad", "USD", "USA", 10, "+1");
-        countriesInformations.Add(c1.Name, c1);
-        countriesInformations.Add(c2.Name, c2);
-        return countriesInformations;
-    }
     public static readonly string googleKey = "AIzaSyC7U0OEb9200tGZFFFTyLjQdo3goKyuSsw";
 
     public static User User {

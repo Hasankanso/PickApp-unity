@@ -19,7 +19,6 @@ namespace Requests {
         private string action;
         private static string Ip => ip;
         private static HttpClient Client => client;
-        protected string Action { get => action; set => action = value; }
         protected string HttpPath { get => httpPath; set => httpPath = value; }
         protected abstract string IsValid();
         public abstract string ToJson();

@@ -15,7 +15,6 @@ namespace Requests {
         public AddScheduleRide(ScheduleRide scheduleRide) {
             this.scheduleRide = scheduleRide;
             HttpPath = "";
-            Action = "/AddScheduleRide";
         }
 
         public override ScheduleRide BuildResponse(JToken response) {

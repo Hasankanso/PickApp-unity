@@ -18,7 +18,6 @@ namespace Requests
     {
       this.rate = rate;
       HttpPath = "/RateBusiness/AddRate";
-      Action = "addRate";
     }
 
     public override Rate BuildResponse(JToken response) //TODO we have to use statusCode

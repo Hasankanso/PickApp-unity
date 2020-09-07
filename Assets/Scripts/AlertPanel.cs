@@ -27,8 +27,7 @@ public class AlertPanel : Panel {
     }
     public void submit() {
         if (Validate()) {
-            alert = null;
-            alert = new Alert(Program.User, fromL, toL, price.text.text, DateTime.Parse(minDate.text), DateTime.Parse(maxDate.text), int.Parse(nbPersons.options[nbPersons.value].text), int.Parse(luggages.options[luggages.value].text), new CountryInformations("l.l"), comment.text.text);
+            alert = new Alert(Program.User, fromL, toL, price.text.text, DateTime.Parse(minDate.text), DateTime.Parse(maxDate.text), int.Parse(nbPersons.options[nbPersons.value].text), int.Parse(luggages.options[luggages.value].text), comment.text.text);
             Request<Alert> request = new BroadCastAlert(alert);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);

@@ -18,7 +18,6 @@ namespace Requests
     {
       this.car = car;
       HttpPath = "";
-      Action = "getCar";
     }
 
     public override Car BuildResponse(JToken response) //TODO

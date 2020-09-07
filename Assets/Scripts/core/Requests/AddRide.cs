@@ -18,7 +18,6 @@ namespace Requests
         {
             this.ride = ride;
             HttpPath = "/RideBusiness/AddRide";
-            Action = "addRide";
         }
 
         public override Ride BuildResponse(JToken response) //TODO

@@ -16,7 +16,6 @@ namespace Requests {
             this.user = user;
             this.newPassword = newPassword;
             HttpPath = "";
-            Action = "newPassword";
         }
 
         public override Person BuildResponse(JToken response) {

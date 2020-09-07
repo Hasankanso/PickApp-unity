@@ -15,7 +15,6 @@ namespace Requests
     public GetMyAccountInfo()
     {
       HttpPath = "";
-      Action = "getMyAccountInfo";
     }
 
     public override Person BuildResponse(JToken response) //TODO

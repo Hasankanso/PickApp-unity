@@ -18,7 +18,6 @@ namespace Requests
     {
       this.user = user;
       HttpPath = "";
-      Action = "removeAccount";
     }
 
     public override Person BuildResponse(JToken response) //TODO

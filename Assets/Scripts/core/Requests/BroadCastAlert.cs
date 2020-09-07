@@ -8,36 +8,29 @@ using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace Requests
-{
-  class BroadCastAlert : Request<Alert>
-  {
-    private Alert alert;
+namespace Requests {
+    class BroadCastAlert : Request<Alert> {
+        private Alert alert;
 
-    public BroadCastAlert(Alert alert)
-    {
-      this.alert = alert;
-      HttpPath = "";
-      Action = "broadCastAlert";
+        public BroadCastAlert(Alert alert) {
+            this.alert = alert;
+            HttpPath = "/AlerBusiness/AddAlert";
+        }
+
+        public override Alert BuildResponse(JToken response) //TODO
+        {
+            return Alert.ToObject((JObject)response);
+        }
+
+        public override string ToJson() {
+            return alert.ToJson().ToString();
+        }
+
+        protected override string IsValid() {
+            return string.Empty;
+
+        }
     }
-
-    public override Alert BuildResponse(JToken response) //TODO
-    {
-      return null;
-      //return JsonConvert.DeserializeObject<Alert>(response);
-    }
-
-    public override string ToJson()
-    {
-      return alert.ToJson().ToString();
-    }
-
-    protected override string IsValid()
-    {
-      return string.Empty;
-
-    }
-  }
 }
 
 

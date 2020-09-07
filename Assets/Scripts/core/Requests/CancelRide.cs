@@ -20,7 +20,6 @@ namespace Requests
       this.ride = ride;
       this.reason = reason;
       HttpPath = "";
-      Action = "cancelRide";
     }
 
     public override Ride BuildResponse(JToken response) //TODO

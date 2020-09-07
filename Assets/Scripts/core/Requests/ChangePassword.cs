@@ -20,7 +20,6 @@ namespace Requests
       this.newPassword = newPassword;
       this.currentPassword = currentPassword;
       HttpPath = "";
-      Action = "changePassword";
     }
     public override string ToJson()
     {

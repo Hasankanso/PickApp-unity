@@ -20,7 +20,6 @@ namespace Requests
             this.user = user;
             this.ride = ride;
             HttpPath = "/RideBusiness/EditRide";
-            Action = "editRide";
         }
 
         public override Ride BuildResponse(JToken response) //TODO

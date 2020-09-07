@@ -18,7 +18,6 @@ namespace Requests
     {
       this.scheduleRide = scheduleRide;
       HttpPath = "";
-      Action = "editScheduleRide";
     }
 
     public override ScheduleRide BuildResponse(JToken response) //TODO

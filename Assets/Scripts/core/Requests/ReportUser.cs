@@ -16,7 +16,6 @@ namespace Requests {
             this.reason = reason;
             this.comment = comment;
             HttpPath = "";
-            Action = "ReportUser";
         }
 
         public override Person BuildResponse(JToken response) {

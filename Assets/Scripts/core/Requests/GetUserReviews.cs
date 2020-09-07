@@ -16,7 +16,6 @@ namespace Requests
     {
       this.user = user;
       HttpPath = "";
-      Action = "getUserReviews";
     }
 
     public override List<Rate> BuildResponse(JToken response) //TODO

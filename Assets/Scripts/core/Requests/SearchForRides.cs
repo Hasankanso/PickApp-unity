@@ -17,7 +17,6 @@ namespace Requests
     {
       this.searchInfo = searchInfo;
       HttpPath = "/SearchBusiness/SearchRides";
-      Action = "searchForRides";
     }
 
     public override List<Ride> BuildResponse(JToken response) //TODO

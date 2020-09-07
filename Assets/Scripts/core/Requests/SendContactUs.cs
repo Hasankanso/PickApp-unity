@@ -21,7 +21,6 @@ namespace Requests
       this.subject = subject;
       this.description = description;
       HttpPath = "";
-      Action = "sendContactUs";
     }
 
     public override string BuildResponse(JToken response) //TODO
