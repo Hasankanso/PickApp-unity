@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Requests
 {
-  class EditCar : Request<Car>
+  class EditCar : Request<List<Car>>
   {
     private Car car;
     private User user;
@@ -22,10 +22,20 @@ namespace Requests
       HttpPath = "/CarBusiness/UpdateCar";
     }
 
-    public override Car BuildResponse(JToken response) //TODO
+    public override List<Car> BuildResponse(JToken response) //TODO
     {
-            return Car.ToObject((JObject)response);
-            this.user = Program.User;
+             JArray carsJ = (JArray)response;
+             List<Car> cars = null;
+
+            if (carsJ != null)
+            {
+                cars = new List<Car>();
+                foreach (var car in carsJ)
+                {
+                    cars.Add(Car.ToObject((JObject)car));
+                }
+            }
+            return cars;
         }
 
     public override string ToJson()

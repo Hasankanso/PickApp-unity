@@ -135,7 +135,7 @@ public class ProfilePanel : Panel {
 
     public void AddCar() {
         Driver driver = Program.Driver;
-        if (driver.Cars.Count < 4) {
+        if (driver.Cars.Count < 3) {
             Panel panel = PanelsFactory.CreateAddCar();
             Open(panel);
         } else

@@ -37,7 +37,7 @@ public class CarDetails : Panel
     {
         if (ValidateDelete())
         {
-            Request<Car> request = new DeleteCar(car, Program.User);
+            Request<List<Car>> request = new DeleteCar(car, Program.User);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);
@@ -45,18 +45,16 @@ public class CarDetails : Panel
         
         
     }
-    private void response(Car result, int code, string message)
+    private void response(List<Car> result, int code, string message)
     {
         if (!code.Equals((int)HttpStatusCode.OK))
         {
+            OpenDialog(message, false);
         }
-         if (code == 1)
+        else
         {
-            OpenDialog("You Cant delete the last car", false);
-        }
-        else 
-        {
-            MissionCompleted(ProfilePanel.PANELNAME, message);
+            Program.Driver.Cars = result;
+            MissionCompleted(ProfilePanel.PANELNAME, "Car has been Deleted");
         }
     }
     internal override void Clear()

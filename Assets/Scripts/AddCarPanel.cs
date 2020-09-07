@@ -20,7 +20,7 @@ public class AddCarPanel : Panel {
     public void Submit() {
         if (VadilateSecondView()) {
             car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
-            Request<Car> request = new AddCar(car, Program.User);
+            Request<List<Car>> request = new AddCar(car, Program.User);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);
@@ -63,17 +63,20 @@ public class AddCarPanel : Panel {
             car.Brand = brand.text.text;
             car.Color = color;
             car.Picture = carImage.sprite.texture;
-            Request<Car> request = new EditCar(car,Program.User);
+            Request<List<Car>> request = new EditCar(car,Program.User);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);
         
     }
 
-    private void response(Car result, int code, string message) {
+    private void response(List<Car> result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-        } else {
-            Program.Driver.Cars.Add(result);
+            OpenDialog(message, false);
+
+        }
+        else {
+            Program.Driver.Cars = result;
             MissionCompleted(ProfilePanel.PANELNAME, "Car has been edited");
         }
     }
