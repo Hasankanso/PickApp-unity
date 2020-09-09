@@ -77,6 +77,12 @@ public class FooterMenu : MonoBehaviour {
             Program.User.Person = u;
             Program.IsLoggedIn = true;
         }
+        if (Program.User.UserStatus == "EMAIL_CONFIRMATION_PENDING")
+        {
+            NativeDialog.OpenDialog("Alert", "Please verify your email address to get all secured!", "Ok", null);
+        }
+        else if (Program.User.UserStatus == "DISABLED")
+            NativeDialog.OpenDialog("Alert", "You're account is blocked! Contact us for more information.", "Ok", null);
     }
 
     public static void Open(string panelName) //default case: no message, with initialize.
@@ -135,13 +141,6 @@ public class FooterMenu : MonoBehaviour {
         ResetButtons();
         searchButton.image.sprite = searchButton.spriteState.selectedSprite;
         Open(searchPanel);
-        Debug.Log(Program.User.userStatus);
-        if (Program.User.UserStatus == "ENABLED")
-            NativeDialog.OpenDialog("Alert", "Please verify your email address to get all secured!", "Ok", null);
-        else if (Program.User.UserStatus == "EMAIL_CONFIRMATION_PENDING")
-        {
-            NativeDialog.OpenDialog("Alert", "Please verify your email address to get all secured!", "Ok", null);
-        }
     }
 
     public void OpenAddRidePanel() {
