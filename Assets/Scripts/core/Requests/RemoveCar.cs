@@ -21,8 +21,8 @@ namespace Requests {
 
         public override Car BuildResponse(JToken response) //TODO
         {
-      // return JsonConvert.DeserializeObject<Car>(response);
-      return null;
+            // return JsonConvert.DeserializeObject<Car>(response);
+            return null;
         }
 
         public override string ToJson() {
@@ -32,6 +32,18 @@ namespace Requests {
         }
 
         protected override string IsValid() {
+            string validateUser = User.ValidateLogin(user);
+            if (!string.IsNullOrEmpty(validateUser)) {
+                return validateUser;
+            }
+            if (string.IsNullOrEmpty(car.id)) {
+                return "Objectid should not be null";
+            }
+            foreach (var item in Program.Person.UpcomingRides) {
+                if (item.Car.id.Equals(car.id)) {
+                    return "You have an upcoming ride in this car";
+                }
+            }
             return string.Empty;
         }
     }

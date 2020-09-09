@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
 namespace Requests {
@@ -32,6 +33,13 @@ namespace Requests {
         }
 
         protected override string IsValid() {
+            if (string.IsNullOrEmpty(user.phone) ||
+                Regex.Matches(user.phone, @"[a-zA-Z]").Count > 0 ||
+                user.phone.Length > 18 ||
+                user.phone.Length < 8
+                ) {
+                return "Invalid phone number";
+            }
             return string.Empty;
         }
     }

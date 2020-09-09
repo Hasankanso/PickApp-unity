@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace Requests {
     class AddScheduleRide : Request<ScheduleRide> {
@@ -27,13 +28,26 @@ namespace Requests {
         }
 
         protected override string IsValid() {
-            if ((scheduleRide.IsMonday != false && scheduleRide.IsMonday != true) || (scheduleRide.IsTuesday != false && scheduleRide.IsTuesday != true) || (scheduleRide.IsWednesday != false && scheduleRide.IsWednesday != true) || (scheduleRide.IsThursday != false && scheduleRide.IsThursday != true) || (scheduleRide.IsFriday != false && scheduleRide.IsFriday != true) || (scheduleRide.IsSaturday != false && scheduleRide.IsSaturday != true) || (scheduleRide.IsSunday != false && scheduleRide.IsSunday != true) || scheduleRide.StartDate == null || scheduleRide.EndDate == null || scheduleRide.Ride == null || scheduleRide.Ride.From == null || scheduleRide.Ride.To == null || scheduleRide.Ride.LeavingDate == null
-                || string.IsNullOrEmpty(scheduleRide.Ride.Comment) || (scheduleRide.Ride.MusicAllowed != false && scheduleRide.Ride.MusicAllowed != true) ||
-                (scheduleRide.Ride.AcAllowed != false && scheduleRide.Ride.AcAllowed != true) || (scheduleRide.Ride.SmokingAllowed != false && scheduleRide.Ride.SmokingAllowed != true)
-                || (scheduleRide.Ride.PetsAllowed != false && scheduleRide.Ride.PetsAllowed != true) || (scheduleRide.Ride.KidSeat != false && scheduleRide.Ride.KidSeat != true)
-                || scheduleRide.Ride.AvailableSeats < 1 || scheduleRide.Ride.AvailableLuggages < 0 || scheduleRide.Ride.StopTime < 0 || scheduleRide.Ride.CountryInformations == null ||
-                 scheduleRide.Ride.Map == null || scheduleRide.Ride.ReservedLuggages < 0 || scheduleRide.Ride.ReservedSeats < 0)
-                return "Please make sure that you have entered the correct information.";
+            if (DateTime.Compare(scheduleRide.StartDate,DateTime.Now)<0) {
+                return "Your schedule must start from today or later";
+            }
+            if (DateTime.Compare(scheduleRide.StartDate, scheduleRide.EndDate) < 0) {
+                return "Start date must be before end date";
+            }
+            if (DateTime.Compare(scheduleRide.StartDate, scheduleRide.EndDate) > 0) {
+                return "End date must be later than start date";
+            }
+            if ((scheduleRide.EndDate-scheduleRide.StartDate).TotalDays>30) {
+                return "Schedule ride can be added for one month at maximum";
+            }
+            bool isAtLeastOneDay = false;
+            if (scheduleRide.IsMonday|| scheduleRide.IsTuesday|| scheduleRide.IsWednesday || scheduleRide.IsThursday || scheduleRide.IsFriday || scheduleRide.IsSaturday || scheduleRide.IsSunday) {
+                isAtLeastOneDay = true;
+            }
+            if (isAtLeastOneDay==false) {
+                return "Choose at least one day of week";
+            }
+
             return string.Empty;
         }
     }

@@ -8,37 +8,34 @@ using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace Requests
-{
-  class AddRate : Request<Rate>
-  {
-    private Rate rate;
+namespace Requests {
+    class AddRate : Request<Rate> {
+        private Rate rate;
 
-    public AddRate(Rate rate)
-    {
-      this.rate = rate;
-      HttpPath = "/RateBusiness/AddRate";
-    }
+        public AddRate(Rate rate) {
+            this.rate = rate;
+            HttpPath = "/RateBusiness/AddRate";
+        }
 
-    public override Rate BuildResponse(JToken response) //TODO we have to use statusCode
-    {
-      return null;
-      //return JsonConvert.DeserializeObject<Rate>(response);
-    }
+        public override Rate BuildResponse(JToken response) //TODO we have to use statusCode
+        {
+            return null;
+            //return JsonConvert.DeserializeObject<Rate>(response);
+        }
 
-    public override string ToJson()
-    {
-      JObject rateJ = rate.ToJson();
-      return rateJ.ToString();
-    }
+        public override string ToJson() {
+            JObject rateJ = rate.ToJson();
+            return rateJ.ToString();
+        }
 
-    protected override string IsValid()
-    {
-      if (string.IsNullOrEmpty(rate.Comment) && (rate.Grade == 1 || rate.Grade == 2))
-        return "Please make sure that you have entered the correct information.";
-      return string.Empty;
+        protected override string IsValid() {
+            string rateValidation = Rate.Validate(rate);
+            if (!string.IsNullOrEmpty(rateValidation)) {
+                return rateValidation;
+            }
+            return string.Empty;
+        }
     }
-  }
 }
 
 

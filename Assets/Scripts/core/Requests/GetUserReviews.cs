@@ -7,34 +7,33 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Requests
-{
-  class GetUserReviews : Request<List<Rate>>
-  {
-    User user;
-    public GetUserReviews(User user)
-    {
-      this.user = user;
-      HttpPath = "";
-    }
+namespace Requests {
+    class GetUserReviews : Request<List<Rate>> {
+        User user;
+        public GetUserReviews(User user) {
+            this.user = user;
+            HttpPath = "";
+        }
 
-    public override List<Rate> BuildResponse(JToken response) //TODO
-    {
-      //return JsonConvert.DeserializeObject<List<Rate>>(response);
-      return null;
-    }
+        public override List<Rate> BuildResponse(JToken response) //TODO
+        {
+            //return JsonConvert.DeserializeObject<List<Rate>>(response);
+            return null;
+        }
 
-    public override string ToJson()
-    {
-        JObject personJ = new JObject();
-        personJ[nameof(user.id)] = user.Id;
-        return personJ.ToString();
-    }
+        public override string ToJson() {
+            JObject personJ = new JObject();
+            personJ[nameof(user.id)] = user.Id;
+            return personJ.ToString();
+        }
 
-    protected override string IsValid() //ToDo 
-    {
-
-      return string.Empty;
+        protected override string IsValid() //ToDo 
+        {
+            string validateUser = User.ValidateLogin(user);
+            if (!string.IsNullOrEmpty(validateUser)) {
+                return validateUser;
+            }
+            return string.Empty;
+        }
     }
-  }
 }

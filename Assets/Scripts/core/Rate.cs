@@ -63,5 +63,23 @@ public class Rate {
 
         return rateJ;
     }
+    public static string Validate(Rate rate) {
+        if (rate.Grade < 0 || rate.Grade > 5) {
+            return "Invalid rate";
+        }
+        if (rate.Grade < 3 && string.IsNullOrEmpty(rate.Comment)) {
+            return "Please state the reason of low rate";
+        }
+        if (string.IsNullOrEmpty(rate.Reviewer.id)) {
+            return "Invalid reviewer object id";
+        }
+        if (string.IsNullOrEmpty(rate.Target.id)) {
+            return "Invalid target object id";
+        }
+        if (string.IsNullOrEmpty(rate.Ride.id)) {
+            return "Invalid ride object id";
+        }
+        return string.Empty;
+    }
 
 }

@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace Requests
 {
@@ -33,14 +34,29 @@ namespace Requests
       return rateJ.ToString();
     }
 
-    protected override string IsValid()
-    {
-      if (string.IsNullOrEmpty(rate.Comment) && (rate.Grade == 1 || rate.Grade == 2))
-        return "Please make sure that you have entered the correct information.";
-      return string.Empty;
-    }
+    protected override string IsValid() {
+            if (rate.Grade < 0 || rate.Grade > 5) {
+                return "Invalid rate";
+            }
+            if (rate.Grade < 3 && string.IsNullOrEmpty(rate.Comment)) {
+                return "Please comment the reason of low rate";
+            }
+            if (DateTime.Compare(rate.Date,DateTime.Now.AddDays(-1))<0) {
+                return "You can't edit rate after one day of its publishing";
+            }
+            if (string.IsNullOrEmpty(rate.Reviewer.id)) {
+                return "Invalid reviewer object id";
+            }
+            if (string.IsNullOrEmpty(rate.Target.id)) {
+                return "Invalid target object id";
+            }
+            if (string.IsNullOrEmpty(rate.Ride.id)) {
+                return "Invalid ride object id";
+            }
+            return string.Empty;
+        }
 
-  }
+    }
 }
 
 

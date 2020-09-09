@@ -37,6 +37,10 @@ namespace Requests {
         }
 
         protected override string IsValid() {
+            string validateUser = User.ValidateLogin(user);
+            if (!string.IsNullOrEmpty(validateUser)) {
+                return validateUser;
+            }
             return string.Empty;
         }
 

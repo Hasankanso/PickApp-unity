@@ -28,7 +28,7 @@ namespace Requests {
 
         public override Ride BuildResponse(JToken response) //TODO
         {
-            JObject json = (JObject) (response);
+            JObject json = (JObject)(response);
             JObject rideJ = (JObject)json["ride"];
             return Ride.ToObject(rideJ);
         }
@@ -43,7 +43,25 @@ namespace Requests {
         }
 
         protected override string IsValid() {
-
+            string validateUser = User.ValidateLogin(user);
+            if (!string.IsNullOrEmpty(validateUser)) {
+                return validateUser;
+            }
+            if (string.IsNullOrEmpty(ride.id)) {
+                return "Ride id is null";
+            }
+            if (seats < 0) {
+                return "Please select seats";
+            }
+            if (seats > ride.AvailableSeats) {
+                return "There is " + ride.AvailableSeats + " available seats";
+            }
+            if (luggages < 0) {
+                return "Please select luggage";
+            }
+            if (luggages > ride.AvailableLuggages) {
+                return "There is " + ride.AvailableLuggages + " available luggage";
+            }
             return string.Empty;
         }
     }

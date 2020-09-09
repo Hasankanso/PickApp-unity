@@ -81,6 +81,12 @@ public class User {
     public override bool Equals(object u) {
         return this.person.id == ((User)u).person.id;
     }
+    public static string ValidateLogin(User user) {
+        if (string.IsNullOrEmpty(user.id)) {
+            return "Please login";
+        }
+        return string.Empty;
+    }
     public string Phone { get => phone; set => phone = value; }
     public string Email { get => email; set => email = value; }
     public string UserStatus { get => userStatus; set => userStatus = value; }

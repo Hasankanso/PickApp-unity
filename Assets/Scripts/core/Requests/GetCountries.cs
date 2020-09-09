@@ -33,8 +33,7 @@ namespace Requests {
         }
 
         protected override string IsValid() {
-            //throw new System.NotImplementedException();
-            return null;
+            return string.Empty;
         }
     }
 }

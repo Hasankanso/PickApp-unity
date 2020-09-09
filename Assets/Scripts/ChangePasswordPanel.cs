@@ -22,13 +22,13 @@ public class ChangePasswordPanel : Panel {
         if (validate()) {
             Request<Person> request;
             if (isForgetPassword) {
-                request = new ForgetPassword(user, newPassword.GetComponent<InputField>().text);
+               // request = new ForgetPassword(user, newPassword.GetComponent<InputField>().text);
             } else {
-                request = new ChangePassword(user, currentPassword.GetComponent<InputField>().text, newPassword.GetComponent<InputField>().text);
+                //request = new ChangePassword(user, currentPassword.GetComponent<InputField>().text, newPassword.GetComponent<InputField>().text);
             }
-            request.AddSendListener(OpenSpinner);
-            request.AddReceiveListener(CloseSpinner);
-            request.Send(response);
+           // request.AddSendListener(OpenSpinner);
+            //request.AddReceiveListener(CloseSpinner);
+           // request.Send(response);
         }
     }
     private void response(Person result, int code, string message) {
