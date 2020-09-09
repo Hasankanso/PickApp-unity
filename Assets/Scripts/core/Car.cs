@@ -49,13 +49,13 @@ public class Car {
     }
     public JObject ToJson() {
         JObject carJ = new JObject();
-        carJ[nameof(this.id)] = this.Id;
-        carJ[nameof(this.year)] = this.Year;
-        carJ[nameof(this.maxLuggage)] = this.MaxLuggage;
-        carJ[nameof(this.maxSeats)] = this.MaxSeats;
-        carJ[nameof(this.brand)] = this.Brand;
-        carJ[nameof(this.name)] = this.Name;
-        carJ[nameof(this.color)] = this.Color;
+        carJ[nameof(this.id)] = this.id;
+        carJ[nameof(this.year)] = this.year;
+        carJ[nameof(this.maxLuggage)] = this.maxLuggage;
+        carJ[nameof(this.maxSeats)] = this.maxSeats;
+        carJ[nameof(this.brand)] = this.brand;
+        carJ[nameof(this.name)] = this.name;
+        carJ[nameof(this.color)] = this.color;
         carJ[nameof(this.picture)] = this.pictureBase64;
         return carJ;
     }

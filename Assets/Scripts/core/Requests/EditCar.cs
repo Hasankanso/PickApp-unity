@@ -50,10 +50,10 @@ namespace Requests {
             if (string.IsNullOrEmpty(car.id)) {
                 return "Objectid should not be null";
             }
-            string carValidation = Car.Validate(car);
+           /* string carValidation = Car.Validate(car);
             if (!string.IsNullOrEmpty(carValidation)) {
                 return carValidation;
-            }
+            }*/
             return string.Empty;
         }
     }

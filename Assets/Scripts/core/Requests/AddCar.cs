@@ -46,10 +46,10 @@ namespace Requests {
             if (!string.IsNullOrEmpty(validateUser)) {
                 return validateUser;
             }
-            string carValidation = Car.Validate(car);
+          /*  string carValidation = Car.Validate(car);
             if (!string.IsNullOrEmpty(carValidation)) {
                 return carValidation;
-            }
+            }*/
             return string.Empty;
         }
     }

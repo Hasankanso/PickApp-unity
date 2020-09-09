@@ -34,8 +34,8 @@ public class BecomeDriver : Panel {
             {
                 regions.Add(item.getRegion());
             }
-            Program.Driver.regions = regions;
-            driver = Program.Driver;
+
+            driver = new Driver(regions);
             Request<Driver> request = new EditRegions(Program.User, driver);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
@@ -44,11 +44,13 @@ public class BecomeDriver : Panel {
         }
     }
     private void EditResponse(Driver driver, int code, string message) {
-        if (!code.Equals((int)HttpStatusCode.OK)) {
-            Panel p = PanelsFactory.CreateDialogBox("Something went wrong", false);
-            OpenDialog(p);
-        } else {
-            Program.User.Driver = driver;
+        if (!code.Equals((int)HttpStatusCode.OK))
+        {
+            OpenDialog(message, false);
+        }
+        else
+        {
+            Program.Driver.regions = driver.regions;
             MissionCompleted(ProfilePanel.PANELNAME, "Regions Updated", true);
         }
     }
