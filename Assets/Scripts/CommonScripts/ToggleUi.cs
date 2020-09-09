@@ -9,7 +9,7 @@ using DG.Tweening;
 public class ToggleUi : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
-    public bool isOn;
+    private bool isOn;
     [SerializeField]
     private RectTransform toggleIndicator;
     [SerializeField]
@@ -24,7 +24,9 @@ public class ToggleUi : MonoBehaviour, IPointerDownHandler
     private float offPosX;
     private float tweenTime = 0.25f;
 
-    public delegate void ValueChanged(bool value);
+  public bool IsOn { get => isOn;}
+
+  public delegate void ValueChanged(bool value);
     public event ValueChanged valueChanged;
 
     private void OnEnable()
@@ -37,7 +39,7 @@ public class ToggleUi : MonoBehaviour, IPointerDownHandler
         onPosX = bcImage.rectTransform.rect.width - toggleIndicator.rect.width;
     }
 
-    private void Toggle(bool value)
+    public void Toggle(bool value)
     {
         if (value != isOn)
         {
