@@ -41,7 +41,6 @@ public class PanelsFactory : MonoBehaviour {
     public DialogBox dialogBox;
     public CarDetails carDetails;
     public DirectionsFinderPanel directionsFinderPanel;
-    public ChangePasswordPanel changePassword;
     public ImageViewPanel imageViewer;
 
     public RideDetails rideDetails;
@@ -214,8 +213,4 @@ public class PanelsFactory : MonoBehaviour {
         return dialogBox;
     }
 
-    public static ChangePasswordPanel ChangePassword() {
-        ChangePasswordPanel changePassword = Instantiate(defaultPanelsFactory.changePassword);
-        return changePassword;
-    }
 }

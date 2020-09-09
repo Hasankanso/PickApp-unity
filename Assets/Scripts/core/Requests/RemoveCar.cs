@@ -32,10 +32,10 @@ namespace Requests {
         }
 
         protected override string IsValid() {
-            string validateUser = User.ValidateLogin(user);
+            /*string validateUser = User.ValidateLogin(user);
             if (!string.IsNullOrEmpty(validateUser)) {
                 return validateUser;
-            }
+            }*/
             if (string.IsNullOrEmpty(car.id)) {
                 return "Objectid should not be null";
             }
