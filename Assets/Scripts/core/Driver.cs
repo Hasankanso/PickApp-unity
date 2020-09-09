@@ -90,7 +90,7 @@ public class Driver
 
     var reg1 = driver["region1"];
     Location regL1 = null;
-    if (reg1 != null)
+    if (reg1 != null && reg1.HasValues)
     {
       regL1 = Location.ToObject((JObject)reg1);
       regions.Add(regL1);
@@ -99,7 +99,7 @@ public class Driver
 
     var reg2 = driver["region2"];
     Location regL2 = null;
-    if (reg2 != null)
+    if (reg2 != null && reg2.HasValues)
     {
       regL2 = Location.ToObject((JObject)reg2);
       regions.Add(regL2);
@@ -107,7 +107,7 @@ public class Driver
 
     var reg3 = driver["region3"];
     Location regL3 = null;
-    if (reg3 != null)
+    if (reg3 != null && reg3.HasValues)
     {
       regL3 = Location.ToObject((JObject)reg3);
       regions.Add(regL3);
