@@ -558,6 +558,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5050130343215444274, guid: 661850801c223f0469446e4807dd0046,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5050130343215444275, guid: 661850801c223f0469446e4807dd0046,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -989,6 +994,16 @@ PrefabInstance:
         type: 3}
       propertyPath: panelName
       value: AddRide
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997404155383888084, guid: a396ab9b184ea894ea8c094d780fa43c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997404155383888084, guid: a396ab9b184ea894ea8c094d780fa43c,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5997404155383888085, guid: a396ab9b184ea894ea8c094d780fa43c,
         type: 3}
@@ -2223,6 +2238,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 790990231574365617, guid: 18ef0a03b13ca0b4dac830b00b203a4a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 790990231574365617, guid: 18ef0a03b13ca0b4dac830b00b203a4a,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 790990231574365619, guid: 18ef0a03b13ca0b4dac830b00b203a4a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2691,6 +2716,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OpenDateTimePicker
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904850426700368750, guid: f6c6f563b87464e4a9c6c6817357bd0d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904850426700368750, guid: f6c6f563b87464e4a9c6c6817357bd0d,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6904850426700368751, guid: f6c6f563b87464e4a9c6c6817357bd0d,
         type: 3}

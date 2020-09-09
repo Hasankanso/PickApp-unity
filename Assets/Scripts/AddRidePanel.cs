@@ -50,6 +50,10 @@ public class AddRidePanel : Panel
   public void Init(Ride ride)
   {
     Clear();
+    if(Previous !=null) {
+      backButton.SetActive(true);
+    }
+
     this.ride = ride;
     titleFirstView.text = "Edit Ride";
     titleSecView.text = titleFirstView.text;
@@ -67,7 +71,7 @@ public class AddRidePanel : Panel
     comment.SetText(ride.Comment);
     price.SetText(ride.Price.ToString());
     date.text = Program.DateToString(ride.LeavingDate);
-    isMusicAllowed.Toggle(ride.MusicAllowed);// = true; // ;
+    isMusicAllowed.Toggle(ride.MusicAllowed);
     isPetsAllowed.Toggle(ride.PetsAllowed);
     isAcAllowed.Toggle(ride.AcAllowed);
     isSmokingAllowed.Toggle(ride.SmokingAllowed);
@@ -101,7 +105,7 @@ public class AddRidePanel : Panel
   {
     Clear();
     this.schedule = schedule;
-    if (schedule != null)
+    if (Previous != null)
     {
       backButton.SetActive(true);
     }
@@ -376,6 +380,12 @@ public class AddRidePanel : Panel
     stopTimeField.Reset();
     date.text = Program.DateToString(DateTime.Now.AddDays(1));
     backButton.SetActive(false);
+
+    isMusicAllowed.Toggle(false);
+    isPetsAllowed.Toggle(false);
+    isAcAllowed.Toggle(false);
+    isSmokingAllowed.Toggle(false);
+    kidSeats.isOn = false;
 
     //reset checkbox to unchecked
     stopTimeCheckBox.GetComponent<Toggle>().isOn = false;

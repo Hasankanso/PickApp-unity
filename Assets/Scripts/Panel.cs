@@ -128,10 +128,6 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
         Next.Show();
         Next.transform.SetAsLastSibling();
 
-        if (Next.permanent) {
-            FooterMenu.dFooterMenu.transform.SetAsFirstSibling();
-        }
-
         return Next;
     }
 
