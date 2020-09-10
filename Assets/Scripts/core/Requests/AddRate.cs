@@ -23,9 +23,7 @@ namespace Requests {
 
         public override Rate BuildResponse(JToken response) //TODO we have to use statusCode
         {
-            return null;
-            //  return Rate.ToObject((JObject)response);
-
+            return Rate.ToObject((JObject)response);
         }
 
         public override string ToJson() {

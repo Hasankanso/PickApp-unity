@@ -60,9 +60,50 @@ public class Rate {
 
         return rateJ;
     }
-    public static int ToObject(JObject rate)
-    {
-        return 1;
+    public static Rate ToObject(JObject json)
+
+      {
+        int grade = -1;
+        var oGrade = json[nameof(Rate.grade)];
+        if (oGrade != null) int.TryParse(oGrade.ToString(), out grade);
+        string comment = "";
+        var ocomment = json["comment"];
+        if (ocomment != null) comment = ocomment.ToString();
+        string reason = "";
+        var oReason = json["reason"];
+        if (oReason != null) reason = oReason.ToString();
+
+        double creationDate = -1;
+        var cD = json[nameof(Rate.creationDate)];
+        if (cD != null)
+        {
+            double.TryParse(cD.ToString(), out creationDate);
+        }
+        DateTime creationDate1 = Program.UnixToUtc(creationDate);
+
+        var reviewer = json["reviewer"];
+        Person reviewer1 = null;
+        if (reviewer != null && reviewer.HasValues)
+        {
+            reviewer1 = Person.ToObject((JObject)reviewer);
+        }
+        var target = json["target"];
+        Person target1 = null;
+        if (target != null && target.HasValues)
+        {
+            target1 = Person.ToObject((JObject)target);
+        }
+        var ride = json["ride"];
+        Ride ride1 = null;
+        if (ride != null && ride.HasValues)
+        {
+            ride1 = Ride.ToObject((JObject)ride);
+        }
+        String updated = "";
+        var Oupdated = json["updated"];
+        if (Oupdated != null) updated = Oupdated.ToString();
+
+        return new Rate(grade, comment, reason, creationDate1, reviewer1, ride1, target1);
     }
     public static string Validate(Rate rate) {
         if (rate.Grade < 0 || rate.Grade > 5) {
