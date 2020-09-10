@@ -318,7 +318,7 @@ public class RideDetails : Panel {
         }
     }
     public void RemoveRide() {
-        Request<Ride> request = new RemoveRide(ride);
+        Request<bool> request = new RemoveRide(ride);
         request.Send(RemoveRideResponse);
     }
 
@@ -351,15 +351,19 @@ public class RideDetails : Panel {
             MissionCompleted(MyRidePanel.PANELNAME, "Ride's in public!");
         }
     }
-
-    private void RemoveRideResponse(Ride result, int code, string message) {
+    
+    private void RemoveRideResponse(bool result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
                 OpenDialog(message, false);
                 Debug.Log(code);
         } else {
-            FooterMenu.dFooterMenu.OpenYourRidesPanel();
-            DestroyImediateForwardBackward();
-            OpenDialog("Ride has been removed!", true);
+            if (result == true)
+            {
+                FooterMenu.dFooterMenu.OpenYourRidesPanel();
+                DestroyImediateForwardBackward();
+                Program.Person.UpcomingRides.Remove(ride);
+                MissionCompleted(MyRidePanel.PANELNAME, "Ride has been removed!");
+            }
         }
     }
 
