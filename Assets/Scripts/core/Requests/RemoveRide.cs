@@ -1,17 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using BackendlessAPI;
+using BackendlessAPI.Async;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Collections;
 using UnityEngine;
-using System.Net;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-using System.Diagnostics;
 //just a comment
 namespace Requests
 {
-    class RemoveRide : Request<Ride>
+    class RemoveRide : Request<bool>
     {
         private Ride ride;
 
@@ -21,10 +22,14 @@ namespace Requests
             HttpPath = "/RideBusiness/DeleteRide";
         }
 
-        public override Ride BuildResponse(JToken response) //TODO
+        public override bool BuildResponse(JToken response) //TODO
         {
-            JObject ride = (JObject) response;
-            return Ride.ToObject(ride);
+            JObject json = (JObject)response;
+            bool deleted = true;
+            var del = json["deleted"];
+            if (del != null)
+                deleted = bool.Parse(del.ToString());
+            return deleted;
         }
 
         public override string ToJson()

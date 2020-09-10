@@ -343,23 +343,17 @@ public class AddRidePanel : Panel
         valid = false;
         OpenDialog("Please fill \"Stop Time\" Field.", false);
       }
-      else if (int.Parse(stopTimeField.text.text) < 0)
+      else if (int.Parse(stopTimeField.text.text) < 5)
       {
         stopTimeField.Error();
         valid = false;
-        OpenDialog("The stop time can't be negative", false);
+        OpenDialog("The stop time can't be less than 5 minutes", false);
       }
-      else if (int.Parse(stopTimeField.text.text) == 0)
+      else if (int.Parse(stopTimeField.text.text) > 30)
       {
         stopTimeField.Error();
         valid = false;
-        OpenDialog("Invalid stop time", false);
-      }
-      else if (int.Parse(stopTimeField.text.text) > 120)
-      {
-        stopTimeField.Error();
-        valid = false;
-        OpenDialog("The stop time can't be more than 120 minutes", false);
+        OpenDialog("The stop time can't be more than 30 minutes", false);
       }
     }
     return valid;
