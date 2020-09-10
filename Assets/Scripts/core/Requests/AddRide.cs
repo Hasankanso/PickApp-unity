@@ -51,7 +51,7 @@ namespace Requests
             if (ride.AvailableLuggages < 0 || ride.AvailableLuggages > ride.Car.MaxLuggage) {
                 return "Invalid number of luggage";
             }
-            if (ride.StopTime<5||ride.StopTime>30) {
+            if (ride.StopTime!=0&&(ride.StopTime<5||ride.StopTime>30)) {
                 return "Your stop time must be between 5 and 30 minutes";
             }
             if (string.IsNullOrEmpty(ride.Comment)|| ride.Comment.Length<25|| ride.Comment.Length > 400) {

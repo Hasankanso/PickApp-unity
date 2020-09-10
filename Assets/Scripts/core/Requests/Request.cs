@@ -51,10 +51,10 @@ namespace Requests {
         public async void Send(Action<T, int, string> callback) {
             sendRequest.Invoke();
             if (!CheckConnection()) {
-                Debug.Log(123321);
                 string code = "503";
                 string message = "Please connect to the internet";
                 callback(default, int.Parse(code), message);
+                receiveResponse.Invoke();
                 return;
             }
             string valid = IsValid();
