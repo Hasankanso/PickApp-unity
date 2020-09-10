@@ -168,7 +168,6 @@ public class Person {
     public List<Ride> UpcomingRides { get { return upcomingRides; } set { upcomingRides = value; } }
     public List<Rate> Rates { get { return rates; } set { rates = value; } }
     public float RateAverage { get => rateAverage; set => rateAverage = value; }
-
     public string Image { get => image; set => image = value; }
     public DateTime Updated { get => updated; set => updated = value; }
     public string ProfilePictureUrl { get => profilePictureUrl; set => profilePictureUrl = value; }

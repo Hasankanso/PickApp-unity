@@ -58,6 +58,27 @@ public class FooterMenu : MonoBehaviour {
             user.Id = Cache.GetUserId();
             user.Phone = "+" + Cache.GetPhoneCode() + "" + Cache.GetPhone();
             user.Email = Cache.GetEmail();
+/*
+            Person person = new Person();
+            person.Id = Cache.GetPersonId();
+            person.FirstName = Cache.GetFirstName();
+            person.LastName = Cache.GetLastName();
+            person.Bio = Cache.GetBio();
+            person.Chattiness = Cache.GetChattiness();
+            person.Birthday = Program.StringToBirthday(Cache.GetBirthday());
+            person.Gender = bool.Parse(Cache.GetGender());
+            person.ProfilePictureUrl = Cache.GetProfilePictureUrl();
+            person.RateAverage = float.Parse(Cache.GetRateAverage());
+
+            CountryInformations countryInformations = new CountryInformations();
+            countryInformations.Id = Cache.GetCountryInformationsId();
+            countryInformations.Unit = Cache.GetUnit();
+            countryInformations.Name = Cache.GetCountryName();
+            countryInformations.Digits = int.Parse(Cache.GetDigits());
+            countryInformations.Code = Cache.GetCode();
+
+            person.CountryInformations = countryInformations;
+            user.Person = person;*/
             Program.User = user;
             Request<Person> request = new GetLoggedInUser(user);
             request.Send(ResponseGetLoggedInUser);
