@@ -140,8 +140,8 @@ public class Ride {
     }
     public JObject removeToJson() {
         JObject userJ = new JObject();
-        userJ[nameof(this.user)] = this.user.Id;
-        userJ[nameof(this.id)] = this.id;
+        userJ[nameof(this.user)] = Program.User.Id;
+        userJ[nameof(this.id)] = this.Id;
         return userJ;
     }
     public static Ride ToObject(JObject json) {
