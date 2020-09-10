@@ -41,7 +41,7 @@ public class ChattinessPanel : Panel {
     }
     private void SetChosenChattiness() {
         Person person = Program.Person;
-        if (person.Chattiness.Equals("I'm a quiet person"))
+        if (person.Chattiness.Equals("I'm the quiet person"))
             chatiness.value = 0;
         else if (person.Chattiness.Equals("I love to chat!"))
             chatiness.value = 2;

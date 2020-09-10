@@ -28,7 +28,8 @@ public class RideDetails : Panel {
 
     //if this panel opened to view Schedule details
     private ScheduleRide schedule;
-
+    private List<string> seatsList = new List<string>();
+    private List<string> luggageList = new List<string>();
 
     private void SetPermissions(bool isSmokingAllowed, bool isACAllowed, bool isPetsAllowed, bool isMusicAllowed, bool isKidsSeat) {
         smokingImage.sprite = smokingOffSpirite;
@@ -67,6 +68,15 @@ public class RideDetails : Panel {
         personsDialog.gameObject.SetActive(false);
     }
     public void OpenPersonDialog() {
+        //add person and luggage drop down for reserve
+        for (int i = 1; i <= ride.AvailableSeats; i++) {
+            seatsList.Add(i.ToString());
+        }
+        for (int i = 1; i <= ride.AvailableLuggages; i++) {
+            luggageList.Add(i.ToString());
+        }
+        personsDropdown.AddOptions(seatsList);
+        luggagesDropdown.AddOptions(luggageList);
         personsDialog.gameObject.SetActive(true);
     }
     public void EditRide() {
@@ -242,6 +252,11 @@ public class RideDetails : Panel {
         addScheduleButton.SetActive(false);
         ClosePersonDialog();
         CloseRideDialog();
+
+        personsDropdown.ClearOptions();
+        luggagesDropdown.ClearOptions();
+        seatsList.Clear();
+        luggageList.Clear();
 
         from.text = "";
         to.text = "";

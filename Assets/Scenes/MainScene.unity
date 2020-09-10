@@ -325,8 +325,6 @@ MonoBehaviour:
     type: 3}
   directionsFinderPanel: {fileID: 1723063400304913265, guid: 87d5635c1895f654ab70c108b48b8b39,
     type: 3}
-  changePassword: {fileID: 4500843169063156750, guid: 4940cb08dfaa4764c8fe6223e429bdbc,
-    type: 3}
   imageViewer: {fileID: 7387959173295946373, guid: cd143cebc18750445bf352fb9738fc05,
     type: 3}
   rideDetails: {fileID: 8819354592479800504, guid: c61b92d9189d48e4bad49b41708c2ad8,

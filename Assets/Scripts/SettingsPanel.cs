@@ -54,30 +54,10 @@ public class SettingsPanel : Panel {
         Panel panel = PanelsFactory.CreateNotificationPanel();
         Open(panel);
     }
-    /*
-  public void changePassword()
-  {
-    ChangePasswordPanel panel = PanelsFactory.ChangePassword();
-    Open(panel, () => panel.Init(user));
-  }*/
     public void Logout() {
         Program.User = null;
         Cache.SetUserId("");
         Program.IsLoggedIn = false;
         MissionCompleted(SearchPanel.PANELNAME, "Waiting for you to come back!");
-    }/*
-      private void response(string result, int code, string message) {
-          if (!code.Equals((int)HttpStatusCode.OK)) {
-              LogoutDefault();
-          } else {
-              LogoutDefault();
-          }
-      }
-      private void LogoutDefault() {
-          Program.User = null;
-          Cache.SetToken("");
-          Program.IsLoggedIn = false;
-          MissionCompleted(SearchPanel.PANELNAME, "Waiting for you to come back!");
-      }*/
-
+    }
 }
