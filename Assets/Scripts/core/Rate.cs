@@ -12,36 +12,33 @@ using System.Threading.Tasks;
 public class Rate {
     private int grade;
     private string comment;
+    private string reason;
     private DateTime creationDate;
     private Person reviewer;
     private Person target;
     private Ride ride;
     private DateTime updated;
     public int Grade { get => grade; set => grade = value; }
-  public string Comment { get => comment; set => comment = value; }
-  public DateTime Date { get => creationDate; set => creationDate = value; }
-  public Person Reviewer { get => reviewer; set => reviewer = value; }
-  public Person Target { get => target; set => target = value; }
-  public Ride Ride { get => ride; set => ride = value; }
+    public string Reason { get => reason; set => reason = value; }
+    public string Comment { get => comment; set => comment = value; }
+    public DateTime Date { get => creationDate; set => creationDate = value; }
+    public Person Reviewer { get => reviewer; set => reviewer = value; }
+    public Person Target { get => target; set => target = value; }
+    public Ride Ride { get => ride; set => ride = value; }
     public DateTime Updated { get => updated; set => updated = value; }
 
     //add new rate
-    public Rate( int grade, string comment, DateTime date, Person reviewer, Ride ride, Person target) {
+    public Rate( int grade, string comment, string reason, DateTime date, Person reviewer, Ride ride, Person target) {
         this.Grade = grade;
         this.Date = date;
-        this.Reviewer = reviewer;
-        this.Ride = ride;
-        this.Target = target;
-    }
-
-    public Rate(int grade, string comment, DateTime date, Person reviewer, Person target) {
-        this.Grade = grade;
-        this.Date = date;
+        this.reason = reason;
         this.comment = comment;
         this.Reviewer = reviewer;
         this.Ride = ride;
         this.Target = target;
     }
+
+
     public JObject ToJson()
     {
         JObject rateJ = new JObject();
@@ -62,6 +59,10 @@ public class Rate {
         rateJ[nameof(this.Target)] = targetJ;
 
         return rateJ;
+    }
+    public static int ToObject(JObject rate)
+    {
+        return 1;
     }
     public static string Validate(Rate rate) {
         if (rate.Grade < 0 || rate.Grade > 5) {

@@ -14,14 +14,17 @@ public class RatePanel : Panel {
 
     public Ride ride = null;
     public Person reviewer = null, target = null;
+    public Dropdown reasonDropdown;
+
     private int grade;
 
     public int Grade { get { return grade; } set { grade = value; } }
 
     public void submit() {
         if (vadilate()) {
-            Rate rate = new Rate(grade, comment.text.text, DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy H:mm")), reviewer, ride, target);
-            Request<Rate> request = new AddRate(rate);
+            var reason = reasonDropdown.options[reasonDropdown.value].text;
+            Rate rate = new Rate(grade, comment.text.text,reason,DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy H:mm")), reviewer, ride, target);
+            Request<Rate> request = new AddRate(rate,Program.User);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);

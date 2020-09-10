@@ -11,28 +11,34 @@ using Newtonsoft.Json.Linq;
 namespace Requests {
     class AddRate : Request<Rate> {
         private Rate rate;
+        private User user;
 
-        public AddRate(Rate rate) {
+
+        public AddRate(Rate rate,User user) {
             this.rate = rate;
+            this.user = user;
+
             HttpPath = "/RateBusiness/AddRate";
         }
 
         public override Rate BuildResponse(JToken response) //TODO we have to use statusCode
         {
             return null;
-            //return JsonConvert.DeserializeObject<Rate>(response);
+            //  return Rate.ToObject((JObject)response);
+
         }
 
         public override string ToJson() {
             JObject rateJ = rate.ToJson();
+            rateJ[nameof(user)] = user.id;
             return rateJ.ToString();
         }
 
         protected override string IsValid() {
-            string rateValidation = Rate.Validate(rate);
+         /*   string rateValidation = Rate.Validate(rate);
             if (!string.IsNullOrEmpty(rateValidation)) {
                 return rateValidation;
-            }
+            }*/
             return string.Empty;
         }
     }
