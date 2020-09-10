@@ -60,8 +60,8 @@ public class BecomeDriver : Panel
         }
         else
         {
-
-            Program.Driver.Regions = driver.regions;
+            Program.Driver.regions.Clear();
+            Program.Driver.regions = driver.regions;
             MissionCompleted(ProfilePanel.PANELNAME, "Regions Updated", true);
         }
     }
