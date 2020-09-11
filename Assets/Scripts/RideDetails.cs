@@ -308,9 +308,7 @@ public class RideDetails : Panel {
         Request<Ride> request = new EditRide(Program.Person, ride);
         request.AddSendListener(OpenSpinner);
         request.AddReceiveListener(CloseSpinner);
-        request.Send(AddRideResponse);
-
-        
+        request.Send(EditRideResponse);
     }
 
     public void ReserveSeat() {
@@ -352,9 +350,20 @@ public class RideDetails : Panel {
     }
 
 
-    public void EditRideResponse(ScheduleRide result, int code, string message) { //Not in use cause we used AddRideResponse instead.    
-                                                                                  //check if schedule Ride add in server success
-    }
+    public void EditRideResponse(Ride result, int code, string message) { //Not in use cause we used AddRideResponse instead.    
+        if (!code.Equals((int)HttpStatusCode.OK))
+        {
+            OpenDialog(message, false);
+            Debug.Log(code);
+        }
+        else
+        {
+            Program.Person.UpcomingRides.Remove(ride);
+            Program.Person.UpcomingRides.Add(result);
+            MissionCompleted(MyRidePanel.PANELNAME, "Ride has been updated");
+        }
+    }                                                                           //check if schedule Ride add in server success
+
 
     public void AddRideResponse(Ride result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
