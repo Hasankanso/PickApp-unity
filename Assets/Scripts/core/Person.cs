@@ -137,8 +137,9 @@ public class Person {
         JArray upcomingRidesArray = (JArray)json.GetValue("upcomingRides");
         List<Ride> rides = new List<Ride>();
         if (upcomingRidesArray != null) {
-            foreach (var j in upcomingRidesArray) {
-                rides.Add(Ride.ToObject((JObject)j));
+            foreach (var ride in upcomingRidesArray) {
+                if (ride.HasValues == true)
+                    rides.Add(Ride.ToObject((JObject)ride));
             }
             p.UpcomingRides = rides;
         }
