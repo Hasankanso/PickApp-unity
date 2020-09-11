@@ -21,7 +21,7 @@ public static class Program {
     private static DateTime maxAlertDate;
     private static DateTime maxScheduleDate;
     private static int maxSchedulesPerUser = 3;
-    public static bool time24 = true;
+    public static bool time24 = false;
     private static List<string> countriesInformationsNames;//this variable should implemented after filling countriesInformations list ,this variable is to insert countries name to dropdown in register
     private static readonly string appName = "Pickapp";
     internal static Color SelectedItemColor() {
