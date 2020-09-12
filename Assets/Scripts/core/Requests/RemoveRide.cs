@@ -2,6 +2,7 @@
 using BackendlessAPI.Async;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -38,10 +39,35 @@ namespace Requests
             return rideJ.ToString();
         }
 
-        protected override string IsValid()
+        protected override string IsValid() // ToDo
         {
-            if (ride.id == null || ride.Driver == null)
-                return "Please make sure that you have entered the correct information.";
+
+            if (ride.LeavingDate > DateTime.Now)
+                return "Ride had started" ;
+            if (string.IsNullOrEmpty(ride.Id))
+            {
+                return "Ride object Id is null";
+            }
+
+            string validateUser = User.ValidateLogin(Program.User);
+            if (!string.IsNullOrEmpty(validateUser))
+            {
+                return validateUser;
+            }
+            TimeSpan ts = ride.LeavingDate.Subtract(DateTime.Now);
+            Double hours = ts.TotalHours;
+            if (ride.Passengers[0] != null && hours<=48 )
+            {
+                return "Your ride has been deleted";  //need to notify the passengers
+            }
+            if (ride.Passengers[0] != null && hours>48)
+            {
+                /*if (string.IsNullOrEmpty(ride.Reason))
+                {
+                    return "Reason must not be null!";
+                }*/
+                return "Your ride has been deleted";  //need to notify the passengers, give a reason and the users can rate him
+            }
             return string.Empty;
         }
     }
