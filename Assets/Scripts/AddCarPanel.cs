@@ -162,21 +162,21 @@ public class AddCarPanel : Panel
             OpenDialog(p);
             valid = false;
         }
-        if (brand.text.text.Equals(""))
+        else  if (brand.text.text.Equals(""))
         {
             brand.Error();
             Panel p = PanelsFactory.CreateDialogBox("Insert your car brand", false);
             OpenDialog(p);
             valid = false;
         }
-        if (year.text.text.Equals(""))
+        else if(year.text.text.Equals(""))
         {
             year.Error();
             Panel p = PanelsFactory.CreateDialogBox("Insert your car year", false);
             OpenDialog(p);
             valid = false;
         }
-        if (year.text.text.Equals(""))
+        else if (year.text.text.Equals(""))
         {
             Panel p = PanelsFactory.CreateDialogBox("Insert your car year", false);
             OpenDialog(p);

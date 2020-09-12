@@ -68,6 +68,10 @@ namespace Requests
                     return "Regions can't be dublicated";
                 }
             }
+            if (driver.regions.Count > 3)
+            {
+                return "You can't add more than 3 regions";
+            }
             return string.Empty;
         }
     }
