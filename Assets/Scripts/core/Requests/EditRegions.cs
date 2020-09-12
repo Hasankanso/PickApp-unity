@@ -41,7 +41,34 @@ namespace Requests
 
         protected override string IsValid()
         {
-            return "";
+            string validateUser = User.ValidateLogin(Program.User);
+            if (!string.IsNullOrEmpty(validateUser))
+            {
+                return validateUser;
+            }
+            if (driver.regions[0] == null)
+            {
+                return "You should add at least 1 region";
+            }
+            if (driver.regions[1] != null)
+            {
+                if (driver.regions[0].Latitude == driver.regions[1].Latitude && driver.regions[0].Longitude == driver.regions[1].Longitude)
+                {
+                    return "Regions can't be dublicated";
+                }
+            }
+            if (driver.regions[2] != null)
+            {
+                if (driver.regions[0].Latitude == driver.regions[2].Latitude && driver.regions[0].Longitude == driver.regions[2].Longitude)
+                {
+                    return "Regions can't be dublicated";
+                }
+                if (driver.regions[1].Latitude == driver.regions[2].Latitude && driver.regions[1].Longitude == driver.regions[2].Longitude)
+                {
+                    return "Regions can't be dublicated";
+                }
+            }
+            return string.Empty;
         }
     }
 }
