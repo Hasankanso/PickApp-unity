@@ -106,7 +106,7 @@ public class AccountPanel : Panel {
             countryDP.value = countryDP.options.FindIndex((i) => { return i.text.Equals(Program.Person.CountryInformations.Name); });
         }
     }
-    internal int CalculateAge() {
+    private int CalculateAge() {
         DateTime birthday = Program.StringToBirthday(this.birthday.text);
         // get the difference in years
         int years = DateTime.Now.Year - birthday.Year;
@@ -135,12 +135,13 @@ public class AccountPanel : Panel {
             OpenDialog(p);
             valid = false;
         } else {
-            if (CalculateAge() < 13) {
+            int age = CalculateAge();
+            if (age < 14) {
                 Panel p = PanelsFactory.CreateDialogBox("You are under the legal age", false);
                 OpenDialog(p);
                 valid = false;
             }
-            if (CalculateAge() > 100) {
+            if (age > 100) {
                 Panel p = PanelsFactory.CreateDialogBox("Invalid birthday", false);
                 OpenDialog(p);
                 valid = false;
@@ -166,6 +167,6 @@ public class AccountPanel : Panel {
     internal override void Clear() {
         firstName.Reset();
         lastName.Reset();
-        birthday.text = Program.BirthdayToString(DateTime.Now.AddYears(-13));
+        birthday.text = Program.BirthdayToString(DateTime.Now.AddYears(-14));
     }
 }

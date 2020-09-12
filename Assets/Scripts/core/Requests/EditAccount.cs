@@ -4,21 +4,22 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Requests {
     public class EditAccount : Request<Person> {
-        Person newUser;
+        Person newPerson;
         string email;
 
         public EditAccount(Person newUser, string email) {
-            this.newUser = newUser;
+            this.newPerson = newUser;
             this.email = email;
             HttpPath = "/PersonBusiness/EditPerson";
         }
         public EditAccount(Person newUser) {
-            this.newUser = newUser;
+            this.newPerson = newUser;
             this.email = Program.User.Email;
             HttpPath = "/PersonBusiness/EditPerson";
         }
@@ -32,29 +33,33 @@ namespace Requests {
         }
 
         public override string ToJson() {
-            JObject personJ = newUser.ToJson();
+            JObject personJ = newPerson.ToJson();
             personJ["user"] = Program.User.Id;
             personJ["email"] = email;
             return personJ.ToString();
         }
 
         protected override string IsValid() {
-            /*if (string.IsNullOrEmpty(newUser.FirstName) || string.IsNullOrEmpty(newUser.LastName)
-              || string.IsNullOrEmpty(newUser.Email) || string.IsNullOrEmpty(newUser.Phone)
-              || string.IsNullOrEmpty(newUser.Password)) {
-                return "Please fill empty fields.";
+            string validateUser = User.ValidateLogin(Program.User);
+            if (!string.IsNullOrEmpty(validateUser)) {
+                return validateUser;
             }
-
-            if (!newUser.Email.Contains("@")) {
-                return "This email doesn't match.";
+            Regex r = new Regex("^[a-zA-Z ]+$");
+            if (string.IsNullOrEmpty(newPerson.FirstName) || !r.IsMatch(newPerson.FirstName)) {
+                return "Your first name must be alphabet only";
             }
-            if (!IsPhoneNumber(newUser.Phone)) {
-                return "The phone number is wrong, please enter a valid one";
+            if (string.IsNullOrEmpty(newPerson.LastName) || !r.IsMatch(newPerson.LastName)) {
+                return "Your first name must be alphabet only";
             }
-
-            if (!ValidPassword(newUser.Password)) {
-                return "Make sure your password has at least 8 characters and contains at least one number and one letter";
-            }*/
+            if (string.IsNullOrEmpty(email) || ValidEmail(email)) {
+                return "Invalid Email address";
+            }
+            if (CalculateAge(newPerson.Birthday)<14) {
+                return "You are out of legal age.";
+            }
+            if (string.IsNullOrEmpty(newPerson.CountryInformations.Id)) {
+                return "Please choose your country";
+            }
             return string.Empty;
         }
     }

@@ -32,11 +32,7 @@ namespace Requests {
             if (string.IsNullOrEmpty(user.verificationCode)|| user.verificationCode.Length!=5) {
                 return "Please insert code";
             }
-            if (string.IsNullOrEmpty(user.phone)||
-                Regex.Matches(user.phone, @"[a-zA-Z]").Count > 0||
-                user.phone.Length > 18||
-                user.phone.Length < 8
-                ) {
+            if (!IsPhoneNumber(user.phone)) {
                 return "Invalid phone number";
             }
             return string.Empty;

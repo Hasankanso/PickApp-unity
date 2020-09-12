@@ -27,7 +27,7 @@ public class LoginRegisterPanel : Panel
     public void Login()
     {
         LoginPanel p = PanelsFactory.CreateLogin();
-        Open(p, () => { p.Init(false); });
+        Open(p, () => { p.Init(true); });
     }
     public void Register()
     {

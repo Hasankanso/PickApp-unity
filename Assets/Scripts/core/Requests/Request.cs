@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -133,12 +134,26 @@ namespace Requests {
         }
 
         public static bool IsPhoneNumber(string number) {
-            return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
+            return Regex.Match(number, @"^(\+[0-9]{8,18})$").Success;
         }
 
         public static bool ValidPassword(string password) {
-            return Regex.Match(password, @"^(?=.*[0-9] +.*)(?=.*[a-zA-Z] +.*)[0-9a-zA-Z]{8,30}
+            return Regex.Match(password, @" ^ (?=.*[0-9] +.*)(?=.*[a-zA-Z] +.*)[0-9a-zA-Z]{8,30}
     $").Success;
+        }
+        public static int CalculateAge(DateTime date) {
+            int years = DateTime.Now.Year - date.Year;
+            if (DateTime.Now.Month < date.Month || (DateTime.Now.Month == date.Month && DateTime.Now.Day < date.Day))
+                years--;
+            return years;
+        }
+        public static bool ValidEmail(string emailaddress) {
+            try {
+                MailAddress m = new MailAddress(emailaddress);
+                return true;
+            } catch (FormatException) {
+                return false;
+            }
         }
     }
 }
