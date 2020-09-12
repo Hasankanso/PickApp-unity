@@ -215,7 +215,7 @@ public class PhonePanel : Panel {
         bool valid = true;
         string givenCode = code.text.text;
         print(givenCode);
-        if (givenCode.Equals("")) {
+        if (givenCode.Equals("") || givenCode.Length !=6) {
             code.Error();
             valid = false;
         }

@@ -43,7 +43,10 @@ namespace Requests
             }
             if (string.IsNullOrEmpty(ride.id)) {
                 return "Invalid id of ride";
-            }
+            }/*
+            if (string.IsNullOrEmpty(reason)||reason.Length<15) {
+                return "Your reason must be at least 15 character";
+            }*/
             return string.Empty;
         }
     }
