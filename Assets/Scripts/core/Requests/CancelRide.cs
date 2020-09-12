@@ -1,49 +1,76 @@
-﻿using Newtonsoft.Json;
+﻿using BackendlessAPI;
+using BackendlessAPI.Async;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Collections;
 using UnityEngine;
-using System.Net;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-
+//just a comment
 namespace Requests
 {
-  class CancelRide : Request<Ride>
-  {
-    private Ride ride;
-    private string reason;
-
-    public CancelRide(Ride ride, string reason)
+    class CancelRide : Request<bool>
     {
-      this.ride = ride;
-      this.reason = reason;
-      HttpPath = "";
-    }
+        private Ride ride;
 
-    public override Ride BuildResponse(JToken response) //TODO
-    {
-      return null;
-      //  return JsonConvert.DeserializeObject<Ride>(response);
-    }
+        public CancelRide(Ride ride)
+        {
+            this.ride = ride;
+            HttpPath = "/RideBusiness/DeleteRide";
+        }
 
-    public override string ToJson()
-    {
-      JObject json = new JObject();
-      json[nameof(ride.Id)] = ride.Id;
-      json["reason"] = reason;
-      return json.ToString();
-    }
+        public override bool BuildResponse(JToken response) //TODO
+        {
+            JObject json = (JObject)response;
+            bool deleted = true;
+            var del = json["deleted"];
+            if (del != null)
+                deleted = bool.Parse(del.ToString());
+            return deleted;
+        }
 
-    protected override string IsValid()
-    {
-      if (string.IsNullOrEmpty(reason))
-        return "Please make sure that you have entered the correct information.";
-      return string.Empty;
-    }
+        public override string ToJson()
+        {
+            JObject rideJ = ride.removeToJson();
+            return rideJ.ToString();
+        }
 
-  }
+        protected override string IsValid() // ToDo
+        {
+
+            if (ride.LeavingDate > DateTime.Now)
+                return "Ride had started" ;
+            if (string.IsNullOrEmpty(ride.Id))
+            {
+                return "Ride object Id is null";
+            }
+
+            string validateUser = User.ValidateLogin(Program.User);
+            if (!string.IsNullOrEmpty(validateUser))
+            {
+                return validateUser;
+            }
+            TimeSpan ts = ride.LeavingDate.Subtract(DateTime.Now);
+            Double hours = ts.TotalHours;
+            if (ride.Passengers[0] != null && hours<=48 )
+            {
+                return "Your ride has been deleted";  //need to notify the passengers
+            }
+            if (ride.Passengers[0] != null && hours>48)
+            {
+                /*if (string.IsNullOrEmpty(ride.Reason))
+                {
+                    return "Reason must not be null!";
+                }*/
+                return "Your ride has been deleted";  //need to notify the passengers, give a reason and the users can rate him
+            }
+            return string.Empty;
+        }
+    }
 }
 
 

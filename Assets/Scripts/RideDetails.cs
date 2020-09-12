@@ -331,7 +331,7 @@ public class RideDetails : Panel {
         }
     }
     public void RemoveRide() {
-        Request<bool> request = new RemoveRide(ride);
+        Request<bool> request = new CancelRide(ride);
         request.Send(RemoveRideResponse);
     }
 
