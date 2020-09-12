@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Text.RegularExpressions;
 
+
 namespace Requests {
     class AddCar : Request<List<Car>> {
         private Car car;
@@ -46,11 +47,7 @@ namespace Requests {
             if (!string.IsNullOrEmpty(validateUser)) {
                 return validateUser;
             }
-            string carValidation = Car.Validate(car);
-            if (!string.IsNullOrEmpty(carValidation)) {
-                return carValidation;
-            }
-            return string.Empty;
+            return Car.Validate(car);
         }
     }
 }

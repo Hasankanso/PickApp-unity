@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -40,20 +41,28 @@ namespace Requests {
         }
 
         protected override string IsValid() {
-            /* if (string.IsNullOrEmpty(newUser.FirstName) || string.IsNullOrEmpty(newUser.LastName)
-               || string.IsNullOrEmpty(newUser.Email) || string.IsNullOrEmpty(newUser.Phone)
-               || string.IsNullOrEmpty(newUser.Password)) {
-                 return "Please fill empty fields.";
-             }
-             if (!newUser.Email.Contains("@")) {
-                 return "Your email is Invalid, please correct it";
-             }
-             if (!IsPhoneNumber(newUser.Phone)) {
-                 return "The phone number is wrong, please enter valid one";
-             }
-             if (!ValidPassword(newUser.Password)) {
-                 return "make sure your password has at least 8 characters and contains at least one number and one letter";
-             }*/
+            Regex r = new Regex("^[a-zA-Z ]+$");
+            if (string.IsNullOrEmpty(newUser.Person.FirstName) || !r.IsMatch(newUser.Person.FirstName)) {
+                return "Your first name must be alphabet only";
+            }
+            if (string.IsNullOrEmpty(newUser.Person.LastName) || !r.IsMatch(newUser.Person.LastName)) {
+                return "Your first name must be alphabet only";
+            }
+            if (string.IsNullOrEmpty(newUser.Email) || !ValidEmail(newUser.Email)) {
+                return "Invalid Email address";
+            }
+            if (CalculateAge(newUser.Person.Birthday) < 14) {
+                return "You are out of legal age.";
+            }
+            if (string.IsNullOrEmpty(newUser.Person.CountryInformations.Id)) {
+                return "Please choose your country";
+            }
+            if (string.IsNullOrEmpty(verificationToken)) {
+                return "Invalid verification token";
+            }
+            if (!IsPhoneNumber(newUser.phone)) {
+                return "Invalid phone number";
+            }
             return string.Empty;
         }
     }

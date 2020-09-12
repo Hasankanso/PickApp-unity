@@ -37,7 +37,13 @@ namespace Requests
 
         protected override string IsValid()
         {
-
+            string validateUser = User.ValidateLogin(Program.User);
+            if (!string.IsNullOrEmpty(validateUser)) {
+                return validateUser;
+            }
+            if (string.IsNullOrEmpty(ride.id)) {
+                return "Invalid id of ride";
+            }
             return string.Empty;
         }
     }

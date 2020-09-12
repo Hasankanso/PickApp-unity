@@ -61,7 +61,7 @@ namespace Requests {
             string valid = IsValid();
             Debug.Log(valid);
             if (!string.IsNullOrEmpty(valid)) {
-                callback(default, (int)HttpStatusCode.NotAcceptable, valid);
+                callback(default, - (int)HttpStatusCode.NotAcceptable, valid);
                 receiveResponse.Invoke();
             } else {
                 string data = ToJson();

@@ -51,7 +51,7 @@ namespace Requests {
             if (string.IsNullOrEmpty(newPerson.LastName) || !r.IsMatch(newPerson.LastName)) {
                 return "Your first name must be alphabet only";
             }
-            if (string.IsNullOrEmpty(email) || ValidEmail(email)) {
+            if (string.IsNullOrEmpty(email) || !ValidEmail(email)) {
                 return "Invalid Email address";
             }
             if (CalculateAge(newPerson.Birthday)<14) {
