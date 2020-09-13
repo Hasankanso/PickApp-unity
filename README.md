@@ -35,7 +35,6 @@ Add ride from to???
 Notes:
 accomplished ride and canceled ride must be added in GUI.....
 Gps to get location and set region depend on it.
-gui validation must be if else noit if.
 phone panel on back and edit number, if no change in number>> no request and time how it is.
  
 # TASKS
