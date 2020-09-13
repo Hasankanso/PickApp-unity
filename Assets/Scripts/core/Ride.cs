@@ -84,10 +84,10 @@ public class Ride {
             return toValidation;
         }
 
-        if (ride.From.Equals(ride.To))
-        {
-            return "From and To are too close (1 km)";
-        }
+     //   if (ride.From.Equals(ride.To))
+     //   {
+     //       return "From and To are too close (1 km)";
+     //   }
 
         if (DateTime.Compare(ride.LeavingDate, DateTime.Now.AddMinutes(30)) < 0)
         {
