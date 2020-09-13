@@ -23,41 +23,20 @@ Edit Regions:
 	one region atleast
 	3 regions at maximum
 	three regions: same as add location, regions must be different position
-REGISTERPERSON, FORCEREGISTER:
-	firstname, lastname: not null, only alphabets
-	email:email validation
-	birthday:at least 14 years old.(note fix in gui)
-	countryinfo: id not null
-	phone:maximum length 18, not null, minimum length 8, + and digits only
-
 Cancel Reserve Seat:
-	userId: not null
-	rideid: should not be null
-	reason: should be at least 15 characters
 	case2: before 48h of leaving time->delete and notify driver
 	case3: after 48h or less of leaving time -> delete reserve with reason of deletion and notify driver and let him rate passenger.
-
-EDITACCOUNT:
-	firstname, lastname: not null, only alphabets
-	email:email validation
-	birthday:at least 14 years old.(note fix in gui)
-	countryinfo: id not null
-Verify Account:
-	phone:maximum length 18, not null, minimum length 8, + and digits only
 SEARCHFORRIDES:
-min day> now
-max day>min
 seats : equal or greater than 1 and equal or less than 8.
 From To: not same position and location validation.
+Add ride from to???
 
 #TODO:
 Notes:
-accomplished ride and canceled ride must be added in person table.....
-verification email code must be in ASCI
+accomplished ride and canceled ride must be added in GUI.....
 Gps to get location and set region depend on it.
 gui validation must be if else noit if.
 phone panel on back and edit number, if no change in number>> no request and time how it is.
-do digits and +. 
  
 # TASKS
 Adel: Register, login.<br>
