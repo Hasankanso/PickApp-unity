@@ -193,33 +193,31 @@ public class PhonePanel : Panel {
     }
 
     bool vadilateFirstView() {
-        bool valid = true;
         if (phone.text.text.Equals("")) {
             phone.Error();
             OpenDialog("Please enter your phone number", false);
-            valid = false;
+            return false;
         }
         if (Regex.Matches(phone.text.text, @"[a-zA-Z]").Count > 0) {
             phone.Error();
             OpenDialog("Your phone number is invalid", false);
-            valid = false;
+            return false;
         }
         if (phone.text.text.Length != user.Person.CountryInformations.Digits) {
             phone.Error();
             OpenDialog("Your phone number is invalid", false);
-            valid = false;
+            return false;
         }
-        return valid;
+        return true;
     }
     bool vadilateSecondView() {
-        bool valid = true;
         string givenCode = code.text.text;
         print(givenCode);
-        if (givenCode.Equals("") || givenCode.Length !=6) {
+        if (givenCode.Equals("") || givenCode.Length != 6) {
             code.Error();
-            valid = false;
+            return false;
         }
-        return valid;
+        return true;
     }
     public void Init(User user) {
         Clear();

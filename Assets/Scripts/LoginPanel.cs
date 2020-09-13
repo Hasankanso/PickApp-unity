@@ -97,44 +97,42 @@ public class LoginPanel : Panel {
     }
 
     private bool Validate() {
-        bool valid = true;
         if (verificationCode.text.text.Length < 4) {
             verificationCode.Error();
             OpenDialog("Code is too small", false);
-            valid = false;
+            return false;
         }
-        return valid;
+        return true;
     }
 
     private bool ValidatePhone() {
-        bool valid = true;
         if (code.text.text.Equals("")) {
             code.Error();
             OpenDialog("Please enter code", false);
-            valid = false;
+            return false;
         }
         if (phone.text.text.Equals("")) {
             phone.Error();
             OpenDialog("Please enter phone", false);
-            valid = false;
+            return false;
         }
         if (Regex.Matches(phone.text.text, @"[a-zA-Z]").Count > 0) {
             phone.Error();
             OpenDialog("Invalid phone", false);
-            valid = false;
+            return false;
         }
         if (phone.text.text.Length > 15) {
             phone.Error();
             OpenDialog("Your phone number is invalid", false);
-            valid = false;
+            return false;
         }
         if (phone.text.text.Length < 0) {
             phone.Error();
             OpenDialog("Your phone number is invalid", false);
-            valid = false;
+            return false;
         }
 
-        return valid;
+        return true;
     }
 
     public void BackView() {
