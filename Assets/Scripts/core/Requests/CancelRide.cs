@@ -16,10 +16,12 @@ namespace Requests
     class CancelRide : Request<bool>
     {
         private Ride ride;
+        private string reason;
 
-        public CancelRide(Ride ride)
+        public CancelRide(Ride ride, string reason)
         {
             this.ride = ride;
+            this.reason = reason;
             HttpPath = "/RideBusiness/DeleteRide";
         }
 
@@ -56,17 +58,12 @@ namespace Requests
             }
             TimeSpan ts = ride.LeavingDate.Subtract(DateTime.Now);
             Double hours = ts.TotalHours;
-            if (ride.Passengers[0] != null && hours<=48 )
-            {
-                return "Your ride has been deleted";  //need to notify the passengers
-            }
             if (ride.Passengers[0] != null && hours>48)
             {
-                /*if (string.IsNullOrEmpty(ride.Reason))
+                if (string.IsNullOrEmpty(reason))
                 {
                     return "Reason must not be null!";
-                }*/
-                return "Your ride has been deleted";  //need to notify the passengers, give a reason and the users can rate him
+                } //need to notify the passengers, give a reason and the users can rate him
             }
             return string.Empty;
         }

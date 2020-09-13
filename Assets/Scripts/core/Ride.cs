@@ -65,7 +65,80 @@ public class Ride {
         Passengers = passengers;
     }
 
+    public static string Valid(Ride ride)
+    {
+        string validateUser = User.ValidateLogin(Program.User);
+        if (!string.IsNullOrEmpty(validateUser))
+        {
+            return validateUser;
+        }
 
+        string fromValidation = Location.Validate(ride.From);
+        if (!string.IsNullOrEmpty(fromValidation))
+        {
+            return fromValidation;
+        }
+        string toValidation = Location.Validate(ride.To);
+        if (!string.IsNullOrEmpty(toValidation))
+        {
+            return toValidation;
+        }
+
+        if (ride.From.Equals(ride.To))
+        {
+            return "From and To are too close (1 km)";
+        }
+
+        if (DateTime.Compare(ride.LeavingDate, DateTime.Now.AddMinutes(30)) < 0)
+        {
+            return "Your ride must be after one hour or more from now";
+        }
+        if (ride.AvailableSeats <= 0 || ride.AvailableSeats > ride.Car.MaxSeats)
+        {
+            return "Invalid number of seats";
+        }
+        if (ride.AvailableLuggages < 0 || ride.AvailableLuggages > ride.Car.MaxLuggage)
+        {
+            return "Invalid number of luggage";
+        }
+        if (ride.StopTime != 0 && (ride.StopTime < 5 || ride.StopTime > 30))
+        {
+            return "Your stop time must be between 5 and 30 minutes";
+        }
+        if (string.IsNullOrEmpty(ride.Comment) || ride.Comment.Length < 25 || ride.Comment.Length > 400)
+        {
+            return "Please add a comment between 25 and 400 characters";
+        }
+        if (string.IsNullOrEmpty(ride.MapBase64))
+        {
+            return "Please choose your ride's road";
+        }
+        if (string.IsNullOrEmpty(ride.Car.id))
+        {
+            return "Please choose a car";
+        }
+        if (ride.Price <= 0)
+        {
+            return "Please set a price";
+        }
+        if (string.IsNullOrEmpty(ride.CountryInformations.Id))
+        {
+            return "Please choose a country info";
+        }
+        if (string.IsNullOrEmpty(ride.Driver.Id))
+        {
+            return "You're not a driver";
+        }
+        var rideDate = ride.LeavingDate.AddMinutes(-20);
+        foreach (var item in Program.Person.UpcomingRides)
+        {
+            if (DateTime.Compare(rideDate, item.LeavingDate) >= 0)
+            {
+                return "you have an upcoming ride in this ride time";
+            }
+        }
+        return string.Empty;
+    }
     //constructor for ride to object
     public Ride(string id, User driver, Car car, Location from, Location to, string comment, string price, DateTime date, int maxSeats, int maxLuggage, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int availableSeats, int availableLuggages, int stopTime, string mapUrl)
     : this(id, driver, car, from, to, comment, price, date, musicAllowed, acAllowed, smokingAllowed, petsAllowed, kidSeat, availableSeats, availableLuggages, stopTime, null, mapUrl) {
