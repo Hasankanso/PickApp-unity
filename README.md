@@ -16,9 +16,6 @@ Cancel Reserve Seat::<br>
 	case2: before 48h of leaving time->delete and notify driver:<br>
 	case3: after 48h or less of leaving time -> delete reserve with reason of deletion and notify driver and let him rate passenger.:<br>:<br>
 SEARCHFORRIDES::<br>
-seats : equal or greater than 1 and equal or less than 8.:<br>
-From To: not same position and location validation.:<br>
-Add ride from to???:<br>:<br>
 
 #TODO::<br>
 Notes::<br>
