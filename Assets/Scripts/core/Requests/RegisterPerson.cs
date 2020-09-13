@@ -46,7 +46,7 @@ namespace Requests {
                 return "Your first name must be alphabet only";
             }
             if (string.IsNullOrEmpty(newUser.Person.LastName) || !r.IsMatch(newUser.Person.LastName)) {
-                return "Your first name must be alphabet only";
+                return "Your last name must be alphabet only";
             }
             if (string.IsNullOrEmpty(newUser.Email) || !ValidEmail(newUser.Email)) {
                 return "Invalid Email address";

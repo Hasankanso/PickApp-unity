@@ -63,6 +63,9 @@ namespace Requests {
             if (searchInfo.PassengersNumber < 1 || searchInfo.PassengersNumber > 8) {
                 return "Please choose 1 to 8 persons.";
             }
+            if (searchInfo.From.Latitude == searchInfo.To.Latitude && searchInfo.From.Longitude == searchInfo.To.Longitude) {
+                return "From and To must be different";
+            }
             return string.Empty;
         }
 

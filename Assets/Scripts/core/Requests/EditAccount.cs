@@ -49,7 +49,7 @@ namespace Requests {
                 return "Your first name must be alphabet only";
             }
             if (string.IsNullOrEmpty(newPerson.LastName) || !r.IsMatch(newPerson.LastName)) {
-                return "Your first name must be alphabet only";
+                return "Your last name must be alphabet only";
             }
             if (string.IsNullOrEmpty(email) || !ValidEmail(email)) {
                 return "Invalid Email address";

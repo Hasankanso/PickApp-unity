@@ -1,12 +1,8 @@
-﻿using Firebase;
-using Firebase.Auth;
+﻿using Firebase.Auth;
 using Requests;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 public class PhonePanel : Panel {
@@ -20,7 +16,7 @@ public class PhonePanel : Panel {
     private static uint timeout = 120000;
     private IEnumerator timer;
     ForceResendingToken token = null;
-    string verificationId = "";
+    string verificationId = "", oldPhone;
     private bool isForceRegister = false;
 
     public void SendCode() {
@@ -33,6 +29,7 @@ public class PhonePanel : Panel {
           verificationCompleted: (credential) => {
               print(credential.ToString());
               Debug.Log("Phone number has been validated!");
+              return;
           },
           verificationFailed: (error) => {
               OpenDialog(error, false);
@@ -43,15 +40,18 @@ public class PhonePanel : Panel {
                   resendCodeLabel.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
                   codeImage.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
               }
+              return;
           },
           codeSent: (id, token) => {
               OpenDialog("Sms has been sent!", true);
               verificationId = id;
               this.token = token;
+              return;
           },
             codeAutoRetrievalTimeOut: (id) => {
                 verificationId = id;
                 OpenDialog("Make sure your phone number is correct!", false);
+                return;
             });
     }
 
@@ -170,13 +170,17 @@ public class PhonePanel : Panel {
         }
     }
     public void openView(int index) {
+        string newPhone = phone.text.text;
         firstView.SetActive(false);
         secondView.SetActive(false);
         UserAlreadyExistView.SetActive(false);
+        Debug.Log(oldPhone);
         if (index == 0) {
             firstView.SetActive(true);
         } else if (index == 1 && vadilateFirstView()) {
-            SendCode();
+            if (oldPhone==null||!oldPhone.Equals(newPhone)) {
+                SendCode();
+            }
             secondView.SetActive(true);
             phoneLabel.text = phone.text.text;
         }
@@ -187,6 +191,7 @@ public class PhonePanel : Panel {
         phone.PlaceHolder();
         code.PlaceHolder();
         if (index == 0) {
+            this.oldPhone = phone.text.text;
             firstView.SetActive(true);
         } else if (index == 1)
             secondView.SetActive(true);
