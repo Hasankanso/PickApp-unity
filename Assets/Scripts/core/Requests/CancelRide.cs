@@ -22,7 +22,7 @@ namespace Requests
         {
             this.ride = ride;
             this.reason = reason;
-            HttpPath = "/RideBusiness/DeleteRide";
+            HttpPath = "/RideBusiness/CancelRide";
         }
 
         public override bool BuildResponse(JToken response) //TODO

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class RideDetails : Panel {
     public ListView listView;
-    public Text from, to, price, date, time, comment, seats, luggages, driverFullName, driverBio, driverRatings, carName, carBrand, carColor, carYear, header;
+    public Text from,reason, to, price, date, time, comment, seats, luggages, driverFullName, driverBio, driverRatings, carName, carBrand, carColor, carYear, header;
     public Image carImage, profileImage, rideMapImage, smokingImage, musicImage, acImage, kidsSeatImage, petsImage;
     public Sprite smokingOnSpirite, musicOnSpirite, acOnSpirite, kidsSeatOnSpirite, petsOnSpirite;
     public Sprite smokingOffSpirite, musicOffSpirite, acOffSpirite, kidsSeatOffSpirite, petsOffSpirite;
@@ -331,7 +331,7 @@ public class RideDetails : Panel {
         }
     }
     public void RemoveRide() {
-        Request<bool> request = new CancelRide(ride);
+        Request<bool> request = new CancelRide(ride,reason.ToString());
         request.Send(RemoveRideResponse);
     }
 
