@@ -1,39 +1,28 @@
 # TheProject
 let private drivers offer rides and drive together, this modern way is flexible and energy/money saving. It may help solving congestion problems since more people will go in one car, which means less cars on the road.<br>
 # TODO
-EDITRIDE:
-if there's passengers:
-stopTime: can only be less or equal to the original //do it in backendless
-price: can only be less  //do it in backednless
-comment: can't be changed, but you can add more information //do it in backendless
-kidSeat: can be changed to TRUE, but can't be changed to FALSE //do it in backendless
+EDITRIDE:<br>
+if there's passengers:<br>
+stopTime: can only be less or equal to the original //do it in backendless:<br>
+price: can only be less  //do it in backednless:<br>
+comment: can't be changed, but you can add more information //do it in backendless:<br>
+kidSeat: can be changed to TRUE, but can't be changed to FALSE //do it in backendless:<br>:<br>
 
-CANCELRIDE:
-case2: if reservation not null and before 48h of leaving time->delete and notify passengers  BACKENDLESS NOTIFICATION
-case3: if reservation not null and after 48h or less of leaving time -> BACKENDLESS NOTIFICATION
-
-BECOMEADRIVE:
-	userID: not null
-	car: same as add car
-	three regions: same as add location, regions must be different position
-	Age of person 18 or more years old.
+CANCELRIDE::<br>
+case2: if reservation not null and before 48h of leaving time->delete and notify passengers  BACKENDLESS NOTIFICATION:<br>
+case3: if reservation not null and after 48h or less of leaving time -> BACKENDLESS NOTIFICATION:<br>:<br>
 	
-Edit Regions:
-	userID: not null
-	one region atleast
-	3 regions at maximum
-	three regions: same as add location, regions must be different position
-Cancel Reserve Seat:
-	case2: before 48h of leaving time->delete and notify driver
-	case3: after 48h or less of leaving time -> delete reserve with reason of deletion and notify driver and let him rate passenger.
-SEARCHFORRIDES:
-seats : equal or greater than 1 and equal or less than 8.
-From To: not same position and location validation.
-Add ride from to???
+Cancel Reserve Seat::<br>
+	case2: before 48h of leaving time->delete and notify driver:<br>
+	case3: after 48h or less of leaving time -> delete reserve with reason of deletion and notify driver and let him rate passenger.:<br>:<br>
+SEARCHFORRIDES::<br>
+seats : equal or greater than 1 and equal or less than 8.:<br>
+From To: not same position and location validation.:<br>
+Add ride from to???:<br>:<br>
 
-#TODO:
-Notes:
-Gps to get location and set region depend on it.
+#TODO::<br>
+Notes::<br>
+Gps to get location and set region depend on it.:<br>:<br>
  
 # TASKS
 Adel: Register, login.<br>
