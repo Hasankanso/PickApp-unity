@@ -33,7 +33,6 @@ Add ride from to???
 
 #TODO:
 Notes:
-accomplished ride and canceled ride must be added in GUI.....
 Gps to get location and set region depend on it.
 phone panel on back and edit number, if no change in number>> no request and time how it is.
  
