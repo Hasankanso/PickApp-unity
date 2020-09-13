@@ -2,23 +2,19 @@
 let private drivers offer rides and drive together, this modern way is flexible and energy/money saving. It may help solving congestion problems since more people will go in one car, which means less cars on the road.<br>
 # TODO
 EDITRIDE:<br>
-if there's passengers:<br>
-stopTime: can only be less or equal to the original //do it in backendless:<br>
-price: can only be less  //do it in backednless:<br>
-comment: can't be changed, but you can add more information //do it in backendless:<br>
-kidSeat: can be changed to TRUE, but can't be changed to FALSE //do it in backendless:<br>:<br>
+	if there's passengers:<br>
+	stopTime: can only be less or equal to the original //do it in backendless:<br>
+	price: can only be less  //do it in backednless:<br>
+	comment: can't be changed, but you can add more information //do it in backendless:<br>
+	kidSeat: can be changed to TRUE, but can't be changed to FALSE //do it in backendless:<br>:<br>
 
 CANCELRIDE::<br>
-case2: if reservation not null and before 48h of leaving time->delete and notify passengers  BACKENDLESS NOTIFICATION:<br>
-case3: if reservation not null and after 48h or less of leaving time -> BACKENDLESS NOTIFICATION:<br>:<br>
+	case2: if reservation not null and before 48h of leaving time->delete and notify passengers  BACKENDLESS NOTIFICATION:<br>
+	case3: if reservation not null and after 48h or less of leaving time -> BACKENDLESS NOTIFICATION:<br>:<br>
 	
 Cancel Reserve Seat::<br>
 	case2: before 48h of leaving time->delete and notify driver:<br>
 	case3: after 48h or less of leaving time -> delete reserve with reason of deletion and notify driver and let him rate passenger.:<br>:<br>
-SEARCHFORRIDES::<br>
-seats : equal or greater than 1 and equal or less than 8.:<br>
-From To: not same position and location validation.:<br>
-Add ride from to???:<br>:<br>
 
 #TODO::<br>
 Notes::<br>
