@@ -39,7 +39,7 @@ public class Ride {
     private Car car;
     private DateTime updated;
 
-    public Ride(string id, Location from, Location to, DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int maxSeats, int maxLuggages, int stopTime, string comment, string price, int reservedLuggages, int reservedSeats, Texture2D map) {
+    public Ride(string id, Location from, Location to, DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int maxSeats, int maxLuggages, int stopTime, string comment, string price, int reservedLuggages, int reservedSeats, Texture2D map, List<Passenger> passengers) {
         Id = id;
         From = from;
         To = to;
@@ -59,6 +59,7 @@ public class Ride {
         Price = float.Parse(price);
         ReservedLuggages = reservedLuggages;
         ReservedSeats = reservedSeats;
+        this.passengers = passengers;
     }
 
     public Ride(List<Passenger> passengers) {
@@ -84,10 +85,10 @@ public class Ride {
             return toValidation;
         }
 
-        if (ride.From.Equals(ride.To))
+        /*if (ride.From.Equals(ride.To))
         {
             return "From and To are too close (1 km)";
-        }
+        }*/
 
         if (DateTime.Compare(ride.LeavingDate, DateTime.Now.AddMinutes(30)) < 0)
         {
@@ -140,15 +141,15 @@ public class Ride {
         return string.Empty;
     }
     //constructor for ride to object
-    public Ride(string id, User driver, Car car, Location from, Location to, string comment, string price, DateTime date, int maxSeats, int maxLuggage, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int availableSeats, int availableLuggages, int stopTime, string mapUrl)
-    : this(id, driver, car, from, to, comment, price, date, musicAllowed, acAllowed, smokingAllowed, petsAllowed, kidSeat, availableSeats, availableLuggages, stopTime, null, mapUrl) {
+    public Ride(string id, User driver, Car car, Location from, Location to, string comment, string price, DateTime date, int maxSeats, int maxLuggage, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int availableSeats, int availableLuggages, int stopTime, string mapUrl, List<Passenger> passenger)
+    : this(id, driver, car, from, to, comment, price, date, musicAllowed, acAllowed, smokingAllowed, petsAllowed, kidSeat, availableSeats, availableLuggages, stopTime, null, mapUrl, passenger) {
         Id = id;
     }
 
     //constructor to add full ride
     public Ride(string id, User user, Car car, Location from, Location to, string comment, string price,
     DateTime date, bool musicAllowed, bool acAllowed, bool smokingAllowed, bool petsAllowed, bool kidSeat, int maxSeats, int maxLuggages,
-    int stopTime, Texture2D map, string mapUrl) {
+    int stopTime, Texture2D map, string mapUrl, List<Passenger> passengers) {
         this.id = id;
         this.user = user;
         Car = car;
@@ -171,6 +172,7 @@ public class Ride {
         this.mapUrl = mapUrl;
         ReservedLuggages = reservedLuggages;
         ReservedSeats = reservedSeats;
+        this.passengers = passengers;
     }
 
     public Ride(User user, Location from, Location to, DateTime date) {
@@ -286,6 +288,18 @@ public class Ride {
             car = Car.ToObject(carJ);
         }
 
+        JArray passengersJ = (JArray)json.GetValue("passengers");
+        List<Passenger> passengers = null;
+
+        if (passengersJ != null)
+        {
+            passengers = new List<Passenger>();
+            foreach (var passenger in passengersJ)
+            {
+                passengers.Add(Passenger.ToObject((JObject)passenger));
+            }
+        }
+
         double leavingDateDouble = -1;
         var ld = json[nameof(Ride.leavingDate)];
         if (ld != null) {
@@ -340,7 +354,7 @@ public class Ride {
         rideJ[nameof(this.Map)] = this.MapBase64;
         */
         return new Ride(id, user, car, from, to, comment, price, leavingDate, maxSeats, maxLuggages, musicAllowed, acAllowed, smokingAllowed, petsAllowed,
-        kidSeat, availableSeats, availableLuggages, stopTime, mapUrl);
+        kidSeat, availableSeats, availableLuggages, stopTime, mapUrl, passengers);
     }
     public string Id { get => id; set => id = value; }
     public Location From { get => from; set => from = value; }

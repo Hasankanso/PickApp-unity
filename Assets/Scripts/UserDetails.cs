@@ -25,7 +25,21 @@ public class UserDetails : Panel
       message.gameObject.SetActive(true);
     }
   }
-  public void ReportUser()
+
+    public void Init(Person person)
+    {
+        this.person =person;
+        bio.text = person.Bio;
+        fullName.text = person.FirstName + " " + person.LastName;
+        ratings.text = person.RateAverage.ToString() + "/5 - " + person.Rates.Count + " ratings";
+        chattiness.text = person.Chattiness;
+        profileImage.sprite = Program.GetImage(person.ProfilePicture);
+        /* if (Person.Driver != null)
+         {
+             message.gameObject.SetActive(true);
+         } ToDo */
+    }
+    public void ReportUser()
   {
     ReportUserPanel panel = PanelsFactory.CreateReportUser();
     Open(panel, () => {panel.Init(person);} );

@@ -397,9 +397,6 @@ public class RideDetails : Panel {
                 Debug.Log(code);
         } else {
             Program.Person.UpcomingRides.Remove(result);
-            Passenger passenger = new Passenger(Program.User, luggagesDropdown.value);
-            result.Passengers.Remove(passenger);
-
             MissionCompleted(SearchPanel.PANELNAME, "You have cancelled the reservation");
         }
     }
