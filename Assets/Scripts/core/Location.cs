@@ -45,7 +45,7 @@ public class Location
 
   public static Location ToObject(JObject json)
   {
-    //  string id = json[nameof(id)].ToString();
+    //string id = json[nameof(id)].ToString();
     string name = json[nameof(name)].ToString();
     string placeId = json[nameof(placeId)].ToString();
     double longitude = 0, latitude = 0;

@@ -305,7 +305,6 @@ public class Ride {
         if (rs != null)
             int.TryParse(rs.ToString(), out reservedSeats);
 
-
         Location from = Location.ToObject((JObject)json[nameof(Ride.from)]);
         Location to = Location.ToObject((JObject)json[nameof(Ride.to)]);
 

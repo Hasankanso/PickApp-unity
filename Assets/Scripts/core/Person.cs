@@ -167,8 +167,13 @@ public class Person {
         List<Ride> rides = new List<Ride>();
         if (upcomingRidesArray != null) {
             foreach (var ride in upcomingRidesArray) {
-                if (ride.HasValues == true)
-                    rides.Add(Ride.ToObject((JObject)ride));
+                if (ride.HasValues == true) {
+                    if (((JObject)ride["ride"]).HasValues==true) {
+                        rides.Add(Ride.ToObject(((JObject)ride["ride"])));
+                    } else {
+                        rides.Add(Ride.ToObject((JObject)ride));
+                    }
+                }
             }
             p.UpcomingRides = rides;
         }

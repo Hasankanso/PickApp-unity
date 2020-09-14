@@ -19,7 +19,7 @@ public class UserDetails : Panel {
         chattiness.text = person.Chattiness;
         acomplishedRides.text = "Acomplished rides: "+person.AcomplishedRides.ToString();
         canceledRides.text = "Canceled rides: " + person.CanceledRides.ToString();
-        if (profileImage!=null) {
+        if (person.ProfilePicture != null) {
             profileImage.sprite = Program.GetImage(person.ProfilePicture);
         }
         if (user.Driver != null) {

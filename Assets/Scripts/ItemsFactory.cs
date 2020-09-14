@@ -63,7 +63,6 @@ public class ItemsFactory : MonoBehaviour {
         return scheduleItem;
     }
     public static MyRideItem CreateMyRideItem(GameObject parent, Ride ride, Person person, MyRidePanel yourRidesPanel) {
-        Debug.Log("CreateMyRideItem");
         MyRideItem myRideItem = Instantiate(defaultItemsFactory.myRideItem);
         myRideItem.transform.SetParent(parent.transform, false);
         myRideItem.Init(ride, person, yourRidesPanel);
