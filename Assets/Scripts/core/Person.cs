@@ -16,7 +16,7 @@ public class Person {
     public Texture2D profilePicture;
     public string image, profilePictureUrl;
     private float rateAverage;
-    private int acomplishedRides, canceledRides;
+    private int acomplishedRides, canceledRides, rateCount;
     private DateTime updated;
     private CountryInformations countryInformations;
 
@@ -26,12 +26,13 @@ public class Person {
     public Person() {
     }
     //Constructor for login
-    public Person(string id, string firstName, string lastName, int acomplishedRides, int canceledRides, string chattiness, string phone, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday, string profilePictureUrl) {
+    public Person(string id, string firstName, string lastName,int rateCount, int acomplishedRides, int canceledRides, string chattiness, string phone, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday, string profilePictureUrl) {
         this.id = id;
         this.firstName = firstName;
         this.acomplishedRides = acomplishedRides;
         this.canceledRides = canceledRides;
         this.bio = bio;
+        this.rateCount = rateCount;
         this.phone = phone;
         this.lastName = lastName;
         this.rateAverage = rateAverage;
@@ -148,6 +149,11 @@ public class Person {
         var cr = json[nameof(Person.canceledRides)];
         if (cr != null)
             int.TryParse(cr.ToString(), out canceledRides);
+        int rateCount = -1;
+        var rc = json[nameof(Person.rateCount)];
+        if (rc != null)
+            int.TryParse(rc.ToString(), out rateCount);
+        
         CountryInformations countryInformations = CountryInformations.ToObject((JObject)json[nameof(Person.countryInformations)]);
         bool gender = false;
         var gn = json[nameof(Person.gender)];
@@ -155,7 +161,7 @@ public class Person {
             bool.TryParse(gn.ToString(), out gender);
 
         string image = json[nameof(image)].ToString();
-        Person p = new Person(id, firstName, lastName, acomplishedRides, canceledRides, chattiness, phone, countryInformations, bio, rateAverage, gender, birthday, image);
+        Person p = new Person(id, firstName, lastName, rateCount, acomplishedRides, canceledRides, chattiness, phone, countryInformations, bio, rateAverage, gender, birthday, image);
 
         JArray upcomingRidesArray = (JArray)json.GetValue("upcomingRides");
         List<Ride> rides = new List<Ride>();
@@ -196,4 +202,5 @@ public class Person {
     public string ProfilePictureUrl { get => profilePictureUrl; set => profilePictureUrl = value; }
     public int AcomplishedRides { get => acomplishedRides; set => acomplishedRides = value; }
     public int CanceledRides { get => canceledRides; set => canceledRides = value; }
+    public int RateCount { get => rateCount; set => rateCount = value; }
 }

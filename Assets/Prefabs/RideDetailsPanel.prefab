@@ -6647,7 +6647,7 @@ MonoBehaviour:
   contentScrollView: {fileID: 1593589810386733172}
   personsDialog: {fileID: 2078383628102837051}
   removeRideDialog: {fileID: 8337651786106792249}
-  cancelReservationDialog: {fileID: 0}
+  cancelReservationDialog: {fileID: 4173783368961271344}
   addScheduleButton: {fileID: 6308145749595551193}
   updateScheduleButton: {fileID: 551152259847313966}
   editScheduleButton: {fileID: 3750347942020378321}
@@ -6657,7 +6657,7 @@ MonoBehaviour:
   editRideButton: {fileID: 5353173435287265045}
   removeRideButton: {fileID: 7750874818871384102}
   reserveSeatsButton: {fileID: 1860792086774630973}
-  cancelReservedSeats: {fileID: 0}
+  cancelReservedSeats: {fileID: 10886054125789287}
   monday: {fileID: 6774744975367751779}
   tuesday: {fileID: 6704879212543313409}
   wednesday: {fileID: 922381842949606661}

@@ -17,7 +17,7 @@ public class PassengerItem : Panel
     this.passenger = passenger;
     this.rideDetail = rideDetail;
     fullName.text = person.FirstName + " " + person.LastName;
-    ratings.text = person.RateAverage + "/5 - " + person.Rates.Count + " ratings";
+    ratings.text = person.RateAverage + "/5 - " + person.RateCount + " ratings";
     bio.text = person.Bio;
     persons.text = passenger.NumberOfPersons.ToString();
   }
