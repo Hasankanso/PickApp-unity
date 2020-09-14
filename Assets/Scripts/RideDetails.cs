@@ -134,19 +134,22 @@ public class RideDetails : Panel {
         luggages.text = ride.AvailableLuggages.ToString();
         driverFullName.text = person.FirstName + " " + person.LastName;
         driverBio.text = person.Bio;
-        //driverRatings.text = ride.Driver.RateAverage.ToString() + "/5 - " + ride.Driver.Rates.Count.ToString() + " ratings";
+        driverRatings.text = ride.Person.RateAverage.ToString() + "/5 - " + ride.Person.RateCount.ToString() + " ratings";
         carName.text = car.Name;
         carBrand.text = car.Brand;
         carYear.text = car.Year.ToString();
         SetColor(car.Color);
         SetPermissions(ride.SmokingAllowed, ride.AcAllowed, ride.PetsAllowed, ride.MusicAllowed, ride.KidSeat);
-        if (car.Picture != null) {
+        if (car.Picture == null) {
+            StartCoroutine(Program.RequestImage(car.CarPictureUrl, SucceedCarImage, Error));
+        } else {
             carImage.sprite = Program.GetImage(car.Picture);
         }
-        if (person.ProfilePicture != null) {
+        if (person.ProfilePicture == null) {
+            StartCoroutine(Program.RequestImage(person.ProfilePictureUrl, SucceedPersonImage, Error));
+        } else {
             profileImage.sprite = Program.GetImage(person.ProfilePicture);
         }
-
         if (ride.Map == null) {
             StartCoroutine(Program.RequestImage(ride.MapUrl, Succeed, Error));
         } else {
@@ -171,9 +174,16 @@ public class RideDetails : Panel {
             }
         }
     }
-
-    private void Error(string obj) {
-        OpenDialog("man nzlet l soura", false);
+    private void SucceedCarImage(Texture2D t) {
+        carImage.sprite = Program.GetImage(t);
+        car.Picture = t;
+    }
+    private void SucceedPersonImage(Texture2D t) {
+        profileImage.sprite = Program.GetImage(t);
+        ride.User.Person.ProfilePicture = t;
+    }
+    private void Error(string error) {
+        OpenDialog(error, false);
     }
 
     private void Succeed(Texture2D map) {
@@ -258,7 +268,7 @@ public class RideDetails : Panel {
         ClosePersonDialog();
         CloseRideDialog();
         CloseCancelReserveDialog();
-        
+
         personsDropdown.ClearOptions();
         luggagesDropdown.ClearOptions();
         seatsList.Clear();

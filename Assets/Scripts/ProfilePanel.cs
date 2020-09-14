@@ -26,8 +26,11 @@ public class ProfilePanel : Panel {
         Person person = Program.Person;
         Driver driver = Program.Driver;
 
-        if (Program.Person.ProfilePicture == null)
+        if (Program.Person.ProfilePicture == null) {
             StartCoroutine(Program.RequestImage(person.ProfilePictureUrl, Succed, Error));
+        } else {
+            profilePicture.sprite = Program.GetImage(person.ProfilePicture);
+        }
         Status = StatusE.VIEW;
         fullName.text = person.FirstName + " " + person.LastName;
         ratings.text = person.RateAverage.ToString() + "/5 ";
@@ -42,8 +45,7 @@ public class ProfilePanel : Panel {
             becomeDriverLabel.SetActive(true);
         }
     }
-    public void SendCode()
-    {
+    public void SendCode() {
 
     }
     private async void DownloadAndAddCarsImages() {
@@ -106,8 +108,7 @@ public class ProfilePanel : Panel {
         Open(panel, () => { panel.Init(); });
     }
 
-    public void EditRegions()
-    {
+    public void EditRegions() {
         Panel panel = PanelsFactory.CreateBecomeDriver();
         Status = StatusE.VIEW;
         Open(panel, () => { panel.Init(); });

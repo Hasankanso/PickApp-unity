@@ -23,9 +23,10 @@ namespace Requests {
             List<Ride> rides = new List<Ride>();
             if (ridesArray == null) return null;
             foreach (JToken j in ridesArray) {
-                JObject rideJ = (JObject)j;
-                Debug.Log(rideJ);
-                rides.Add(Ride.ToObject(rideJ));
+                if (j.HasValues) {
+                    JObject rideJ = (JObject)j;
+                    rides.Add(Ride.ToObject(rideJ));
+                }
             }
             return rides;
         }
