@@ -117,43 +117,42 @@ public class AccountPanel : Panel {
         return years;
     }
     private bool vadilate() {
-        bool valid = true;
         if (firstName.text.text.Equals("")) {
             firstName.Error();
             Panel p = PanelsFactory.CreateDialogBox("Please insert your name", false);
             OpenDialog(p);
-            valid = false;
+            return false;
         }
         if (lastName.text.text.Equals("")) {
             lastName.Error();
             Panel p = PanelsFactory.CreateDialogBox("Please insert your last name", false);
             OpenDialog(p);
-            valid = false;
+            return false;
         }
         if (birthday.text.Equals("")) {
             Panel p = PanelsFactory.CreateDialogBox("The birthday field can't be empty", false);
             OpenDialog(p);
-            valid = false;
+            return false;
         } else {
             int age = CalculateAge();
             if (age < 14) {
                 Panel p = PanelsFactory.CreateDialogBox("You are under the legal age", false);
                 OpenDialog(p);
-                valid = false;
+                return false;
             }
             if (age > 100) {
                 Panel p = PanelsFactory.CreateDialogBox("Invalid birthday", false);
                 OpenDialog(p);
-                valid = false;
+                return false;
             }
         }
         if (!IsValidEmail(email.text.text)) {
             email.Error();
             Panel p = PanelsFactory.CreateDialogBox("Invalid email", false);
             OpenDialog(p);
-            valid = false;
+            return false;
         }
-        return valid;
+        return true;
     }
     bool IsValidEmail(string email) {
         try {

@@ -28,8 +28,8 @@ public class ChattinessPanel : Panel {
     }
     private void response(Person result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-                OpenDialog(message, false);
-                Debug.Log(code);
+            OpenDialog(message, false);
+            Debug.Log(code);
         } else {
             List<Ride> upcomingRides = Program.Person.UpcomingRides;
             List<Rate> rates = Program.Person.Rates;
@@ -51,10 +51,11 @@ public class ChattinessPanel : Panel {
     private bool Vadilate() {
         if (chatiness.options[chatiness.value].text.Equals("") || chatiness.options[chatiness.value].text == null) {
             OpenDialog("Please choose chattiness", false);
+            return false;
         }
         return true;
     }
     internal override void Clear() {
-        
+
     }
 }

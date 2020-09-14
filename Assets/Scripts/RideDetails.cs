@@ -10,11 +10,11 @@ using UnityEngine.UI;
 
 public class RideDetails : Panel {
     public ListView listView;
-    public Text from,reason, to, price, date, time, comment, seats, luggages, driverFullName, driverBio, driverRatings, carName, carBrand, carColor, carYear, header;
+    public Text from, reason, to, price, date, time, comment, seats, luggages, driverFullName, driverBio, driverRatings, carName, carBrand, carColor, carYear, header;
     public Image carImage, profileImage, rideMapImage, smokingImage, musicImage, acImage, kidsSeatImage, petsImage;
     public Sprite smokingOnSpirite, musicOnSpirite, acOnSpirite, kidsSeatOnSpirite, petsOnSpirite;
     public Sprite smokingOffSpirite, musicOffSpirite, acOffSpirite, kidsSeatOffSpirite, petsOffSpirite;
-    public GameObject dayOfWeek, passengersContainer, contentScrollView, personsDialog, removeRideDialog;
+    public GameObject dayOfWeek, passengersContainer, contentScrollView, personsDialog, removeRideDialog, cancelReservationDialog;
     public GameObject addScheduleButton, updateScheduleButton, editScheduleButton, removeScheduleButton; //schedule
     public GameObject addRideButton, updateRideButton, editRideButton, removeRideButton; //Ride
     public GameObject reserveSeatsButton, cancelReservedSeats; //reserve
@@ -63,7 +63,12 @@ public class RideDetails : Panel {
     public void CloseRideDialog() {
         removeRideDialog.gameObject.SetActive(false);
     }
-
+    public void OpenCancelReserveDialog() {
+        cancelReservationDialog.gameObject.SetActive(true);
+    }
+    public void CloseCancelReserveDialog() {
+        cancelReservationDialog.gameObject.SetActive(false);
+    }
     public void ClosePersonDialog() {
         personsDialog.gameObject.SetActive(false);
     }
@@ -252,7 +257,8 @@ public class RideDetails : Panel {
         addScheduleButton.SetActive(false);
         ClosePersonDialog();
         CloseRideDialog();
-
+        CloseCancelReserveDialog();
+        
         personsDropdown.ClearOptions();
         luggagesDropdown.ClearOptions();
         seatsList.Clear();
@@ -331,7 +337,7 @@ public class RideDetails : Panel {
         }
     }
     public void RemoveRide() {
-        Request<bool> request = new CancelRide(ride,reason.ToString());
+        Request<bool> request = new CancelRide(ride, reason.ToString());
         request.Send(RemoveRideResponse);
     }
 
@@ -351,13 +357,10 @@ public class RideDetails : Panel {
 
 
     public void EditRideResponse(Ride result, int code, string message) { //Not in use cause we used AddRideResponse instead.    
-        if (!code.Equals((int)HttpStatusCode.OK))
-        {
+        if (!code.Equals((int)HttpStatusCode.OK)) {
             OpenDialog(message, false);
             Debug.Log(code);
-        }
-        else
-        {
+        } else {
             Program.Person.UpcomingRides.Remove(ride);
             Program.Person.UpcomingRides.Add(result);
             MissionCompleted(MyRidePanel.PANELNAME, "Ride has been updated");
@@ -367,22 +370,20 @@ public class RideDetails : Panel {
 
     public void AddRideResponse(Ride result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-                OpenDialog(message, false);
-                Debug.Log(code);
-        }
-        else  {
+            OpenDialog(message, false);
+            Debug.Log(code);
+        } else {
             Program.Person.UpcomingRides.Add(result);
             MissionCompleted(MyRidePanel.PANELNAME, "Ride's in public!");
         }
     }
-    
+
     private void RemoveRideResponse(bool result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-                OpenDialog(message, false);
-                Debug.Log(code);
+            OpenDialog(message, false);
+            Debug.Log(code);
         } else {
-            if (result == true)
-            {
+            if (result == true) {
                 FooterMenu.dFooterMenu.OpenYourRidesPanel();
                 DestroyImediateForwardBackward();
                 Program.Person.UpcomingRides.Remove(ride);
@@ -393,8 +394,8 @@ public class RideDetails : Panel {
 
     private void CancelReservedSeatsResponse(Ride result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-                OpenDialog(message, false);
-                Debug.Log(code);
+            OpenDialog(message, false);
+            Debug.Log(code);
         } else {
             Program.Person.UpcomingRides.Remove(result);
             MissionCompleted(SearchPanel.PANELNAME, "You have cancelled the reservation");
@@ -403,8 +404,8 @@ public class RideDetails : Panel {
 
     private void ReserveSeatsResponse(Ride result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
-                OpenDialog(message, false);
-                Debug.Log(code);
+            OpenDialog(message, false);
+            Debug.Log(code);
         } else {
             Program.Person.UpcomingRides.Add(result);
             FooterMenu.dFooterMenu.OpenSearchPanel();

@@ -60,8 +60,11 @@ namespace Requests {
             if (DateTime.Compare(searchInfo.MaxDate, searchInfo.MinDate) < 0) {
                 return "Max date must be smaller than max date";
             }
-            if (searchInfo.PassengersNumber < 1 || searchInfo.PassengersNumber > 8) {
+            if (searchInfo.PassengersNumber < 1 || searchInfo.PassengersNumber > 4) {
                 return "Please choose 1 to 8 persons.";
+            }
+            if (searchInfo.From.Latitude == searchInfo.To.Latitude && searchInfo.From.Longitude == searchInfo.To.Longitude) {
+                return "From and To must be different";
             }
             return string.Empty;
         }
