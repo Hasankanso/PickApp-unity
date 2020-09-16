@@ -14,21 +14,23 @@ public class AlertPanel : Panel {
     public InputFieldScript from, to, price, comment;
     private Location fromL, toL;
     public Text minDate, maxDate;
-    public Dropdown nbPersons, luggages, region;
+    public Dropdown nbPersons, luggages;
     private Alert alert;
 
     public void Init(SearchInfo searchInfo) {
         Clear();
+        this.fromL = searchInfo.From;
+        this.toL = searchInfo.To;
         this.from.SetText(searchInfo.From.ToString());
         this.to.SetText(searchInfo.To.ToString());
-        this.minDate.text = searchInfo.MinDate.ToString();
-        this.maxDate.text = searchInfo.MaxDate.ToString();
+        this.minDate.text = Program.DateToString(searchInfo.MinDate);
+        this.maxDate.text = Program.DateToString(searchInfo.MaxDate);
         this.nbPersons.value = searchInfo.PassengersNumber;
     }
     public void submit() {
         if (Validate()) {
-            alert = new Alert(Program.User, fromL, toL, price.text.text, DateTime.Parse(minDate.text), DateTime.Parse(maxDate.text), int.Parse(nbPersons.options[nbPersons.value].text), int.Parse(luggages.options[luggages.value].text), comment.text.text);
-            Request<Alert> request = new BroadCastAlert(alert);
+            alert = new Alert(Program.User, fromL, toL, price.text.text, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), int.Parse(nbPersons.options[nbPersons.value].text), int.Parse(luggages.options[luggages.value].text), comment.text.text);
+            Request<string> request = new BroadCastAlert(alert);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);
@@ -61,11 +63,11 @@ public class AlertPanel : Panel {
     private void OnDatePicked(Text dateLabel, DateTime d) {
         dateLabel.text = Program.DateToString(d);
     }
-    private void response(Alert result, int code, string message) {
-        if (!code.Equals(HttpStatusCode.OK))
-            OpenDialog("Something went wrong!", false);
+    private void response(string result, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK))
+            OpenDialog(message, false);
         else {
-            MissionCompleted(SearchPanel.PANELNAME, "Your alert has been sent!");
+            MissionCompleted(SearchPanel.PANELNAME, result);
         }
     }
     private bool Validate() {
@@ -79,11 +81,11 @@ public class AlertPanel : Panel {
             OpenDialog("Minimum date range can't be empty!", false);
             valid = false;
         } else {
-            if (DateTime.Parse(minDate.text) < DateTime.Now) {
+            if (Program.StringToDate(minDate.text) < DateTime.Now) {
                 OpenDialog("Minimum date range can't be empty!", false);
                 valid = false;
             }
-            if (DateTime.Parse(minDate.text) > Program.MaxAlertDate) {
+            if (Program.StringToDate(minDate.text) > Program.MaxAlertDate) {
                 OpenDialog("The max period of alert is six months", false);
                 valid = false;
             }
@@ -92,23 +94,20 @@ public class AlertPanel : Panel {
             OpenDialog("Maximum date range can't be empty!", false);
             valid = false;
         } else {
-            if (DateTime.Parse(maxDate.text) < DateTime.Now) {
+            if (Program.StringToDate(maxDate.text) < DateTime.Now) {
                 OpenDialog("Invalid maximum date range", false);
                 valid = false;
             }
-            if (DateTime.Parse(maxDate.text) > Program.MaxAlertDate) {
+            if (Program.StringToDate(maxDate.text) > Program.MaxAlertDate) {
                 OpenDialog("The max period of alert is six months", false);
                 valid = false;
             }
         }
-        if (DateTime.Parse(maxDate.text) < DateTime.Parse(minDate.text)) {
+        if (Program.StringToDate(maxDate.text) < Program.StringToDate(minDate.text)) {
             OpenDialog("The maximum date range couldn't be less tham the minimum.", false);
             valid = false;
         }
-        if (region.value == 0) {
-            valid = false;
-            OpenDialog("Please select a region", false);
-        }
+
         if (to.text.text.Equals("")) {
             to.Error();
             OpenDialog("Going-To can't be empty!", false);
@@ -116,7 +115,7 @@ public class AlertPanel : Panel {
         }
         if (price.text.text.Equals("")) {
             price.Error();
-            OpenDialog("CountryInfo can't be empty!", false);
+            OpenDialog("Price can't be empty!", false);
             valid = false;
         }
         return valid;
@@ -128,10 +127,9 @@ public class AlertPanel : Panel {
         price.Reset();
         nbPersons.value = 0;
         luggages.value = 0;
-        region.value = 0;
         comment.Reset();
-        minDate.text = Program.DateToString(DateTime.Now);
-        maxDate.text = Program.DateToString(DateTime.Now);
+        minDate.text = Program.DateToString(DateTime.Now.AddMinutes(10));
+        maxDate.text = Program.DateToString(DateTime.Now.AddDays(1));
     }
 
 }

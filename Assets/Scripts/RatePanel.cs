@@ -13,7 +13,8 @@ public class RatePanel : Panel {
     public InputFieldScript comment;
 
     public Ride ride = null;
-    public Person reviewer = null, target = null;
+    public Person target = null;
+
     public Dropdown reasonDropdown;
 
     private int grade;
@@ -23,8 +24,8 @@ public class RatePanel : Panel {
     public void submit() {
         if (vadilate()) {
             var reason = reasonDropdown.options[reasonDropdown.value].text;
-            Rate rate = new Rate(grade, comment.text.text,reason,DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy H:mm")), reviewer, ride, target);
-            Request<Rate> request = new AddRate(rate,ride,Program.User,target,reviewer);
+            Rate rate = new Rate(grade, comment.text.text,reason, Program.StringToDate(DateTime.Now.ToString("dd/MM/yyyy hh:mm tt")), ride, target);
+            Request<Rate> request = new AddRate(rate);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(response);
@@ -37,10 +38,9 @@ public class RatePanel : Panel {
             MissionCompleted(SearchPanel.PANELNAME, "Thank you for your rating!");
         }
     }
-    public void Init(Ride ride, Person reviewer, Person target) {
+    public void Init(Ride ride, Person target) {
         Clear();
         this.ride = ride;
-        this.reviewer = reviewer;
         this.target = target;
     }
     public void starOnOff(int starPosition) {

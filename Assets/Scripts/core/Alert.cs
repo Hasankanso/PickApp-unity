@@ -39,19 +39,15 @@ public class Alert {
     }
     public JObject ToJson() {
         JObject alertJ = new JObject();
-
-        alertJ[nameof(From)] = From.ToJson();
-        alertJ[nameof(user)] = new JObject { [nameof(User.id)] = this.User.Id };
-
-        alertJ[nameof(To)] = To.ToJson();
-
-        alertJ[nameof(Price)] = price;
-
-        alertJ[nameof(MinDate)] = minDate;
-        alertJ[nameof(MaxDate)] = maxDate;
-        alertJ[nameof(NumberOfPersons)] = numberOfPersons;
-        alertJ[nameof(NumberOfLuggage)] = numberOfLuggage;
-        alertJ[nameof(Comment)] = comment;
+        alertJ[nameof(from)] = this.from.ToJson();
+        alertJ[nameof(user)] = user.id;
+        alertJ[nameof(to)] = this.to.ToJson();
+        alertJ[nameof(price)] = price;
+        alertJ[nameof(minDate)] = minDate;
+        alertJ[nameof(maxDate)] = maxDate;
+        alertJ[nameof(numberOfPersons)] = numberOfPersons;
+        alertJ[nameof(numberOfLuggage)] = numberOfLuggage;
+        alertJ[nameof(comment)] = comment;
 
 
         return alertJ;

@@ -65,7 +65,8 @@ public class Ride {
     public Ride(List<Passenger> passengers) {
         Passengers = passengers;
     }
-
+    public Ride() { 
+    }
     public static string Valid(Ride ride) {
         string validateUser = User.ValidateLogin(Program.User);
         if (!string.IsNullOrEmpty(validateUser)) {
@@ -188,9 +189,6 @@ public class Ride {
         rideJ[nameof(this.car)] = this.Car.Id;
         rideJ[nameof(this.comment)] = this.Comment;
         rideJ[nameof(this.user)] = this.user.Id;
-
-        rideJ[nameof(this.reservedLuggages)] = this.ReservedLuggages;
-
         rideJ[nameof(this.price)] = this.Price;
 
         rideJ[nameof(this.to)] = to.ToJson();

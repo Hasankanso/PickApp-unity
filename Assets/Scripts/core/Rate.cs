@@ -14,7 +14,7 @@ public class Rate {
     private string comment;
     private string reason;
     private DateTime creationDate;
-    private Person reviewer;
+    private Person rater;
     private Person target;
     private Ride ride;
     private DateTime updated;
@@ -22,42 +22,41 @@ public class Rate {
     public string Reason { get => reason; set => reason = value; }
     public string Comment { get => comment; set => comment = value; }
     public DateTime Date { get => creationDate; set => creationDate = value; }
-    public Person Reviewer { get => reviewer; set => reviewer = value; }
+    public Person Rater { get => rater; set => rater = value; }
     public Person Target { get => target; set => target = value; }
     public Ride Ride { get => ride; set => ride = value; }
     public DateTime Updated { get => updated; set => updated = value; }
 
     //add new rate
-    public Rate( int grade, string comment, string reason, DateTime date, Person reviewer, Ride ride, Person target) {
+    public Rate( int grade, string comment, string reason, DateTime date, Person rater, Ride ride, Person target) {
         this.Grade = grade;
         this.Date = date;
         this.reason = reason;
         this.comment = comment;
-        this.Reviewer = reviewer;
+        this.Rater = rater;
         this.Ride = ride;
         this.Target = target;
     }
 
-
+    //add new rate
+    public Rate(int grade, string comment, string reason, DateTime date, Ride ride, Person target) {
+        this.Grade = grade;
+        this.Date = date;
+        this.reason = reason;
+        this.comment = comment;
+        this.Ride = ride;
+        this.Target = target;
+    }
     public JObject ToJson()
     {
         JObject rateJ = new JObject();
         rateJ[nameof(this.Comment)] = this.comment;
         rateJ[nameof(this.Grade)] = this.grade;
         rateJ[nameof(this.Date)] = this.creationDate;
-
-        JObject reviewerJ = new JObject();
-        reviewerJ[nameof(this.Reviewer.Id)] = this.reviewer.Id;
-        rateJ[nameof(this.Reviewer)] = reviewerJ;
-
-        JObject rideJ = new JObject();
-        reviewerJ[nameof(this.ride.Id)] = this.ride.Id;
-        rateJ[nameof(this.Ride)] = rideJ;
-
-        JObject targetJ = new JObject();
-        reviewerJ[nameof(this.target.Id)] = this.target.Id;
-        rateJ[nameof(this.Target)] = targetJ;
-
+        rateJ[nameof(this.reason)] = this.reason;
+        rateJ["user"] = Program.User.id;
+        rateJ[nameof(this.ride)] = this.ride.Id;
+        rateJ[nameof(this.target)] = this.target.Id;
         return rateJ;
     }
     public static Rate ToObject(JObject json)
@@ -112,7 +111,7 @@ public class Rate {
         if (rate.Grade < 3 && string.IsNullOrEmpty(rate.Comment)) {
             return "Please state the reason of low rate";
         }
-        if (string.IsNullOrEmpty(rate.Reviewer.id)) {
+        if (string.IsNullOrEmpty(rate.Rater.id)) {
             return "Invalid reviewer object id";
         }
         if (string.IsNullOrEmpty(rate.Target.id)) {

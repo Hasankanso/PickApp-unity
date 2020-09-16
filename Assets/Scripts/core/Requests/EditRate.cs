@@ -44,7 +44,7 @@ namespace Requests
             if (DateTime.Compare(rate.Date,DateTime.Now.AddDays(-1))<0) {
                 return "You can't edit rate after one day of its publishing";
             }
-            if (string.IsNullOrEmpty(rate.Reviewer.id)) {
+            if (string.IsNullOrEmpty(rate.Rater.id)) {
                 return "Invalid reviewer object id";
             }
             if (string.IsNullOrEmpty(rate.Target.id)) {

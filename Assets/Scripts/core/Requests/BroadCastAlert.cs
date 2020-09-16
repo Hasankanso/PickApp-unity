@@ -9,17 +9,17 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
 namespace Requests {
-    class BroadCastAlert : Request<Alert> {
+    class BroadCastAlert : Request<string> {
         private Alert alert;
 
         public BroadCastAlert(Alert alert) {
             this.alert = alert;
-            HttpPath = "/AlerBusiness/AddAlert";
+            HttpPath = "/AlertBusiness/AddAlert";
         }
 
-        public override Alert BuildResponse(JToken response) //TODO
+        public override string BuildResponse(JToken response) //TODO
         {
-            return Alert.ToObject((JObject)response);
+            return (((JObject)response)["message"]).ToString();
         }
 
         public override string ToJson() {

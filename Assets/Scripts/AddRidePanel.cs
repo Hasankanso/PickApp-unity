@@ -226,8 +226,8 @@ public class AddRidePanel : Panel {
     private bool ValidateSecondView() {
         if (price.text.text.Equals("")) {
             price.Error();
-            return false;
             OpenDialog("Please fill \"CountryInfo\" Field.", false);
+            return false;
         }
 
 
