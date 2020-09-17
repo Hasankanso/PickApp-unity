@@ -44,7 +44,7 @@ namespace Requests {
             {
                 return validateUser;
             }
-            if (user.Person.Birthday.Year - localDate.Year < 18)
+            if (localDate.Year-user.Person.Birthday.Year   < 18)
             {
                 return "You can't be driver since you are under 18 years old";
             }
@@ -52,14 +52,14 @@ namespace Requests {
             {
                 return "You should add at least 1 region";
             }
-            if (driver.regions[1] != null)
+            if (driver.regions.Count==2)
             {
                 if (driver.regions[0].Latitude== driver.regions[1].Latitude && driver.regions[0].Longitude== driver.regions[1].Longitude)
                 {
                     return "Regions can't be dublicated";
                 }
             }
-            if (driver.regions[2] != null)
+            if (driver.regions.Count==3)
             {
                 if (driver.regions[0].Latitude == driver.regions[2].Latitude && driver.regions[0].Longitude == driver.regions[2].Longitude)
                 {

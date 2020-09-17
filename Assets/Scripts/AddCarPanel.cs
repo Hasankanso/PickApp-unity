@@ -62,6 +62,8 @@ public class AddCarPanel : Panel {
         if (!code.Equals((int)HttpStatusCode.OK)) {
             OpenDialog(message, false);
         } else {
+            Program.Driver.regions.Clear();
+            Program.Driver.regions = result.regions;
             Program.User.Driver = result;
             MissionCompleted(AddRidePanel.PANELNAME, "Now you are a driver", false);
         }
