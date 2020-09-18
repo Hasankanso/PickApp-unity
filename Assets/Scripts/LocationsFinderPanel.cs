@@ -27,7 +27,6 @@ public class LocationsFinderPanel : Panel
   public static string GenerateToken()
   {
     Guid token = Guid.NewGuid();
-    print(token.ToString());
     return token.ToString();
   }
   internal override void Clear()

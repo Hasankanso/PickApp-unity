@@ -94,6 +94,11 @@ public class LoginPanel : Panel {
             backButton.gameObject.SetActive(true);
             showFirstBack = true;
         }
+        string phoneCache = Cache.GetPhone(), codeCache = Cache.GetPhoneCode();
+        if (!string.IsNullOrEmpty(phoneCache)) {
+            phone.SetText(phoneCache);
+            code.SetText(codeCache);
+        }
     }
 
     private bool Validate() {

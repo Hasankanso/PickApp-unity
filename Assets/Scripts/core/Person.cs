@@ -26,7 +26,7 @@ public class Person {
     public Person() {
     }
     //Constructor for login
-    public Person(string id, string firstName, string lastName,int rateCount, int acomplishedRides, int canceledRides, string chattiness, string phone, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday, string profilePictureUrl) {
+    public Person(string id, string firstName, string lastName, int rateCount, int acomplishedRides, int canceledRides, string chattiness, string phone, CountryInformations countryInformations, string bio, float rateAverage, bool gender, DateTime birthday, string profilePictureUrl) {
         this.id = id;
         this.firstName = firstName;
         this.acomplishedRides = acomplishedRides;
@@ -153,7 +153,7 @@ public class Person {
         var rc = json[nameof(Person.rateCount)];
         if (rc != null)
             int.TryParse(rc.ToString(), out rateCount);
-        
+
         CountryInformations countryInformations = CountryInformations.ToObject((JObject)json[nameof(Person.countryInformations)]);
         bool gender = false;
         var gn = json[nameof(Person.gender)];
@@ -168,7 +168,7 @@ public class Person {
         if (upcomingRidesArray != null) {
             foreach (var ride in upcomingRidesArray) {
                 if (ride.HasValues == true) {
-                    if (((JObject)ride["ride"]).HasValues==true) {
+                    if (ride["ride"] != null && ((JObject)ride["ride"]).HasValues == true) {
                         rides.Add(Ride.ToObject(((JObject)ride["ride"])));
                     } else {
                         rides.Add(Ride.ToObject((JObject)ride));

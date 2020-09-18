@@ -795,11 +795,11 @@ RectTransform:
   m_Father: {fileID: 2802637612741329530}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -12, y: 9.65}
-  m_SizeDelta: {x: 161.9, y: 71.9}
-  m_Pivot: {x: 1, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -106.1}
+  m_SizeDelta: {x: 161.9, y: 71.899994}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2802637612853427988
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -839,7 +839,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: aaaaaaaaaa
 --- !u!1 &2802637612921142959
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,7 +953,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 432.7}
+  m_SizeDelta: {x: 0, y: 475.8}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6783563819138745157
 MonoBehaviour:
@@ -969,10 +969,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  verifyEmail: {fileID: 0}
+  permanent: 0
   from: {fileID: 2802637611952199636}
   to: {fileID: 2802637612604237910}
   price: {fileID: 2802637612921142961}
-  days: {fileID: 0}
+  startDate: {fileID: 2062558522628382251}
+  endDate: {fileID: 2855223179405750750}
   date: {fileID: 2802637612853427987}
   seats: {fileID: 3494949413526985811}
   luggages: {fileID: 4560176057483248553}
@@ -2217,11 +2220,11 @@ RectTransform:
   m_Father: {fileID: 2802637612741329530}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 61.450012}
-  m_SizeDelta: {x: 173.9, y: 71.9}
-  m_Pivot: {x: 1, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -6, y: -106.1}
+  m_SizeDelta: {x: 173.9, y: 71.899994}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &841169667356340231
 CanvasRenderer:
   m_ObjectHideFlags: 0

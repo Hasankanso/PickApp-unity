@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using Requests;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 public class ScheduleRide {
     public int id;
@@ -28,8 +29,52 @@ public class ScheduleRide {
 
         return scheduleJ;
     }
-    public static ScheduleRide ToObject(JObject json) {
-        return null;
+    public static ScheduleRide ToObject(JObject scheduleRide) {
+        JObject json = (JObject)scheduleRide["schedule"];
+        bool monday = false;
+        var md = json[nameof(monday)];
+        if (md != null)
+            bool.TryParse(md.ToString(), out monday);
+        bool tuesday = false;
+        var td = json[nameof(tuesday)];
+        if (td != null)
+            bool.TryParse(td.ToString(), out tuesday);
+        bool wednesday = false;
+        var wd = json[nameof(wednesday)];
+        if (wd != null)
+            bool.TryParse(wd.ToString(), out wednesday);
+        bool thursday = false;
+        var tdd = json[nameof(thursday)];
+        if (tdd != null)
+            bool.TryParse(tdd.ToString(), out thursday);
+        bool friday = false;
+        var fd = json[nameof(friday)];
+        if (fd != null)
+            bool.TryParse(fd.ToString(), out friday);
+        bool saturday = false;
+        var sd = json[nameof(saturday)];
+        if (sd != null)
+            bool.TryParse(sd.ToString(), out saturday);
+        bool sunday = false;
+        var sn = json[nameof(sunday)];
+        if (sn != null)
+            bool.TryParse(sn.ToString(), out sunday);
+
+        double startDateDouble = -1;
+        var ld = json[nameof(ScheduleRide.startDate)];
+        if (ld != null) {
+            double.TryParse(ld.ToString(), out startDateDouble);
+        }
+        DateTime startDate = Program.UnixToUtc(startDateDouble);
+        double endDateDouble = -1;
+        var ed = json[nameof(ScheduleRide.endDate)];
+        if (ed != null) {
+            double.TryParse(ed.ToString(), out endDateDouble);
+        }
+        DateTime endDate = Program.UnixToUtc(endDateDouble);
+
+        Ride rides = Ride.ToObject((JObject)scheduleRide["ride"][0]);
+        return new ScheduleRide(startDate,endDate,monday,tuesday,wednesday,thursday,friday,saturday,sunday,rides);
     }
     public ScheduleRide(DateTime startDate, DateTime endDate, bool isMonday, bool isTuesday, bool isWednesday, bool isThursday, bool isFriday, bool isSaturday, bool isSunday, Ride ride) {
         this.StartDate = startDate;

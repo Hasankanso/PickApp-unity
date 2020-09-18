@@ -116,6 +116,40 @@ public class AddRidePanel : Panel {
         availableLuggage = luggage;
         OpenDirectionsPanel();
     }
+    public void OpenMyCarsPicker() {
+        if (Program.Driver == null) {
+            Panel panel = PanelsFactory.CreateBecomeDriver();
+            Open(panel);
+        } else if (ValidateSecondView()) {
+
+            if (!Program.IsLoggedIn) {
+                LoginPanel login = PanelsFactory.CreateLogin();
+                Open(login, () => { login.Init(false); });
+                return; //end this function
+            }
+
+            DateTime wholeDate = Program.StringToDate(date.text);
+            int stopTime = 0;
+            if (stopTimeCheckBox.isOn) {
+                stopTime = int.Parse(stopTimeField.text.text);
+            }
+            if (Status == StatusE.UPDATE)
+                ride = new Ride(ride.id, Program.User, null, fromL, toL, comment.text.text, price.text.text,
+          wholeDate, isMusicAllowed.IsOn, isAcAllowed.IsOn, isSmokingAllowed.IsOn, isPetsAllowed.IsOn, kidSeats.isOn,
+          0, 0,
+          stopTime, null, null,null);
+            else
+                ride = new Ride(null, Program.User, null, fromL, toL, comment.text.text, price.text.text,
+          wholeDate, isMusicAllowed.IsOn, isAcAllowed.IsOn, isSmokingAllowed.IsOn, isPetsAllowed.IsOn, kidSeats.isOn,
+          0, 0,
+          stopTime, null, null,null);
+
+            if (carPickerPanel == null) {
+                carPickerPanel = PanelsFactory.CreateCarsListPanel();
+            }
+            Open(carPickerPanel, () => { carPickerPanel.Init(OnCarPicked, car); });
+        }
+    }
     private void OpenDirectionsPanel() {
         if (directionsPanel == null) {
             directionsPanel = PanelsFactory.CreateDirectionFinderPanel();
