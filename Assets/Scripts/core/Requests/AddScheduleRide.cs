@@ -12,23 +12,29 @@ using System;
 namespace Requests {
     class AddScheduleRide : Request<ScheduleRide> {
         private ScheduleRide scheduleRide;
+        private Ride ride;
+        private User user;
 
         public AddScheduleRide(ScheduleRide scheduleRide) {
             this.scheduleRide = scheduleRide;
-            HttpPath = "";
+            this.ride = scheduleRide.Ride;
+            this.user = Program.User;
+            HttpPath = "/ScheduleRideBusiness/AddSchedule";
         }
 
         public override ScheduleRide BuildResponse(JToken response) {
-            throw new System.NotImplementedException();
+            return ScheduleRide.ToObject((JObject)response);
         }
 
         public override string ToJson() {
             JObject scheduleRideJ = scheduleRide.ToJson();
+            scheduleRideJ[nameof(user)] = user.Id;
+            scheduleRideJ[nameof(ride)] = ride.ToJson();
             return scheduleRideJ.ToString();
         }
 
         protected override string IsValid() {
-            if (DateTime.Compare(scheduleRide.StartDate,DateTime.Now)<0) {
+         /*   if (DateTime.Compare(scheduleRide.StartDate,DateTime.Now)<0) {
                 return "Your schedule must start from today or later";
             }
             if (DateTime.Compare(scheduleRide.StartDate, scheduleRide.EndDate) < 0) {
@@ -47,7 +53,7 @@ namespace Requests {
             if (isAtLeastOneDay==false) {
                 return "Choose at least one day of week";
             }
-
+            */
             return string.Empty;
         }
     }

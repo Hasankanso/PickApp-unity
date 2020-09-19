@@ -170,6 +170,7 @@ public class AddRidePanel : Panel {
         } else {
             schedule.Ride = ride;
             RideDetails rideDetailsPanel = PanelsFactory.CreateRideDetails();
+            Status = StatusE.ADD;
             directionsPanel.Open(rideDetailsPanel, () => { rideDetailsPanel.Init(schedule); });
 
         }

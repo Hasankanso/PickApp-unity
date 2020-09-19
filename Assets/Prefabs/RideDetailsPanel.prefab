@@ -6238,7 +6238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7900035543992774644
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6649,7 +6649,6 @@ MonoBehaviour:
   removeRideDialog: {fileID: 8337651786106792249}
   cancelReservationDialog: {fileID: 4173783368961271344}
   addScheduleButton: {fileID: 6308145749595551193}
-  updateScheduleButton: {fileID: 551152259847313966}
   editScheduleButton: {fileID: 3750347942020378321}
   removeScheduleButton: {fileID: 4787397976130863298}
   addRideButton: {fileID: 4500598115504135172}

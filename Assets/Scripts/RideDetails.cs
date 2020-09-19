@@ -15,7 +15,7 @@ public class RideDetails : Panel {
     public Sprite smokingOnSpirite, musicOnSpirite, acOnSpirite, kidsSeatOnSpirite, petsOnSpirite;
     public Sprite smokingOffSpirite, musicOffSpirite, acOffSpirite, kidsSeatOffSpirite, petsOffSpirite;
     public GameObject dayOfWeek, passengersContainer, contentScrollView, personsDialog, removeRideDialog, cancelReservationDialog;
-    public GameObject addScheduleButton, updateScheduleButton, editScheduleButton, removeScheduleButton; //schedule
+    public GameObject addScheduleButton,  editScheduleButton, removeScheduleButton; //schedule
     public GameObject addRideButton, updateRideButton, editRideButton, removeRideButton; //Ride
     public GameObject reserveSeatsButton, cancelReservedSeats; //reserve
 
@@ -96,17 +96,61 @@ public class RideDetails : Panel {
 
 
     public void Init(ScheduleRide schedule) {
-        Init(schedule.Ride);
+        var ride = schedule.Ride;
+        this.schedule = schedule;
+        this.ride = ride;
+        this.car = ride.Car;
+        Person person = ride.User.Person;
+        date.text = Program.DateToString(ride.LeavingDate);
+        from.text = ride.From.Name;
+        to.text = ride.To.Name;
+        price.text = ride.Price.ToString() + " " + ride.CountryInformations.Unit;
+        comment.text = ride.Comment;
+        seats.text = ride.AvailableSeats.ToString();
+        luggages.text = ride.AvailableLuggages.ToString();
+        driverFullName.text = person.FirstName + " " + person.LastName;
+        driverBio.text = person.Bio;
+        driverRatings.text = ride.Person.RateAverage.ToString() + "/5 - " + ride.Person.RateCount.ToString() + " ratings";
+        carName.text = car.Name;
+        carBrand.text = car.Brand;
+        carYear.text = car.Year.ToString();
+        SetColor(car.Color);
+        SetPermissions(ride.SmokingAllowed, ride.AcAllowed, ride.PetsAllowed, ride.MusicAllowed, ride.KidSeat);
+        if (car.Picture == null)
+        {
+            StartCoroutine(Program.RequestImage(car.CarPictureUrl, SucceedCarImage, Error));
+        }
+        else
+        {
+            carImage.sprite = Program.GetImage(car.Picture);
+        }
+        if (person.ProfilePicture == null)
+        {
+            StartCoroutine(Program.RequestImage(person.ProfilePictureUrl, SucceedPersonImage, Error));
+        }
+        else
+        {
+            profileImage.sprite = Program.GetImage(person.ProfilePicture);
+        }
+        if (ride.Map == null)
+        {
+            StartCoroutine(Program.RequestImage(ride.MapUrl, Succeed, Error));
+        }
+        else
+        {
+            rideMapImage.sprite = Program.GetImage(ride.Map);
+        }
         if (Status == StatusE.ADD) {
             addScheduleButton.SetActive(true);
+            editScheduleButton.SetActive(false);
+            removeScheduleButton.SetActive(false);
         } else if (Status == StatusE.UPDATE) {
-            updateScheduleButton.SetActive(true);
+            editScheduleButton.SetActive(true);
         } else if (Status == StatusE.VIEW) {
             editScheduleButton.SetActive(true);
             removeScheduleButton.SetActive(true);
         }
 
-        this.schedule = schedule;
         date.text = Program.DateToString(schedule.StartDate) + " - " + Program.DateToString(schedule.EndDate);
         SetWeekDays(schedule.IsMonday, schedule.IsTuesday, schedule.IsWednesday, schedule.IsThursday, schedule.IsFriday, schedule.IsSaturday, schedule.IsSunday);
         dayOfWeek.SetActive(true);

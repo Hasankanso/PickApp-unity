@@ -126,6 +126,7 @@ public class ProfilePanel : Panel {
         if (driver.Cars.Count > 0) {
             if (driver.Schedules.Count < Program.MaxSchedulesPerUser) {
                 SchedulePanel panel = PanelsFactory.CreateAddSchedule();
+                Status = StatusE.ADD;
                 Open(panel);
             } else
                 OpenDialog("You have added the maximum number of schedule rides", false);
