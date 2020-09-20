@@ -12,18 +12,24 @@ namespace Requests {
         User user;
         public GetUserReviews(User user) {
             this.user = user;
-            HttpPath = "";
+            HttpPath = "/RateBusiness/GetRate";
         }
 
         public override List<Rate> BuildResponse(JToken response) //TODO
         {
-            //return JsonConvert.DeserializeObject<List<Rate>>(response);
-            return null;
+            JArray rateArray = (JArray)response;
+            List<Rate> rates = new List<Rate>();
+            if (rateArray == null)
+                return null;
+            foreach (JToken j in rateArray) {
+                rates.Add(Rate.ToObject((JObject)j));
+            }
+            return rates;
         }
 
         public override string ToJson() {
             JObject personJ = new JObject();
-            personJ[nameof(user.id)] = user.Id;
+            personJ[nameof(user)] = user.Id;
             return personJ.ToString();
         }
 

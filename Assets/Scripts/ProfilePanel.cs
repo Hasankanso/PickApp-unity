@@ -10,7 +10,7 @@ public class ProfilePanel : Panel {
     public Text fullName, ratings;
     public Scrollbar scroll;
     public ListView listCarView;
-    public List<CarItem> carItems = new List<CarItem>(5);
+    public List<CarItem> carItems = new List<CarItem>(3);
     public GameObject /*mainContent,*/ carContainer,/* scheduleContainer, scrollView,*/ /*scheduleLabel,*/ becomeDriverLabel, regionsLabel;
     //public ListView listSchduleView;
     public Image profilePicture;
@@ -41,9 +41,7 @@ public class ProfilePanel : Panel {
             becomeDriverLabel.SetActive(true);
         }
     }
-    public void SendCode() {
 
-    }
     private async void DownloadAndAddCarsImages() {
         for (int i = 0; i < carItems.Count; i++)
             if (carItems[i].car.Picture == null) {

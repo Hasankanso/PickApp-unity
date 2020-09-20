@@ -52,7 +52,7 @@ public class ItemsFactory : MonoBehaviour {
     public static RatingItem CreateRatingItem(GameObject parent, Rate o) {
         RatingItem ratingItem = Instantiate(defaultItemsFactory.ratingItem);
         ratingItem.transform.SetParent(parent.transform, false);
-        ratingItem.init(o.Date, o.Grade, o.Comment, o.Rater.FirstName + " " + o.Rater.LastName, o.Rater.ProfilePicture);
+        ratingItem.init(o);
         return ratingItem;
     }
 

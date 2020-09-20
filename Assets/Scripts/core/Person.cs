@@ -153,8 +153,17 @@ public class Person {
         var rc = json[nameof(Person.rateCount)];
         if (rc != null)
             int.TryParse(rc.ToString(), out rateCount);
+        JObject driverJ = (JObject)json["driver"];
 
-        CountryInformations countryInformations = CountryInformations.ToObject((JObject)json[nameof(Person.countryInformations)]);
+        Driver driver = null;
+        if (driverJ != null) {
+            driver = Driver.ToObject(driverJ);
+        }
+        JObject countryJ = (JObject)json[nameof(Person.countryInformations)];
+        CountryInformations countryInformations = null;
+        if (countryJ != null && countryJ.HasValues) {
+            countryInformations = CountryInformations.ToObject(countryJ);
+        }
         bool gender = false;
         var gn = json[nameof(Person.gender)];
         if (gn != null)

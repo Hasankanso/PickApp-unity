@@ -28,7 +28,7 @@ public class Rate {
     public DateTime Updated { get => updated; set => updated = value; }
 
     //add new rate
-    public Rate( int grade, string comment, string reason, DateTime date, Person rater, Ride ride, Person target) {
+    public Rate(int grade, string comment, string reason, DateTime date, Person rater, Ride ride, Person target) {
         this.Grade = grade;
         this.Date = date;
         this.reason = reason;
@@ -47,8 +47,7 @@ public class Rate {
         this.Ride = ride;
         this.Target = target;
     }
-    public JObject ToJson()
-    {
+    public JObject ToJson() {
         JObject rateJ = new JObject();
         rateJ[nameof(this.Comment)] = this.comment;
         rateJ[nameof(this.Grade)] = this.grade;
@@ -59,9 +58,7 @@ public class Rate {
         rateJ[nameof(this.target)] = this.target.Id;
         return rateJ;
     }
-    public static Rate ToObject(JObject json)
-
-      {
+    public static Rate ToObject(JObject json) {
         int grade = -1;
         var oGrade = json[nameof(Rate.grade)];
         if (oGrade != null) int.TryParse(oGrade.ToString(), out grade);
@@ -74,35 +71,31 @@ public class Rate {
 
         double creationDate = -1;
         var cD = json[nameof(Rate.creationDate)];
-        if (cD != null)
-        {
+        if (cD != null) {
             double.TryParse(cD.ToString(), out creationDate);
         }
         DateTime creationDate1 = Program.UnixToUtc(creationDate);
 
-        var reviewer = json["reviewer"];
-        Person reviewer1 = null;
-        if (reviewer != null && reviewer.HasValues)
-        {
-            reviewer1 = Person.ToObject((JObject)reviewer);
+        var rater = json["rater"];
+        Person rater1 = null;
+        if (rater != null && rater.HasValues) {
+            rater1 = Person.ToObject((JObject)rater);
         }
         var target = json["target"];
         Person target1 = null;
-        if (target != null && target.HasValues)
-        {
+        if (target != null && target.HasValues) {
             target1 = Person.ToObject((JObject)target);
         }
         var ride = json["ride"];
         Ride ride1 = null;
-        if (ride != null && ride.HasValues)
-        {
+        if (ride != null && ride.HasValues) {
             ride1 = Ride.ToObject((JObject)ride);
         }
         String updated = "";
         var Oupdated = json["updated"];
         if (Oupdated != null) updated = Oupdated.ToString();
 
-        return new Rate(grade, comment, reason, creationDate1, reviewer1, ride1, target1);
+        return new Rate(grade, comment, reason, creationDate1, rater1, ride1, target1);
     }
     public static string Validate(Rate rate) {
         if (rate.Grade < 0 || rate.Grade > 5) {

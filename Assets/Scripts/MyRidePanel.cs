@@ -20,7 +20,6 @@ public class MyRidePanel : Panel {
     public void GetMyUpcomingsRidesOnPull() {
         float newDistance= Vector3.Distance(listMyRidesView.transform.position, scrollContainer.transform.position);
         if (newDistance+150<distance) {
-            Debug.Log("get my upcoming rides");
             Request<List<Ride>> request = new GetMyUpcomingRides(Program.User);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
@@ -48,5 +47,6 @@ public class MyRidePanel : Panel {
         }
     }
     internal override void Clear() {
+        listMyRidesView.Clear();
     }
 }
