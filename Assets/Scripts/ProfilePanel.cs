@@ -1,28 +1,24 @@
-﻿using Requests;
+﻿using BackendlessAPI.Messaging;
+using Requests;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 public class ProfilePanel : Panel {
     public Text fullName, ratings;
     public Scrollbar scroll;
     public ListView listCarView;
     public List<CarItem> carItems = new List<CarItem>(5);
-    public GameObject mainContent, carContainer, scheduleContainer, scrollView, scheduleLabel, becomeDriverLabel, regionsLabel;
-    public ListView listSchduleView;
+    public GameObject /*mainContent,*/ carContainer,/* scheduleContainer, scrollView,*/ /*scheduleLabel,*/ becomeDriverLabel, regionsLabel;
+    //public ListView listSchduleView;
     public Image profilePicture;
 
     public static readonly string PANELNAME = "PROFILEPANEL";
 
     public override void Init() {
         Clear();
-
         Person person = Program.Person;
         Driver driver = Program.Driver;
 
@@ -35,11 +31,11 @@ public class ProfilePanel : Panel {
         fullName.text = person.FirstName + " " + person.LastName;
         ratings.text = person.RateAverage.ToString() + "/5 ";
         if (driver != null) {
-            scheduleLabel.SetActive(true);
+            //scheduleLabel.SetActive(true);
             regionsLabel.SetActive(true);
             becomeDriverLabel.SetActive(false);
             AddCarItemsInList(driver.Cars);
-            AddScheduleItemsInList(driver.Schedules);
+            //AddScheduleItemsInList(driver.Schedules);
             DownloadAndAddCarsImages();
         } else {
             becomeDriverLabel.SetActive(true);
@@ -67,7 +63,7 @@ public class ProfilePanel : Panel {
 
     public void AddCarItemsInList(List<Car> cars) {
         if ((cars != null) && cars.Count > 0) {
-            mainContent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1345.8f);
+            //mainContent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,1345.8f);
             carContainer.SetActive(true);
             listCarView.Clear();
             carItems.Clear();
@@ -88,14 +84,14 @@ public class ProfilePanel : Panel {
     public void AddScheduleItemsInList(List<ScheduleRide> schedules) {
         Person person = Program.Person;
         if ((schedules != null) && schedules.Count > 0 && Program.Driver.Cars.Count > 0) {
-            scheduleLabel.SetActive(false);
-            scheduleContainer.SetActive(true);
-            mainContent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1856.4f);
-            listSchduleView.Clear();
-            foreach (ScheduleRide o in schedules) {
-                var item = ItemsFactory.CreateScheduleItem(listSchduleView.scrollContainer, o, this);
-                listSchduleView.Add(item.gameObject);
-            }
+            //scheduleLabel.SetActive(false);
+            //scheduleContainer.SetActive(true);
+            //mainContent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1856.4f);
+            //listSchduleView.Clear();
+            //foreach (ScheduleRide o in schedules) {
+            //    var item = ItemsFactory.CreateScheduleItem(listSchduleView.scrollContainer, o, this);
+            //    listSchduleView.Add(item.gameObject);
+            //}
         }
     }
     public void EditAccount() {
@@ -126,7 +122,6 @@ public class ProfilePanel : Panel {
         if (driver.Cars.Count > 0) {
             if (driver.Schedules.Count < Program.MaxSchedulesPerUser) {
                 SchedulePanel panel = PanelsFactory.CreateAddSchedule();
-                Status = StatusE.ADD;
                 Open(panel);
             } else
                 OpenDialog("You have added the maximum number of schedule rides", false);
@@ -169,14 +164,16 @@ public class ProfilePanel : Panel {
 
     internal override void Clear() {
         scroll.value = 1;
+        //var listCarViewPosition = listCarView.scrollContainer.transform.position;
+        //listCarViewPosition = new Vector3(listCarViewPosition.x, 160.038f, listCarViewPosition.z);
         carItems.Clear();
         ratings.text = "";
         fullName.text = "";
-        mainContent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, scrollView.GetComponent<RectTransform>().rect.height);
+        //mainContent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, scrollView.GetComponent<RectTransform>().rect.height);
         carContainer.SetActive(false);
-        scheduleContainer.SetActive(false);
+        //scheduleContainer.SetActive(false);
         becomeDriverLabel.SetActive(true);
-        scheduleLabel.SetActive(false);
+        //scheduleLabel.SetActive(false);
         regionsLabel.SetActive(false);
     }
 }

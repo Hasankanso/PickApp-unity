@@ -100,16 +100,16 @@ public class SchedulePanel : Panel
   public bool validate()
   {
         bool valid = true;
-        if (Program.StringToDate(startDate.text) < DateTime.Now)
+       /* if (Program.StringToDate(startDate.text) < DateTime.Now)
         {
-            OpenDialog("The max period of svhedule is six months", false);
+            OpenDialog("The max period of schedule is six months", false);
             valid = false;
         }
-        if (Program.StringToDate(endDate.text) > Program.MaxScheduleDate)
+        if (DateTime.Compare(Program.StringToDate(endDate.text) , Program.MaxScheduleDate)>0)
         {
-            OpenDialog("The max period of svhedule is six months", false);
+            OpenDialog("The max period of schedule is six months", false);
             valid = false;
-        }
+        }*/
         return valid;
     }
  
