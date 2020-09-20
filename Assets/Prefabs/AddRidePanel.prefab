@@ -2271,6 +2271,7 @@ GameObject:
   - component: {fileID: 5997404154982866994}
   - component: {fileID: 5997404154982867004}
   - component: {fileID: 5997404154982867005}
+  - component: {fileID: 2106752701400705231}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2337,6 +2338,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: NEXT
+--- !u!114 &2106752701400705231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997404154982866995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Next
 --- !u!1 &5997404154985572514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2645,6 +2659,7 @@ GameObject:
   - component: {fileID: 5997404155017368135}
   - component: {fileID: 5997404155017368129}
   - component: {fileID: 5997404155017368134}
+  - component: {fileID: 1106291568477003026}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -2711,6 +2726,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Add Ride
+--- !u!114 &1106291568477003026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997404155017368132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: AddRide
 --- !u!1 &5997404155038434901
 GameObject:
   m_ObjectHideFlags: 0
