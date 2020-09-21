@@ -16,16 +16,22 @@ public class InputFieldScript : MonoBehaviour {
     public GameObject inputFieldContainer;
     private static bool isClicked = false;
     string stringEdit = "";
+    string text1="";
 
     private void Start() {
         text.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
         this.GetComponent<InputField>().onValueChanged.AddListener(delegate { OnEditting(); });
-       // this.placeHolder.text = ArabicFixer.Fix(text.text, true, true);
-       // this.text.text = ArabicFixer.Fix(text.text, true, true);
-       // this.placeHolderText.text = ArabicFixer.Fix(text.text, true, true);
     }
     public void OnEditting() {
-        stringEdit = text.text;
+        text1 = text.GetComponent<Text>().text;
+        text1=  ArabicFixer.Fix(text1, true, true);
+        this.text.text = text1;
+        stringEdit = text1;
+        Debug.Log(text.text);
+        Debug.Log(text1);
+
+
+        //stringEdit= ArabicFixer.Fix(text.text, true, true);
     }
     public void PlaceHolder() {
         placeHolderText = placeHolder.GetComponent<Text>();
@@ -47,7 +53,7 @@ public class InputFieldScript : MonoBehaviour {
         this.PlaceHolder();
     }
     public void clickedOut() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+       if (Input.GetKeyDown(KeyCode.Escape)) {
             SetText(stringEdit);
         }
         placeHolderText = placeHolder.GetComponent<Text>();
