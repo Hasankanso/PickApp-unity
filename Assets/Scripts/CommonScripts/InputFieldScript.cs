@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using ArabicSupport;
 
 public class InputFieldScript : MonoBehaviour {
     public Text placeHolder;
@@ -19,6 +20,9 @@ public class InputFieldScript : MonoBehaviour {
     private void Start() {
         text.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
         this.GetComponent<InputField>().onValueChanged.AddListener(delegate { OnEditting(); });
+       // this.placeHolder.text = ArabicFixer.Fix(text.text, true, true);
+       // this.text.text = ArabicFixer.Fix(text.text, true, true);
+       // this.placeHolderText.text = ArabicFixer.Fix(text.text, true, true);
     }
     public void OnEditting() {
         stringEdit = text.text;

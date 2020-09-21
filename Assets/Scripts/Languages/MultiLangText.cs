@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ArabicSupport;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,9 @@ public class MultiLangText : MonoBehaviour
   {
     Text textUI = GetComponent<Text>();
     textUI.text = Program.language.GetString(key);
-  }
+    textUI.text = ArabicFixer.Fix(textUI.text, true, true);
+   // textUI.alignment = TextAnchor.MiddleRight;
+    textUI.fontSize = 60;
+    }
 
 }

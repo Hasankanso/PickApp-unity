@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 6904850426700369266}
   - component: {fileID: 6904850426700369121}
   - component: {fileID: 6904850426700368692}
+  - component: {fileID: 3079566820182192850}
   m_Layer: 5
   m_Name: PersonLabel
   m_TagString: Untagged
@@ -317,8 +318,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -183.26001, y: -251.4}
-  m_SizeDelta: {x: 282.5, y: 89.94}
+  m_AnchoredPosition: {x: -143.87, y: -241.29}
+  m_SizeDelta: {x: 361.27, y: 110.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6904850426700369121
 CanvasRenderer:
@@ -360,6 +361,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Persons
+--- !u!114 &3079566820182192850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6904850426700369444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Persons
 --- !u!1 &6904850426700369446
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +385,7 @@ GameObject:
   - component: {fileID: 6904850426700369276}
   - component: {fileID: 6904850426700369123}
   - component: {fileID: 6904850426700368694}
+  - component: {fileID: 4656111020775165174}
   m_Layer: 5
   m_Name: TimeLabel
   m_TagString: Untagged
@@ -437,6 +452,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: At which range of time you will leave ?
+--- !u!114 &4656111020775165174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6904850426700369446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: WhichRange
 --- !u!1 &6904850426700369447
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +576,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000011444092, y: 0}
+  m_AnchoredPosition: {x: 0.0000076293945, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6904850426700369149
@@ -887,6 +915,7 @@ GameObject:
   - component: {fileID: 6904850426700369139}
   - component: {fileID: 6904850426700368734}
   - component: {fileID: 6904850426700368735}
+  - component: {fileID: 8862293741390153269}
   m_Layer: 5
   m_Name: placeHolder
   m_TagString: Untagged
@@ -970,6 +999,19 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &8862293741390153269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6904850426700369460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: To
 --- !u!1 &6904850426700369461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,6 +2133,7 @@ GameObject:
   - component: {fileID: 6904850426700369143}
   - component: {fileID: 6904850426700368727}
   - component: {fileID: 6904850426700368726}
+  - component: {fileID: 4336472016312690200}
   m_Layer: 5
   m_Name: placeHolder
   m_TagString: Untagged
@@ -2174,6 +2217,19 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &4336472016312690200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6904850426700369480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: From
 --- !u!1 &6904850426700369481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2391,6 +2447,7 @@ GameObject:
   - component: {fileID: 6904850426700368513}
   - component: {fileID: 6904850426700369142}
   - component: {fileID: 6904850426700368721}
+  - component: {fileID: 7517322293432590817}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2457,6 +2514,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: SEARCH
+--- !u!114 &7517322293432590817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6904850426700369483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Search
 --- !u!1 &6904850426700369484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2468,6 +2538,7 @@ GameObject:
   - component: {fileID: 6904850426700368538}
   - component: {fileID: 6904850426700368907}
   - component: {fileID: 6904850426700368745}
+  - component: {fileID: 5674526709515388823}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -2534,6 +2605,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Search Rides
+--- !u!114 &5674526709515388823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6904850426700369484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: SearchRide
 --- !u!1 &6904850426700369485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,8 +2764,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 41.23999, y: -251.4}
-  m_SizeDelta: {x: 166.5, y: 89.94}
+  m_AnchoredPosition: {x: 180.34, y: -241.29}
+  m_SizeDelta: {x: 182.7, y: 110.16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6904850426700369141
 CanvasRenderer:
