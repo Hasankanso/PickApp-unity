@@ -25,12 +25,9 @@ namespace Requests {
             HttpPath = "/ReserveBusiness/ReserveSeat";
         }
 
-
         public override Ride BuildResponse(JToken response) //TODO
         {
-            JObject json = (JObject)(response);
-            JObject rideJ = (JObject)json["ride"];
-            return Ride.ToObject(rideJ);
+            return Ride.ToObject((JObject)response);
         }
 
         public override string ToJson() {

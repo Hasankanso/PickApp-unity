@@ -18,7 +18,6 @@ public class LoginPanel : Panel {
 
     private bool isFromProfilePanel;
 
-    //verifyCode
     public GameObject verifyEmailView;
     public Text VerifyEmailText;
     public InputFieldScript verificationCode;
@@ -76,6 +75,7 @@ public class LoginPanel : Panel {
             OpenDialog(message, false);
         } else {
             Program.User = u;
+            Program.CountryComponent = Program.Person.CountryInformations.CountryComponent;
             Cache.User(u);
             Program.IsLoggedIn = true;
             if (!isFromProfilePanel) {
