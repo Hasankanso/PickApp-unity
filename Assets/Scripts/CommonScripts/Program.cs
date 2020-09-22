@@ -23,6 +23,7 @@ public static class Program {
     private static int maxSchedulesPerUser = 3;
     public static bool time24 = false;
     private static List<string> countriesInformationsNames;//this variable should implemented after filling countriesInformations list ,this variable is to insert countries name to dropdown in register
+    private static string countryComponent = "";
     private static readonly string appName = "Pickapp";
     internal static Color SelectedItemColor() {
         return new Color(179f / 255f, 230f / 255f, 255f / 255f, 90f / 255f);
@@ -48,19 +49,6 @@ public static class Program {
         List<Chat> chats = new List<Chat>();
         return chats;
     }
-    public static List<Message> FakeMessages() {
-        List<Message> messages = new List<Message>();
-        messages.Add(new Message("hello", DateTime.Now, false));
-        messages.Add(new Message("Kifak", DateTime.Now, false));
-        messages.Add(new Message("yalla", DateTime.Now, false));
-        messages.Add(new Message("waynak", DateTime.Now, false));
-        messages.Add(new Message("!!", DateTime.Now, false));
-        messages.Add(new Message("ana 5ara bb3at kll klmi message", DateTime.Now, true));
-        messages.Add(new Message("riselii tawilii ktiir, yalla rakkez m3i shway bddi e7ki ktiir ymkn ma tsma3 menni shi, 5allina ntwasal wen l 100$?", DateTime.Now, false));
-        messages.Add(new Message("100$ miin?", DateTime.Now, true));
-        return messages;
-    }
-
     public static readonly string googleKey = "AIzaSyC7U0OEb9200tGZFFFTyLjQdo3goKyuSsw";
 
     public static User User {
@@ -78,6 +66,7 @@ public static class Program {
     public static FirebaseApp FirebaseApp { get => firebaseApp; set => firebaseApp = value; }
     public static Driver Driver { get => User == null ? null : User.Driver; }
     public static Person Person { get => User == null ? null : User.Person; }
+    public static string CountryComponent { get => countryComponent; set => countryComponent = value; }
 
     public static Sprite GetImage(Texture2D texture2D) {
         return Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 1024);

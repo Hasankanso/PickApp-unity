@@ -18,7 +18,6 @@ public class AccountPanel : Panel {
 
     public void submit() {
         if (vadilate()) {
-            Debug.Log(countryDP.options[countryDP.value].text);
             CountryInformations cI = Program.CountriesInformations[countryDP.options[countryDP.value].text];
             Person editedPerson = new Person(firstName.text.text, lastName.text.text,
             Program.StringToBirthday(birthday.text),

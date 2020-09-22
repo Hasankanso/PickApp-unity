@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Requests;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using ArabicSupport;
 
 public class SearchPanel : Panel {
     public InputFieldScript from, to;
@@ -106,7 +107,9 @@ public class SearchPanel : Panel {
 
     public void OnFromLocationPicked(Location loc) {
         fromL = loc;
-        from.GetComponent<InputField>().text = fromL.Name;
+        string fromLoca = fromL.Name;
+        fromLoca = ArabicFixer.Fix(fromLoca, true, true);
+        from.GetComponent<InputField>().text = fromLoca;
         from.PlaceHolder();
     }
 

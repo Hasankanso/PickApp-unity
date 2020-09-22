@@ -15,9 +15,9 @@ public class RideDetails : Panel {
     public Sprite smokingOnSpirite, musicOnSpirite, acOnSpirite, kidsSeatOnSpirite, petsOnSpirite;
     public Sprite smokingOffSpirite, musicOffSpirite, acOffSpirite, kidsSeatOffSpirite, petsOffSpirite;
     public GameObject dayOfWeek, passengersContainer, contentScrollView, personsDialog, removeRideDialog, cancelReservationDialog;
-    public GameObject addScheduleButton,  editScheduleButton, removeScheduleButton; //schedule
+    public GameObject addScheduleButton, editScheduleButton, removeScheduleButton; //schedule
     public GameObject addRideButton, updateRideButton, editRideButton, removeRideButton; //Ride
-    public GameObject reserveSeatsButton, cancelReservedSeats; //reserve
+    public GameObject reserveSeatsButton, updateReserveSeats, addReserveSeats, editReserveSeats, cancelReservedSeats; //reserve
 
     public Text monday, tuesday, wednesday, thursday, friday, saturday, sunday;
     public Dropdown personsDropdown, luggagesDropdown;
@@ -74,10 +74,18 @@ public class RideDetails : Panel {
     }
     public void OpenPersonDialog() {
         //add person and luggage drop down for reserve
-        for (int i = 1; i <= ride.AvailableSeats; i++) {
+        var availableSeats = ride.AvailableSeats;
+        var availableLuggage = ride.AvailableLuggages;
+        if (ride.Passengers != null && ride.Passengers[0].Seats > 0) {
+            availableSeats += ride.Passengers[0].Seats;
+        }
+        if (ride.Passengers != null && ride.Passengers[0].Luggages > 0) {
+            availableLuggage += ride.Passengers[0].Luggages;
+        }
+        for (int i = 1; i <= availableSeats; i++) {
             seatsList.Add(i.ToString());
         }
-        for (int i = 1; i <= ride.AvailableLuggages; i++) {
+        for (int i = 1; i <= availableLuggage; i++) {
             luggageList.Add(i.ToString());
         }
         personsDropdown.AddOptions(seatsList);
@@ -93,7 +101,6 @@ public class RideDetails : Panel {
         SchedulePanel p = PanelsFactory.CreateAddSchedule();
         Open(p, () => { p.Init(schedule); });
     }
-
 
     public void Init(ScheduleRide schedule) {
         var ride = schedule.Ride;
@@ -116,28 +123,19 @@ public class RideDetails : Panel {
         carYear.text = car.Year.ToString();
         SetColor(car.Color);
         SetPermissions(ride.SmokingAllowed, ride.AcAllowed, ride.PetsAllowed, ride.MusicAllowed, ride.KidSeat);
-        if (car.Picture == null)
-        {
+        if (car.Picture == null) {
             StartCoroutine(Program.RequestImage(car.CarPictureUrl, SucceedCarImage, Error));
-        }
-        else
-        {
+        } else {
             carImage.sprite = Program.GetImage(car.Picture);
         }
-        if (person.ProfilePicture == null)
-        {
+        if (person.ProfilePicture == null) {
             StartCoroutine(Program.RequestImage(person.ProfilePictureUrl, SucceedPersonImage, Error));
-        }
-        else
-        {
+        } else {
             profileImage.sprite = Program.GetImage(person.ProfilePicture);
         }
-        if (ride.Map == null)
-        {
+        if (ride.Map == null) {
             StartCoroutine(Program.RequestImage(ride.MapUrl, Succeed, Error));
-        }
-        else
-        {
+        } else {
             rideMapImage.sprite = Program.GetImage(ride.Map);
         }
         if (Status == StatusE.ADD) {
@@ -211,10 +209,12 @@ public class RideDetails : Panel {
                 editRideButton.SetActive(true);
                 removeRideButton.SetActive(true);
             } else if (ride.Reserved) {
+                editReserveSeats.SetActive(true);
                 cancelReservedSeats.SetActive(true); //cancel
-                ClosePersonDialog();
+                updateReserveSeats.SetActive(true);
             } else {
                 reserveSeatsButton.SetActive(true);
+                addReserveSeats.SetActive(true);
             }
         }
     }
@@ -307,8 +307,11 @@ public class RideDetails : Panel {
 
         reserveSeatsButton.SetActive(false);
         cancelReservedSeats.SetActive(false);
+        editReserveSeats.SetActive(false);
         editScheduleButton.SetActive(false);
         addScheduleButton.SetActive(false);
+        updateReserveSeats.SetActive(false);
+        addReserveSeats.SetActive(false);
         ClosePersonDialog();
         CloseRideDialog();
         CloseCancelReserveDialog();
@@ -346,8 +349,6 @@ public class RideDetails : Panel {
         Request<ScheduleRide> request = new AddScheduleRide(schedule);
         request.Send(AddScheduleResponse);
     }
-
-
     public void UpdateSchedule() {
 
     }
@@ -355,48 +356,6 @@ public class RideDetails : Panel {
     public void RemoveSchedule() {
 
     }
-
-
-    public void AddRide() {
-        Request<Ride> request = new AddRide(ride);
-        request.AddSendListener(OpenSpinner);
-        request.AddReceiveListener(CloseSpinner);
-        request.Send(AddRideResponse);
-    }
-
-    public void UpdateRide() {
-        Request<Ride> request = new EditRide(Program.Person, ride);
-        request.AddSendListener(OpenSpinner);
-        request.AddReceiveListener(CloseSpinner);
-        request.Send(EditRideResponse);
-    }
-
-    public void ReserveSeat() {
-        if (!Program.IsLoggedIn) {
-            LoginPanel login = PanelsFactory.CreateLogin();
-            Open(login, () => { login.Init(false); });
-        } else {
-            Request<Ride> request = new ReserveSeat(ride, Program.User, personsDropdown.value + 1, luggagesDropdown.value + 1);
-            request.Send(ReserveSeatsResponse);
-        }
-    }
-
-    public void CancelReservedSeats() {
-        if (!Program.IsLoggedIn) {
-            LoginPanel login = PanelsFactory.CreateLogin();
-            Open(login, () => { login.Init(false); });
-        } else {
-            Request<Ride> request = new CancelReservedSeats(ride, Program.User);
-            request.Send(CancelReservedSeatsResponse);
-        }
-    }
-    public void RemoveRide() {
-        Request<bool> request = new CancelRide(ride, reason.ToString());
-        request.Send(RemoveRideResponse);
-    }
-
-
-
     public void AddScheduleResponse(ScheduleRide result, int code, string message) {
         //check if schedule Ride add in server success
     }
@@ -409,19 +368,13 @@ public class RideDetails : Panel {
         //check if schedule Ride remove in server success
     }
 
-
-    public void EditRideResponse(Ride result, int code, string message) { //Not in use cause we used AddRideResponse instead.    
-        if (!code.Equals((int)HttpStatusCode.OK)) {
-            OpenDialog(message, false);
-            Debug.Log(code);
-        } else {
-            Program.Person.UpcomingRides.Remove(ride);
-            Program.Person.UpcomingRides.Add(result);
-            MissionCompleted(MyRidePanel.PANELNAME, "Ride has been updated");
-        }
-    }                                                                           //check if schedule Ride add in server success
-
-
+    //RIDEE
+    public void AddRide() {
+        Request<Ride> request = new AddRide(ride);
+        request.AddSendListener(OpenSpinner);
+        request.AddReceiveListener(CloseSpinner);
+        request.Send(AddRideResponse);
+    }
     public void AddRideResponse(Ride result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
             OpenDialog(message, false);
@@ -431,7 +384,28 @@ public class RideDetails : Panel {
             MissionCompleted(MyRidePanel.PANELNAME, "Ride's in public!");
         }
     }
-
+    public void UpdateRide() {
+        Request<Ride> request = new EditRide(Program.Person, ride);
+        request.AddSendListener(OpenSpinner);
+        request.AddReceiveListener(CloseSpinner);
+        request.Send(EditRideResponse);
+    }
+    public void EditRideResponse(Ride result, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+            OpenDialog(message, false);
+            Debug.Log(code);
+        } else {
+            Program.Person.UpcomingRides.Remove(ride);
+            Program.Person.UpcomingRides.Add(result);
+            MissionCompleted(MyRidePanel.PANELNAME, "Ride has been updated");
+        }
+    }
+    public void RemoveRide() {
+        Request<bool> request = new CancelRide(ride, reason.ToString());
+        request.AddSendListener(OpenSpinner);
+        request.AddReceiveListener(CloseSpinner);
+        request.Send(RemoveRideResponse);
+    }
     private void RemoveRideResponse(bool result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
             OpenDialog(message, false);
@@ -445,17 +419,18 @@ public class RideDetails : Panel {
             }
         }
     }
-
-    private void CancelReservedSeatsResponse(Ride result, int code, string message) {
-        if (!code.Equals((int)HttpStatusCode.OK)) {
-            OpenDialog(message, false);
-            Debug.Log(code);
+    //RESERVATION
+    public void ReserveSeat() {
+        if (!Program.IsLoggedIn) {
+            LoginPanel login = PanelsFactory.CreateLogin();
+            Open(login, () => { login.Init(false); });
         } else {
-            Program.Person.UpcomingRides.Remove(result);
-            MissionCompleted(SearchPanel.PANELNAME, "You have cancelled the reservation");
+            Request<Ride> request = new ReserveSeat(ride, Program.User, personsDropdown.value + 1, luggagesDropdown.value + 1);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(ReserveSeatsResponse);
         }
     }
-
     private void ReserveSeatsResponse(Ride result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
             OpenDialog(message, false);
@@ -466,10 +441,48 @@ public class RideDetails : Panel {
             OpenDialog("You reserved " + (personsDropdown.value + 1) + " seat(s) and " + (luggagesDropdown.value + 1) + " luggage(s).", true);
             DestroyImediateForwardBackward();
         }
-
     }
-
+    public void EditReservation() {
+        if (!Program.IsLoggedIn) {
+            LoginPanel login = PanelsFactory.CreateLogin();
+            Open(login, () => { login.Init(false); });
+        } else {
+            Request<Ride> request = new EditReservation(ride, personsDropdown.value + 1, luggagesDropdown.value + 1);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(EditReservationResponse);
+        }
+    }
+    private void EditReservationResponse(Ride result, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+            OpenDialog(message, false);
+            Debug.Log(code);
+        } else {
+            Program.Person.UpcomingRides.Remove(ride);
+            Program.Person.UpcomingRides.Add(result);
+            FooterMenu.dFooterMenu.OpenSearchPanel();
+            OpenDialog("You reserved " + (personsDropdown.value + 1) + " seat(s) and " + (luggagesDropdown.value + 1) + " luggage(s).", true);
+            DestroyImediateForwardBackward();
+        }
+    }
+    public void CancelReservedSeats() {
+        if (!Program.IsLoggedIn) {
+            LoginPanel login = PanelsFactory.CreateLogin();
+            Open(login, () => { login.Init(false); });
+        } else {
+            Request<Ride> request = new CancelReservedSeats(ride, Program.User);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(CancelReservedSeatsResponse);
+        }
+    }
+    private void CancelReservedSeatsResponse(Ride result, int code, string message) {
+        if (!code.Equals((int)HttpStatusCode.OK)) {
+            OpenDialog(message, false);
+            Debug.Log(code);
+        } else {
+            Program.Person.UpcomingRides.Remove(result);
+            MissionCompleted(SearchPanel.PANELNAME, "You have cancelled the reservation");
+        }
+    }
 }
-// end send and receive functions
-
-
