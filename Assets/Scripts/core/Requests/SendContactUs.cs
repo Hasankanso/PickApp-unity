@@ -13,14 +13,14 @@ namespace Requests
   class SendContactUs : Request<string>
   {
     private Person person;
-    private string subject, description;
+    private string subject, body;
 
     public SendContactUs(Person user, string subject, string description)
     {
       this.person = user;
       this.subject = subject;
-      this.description = description;
-      HttpPath = "";
+      this.body = description;
+      HttpPath = "/UserBusiness/ContactUs";
     }
 
     public override string BuildResponse(JToken response) //TODO
@@ -33,9 +33,9 @@ namespace Requests
     public override string ToJson()
     {
       JObject sendContactUsJ = new JObject();
-      sendContactUsJ[nameof(person)] = new JObject { [nameof(person.Id)] = person.Id };
+      sendContactUsJ[nameof(person)] = person.Id;
       sendContactUsJ[nameof(subject)] = this.subject;
-      sendContactUsJ[nameof(description)] = this.description;
+      sendContactUsJ[nameof(body)] = this.body;
       return sendContactUsJ.ToString();
     }
 

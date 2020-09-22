@@ -7,18 +7,21 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Net.Mail;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
 public class ContactUsPanel : Panel {
     public InputFieldScript description, subject;
 
     private Person user;
-    public void sendMessage(Person user) {
+    public void SendMail() {
         if (validate()) {
-            Request<string> request = new SendContactUs(user, subject.text.text, description.text.text);
-            request.AddSendListener(OpenSpinner);
-            request.AddReceiveListener(CloseSpinner);
-            request.Send(response);
-        }
+             Request<string> request = new SendContactUs(Program.Person, subject.text.text, description.text.text);
+             request.AddSendListener(OpenSpinner);
+             request.AddReceiveListener(CloseSpinner);
+             request.Send(response);
+             
+             }
     }
     private void response(string result, int code, string message) {
         if (!code.Equals(HttpStatusCode.OK)) {

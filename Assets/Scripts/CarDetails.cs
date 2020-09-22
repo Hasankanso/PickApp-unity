@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class CarDetails : Panel
 {
+    public GameObject removeCarDialog;
     public Text carName,
     carBrand,
     carYear,
@@ -27,6 +28,15 @@ public class CarDetails : Panel
         carColor.text = car.Color.ToString();
         carImage.sprite = Program.GetImage(car.Picture);
 
+    }
+    public void OpenCarDialog()
+    {
+        removeCarDialog.gameObject.SetActive(true);
+    }
+
+    public void CloseCarDialog()
+    {
+        removeCarDialog.gameObject.SetActive(false);
     }
     public void ViewModel()
     {
@@ -65,6 +75,7 @@ public class CarDetails : Panel
     }
     internal override void Clear()
     {
+        CloseCarDialog();
         carName.text = "";
         carBrand.text = "";
         carYear.text = "";
