@@ -26,8 +26,8 @@ public class Language : MonoBehaviour
   private Action<bool, long> OnSetFinished;
 
   public static Language language; //For the singleton pattern.
-
-  public void Awake()
+  public static Language Arabic;
+    public void Awake()
   {
     if (language == null)
     {
@@ -141,7 +141,6 @@ public class Language : MonoBehaviour
   {
     //We're opening a file, so we reset all the states of this script
     SetLocalLanguage(Path.Combine(Application.persistentDataPath, relativeFolderPath + Language + ".xml"), Language);
-        Debug.Log(Path.Combine(Application.persistentDataPath, relativeFolderPath + Language + ".xml"));
     currentLanguage = Language;
   }
 

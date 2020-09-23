@@ -12,9 +12,13 @@ public class MultiLangText : MonoBehaviour
   {
     Text textUI = GetComponent<Text>();
     textUI.text = Program.language.GetString(key);
-    textUI.text = ArabicFixer.Fix(textUI.text, true, true);
-   // textUI.alignment = TextAnchor.MiddleRight;
-    textUI.fontSize = 60;
+
+        if (Program.language == Language.Arabic)
+        {
+            textUI.text = ArabicFixer.Fix(textUI.text, true, true);
+            textUI.alignment = TextAnchor.MiddleRight;
+            textUI.fontSize = 60;
+        }
     }
 
 }
