@@ -10,11 +10,11 @@ using UnityEngine.UI;
 
 public class RideDetails : Panel {
     public ListView listView;
-    public Text from, reason, to, price, date, time, comment, seats, luggages, driverFullName, driverBio, driverRatings, carName, carBrand, carColor, carYear, header;
+    public Text from, to, rideReason, reserveReason, price, date, time, comment, seats, luggages, driverFullName, driverBio, driverRatings, carName, carBrand, carColor, carYear, header;
     public Image carImage, profileImage, rideMapImage, smokingImage, musicImage, acImage, kidsSeatImage, petsImage;
     public Sprite smokingOnSpirite, musicOnSpirite, acOnSpirite, kidsSeatOnSpirite, petsOnSpirite;
     public Sprite smokingOffSpirite, musicOffSpirite, acOffSpirite, kidsSeatOffSpirite, petsOffSpirite;
-    public GameObject dayOfWeek, passengersContainer, contentScrollView, personsDialog, removeRideDialog, cancelReservationDialog;
+    public GameObject dayOfWeek, passengersContainer, contentScrollView, personsDialog, removeRideDialog, cancelReservationDialog, cancelRideReason, cancelReservedReason;
     public GameObject addScheduleButton, editScheduleButton, removeScheduleButton; //schedule
     public GameObject addRideButton, updateRideButton, editRideButton, removeRideButton; //Ride
     public GameObject reserveSeatsButton, updateReserveSeats, addReserveSeats, editReserveSeats, cancelReservedSeats; //reserve
@@ -58,6 +58,11 @@ public class RideDetails : Panel {
     }
     public void OpenRideDialog() {
         removeRideDialog.gameObject.SetActive(true);
+        TimeSpan diff = ride.LeavingDate - DateTime.Now;
+        if (diff.TotalHours <48)
+            cancelRideReason.gameObject.SetActive(true);
+        else 
+            cancelRideReason.gameObject.SetActive(false);
     }
 
     public void CloseRideDialog() {
@@ -65,6 +70,11 @@ public class RideDetails : Panel {
     }
     public void OpenCancelReserveDialog() {
         cancelReservationDialog.gameObject.SetActive(true);
+        TimeSpan diff = ride.LeavingDate - DateTime.Now;
+        if (diff.TotalHours < 48)
+            cancelReservedReason.gameObject.SetActive(true);
+        else
+            cancelReservedReason.gameObject.SetActive(false);
     }
     public void CloseCancelReserveDialog() {
         cancelReservationDialog.gameObject.SetActive(false);
@@ -158,7 +168,8 @@ public class RideDetails : Panel {
     //Init MyRidesPanel
     public void Init(Ride ride) {
         Clear();
-
+        cancelRideReason.gameObject.SetActive(false);
+        cancelReservedReason.gameObject.SetActive(false);
         bool owner = false;
         if (Program.Person != null) {
             owner = Program.User.Equals(ride.User);
@@ -401,7 +412,7 @@ public class RideDetails : Panel {
         }
     }
     public void RemoveRide() {
-        Request<bool> request = new CancelRide(ride, reason.ToString());
+        Request<bool> request = new CancelRide(ride, rideReason.text.ToString());
         request.AddSendListener(OpenSpinner);
         request.AddReceiveListener(CloseSpinner);
         request.Send(RemoveRideResponse);
@@ -470,7 +481,7 @@ public class RideDetails : Panel {
             LoginPanel login = PanelsFactory.CreateLogin();
             Open(login, () => { login.Init(false); });
         } else {
-            Request<Ride> request = new CancelReservedSeats(ride, Program.User);
+            Request<Ride> request = new CancelReservedSeats(ride, reserveReason.text.ToString());
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(CancelReservedSeatsResponse);

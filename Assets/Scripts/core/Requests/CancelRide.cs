@@ -44,7 +44,7 @@ namespace Requests
         protected override string IsValid() // ToDo
         {
 
-            if (ride.LeavingDate > DateTime.Now)
+            if (ride.LeavingDate < DateTime.Now)
                 return "Ride had started" ;
             if (string.IsNullOrEmpty(ride.Id))
             {
@@ -56,14 +56,15 @@ namespace Requests
             {
                 return validateUser;
             }
-            TimeSpan ts = ride.LeavingDate.Subtract(DateTime.Now);
-            Double hours = ts.TotalHours;
-            if (ride.Passengers[0] != null && hours>48)
-            {
+            TimeSpan ts = ride.LeavingDate - DateTime.Now;
+            if ((ride.Passengers.Count !=0 && ts.TotalHours < 48))
+            {  //need to notify the passengers, give a reason and the users can rate him
                 if (string.IsNullOrEmpty(reason))
                 {
-                    return "Reason must not be null!";
-                } //need to notify the passengers, give a reason and the users can rate him
+                    return "You should state a good reason!";
+                } 
+                else if (reason.Length < 15)
+                    return "The reason should be at least 15 characters";
             }
             return string.Empty;
         }

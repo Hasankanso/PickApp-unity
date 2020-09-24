@@ -4344,7 +4344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6609973980011967976
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5121,7 +5121,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please state the reason of deletion.
+  m_Text: Are you sure you want to delete your ride?
 --- !u!1 &5316266279888444905
 GameObject:
   m_ObjectHideFlags: 0
@@ -6816,8 +6816,9 @@ MonoBehaviour:
   permanent: 0
   listView: {fileID: 3546810883035884313}
   from: {fileID: 2050928702256876112}
-  reason: {fileID: 0}
   to: {fileID: 2050928701773873928}
+  rideReason: {fileID: 4921458464641800559}
+  reserveReason: {fileID: 5794759623398095993}
   price: {fileID: 2050928700984387425}
   date: {fileID: 6675128265891867867}
   time: {fileID: 2050928702426876399}
@@ -6856,6 +6857,8 @@ MonoBehaviour:
   personsDialog: {fileID: 2078383628102837051}
   removeRideDialog: {fileID: 8337651786106792249}
   cancelReservationDialog: {fileID: 4173783368961271344}
+  cancelRideReason: {fileID: 8933443615036005604}
+  cancelReservedReason: {fileID: 1684191513515735362}
   addScheduleButton: {fileID: 6308145749595551193}
   editScheduleButton: {fileID: 3750347942020378321}
   removeScheduleButton: {fileID: 4787397976130863298}
@@ -10204,7 +10207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5782254755216766131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10824,7 +10827,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please state the reason of cancelation.
+  m_Text: Are you sure you want to cancel your reserved seats?
 --- !u!1 &8676717717316164464
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,10 +12,12 @@ namespace Requests {
     class CancelReservedSeats : Request<Ride> {
         Ride ride;
         User user;
+        string reason;
 
-        public CancelReservedSeats(Ride ride, User user) {
+        public CancelReservedSeats(Ride ride, string reason) {
             this.ride = ride;
-            this.user = user;
+            this.user = Program.User;
+            this.reason = reason;
             HttpPath = "/RideBusiness/CancelReserved";
         }
 
@@ -40,14 +42,15 @@ namespace Requests {
             if (string.IsNullOrEmpty(ride.id)) {
                 return "Invalid id of ride";
             }
-            TimeSpan ts = ride.LeavingDate.Subtract(DateTime.Now);
-            Double hours = ts.TotalHours;
-
-            if (ride.Passengers[0] != null && hours > 48) {
-                /*
-             if (string.IsNullOrEmpty(reason)||reason.Length<15) {
-                 return "Your reason must be at least 15 character";
-             }*/
+            TimeSpan ts = ride.LeavingDate - DateTime.Now;
+            if (ts.TotalHours < 48)
+            {//need to notify the driver, give a reason and the driver can rate the passenger
+                if (string.IsNullOrEmpty(reason))
+                {
+                    return "You should state a good reason!";
+                } 
+                else if (reason.Length < 15)
+                    return "The reason should be at least 15 characters";
             }
             return string.Empty;
         }
