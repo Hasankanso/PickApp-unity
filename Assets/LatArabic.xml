@@ -1,0 +1,25 @@
+<LatArabic>
+	<string name="ScheduleTitle">جدول الرحلات</string>
+	<string name="Monday">eth</string>
+	<string name="Tuesday">tal</string>
+	<string name="Wednesday">2orb</string>
+	<string name="Thursday">5am</string>
+	<string name="Friday">jom</string>
+	<string name="Saturday">sab</string>
+	<string name="Sunday">2a7</string>
+	<string name="ChooseStartAndEnd">Al Raje2 3abe l wa2eet</string>
+	<string name="ScheduleTime">l wa2eet</string>
+    <string name="Price">se3er</string>
+	<string name="AddRide">اضافة رحلة</string>
+	<string name="Next"> التالي</string>
+    <string name="SearchRide">البحث عن رحلة</string>
+	<string name="From">من</string>
+	<string name="To">الى</string>
+	<string name="WhichRange">في أي وقت تريد المغادرة</string>
+    <string name="Persons">عدد الأشخاص</string>
+	<string name="Search">بحث</string>
+
+
+
+
+</LatArabic>

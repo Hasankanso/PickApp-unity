@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ArabicSupport;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
@@ -39,25 +40,62 @@ public class LocationsFinderPanel : Panel {
     }
 
     private IEnumerator LoadLocations() {
-        if (searchField.text != "") {
-            var loaded = new UnityWebRequest(directionsURL + "input=" + searchField.text + "&types=geocode" + "&components=" + Program.CountryComponent + "&key=" + Program.googleKey + "&sessiontoken=" + token);
-            loaded.downloadHandler = new DownloadHandlerBuffer();
-            yield return loaded.SendWebRequest();
+        var Ar = "&types=geocode&language=ar";
+        var En = "&types=geocode&language=ar";
 
-            var list = JsonConvert.DeserializeObject<JObject>(loaded.downloadHandler.text).Value<JArray>("predictions");
-            if (list != null) {
-                var results = list.Values<JObject>();
-                listView.Clear();
-                foreach (JObject o in results) {
-                    var description = o.Value<string>("description").ToString();
-                    var id = o.Value<string>("place_id").ToString();
 
-                    LocationItem obj = Instantiate(locItem);
-                    obj.Init(this, id, description);
+        if (Program.language == Language.Arabic)
+        {
+            if (searchField.text != "")
+            {
+                var loaded = new UnityWebRequest(directionsURL + "input=" + searchField.text + Ar + "&components=" + Program.CountryComponent + "&key=" + Program.googleKey + "&sessiontoken=" + token);
+                loaded.downloadHandler = new DownloadHandlerBuffer();
+                yield return loaded.SendWebRequest();
 
-                    listView.Add(obj.gameObject);
+                var list = JsonConvert.DeserializeObject<JObject>(loaded.downloadHandler.text).Value<JArray>("predictions");
+                if (list != null)
+                {
+                    var results = list.Values<JObject>();
+                    listView.Clear();
+                    foreach (JObject o in results)
+                    {
+                        var description = ArabicFixer.Fix(o.Value<string>("description").ToString(), true, true);
+                        var id = o.Value<string>("place_id").ToString();
+
+                        LocationItem obj = Instantiate(locItem);
+                        obj.Init(this, id, description);
+
+                        listView.Add(obj.gameObject);
+                    }
+
                 }
+            }
+        }
+        else 
+        {
+            if (searchField.text != "")
+            {
+                var loaded = new UnityWebRequest(directionsURL + "input=" + searchField.text + En + "&components=" + Program.CountryComponent + "&key=" + Program.googleKey + "&sessiontoken=" + token);
+                loaded.downloadHandler = new DownloadHandlerBuffer();
+                yield return loaded.SendWebRequest();
 
+                var list = JsonConvert.DeserializeObject<JObject>(loaded.downloadHandler.text).Value<JArray>("predictions");
+                if (list != null)
+                {
+                    var results = list.Values<JObject>();
+                    listView.Clear();
+                    foreach (JObject o in results)
+                    {
+                        var description = o.Value<string>("description").ToString();
+                        var id = o.Value<string>("place_id").ToString();
+
+                        LocationItem obj = Instantiate(locItem);
+                        obj.Init(this, id, description);
+
+                        listView.Add(obj.gameObject);
+                    }
+
+                }
             }
         }
     }

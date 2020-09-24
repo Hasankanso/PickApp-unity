@@ -13,11 +13,14 @@ public class LocationItem : MonoBehaviour
   public LocationsFinderPanel locPanel;
   public Location location;
   public Text itemText;
-
   private static readonly string directionsURL = "https://maps.googleapis.com/maps/api/place/details/json?";
 
   internal void Init(LocationsFinderPanel locationResultsPanel, string placeId, string name)
   {
+    if (Program.language==Language.Arabic) {
+        this.itemText.alignment = TextAnchor.MiddleRight;
+        this.itemText.fontSize = 70;
+    }
     location = new Location(placeId, name);
     itemText.text = name;
     locPanel = locationResultsPanel;

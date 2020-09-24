@@ -13,6 +13,7 @@ public class SearchPanel : Panel {
     public Dropdown numberOfPersons;
     private Location fromL, toL;
     private SearchInfo info = null;
+    private Language lan;
 
     public static readonly string PANELNAME = "SEARCHPANEL";
 
@@ -106,14 +107,27 @@ public class SearchPanel : Panel {
     }
 
     public void OnFromLocationPicked(Location loc) {
+        if(Program.language==lan)
+        {
+            fromL = loc;
+            string fromLoca = fromL.Name;
+            fromLoca = ArabicFixer.Fix(fromLoca, true, true);
+            from.GetComponent<InputField>().text = fromLoca;
+            from.PlaceHolder();
+        }
         fromL = loc;
-        string fromLoca = fromL.Name;
-        fromLoca = ArabicFixer.Fix(fromLoca, true, true);
-        from.GetComponent<InputField>().text = fromLoca;
+        from.GetComponent<InputField>().text = fromL.Name;
         from.PlaceHolder();
     }
 
     public void OnToLocationPicked(Location loc) {
+        if (Program.language == lan)
+        {
+            toL = loc;
+            string toLoca=ArabicFixer.Fix(toL.Name, true, true);
+            to.GetComponent<InputField>().text = toLoca;
+            to.PlaceHolder();
+        }
         toL = loc;
         to.GetComponent<InputField>().text = toL.Name;
         to.PlaceHolder();
