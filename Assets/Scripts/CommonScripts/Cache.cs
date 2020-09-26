@@ -2,6 +2,8 @@
 using UnityEngine;
 
 public static class Cache {
+    private static  readonly string currentLanguageKey = "LANG_CURR";
+    private static readonly string defaultLanguage = "";
     public static void User(User user) {
         if (user != null) {
             if (user.Person != null)
@@ -26,6 +28,14 @@ public static class Cache {
     //Cache for user
     public static void SetPhone(string phone) {
         PlayerPrefs.SetString("phone", phone);
+    }
+    public static void SetLanguage(string value)
+    {
+        PlayerPrefs.SetString(currentLanguageKey, value);
+    }
+    public static string GetLanguage()
+    {
+        return PlayerPrefs.GetString(currentLanguageKey);
     }
     public static void SetEmail(string email) {
         PlayerPrefs.SetString("email", email);

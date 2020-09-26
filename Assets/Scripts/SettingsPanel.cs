@@ -22,8 +22,10 @@ public class SettingsPanel : Panel {
         //0 is English
         if (index == 0) {
             englishCheck.enabled = true;
+            Cache.SetLanguage("English");
         } else if (index == 1) {
             arabicCheck.enabled = true;
+            Cache.SetLanguage("Arabic");
         }
     }
     public void openHowItWorks() {

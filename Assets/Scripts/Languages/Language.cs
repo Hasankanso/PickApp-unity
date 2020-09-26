@@ -13,8 +13,6 @@ public class Language : MonoBehaviour
   private static readonly string relativeFolderPath = "Lang/";
   private static readonly string languageURL = "http://yourdomainname.dx.am/MLS_Languages/";
   private static string currentLanguage;
-
-  private readonly string currentLanguageKey = "LANG_CURR";
   private readonly string defaultLanguage = "LatArabic";
 
   ///This constructor is called when we instantiate this class in the "LanguageManager" class.
@@ -33,9 +31,11 @@ public class Language : MonoBehaviour
     {
       language = this;
     }
-    var currlang = PlayerPrefs.GetString(currentLanguageKey, defaultLanguage);
-    if(currlang !=null)
-    OpenLocalXML(currlang);
+
+    var currlang = Cache.GetLanguage();
+        if (currlang == string.Empty)
+            currlang = defaultLanguage;
+            OpenLocalXML(currlang);
   }
 
   /// Get a string from the hastable by the index gived in it.
