@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SettingsPanel : Panel {
 
@@ -14,6 +15,18 @@ public class SettingsPanel : Panel {
 
     public override void Init() {
         this.user = Program.User;
+        Cache.GetLanguage();
+        if (Cache.GetLanguage() == "English")
+        {
+            englishCheck.enabled = true;
+            arabicCheck.enabled = false;
+        }
+
+        else
+        {
+            arabicCheck.enabled = true;
+            englishCheck.enabled = false;
+        }
         Clear();
     }
 
@@ -27,6 +40,7 @@ public class SettingsPanel : Panel {
             arabicCheck.enabled = true;
             Cache.SetLanguage("Arabic");
         }
+        SceneManager.LoadScene("MainScene");
     }
     public void openHowItWorks() {
         Panel panel = PanelsFactory.CreateHowItWorks();
@@ -49,8 +63,6 @@ public class SettingsPanel : Panel {
         Open(panel);
     }
     internal override void Clear() {
-        englishCheck.enabled = false;
-        arabicCheck.enabled = false;
     }
     public void openNotifications() {
         Panel panel = PanelsFactory.CreateNotificationPanel();
