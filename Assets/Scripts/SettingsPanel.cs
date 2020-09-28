@@ -31,11 +31,9 @@ public class SettingsPanel : Panel {
         //0 is English
         if (index == 0) {
             englishCheck.enabled = true;
-            Program.language.Arabic = false;
             Cache.SetLanguage("English");
         } else if (index == 1) {
             arabicCheck.enabled = true;
-            Program.language.Arabic = true;
             Cache.SetLanguage("Arabic");
         }
         SceneManager.LoadScene("MainScene");

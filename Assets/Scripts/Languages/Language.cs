@@ -13,8 +13,8 @@ public class Language : MonoBehaviour
   static Hashtable XML_Strings; //The hashtable that we create to contain the data
   private static readonly string relativeFolderPath = "Lang/";
   private static readonly string languageURL = "http://yourdomainname.dx.am/MLS_Languages/";
-    private static string currentLanguage = "LatArabic";
-    private readonly string defaultLanguage = "LatArabic";
+    private static string currentLanguage = "Arabic";
+    private readonly string defaultLanguage = "Arabic";
     private bool arabic = true;
 
 
@@ -38,8 +38,13 @@ public class Language : MonoBehaviour
     }
 
     var currlang = Cache.GetLanguage();
+        if (currlang.Equals("Arabic"))
+            arabic = true;
+        else arabic = false;
         if (currlang == string.Empty)
             currlang = defaultLanguage;
+        if (defaultLanguage.Equals("Arabic"))
+            arabic = true;
             OpenLocalXML(currlang);
   }
 
@@ -113,7 +118,7 @@ public class Language : MonoBehaviour
     {
       var elemEnum= element.GetEnumerator();
 
-        if (language.Equals("LatArabic"))
+        if (language.Equals("Arabic"))
         {
             while (elemEnum.MoveNext())
                 XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), ArabicFixer.Fix((elemEnum.Current as XmlElement).InnerText,true,true));
