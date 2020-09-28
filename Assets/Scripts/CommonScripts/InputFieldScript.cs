@@ -25,8 +25,10 @@ public class InputFieldScript : MonoBehaviour {
     public void OnEditting() {
         text1 = text.GetComponent<Text>().text;
         text1=  ArabicFixer.Fix(text1, true, true);
-        this.text.text = text1;
+        //this.text.text = text1;
         stringEdit = text1;
+        //Debug.Log(text.text);
+        Debug.Log(text1);
 
 
         //stringEdit= ArabicFixer.Fix(text.text, true, true);
@@ -47,7 +49,8 @@ public class InputFieldScript : MonoBehaviour {
         this.GetComponent<InputFieldScript>().placeHolder.color = new Color(236f / 255f, 28f / 255f, 36f / 255f);
     }
     public void SetText(string text) {
-        this.GetComponent<InputField>().SetTextWithoutNotify(text);
+        var txt = ArabicFixer.Fix(text, true, true);
+        this.GetComponent<InputField>().SetTextWithoutNotify(txt);
         this.PlaceHolder();
     }
     public void clickedOut() {

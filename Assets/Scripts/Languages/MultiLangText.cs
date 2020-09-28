@@ -10,8 +10,10 @@ public class MultiLangText : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    Text textUI = GetComponent<Text>();
-    textUI.text = Program.language.GetString(key);
+            Text textUI = GetComponent<Text>();
+            textUI.text = Program.language.GetString(key);
+
+
 
         //if (Program.language == Language.Arabic)
         //{
