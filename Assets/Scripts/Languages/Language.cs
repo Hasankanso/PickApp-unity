@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArabicSupport;
+using System;
 using System.Collections;
 using System.IO;
 using System.Net;
@@ -12,19 +13,23 @@ public class Language : MonoBehaviour
   static Hashtable XML_Strings; //The hashtable that we create to contain the data
   private static readonly string relativeFolderPath = "Lang/";
   private static readonly string languageURL = "http://yourdomainname.dx.am/MLS_Languages/";
-  private static string currentLanguage;
-  private readonly string defaultLanguage = "LatArabic";
+    private static string currentLanguage = "LatArabic";
+    private readonly string defaultLanguage = "LatArabic";
+    private bool arabic = true;
 
-  ///This constructor is called when we instantiate this class in the "LanguageManager" class.
-  ///It's called when we set a new language to read it thanks to the functions "SetLanguageWeb" and "SetLocalLanguage".
-  ///
-  ///The parameters are: the XML file is gived as WWW.text result for the Web and as the physical file for the local.
-  ///The "language" is the language that we've selected
-  ///The "isLocal" define what function to call, if the one to open a web file or the one to open a file stored on the computer
-  private Action<bool, long> OnSetFinished;
+
+    ///This constructor is called when we instantiate this class in the "LanguageManager" class.
+    ///It's called when we set a new language to read it thanks to the functions "SetLanguageWeb" and "SetLocalLanguage".
+    ///
+    ///The parameters are: the XML file is gived as WWW.text result for the Web and as the physical file for the local.
+    ///The "language" is the language that we've selected
+    ///The "isLocal" define what function to call, if the one to open a web file or the one to open a file stored on the computer
+    private Action<bool, long> OnSetFinished;
 
   public static Language language; //For the singleton pattern.
-  public static Language Arabic;
+
+    public bool Arabic { get => arabic; set => arabic = value; }
+
     public void Awake()
   {
     if (language == null)
@@ -106,10 +111,15 @@ public class Language : MonoBehaviour
     var element = xml.DocumentElement;
     if (element != null)
     {
-      var elemEnum = element.GetEnumerator();
+      var elemEnum= element.GetEnumerator();
 
-      while (elemEnum.MoveNext())
-        XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), (elemEnum.Current as XmlElement).InnerText);
+        if (language.Equals("LatArabic"))
+        {
+            while (elemEnum.MoveNext())
+                XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), ArabicFixer.Fix((elemEnum.Current as XmlElement).InnerText,true,true));
+        }
+     while (elemEnum.MoveNext())
+     XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), (elemEnum.Current as XmlElement).InnerText);
     }
     else
       Debug.LogError("The specified language does not exist: " + language);

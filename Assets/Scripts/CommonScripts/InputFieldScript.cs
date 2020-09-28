@@ -27,8 +27,6 @@ public class InputFieldScript : MonoBehaviour {
         text1=  ArabicFixer.Fix(text1, true, true);
         this.text.text = text1;
         stringEdit = text1;
-        Debug.Log(text.text);
-        Debug.Log(text1);
 
 
         //stringEdit= ArabicFixer.Fix(text.text, true, true);
