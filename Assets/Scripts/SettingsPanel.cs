@@ -15,15 +15,11 @@ public class SettingsPanel : Panel {
 
     public override void Init() {
         this.user = Program.User;
-        Cache.GetLanguage();
-        if (Cache.GetLanguage() == "English")
-        {
+        string lang = Cache.GetLanguage();
+        if (lang == "English"){
             englishCheck.enabled = true;
             arabicCheck.enabled = false;
-        }
-
-        else
-        {
+        } else if (lang == "Arabic"){
             arabicCheck.enabled = true;
             englishCheck.enabled = false;
         }
