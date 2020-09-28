@@ -16,7 +16,6 @@ public class Language : MonoBehaviour
     private static string currentLanguage = "Arabic";
     private readonly string defaultLanguage = "English";
     public static bool arabic = false;
-    private static bool defaultLang = false;
 
 
     private Action<bool,
@@ -28,10 +27,6 @@ public class Language : MonoBehaviour
     {
         get => arabic;
         set => arabic = value;
-    }
-    public static bool DefaultLang {
-        get => defaultLang;
-        set => defaultLang = value; 
     }
 
     public void Awake()
@@ -50,7 +45,6 @@ public class Language : MonoBehaviour
 
         if (currlang == string.Empty) 
             currlang = defaultLanguage;
-            defaultLang = true;
     }
 
     public string GetString(string _name)
