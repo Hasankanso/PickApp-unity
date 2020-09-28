@@ -22,7 +22,7 @@ public class SearchPanel : Panel {
         Clear();
     }
     public override void Init() {
-        
+
         Status = StatusE.VIEW;
         var minDT = Program.StringToDate(minDate.text);
         var maxDT = Program.StringToDate(maxDate.text);
@@ -107,8 +107,7 @@ public class SearchPanel : Panel {
     }
 
     public void OnFromLocationPicked(Location loc) {
-        if(Program.language==lan)
-        {
+        if (Program.language == lan) {
             fromL = loc;
             string fromLoca = fromL.Name;
             fromLoca = ArabicFixer.Fix(fromLoca, true, true);
@@ -121,10 +120,9 @@ public class SearchPanel : Panel {
     }
 
     public void OnToLocationPicked(Location loc) {
-        if (Program.language == lan)
-        {
+        if (Program.language == lan) {
             toL = loc;
-            string toLoca=ArabicFixer.Fix(toL.Name, true, true);
+            string toLoca = ArabicFixer.Fix(toL.Name, true, true);
             to.GetComponent<InputField>().text = toLoca;
             to.PlaceHolder();
         }

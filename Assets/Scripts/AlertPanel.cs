@@ -29,11 +29,13 @@ public class AlertPanel : Panel {
     }
     public void submit() {
         if (Validate()) {
-            alert = new Alert(Program.User, fromL, toL, price.text.text, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), int.Parse(nbPersons.options[nbPersons.value].text), int.Parse(luggages.options[luggages.value].text), comment.text.text);
-            Request<string> request = new BroadCastAlert(alert);
-            request.AddSendListener(OpenSpinner);
-            request.AddReceiveListener(CloseSpinner);
-            request.Send(response);
+            AdMob.ShowSkippableAd(() => {
+                alert = new Alert(Program.User, fromL, toL, price.text.text, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), int.Parse(nbPersons.options[nbPersons.value].text), int.Parse(luggages.options[luggages.value].text), comment.text.text);
+                Request<string> request = new BroadCastAlert(alert);
+                request.AddSendListener(OpenSpinner);
+                request.AddReceiveListener(CloseSpinner);
+                request.Send(response);
+            });
         }
     }
 
