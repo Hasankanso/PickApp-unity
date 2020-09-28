@@ -1,4 +1,5 @@
 ﻿using GoogleMobileAds.Api;
+using GoogleMobileAds.Api.Mediation.AdColony;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,10 +8,8 @@ using UnityEngine;
 public class AdMob : MonoBehaviour {
     private static string addUnitId;
     private static AdRequest request;
-    private static RewardedAd skippableAd;
-    private static RewardedAd unSkippableAd;
-    private static Action skippableAdsAction;
-    private static Action unSkippableAdsAction;
+    private static RewardedAd rewardedAd;
+    private static Action rewardedAdAction;
 
     void Start() {
         //Initialize App
@@ -22,16 +21,25 @@ public class AdMob : MonoBehaviour {
                 switch (status.InitializationState) {
                     case AdapterState.NotReady:
                         // The adapter initialization did not complete.
-                        MonoBehaviour.print("Adapter: " + className + " not ready.");
                         break;
                     case AdapterState.Ready:
                         // The adapter was successfully initialized.
-                        MonoBehaviour.print("Adapter: " + className + " is initialized.");
                         break;
                 }
             }
         });
+        //for testing purpose
+        AdColonyAppOptions.SetUserId("myUser");
+        AdColonyAppOptions.SetTestMode(true);
+        //
+
+        AdColonyAppOptions.SetGDPRRequired(true);
+        AdColonyAppOptions.SetGDPRConsentString("1");
+        AdColonyMediationExtras extras = new AdColonyMediationExtras();
+        extras.SetShowPrePopup(false);
+        extras.SetShowPostPopup(false);
         //initialize request
+        //set info if user logged in
         if (Program.Person != null) {
             GoogleMobileAds.Api.Gender gender;
             if (Program.Person.Gender == true) {
@@ -40,21 +48,25 @@ public class AdMob : MonoBehaviour {
                 gender = Gender.Female;
             }
             bool tagForChildDirected = true;
-            if (CalculateAge(Program.Person.Birthday)>=18) {
+            if (CalculateAge(Program.Person.Birthday) >= 18) {
                 tagForChildDirected = false;
             }
             request = new AdRequest.Builder()
             .SetGender(gender)
             .SetBirthday(Program.Person.Birthday)
             .TagForChildDirectedTreatment(tagForChildDirected)
+            .AddMediationExtras(extras)
             .Build();
         } else {
             request = new AdRequest.Builder()
             .TagForChildDirectedTreatment(false)
+            .AddMediationExtras(extras)
             .Build();
         }
-
-#if UNITY_ANDROID
+        //Setup rewarded video
+#if UNITY_EDITOR
+        addUnitId = "unused";
+#elif UNITY_ANDROID
         addUnitId = "ca-app-pub-3940256099942544/5224354917";
 #elif UNITY_IPHONE
         addUnitId = "ca-app-pub-3940256099942544/1712485313";
@@ -62,55 +74,27 @@ public class AdMob : MonoBehaviour {
         adUnitId = "unexpected_platform";
 #endif
         //Initialize skippableRewardedAd
-        skippableAd = new RewardedAd(addUnitId);
+        rewardedAd = new RewardedAd(addUnitId);
 
-        skippableAd.OnAdFailedToLoad += AdFaildLoading;
-        skippableAd.OnAdOpening += AdIsShowen;
-        skippableAd.OnAdFailedToShow += AdFaildToShow;
-
-        // Called when the user should be rewarded for interacting with the ad.
-        skippableAd.OnUserEarnedReward += HandleUserEarnedReward;
-        // Called when the ad is closed.
-        skippableAd.OnAdClosed += HandleRewardedAdClosed;
-
-#if UNITY_ANDROID
-        addUnitId = "ca-app-pub-3940256099942544/5224354917";
-#elif UNITY_IPHONE
-        addUnitId = "ca-app-pub-3940256099942544/1712485313";
-#else
-        adUnitId = "unexpected_platform";
-#endif
-        //Initialize skippableRewardedAd
-        unSkippableAd = new RewardedAd(addUnitId);
-
-        unSkippableAd.OnAdFailedToLoad += AdFaildLoading;
-        unSkippableAd.OnAdOpening += AdIsShowen;
-        unSkippableAd.OnAdFailedToShow += AdFaildToShow;
+        rewardedAd.OnAdFailedToLoad += AdFaildLoading;
+        rewardedAd.OnAdOpening += AdIsShowen;
+        rewardedAd.OnAdFailedToShow += AdFaildToShow;
 
         // Called when the user should be rewarded for interacting with the ad.
-        unSkippableAd.OnUserEarnedReward += HandleUserEarnedReward;
+        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
         // Called when the ad is closed.
-        unSkippableAd.OnAdClosed += HandleRewardedAdClosed;
-        LoadUnskippableAd();
-        LoadSkippableAd();
+        rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+        //load rewarded video
+        LoadRewardedAd();
     }
-    private static void LoadUnskippableAd() {
-        unSkippableAd.LoadAd(request);
+    private static void LoadRewardedAd() {
+        rewardedAd.LoadAd(request);
     }
-    private static void LoadSkippableAd() {
-        skippableAd.LoadAd(request);
-    }
-    public static void ShowSkippableAd(Action afterShowAction) {
-        if (skippableAd.IsLoaded()) {
-            skippableAd.Show();
+    public static void ShowRewardedAd(Action afterShowAction) {
+        if (rewardedAd.IsLoaded()) {
+            rewardedAd.Show();
         }
-        skippableAdsAction = afterShowAction;
-    }
-    public static void ShowUnSkippableAd(Action afterShowAction) {
-        if (unSkippableAd.IsLoaded()) {
-            unSkippableAd.Show();
-        }
-        unSkippableAdsAction = afterShowAction;
+        rewardedAdAction = afterShowAction;
     }
     public static void AdFaildLoading(object sender, AdErrorEventArgs args) {
     }
@@ -119,14 +103,19 @@ public class AdMob : MonoBehaviour {
     }
 
     public static void AdFaildToShow(object sender, AdErrorEventArgs args) {
+        LoadRewardedAd();
     }
-
     public static void HandleRewardedAdClosed(object sender, EventArgs args) {
-        if (skippableAdsAction != null) {
-            skippableAdsAction.Invoke();
-            skippableAdsAction = null;
-            LoadSkippableAd();
+        LoadRewardedAd();
+    }
+    public static void HandleUserEarnedReward(object sender, Reward args) {
+        string type = args.Type;
+        double amount = args.Amount;
+        if (rewardedAdAction != null) {
+            rewardedAdAction.Invoke();
+            rewardedAdAction = null;
         }
+        LoadRewardedAd();
     }
     private int CalculateAge(DateTime date) {
         DateTime birthdate = date;
@@ -134,18 +123,5 @@ public class AdMob : MonoBehaviour {
         if (DateTime.Now.Month < birthdate.Month || (DateTime.Now.Month == birthdate.Month && DateTime.Now.Day < birthdate.Day))
             years--;
         return years;
-    }
-    public static void HandleUserEarnedReward(object sender, Reward args) {
-        string type = args.Type;
-        double amount = args.Amount;
-        if (skippableAdsAction != null) {
-            skippableAdsAction.Invoke();
-            skippableAdsAction = null;
-            LoadSkippableAd();
-        } else if (unSkippableAdsAction != null) {
-            unSkippableAdsAction.Invoke();
-            unSkippableAdsAction = null;
-            LoadUnskippableAd();
-        }
     }
 }
