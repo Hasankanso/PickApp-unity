@@ -327,6 +327,7 @@ MonoBehaviour:
     type: 3}
   imageViewer: {fileID: 7387959173295946373, guid: cd143cebc18750445bf352fb9738fc05,
     type: 3}
+  notificationScript: {fileID: 0}
   rideDetails: {fileID: 8819354592479800504, guid: c61b92d9189d48e4bad49b41708c2ad8,
     type: 3}
   carsListPanel: {fileID: 8729843685456017724, guid: 02648b02d90a2884da5aea2feedf144c,
@@ -380,6 +381,7 @@ MonoBehaviour:
     type: 3}
   messageItem: {fileID: 5249838573254746862, guid: cbe2e10caebf18b47a6b8fe75be18b5b,
     type: 3}
+  notificationItem: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
