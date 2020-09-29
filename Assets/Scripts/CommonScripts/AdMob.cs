@@ -1,19 +1,19 @@
 ﻿using GoogleMobileAds.Api;
 using GoogleMobileAds.Api.Mediation.AdColony;
+using GoogleMobileAds.Api.Mediation.UnityAds;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class AdMob : MonoBehaviour {
-    private static string addUnitId;
+    private static string adUnitId;
     private static AdRequest request;
     private static RewardedAd rewardedAd;
     private static Action rewardedAdAction;
 
     void Start() {
         //Initialize App
-        MobileAds.Initialize((initStatus) => {
+        /*MobileAds.Initialize((initStatus) => {
             Dictionary<string, AdapterStatus> map = initStatus.getAdapterStatusMap();
             foreach (KeyValuePair<string, AdapterStatus> keyValuePair in map) {
                 string className = keyValuePair.Key;
@@ -27,17 +27,16 @@ public class AdMob : MonoBehaviour {
                         break;
                 }
             }
-        });
+        });*/
         //for testing purpose
         AdColonyAppOptions.SetUserId("myUser");
         AdColonyAppOptions.SetTestMode(true);
         //
-
+        UnityAds.SetGDPRConsentMetaData(true);
         AdColonyAppOptions.SetGDPRRequired(true);
         AdColonyAppOptions.SetGDPRConsentString("1");
-        AdColonyMediationExtras extras = new AdColonyMediationExtras();
-        extras.SetShowPrePopup(false);
-        extras.SetShowPostPopup(false);
+
+        MobileAds.Initialize(initStatus => { });
         //initialize request
         //set info if user logged in
         if (Program.Person != null) {
@@ -55,26 +54,26 @@ public class AdMob : MonoBehaviour {
             .SetGender(gender)
             .SetBirthday(Program.Person.Birthday)
             .TagForChildDirectedTreatment(tagForChildDirected)
-            .AddMediationExtras(extras)
+            .AddTestDevice("0D194CF269BFB841E3F9F699EE9B5E2E")
+            .AddExtra("color_bg", "D81159")
             .Build();
         } else {
             request = new AdRequest.Builder()
             .TagForChildDirectedTreatment(false)
-            .AddMediationExtras(extras)
+            .AddTestDevice("0D194CF269BFB841E3F9F699EE9B5E2E")
+            .AddExtra("color_bg", "D81159")
             .Build();
         }
         //Setup rewarded video
-#if UNITY_EDITOR
-        addUnitId = "unused";
-#elif UNITY_ANDROID
-        addUnitId = "ca-app-pub-3940256099942544/5224354917";
+#if UNITY_ANDROID
+        adUnitId = "ca-app-pub-4192057498524161/8496521283";
 #elif UNITY_IPHONE
-        addUnitId = "ca-app-pub-3940256099942544/1712485313";
+        adUnitId = "ca-app-pub-4192057498524161/8299234258";
 #else
         adUnitId = "unexpected_platform";
 #endif
-        //Initialize skippableRewardedAd
-        rewardedAd = new RewardedAd(addUnitId);
+        //Initialize RewardedAd
+        rewardedAd = new RewardedAd(adUnitId);
 
         rewardedAd.OnAdFailedToLoad += AdFaildLoading;
         rewardedAd.OnAdOpening += AdIsShowen;
@@ -86,6 +85,7 @@ public class AdMob : MonoBehaviour {
         rewardedAd.OnAdClosed += HandleRewardedAdClosed;
         //load rewarded video
         LoadRewardedAd();
+        Debug.Log(555555556666666666);
     }
     private static void LoadRewardedAd() {
         rewardedAd.LoadAd(request);
@@ -93,6 +93,7 @@ public class AdMob : MonoBehaviour {
     public static void ShowRewardedAd(Action afterShowAction) {
         if (rewardedAd.IsLoaded()) {
             rewardedAd.Show();
+            Debug.Log("ad's showen");
         }
         rewardedAdAction = afterShowAction;
     }

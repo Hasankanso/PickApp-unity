@@ -127,7 +127,7 @@ public class RideDetails : Panel {
         luggages.text = ride.AvailableLuggages.ToString();
         driverFullName.text = person.FirstName + " " + person.LastName;
         driverBio.text = person.Bio;
-        driverRatings.text = ride.Person.RateAverage.ToString() + "/5 - " + ride.Person.RateCount.ToString() + " ratings";
+        driverRatings.text = ride.Person.RateAverage.ToString("0.0") + "/5 - " + ride.Person.RateCount.ToString() + " ratings";
         carName.text = car.Name;
         carBrand.text = car.Brand;
         carYear.text = car.Year.ToString();
@@ -187,7 +187,7 @@ public class RideDetails : Panel {
         luggages.text = ride.AvailableLuggages.ToString();
         driverFullName.text = person.FirstName + " " + person.LastName;
         driverBio.text = person.Bio;
-        driverRatings.text = ride.Person.RateAverage.ToString() + "/5 - " + ride.Person.RateCount.ToString() + " ratings";
+        driverRatings.text = ride.Person.RateAverage.ToString("0.0") + "/5 - " + ride.Person.RateCount.ToString() + " ratings";
         carName.text = car.Name;
         carBrand.text = car.Brand;
         carYear.text = car.Year.ToString();
