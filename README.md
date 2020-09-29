@@ -1,11 +1,11 @@
 # TheProject
 let private drivers offer rides and drive together, this modern way is flexible and energy/money saving. It may help solving congestion problems since more people will go in one car, which means less cars on the road.<br>
 # TODO
-ratebusiness(update),device registration,push notifications, alertBusiness(need pus notification only),
-chatting system, analytics, notification panel
+device registration(waiting backendless team),push notifications(waiting backendless team), alertBusiness(need pus notification only)(waiting backendless team),
+chatting system(waiting backendless team), notification panel
 how it works, terms & conditions, privacy policy, licenses, user in cache,
-backendless validation, backednelss retreiveng verification code, input field(when press back the text become null),
- verification email, delete user, backup data, remove car problem.
+backendless validation, backednelss retreiveng verification code(when two user have same email, and one user try to login, two email received)(waiting backendless team), input field(when press back the text become null),
+ verification email(waiting backendless team), delete user, backup data, remove car problem.
 
 loubani arabic language(search about change language,input fields)
 serhan 
