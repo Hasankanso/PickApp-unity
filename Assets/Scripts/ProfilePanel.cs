@@ -29,7 +29,7 @@ public class ProfilePanel : Panel {
         }
         Status = StatusE.VIEW;
         fullName.text = person.FirstName + " " + person.LastName;
-        ratings.text = person.RateAverage.ToString() + "/5 ";
+        ratings.text = person.RateAverage.ToString("0.0") + "/5 ";
         if (driver != null) {
             //scheduleLabel.SetActive(true);
             regionsLabel.SetActive(true);

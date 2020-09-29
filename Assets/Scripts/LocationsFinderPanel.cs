@@ -35,8 +35,8 @@ public class LocationsFinderPanel : Panel {
     internal void Init(string initText, Action<Location> OnLocationPicked) {
         itemClicked = OnLocationPicked;
         searchField.text = initText;
-        searchField.Select();
         token = GenerateToken();
+        searchField.Select();
     }
 
     private IEnumerator LoadLocations() {

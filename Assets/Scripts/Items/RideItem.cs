@@ -24,7 +24,7 @@ public class RideItem : MonoBehaviour {
         this.origin.text = this.ride.From.ToString();
         this.target.text = this.ride.To.ToString();
         this.driverName.text = driver.FirstName + " " + driver.LastName;
-        this.rating.text = driver.RateAverage + "";
+        this.rating.text = driver.RateAverage.ToString("0.0") + "";
 
         float r = 1f;
         float g = 1f;

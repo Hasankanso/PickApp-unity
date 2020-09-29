@@ -15,7 +15,7 @@ public class UserDetails : Panel {
         this.person = user.Person;
         bio.text = person.Bio;
         fullName.text = person.FirstName + " " + person.LastName;
-        ratings.text = person.RateAverage.ToString() + "/5 - " + person.RateCount + " ratings";
+        ratings.text = person.RateAverage.ToString("0.0") + "/5 - " + person.RateCount + " ratings";
         chattiness.text = person.Chattiness;
         acomplishedRides.text = "Acomplished rides: "+person.AcomplishedRides.ToString();
         canceledRides.text = "Canceled rides: " + person.CanceledRides.ToString();
@@ -46,7 +46,7 @@ public class UserDetails : Panel {
         bio.text = person.Bio;
         fullName.text = person.FirstName + " " + person.LastName;
         Debug.Log(person.Rates.Count.ToString());
-        ratings.text = person.RateAverage.ToString() + "/5 - " + person.Rates.Count.ToString() + " ratings";
+        ratings.text = person.RateAverage.ToString("0.0") + "/5 - " + person.Rates.Count.ToString() + " ratings";
         chattiness.text = person.Chattiness;
         profileImage.sprite = Program.GetImage(person.ProfilePicture);
         /* if (Person.Driver != null)
