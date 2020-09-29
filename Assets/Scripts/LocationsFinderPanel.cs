@@ -44,7 +44,7 @@ public class LocationsFinderPanel : Panel {
         var En = "&types=geocode&language=ar";
 
 
-        if (Program.language == Language.Arabic)
+        if (Program.language.Arabic==true)
         {
             if (searchField.text != "")
             {

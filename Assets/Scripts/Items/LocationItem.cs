@@ -17,7 +17,7 @@ public class LocationItem : MonoBehaviour
 
   internal void Init(LocationsFinderPanel locationResultsPanel, string placeId, string name)
   {
-    if (Program.language==Language.Arabic) {
+    if (Program.language.Arabic==true) {
         this.itemText.alignment = TextAnchor.MiddleRight;
         this.itemText.fontSize = 70;
     }
