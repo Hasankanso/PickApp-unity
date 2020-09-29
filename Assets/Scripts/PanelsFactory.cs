@@ -42,7 +42,7 @@ public class PanelsFactory : MonoBehaviour {
     public CarDetails carDetails;
     public DirectionsFinderPanel directionsFinderPanel;
     public ImageViewPanel imageViewer;
-
+    public NotificationScript notificationScript;
     public RideDetails rideDetails;
     public CarsListPanel carsListPanel;
     public PhonePanel phonePanel;
@@ -55,6 +55,11 @@ public class PanelsFactory : MonoBehaviour {
     internal static Panel CreateImageViewer(Texture image) {
         ImageViewPanel panel = Instantiate(defaultPanelsFactory.imageViewer);
         panel.Init(image);
+        return panel;
+    }
+    public static NotificationScript CreateNotificationScript()
+    {
+        NotificationScript panel = Instantiate(defaultPanelsFactory.notificationScript);
         return panel;
     }
 

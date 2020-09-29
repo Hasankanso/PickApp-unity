@@ -129,7 +129,7 @@ public class Language : MonoBehaviour
             {
                 var elemEnum = element.GetEnumerator();
                 while (elemEnum.MoveNext())
-                    XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), (elemEnum.Current as XmlElement).InnerText);
+                XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), (elemEnum.Current as XmlElement).InnerText);
             }
         }
         else Debug.LogError("The specified language does not exist: " + language);
