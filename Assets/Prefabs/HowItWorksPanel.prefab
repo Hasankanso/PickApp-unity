@@ -535,6 +535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: How it works
+  verifyEmail: {fileID: 0}
   permanent: 0
 --- !u!1 &5985538005411812634
 GameObject:

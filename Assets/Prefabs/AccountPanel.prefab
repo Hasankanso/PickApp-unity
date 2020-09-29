@@ -1835,6 +1835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  verifyEmail: {fileID: 0}
   permanent: 0
   firstName: {fileID: 2089551047134432735}
   lastName: {fileID: 2089551047645121422}

@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 653831900235352934}
   - component: {fileID: 7168517794533794459}
   - component: {fileID: 4271982305291067057}
+  - component: {fileID: 8368820191591333233}
   m_Layer: 5
   m_Name: regionText
   m_TagString: Untagged
@@ -367,6 +368,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Please select the region that you live in
+--- !u!114 &8368820191591333233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3259561643153308451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: SelectRegions
 --- !u!1 &4677560809503834808
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +392,7 @@ GameObject:
   - component: {fileID: 1857255704129267909}
   - component: {fileID: 1553175131353004678}
   - component: {fileID: 2398176094528322527}
+  - component: {fileID: 7532874908146081282}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -444,6 +459,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: NEXT
+--- !u!114 &7532874908146081282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677560809503834808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Next
 --- !u!1 &4992336597955113856
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,12 +566,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  verifyEmail: {fileID: 0}
   permanent: 0
   title: {fileID: 5948938252227529583}
-  backButton: {fileID: 1620295916010041877}
   becomeDriver: {fileID: 1909600642717654040}
   editRegions: {fileID: 3916794289657643186}
   listView: {fileID: 1351776205792160011}
+  regionItems: []
 --- !u!1 &6507001518714511591
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,6 +763,7 @@ GameObject:
   - component: {fileID: 1034173181801408941}
   - component: {fileID: 3616050683183258476}
   - component: {fileID: 5948938252227529583}
+  - component: {fileID: 9188360988530604419}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -800,6 +830,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Become a driver
+--- !u!114 &9188360988530604419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6683313345183548732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec084995cdf5444c85660100addd020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: BecomeDriver
 --- !u!1 &7857830969508064633
 GameObject:
   m_ObjectHideFlags: 0
