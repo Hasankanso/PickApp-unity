@@ -1,15 +1,13 @@
 # TheProject
 let private drivers offer rides and drive together, this modern way is flexible and energy/money saving. It may help solving congestion problems since more people will go in one car, which means less cars on the road.<br>
 # TODO
-device registration(waiting backendless team),push notifications(waiting backendless team), alertBusiness(need pus notification only)(waiting backendless team),
-chatting system(waiting backendless team), notification panel
-how it works, terms & conditions, privacy policy, licenses, user in cache,
-backendless validation, input field(when press back the text become null),
- confirmation email(waiting backendless team), delete user, backup data, remove car problem.
+device registration(waiting backendless team), confirmation email(waiting backendless team),push notifications(waiting backendless team), alertBusiness(need pus notification only)(waiting backendless team),chatting system(waiting backendless team)<br>
 
-loubani arabic language(search about change language,input fields)
-serhan 
-adel ads mediation
+notification panel, how it works, terms & conditions, privacy policy, licenses, user in cache,
+backendless validation, delete user, backup data.<br>
+
+loubani arabic language(search about change language,input fields)<br>
+adel ads mediation<br>
 
 EDITRIDE:<br>
 	if there's passengers:<br>
