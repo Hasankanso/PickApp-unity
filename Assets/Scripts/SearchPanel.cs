@@ -9,7 +9,7 @@ using ArabicSupport;
 
 public class SearchPanel : Panel {
     public InputFieldScript from, to;
-    public Text minDate, maxDate;
+    public Text minDate, maxDate,nbOfNotifications;
     public Dropdown numberOfPersons;
     private Location fromL, toL;
     private SearchInfo info = null;

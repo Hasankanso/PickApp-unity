@@ -13,12 +13,16 @@ public class NotificationScript : Panel
     public Image backImage;
     public Text title;
     public Person person;
+    public GameObject settingPanel;
+    public GameObject firstView;
     private List<NotificationItem> NotificationItems = new List<NotificationItem>();
 
     public static readonly string PANELNAME = "NotificationScript";
 
     internal override void Clear()
     {
+        firstView.gameObject.SetActive(true);
+        settingPanel.gameObject.SetActive(false);
         backImage.gameObject.SetActive(false);
         listView.Clear();
         title.transform.position = new Vector3(56f, title.transform.position.y, title.transform.position.z);
@@ -44,10 +48,23 @@ public class NotificationScript : Panel
     }
     public void OpenAlert(NotificationScript n) 
     {
-         Debug.Log("sexzxz");
     }
     public void OpenAddRide(NotificationScript v )
     {
+
+    }
+    public void ClearNotifications()
+    {
+        this.listView.Clear();
+        this.NotificationItems.Clear();
+        settingPanel.gameObject.SetActive(false);
+        firstView.gameObject.SetActive(true);
+        OpenDialog("Notifications Cleared", true);
+    }
+    public void OpenNotificationsSetting()
+    {
+        settingPanel.gameObject.SetActive(true);
+        firstView.gameObject.SetActive(false);
 
     }
 
