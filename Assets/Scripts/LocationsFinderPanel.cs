@@ -37,6 +37,7 @@ public class LocationsFinderPanel : Panel {
         searchField.text = initText;
         token = GenerateToken();
         searchField.Select();
+        searchField.ActivateInputField();
     }
 
     private IEnumerator LoadLocations() {

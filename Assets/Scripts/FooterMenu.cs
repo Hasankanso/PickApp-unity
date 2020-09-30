@@ -218,7 +218,7 @@ public class FooterMenu : MonoBehaviour {
         if (!Program.IsLoggedIn) {
             if (loginRegister == null) loginRegister = PanelsFactory.CreateLoginRegisterPanel();
             loginRegister.transform.SetParent(transform.parent, false);
-            Open(loginRegister, () => loginRegister.Init(false));
+            Open(loginRegister, () => loginRegister.Init(true));
         } else {
             Open(yourRidesPanel);
         }

@@ -24,15 +24,16 @@ public class InputFieldScript : MonoBehaviour {
     }
     public void OnEditting() {
         /*  text1 = text.GetComponent<Text>().text;
-          text1=  ArabicFixer.Fix(text1, true, true);
-          //this.text.text = text1;
-          stringEdit = text1;
-          //Debug.Log(text.text);
-          Debug.Log(text1);
-          */
+         text1=  ArabicFixer.Fix(text1, true, true);
+         //this.text.text = text1;
+         stringEdit = text1;
+         //Debug.Log(text.text);
+         Debug.Log(text1);
+         */
         stringEdit = text.text;
         //stringEdit= ArabicFixer.Fix(text.text, true, true);
     }
+
     public void PlaceHolder() {
         placeHolderText = placeHolder.GetComponent<Text>();
         text.color = new Color(255f / 255f, 188f / 255f, 66f / 255f);
@@ -53,11 +54,9 @@ public class InputFieldScript : MonoBehaviour {
         this.PlaceHolder();
     }
     public void clickedOut() {
-       if (Input.GetKeyDown(KeyCode.Escape)) {
-            SetText(stringEdit);
-        }
+        SetText(stringEdit);
         placeHolderText = placeHolder.GetComponent<Text>();
-        if (placeHolderText.fontSize != 40 && String.IsNullOrEmpty(text.GetComponent<Text>().text)) {
+        if (placeHolderText.fontSize != 40 && string.IsNullOrEmpty(text.GetComponent<Text>().text)) {
             placeHolderText.transform.position -= new Vector3(-19.7f, -8.1f, 0);
             placeHolderText.fontSize = 40;
             placeHolderText.alignment = TextAnchor.MiddleLeft;
