@@ -6,7 +6,7 @@ device registration(waiting backendless team), confirmation email(waiting backen
 notification panel, how it works, terms & conditions, privacy policy, licenses, user in cache,
 backendless validation, delete user, backup data.<br>
 
-loubani arabic language(search about change language,input fields)<br>
+loubani arabic language(search about change language,input fields,xml files)<br>
 adel ads mediation<br>
 
 EDITRIDE:<br>
