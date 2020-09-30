@@ -4,8 +4,8 @@ let private drivers offer rides and drive together, this modern way is flexible 
 device registration(waiting backendless team),push notifications(waiting backendless team), alertBusiness(need pus notification only)(waiting backendless team),
 chatting system(waiting backendless team), notification panel
 how it works, terms & conditions, privacy policy, licenses, user in cache,
-backendless validation, backednelss retreiveng verification code(when two user have same email, and one user try to login, two email received)(waiting backendless team), input field(when press back the text become null),
- verification email(waiting backendless team), delete user, backup data, remove car problem.
+backendless validation, input field(when press back the text become null),
+ confirmation email(waiting backendless team), delete user, backup data, remove car problem.
 
 loubani arabic language(search about change language,input fields)
 serhan 
