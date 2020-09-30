@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 1.575, y: 132.75}
+  m_AnchoredPosition: {x: 1.575, y: 119}
   m_SizeDelta: {x: 435.5, y: 86.7}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &4179695287383000192
@@ -298,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  verifyEmail: {fileID: 0}
   permanent: 0
   news: {fileID: 4179695288146416816}
   disableAll: {fileID: 4179695288415934153}

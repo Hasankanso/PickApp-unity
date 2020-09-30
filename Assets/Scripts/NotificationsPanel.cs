@@ -15,7 +15,8 @@ public class NotificationsPanel : Panel {
         Cache.SetDisableAllCheckbox(disableAll.isOn);
         BackClose();
     }
-    public void Init() {
+    public override void Init() {
+        AdMob.InitializeBannerView();
         news.isOn = Cache.GetNewsCheckbox();
         disableAll.isOn = Cache.GetDisableAllCheckbox();
     }

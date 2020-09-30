@@ -11,6 +11,7 @@ public class ChattinessPanel : Panel {
     public Dropdown chatiness;
 
     public override void Init() {
+        AdMob.InitializeBannerView();
         SetChosenChattiness();
     }
     public void submit() {

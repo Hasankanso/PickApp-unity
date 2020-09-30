@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HowItWorksPanel : Panel {
+    public override void Init() {
+        AdMob.InitializeBannerView();
+    }
     internal override void Clear() {
-        throw new System.NotImplementedException();
+
     }
 }

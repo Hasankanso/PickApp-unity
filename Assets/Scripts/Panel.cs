@@ -76,6 +76,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
         if (Previous != null) {
             Hide();
             Previous.Show();
+            AdMob.DestroyBanner();
         }
     }
 
@@ -197,6 +198,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel> {
     }
     public void MissionCompleted(string panelName, string dialogMessage, bool initialize) {
         FooterMenu.Open(panelName, dialogMessage, initialize);
+        AdMob.DestroyBanner();
         DestroyImediateForwardBackward();
     }
     internal abstract void Clear();

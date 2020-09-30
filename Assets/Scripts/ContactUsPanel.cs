@@ -13,7 +13,6 @@ using System.Security.Cryptography.X509Certificates;
 public class ContactUsPanel : Panel {
     public InputFieldScript description, subject;
 
-    private Person user;
     public void SendMail() {
         if (validate()) {
              Request<string> request = new SendContactUs(Program.Person, subject.text.text, description.text.text);
@@ -34,8 +33,8 @@ public class ContactUsPanel : Panel {
             Open(panel);
         }
     }
-    public void Init(Person user) {
-        this.user = user;
+    public override void Init() {
+        AdMob.InitializeBannerView();
     }
     public void openPrivacyPolicy() {
         Panel panel = PanelsFactory.CreatePrivacyPolicy();

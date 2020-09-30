@@ -11,6 +11,7 @@ public class BioPanel : Panel {
     public InputFieldScript bio;
 
     public override void Init() {
+        AdMob.InitializeBannerView();
         Clear();
         if (!string.IsNullOrEmpty(Program.Person.Bio)) {
             bio.SetText(Program.Person.Bio);

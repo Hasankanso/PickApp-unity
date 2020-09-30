@@ -538,12 +538,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   panelName: 
+  verifyEmail: {fileID: 0}
   permanent: 0
   title: {fileID: 5948938252227529583}
-  backButton: {fileID: 1620295916010041877}
   becomeDriver: {fileID: 1909600642717654040}
   editRegions: {fileID: 3916794289657643186}
   listView: {fileID: 1351776205792160011}
+  regionItems: []
 --- !u!1 &6507001518714511591
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +837,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 55}
+  m_AnchoredPosition: {x: 0, y: 119}
   m_SizeDelta: {x: 506, y: 86.7}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8501033298366360541

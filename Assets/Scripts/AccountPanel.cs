@@ -81,6 +81,7 @@ public class AccountPanel : Panel {
     }
     public override void Init() {
         Clear();
+        AdMob.InitializeBannerView();
         user = Program.User;
         Person person = Program.Person;
         firstName.SetText(person.FirstName);

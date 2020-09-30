@@ -14,6 +14,7 @@ public class SettingsPanel : Panel {
     public User user = null;
 
     public override void Init() {
+        AdMob.InitializeBannerView();
         this.user = Program.User;
         string lang = Cache.GetLanguage();
         if (lang == "English"){
@@ -57,6 +58,7 @@ public class SettingsPanel : Panel {
     public void openContactUs() {
         Panel panel = PanelsFactory.CreateContactUs();
         Open(panel);
+
     }
     internal override void Clear() {
     }
