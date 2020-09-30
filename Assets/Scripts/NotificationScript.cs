@@ -29,33 +29,27 @@ public class NotificationScript : Panel
         Status = StatusE.VIEW;
         foreach (NotificationItem NI in notificationItem)
         {
-            var item = ItemsFactory.CreateNotificationItem(listView.scrollContainer);
+            var item = ItemsFactory.CreateNotificationItem(listView.scrollContainer, OpenAddRide);
             listView.Add(item.gameObject);
             NotificationItems.Add(item);
         }
     }
-    public void Search()
+    public void AddNotificationItem(string title,string message)
     {
-        Debug.Log("search");
-
-        bool isNoResult = true;
-        string searchText = search.text;
-        for (int i = 0; i < NotificationItems.Count; i++)
-        {
-            if (NotificationItems[i].Title.text.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 || NotificationItems[i].Message.text.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
-            {
-                NotificationItems[i].gameObject.SetActive(true);
-                isNoResult = false;
-            }
-            else
-            {
-                NotificationItems[i].gameObject.SetActive(false);
-            }
-        }
-        if (isNoResult)
-        {
-            OpenDialog("No results found", false);
-        }
+        var item = ItemsFactory.CreateNotificationItem(listView.scrollContainer,OpenAlert);
+        listView.Add(item.gameObject);
+        item.title.text = title;
+        item.message.text = message;
+        NotificationItems.Add(item);
     }
+    public void OpenAlert(NotificationScript n) 
+    {
+         Debug.Log("sexzxz");
+    }
+    public void OpenAddRide(NotificationScript v )
+    {
+
+    }
+
 
 }

@@ -43,6 +43,7 @@ public class SearchPanel : Panel {
     public void OpenNotificationPanel()
     {
         NotificationScript p = PanelsFactory.CreateNotificationScript();
+        p.AddNotificationItem("hello", "me");
         Open(p);
     }
 

@@ -6,20 +6,21 @@ using UnityEngine.UI;
 
 public class NotificationItem : Panel
 {
-    private Panel inboxPanel;
-    public Text Title;
-    public Text Message;
-    public Person person = null;
+    public Text title;
+    public Text message;
+    Action<NotificationScript> OnItemClick;
 
-    public void Init(Person person)
+    public void Init(Action<NotificationScript> OnItemClick)
     {
         Clear();
-        this.person = person;
 
+        this.OnItemClick = OnItemClick;
     }
 
     internal override void Clear()
     {
-
+        this.title.text = "";
+        this.message.text = "";
     }
+
 }

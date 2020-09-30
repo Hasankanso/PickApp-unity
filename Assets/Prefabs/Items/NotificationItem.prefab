@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8886325535083143221}
   - component: {fileID: 8886325535083143220}
   - component: {fileID: 910940635316087483}
-  - component: {fileID: 2379530484848515490}
+  - component: {fileID: 432527547212576142}
   m_Layer: 5
   m_Name: NotificationItem
   m_TagString: Untagged
@@ -132,7 +132,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2379530484848515490
+--- !u!114 &432527547212576142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,8 +148,8 @@ MonoBehaviour:
   panelName: 
   verifyEmail: {fileID: 0}
   permanent: 0
-  Title: {fileID: 8886325535530235905}
-  Message: {fileID: 8886325536065947046}
+  title: {fileID: 8886325535530235905}
+  message: {fileID: 8886325536065947046}
 --- !u!1 &8886325535530235911
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ALert!!
+  m_Text: 
 --- !u!1 &8886325535750078906
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,4 +376,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: An urgent trip is waiting for you
+  m_Text: 

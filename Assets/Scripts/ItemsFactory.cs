@@ -92,11 +92,11 @@ public class ItemsFactory : MonoBehaviour {
         roadItem.Init(panel, details, points);
         return roadItem;
     }
-    public static NotificationItem CreateNotificationItem(GameObject parent)
+    public static NotificationItem CreateNotificationItem(GameObject parent, Action<NotificationScript> OnItemClick)
     {
         NotificationItem notificationItem = Instantiate(defaultItemsFactory.notificationItem);
         notificationItem.transform.SetParent(parent.transform, false);
-        notificationItem.Init();
+        notificationItem.Init(OnItemClick);
         return notificationItem;
     }
     internal static PassengerItem CreatPassengerItem(Passenger o, Panel rideDetails) {
