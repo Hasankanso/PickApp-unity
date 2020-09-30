@@ -17,7 +17,7 @@ public class ItemsFactory : MonoBehaviour {
     public InboxItem inboxItem;
     public RegionItem regionItem;
     public MessageItem messageItem;
-
+    public NotificationItem notificationItem;
     private void Start() {
         defaultItemsFactory = this;
     }
@@ -92,7 +92,13 @@ public class ItemsFactory : MonoBehaviour {
         roadItem.Init(panel, details, points);
         return roadItem;
     }
-
+    public static NotificationItem CreateNotificationItem(GameObject parent)
+    {
+        NotificationItem notificationItem = Instantiate(defaultItemsFactory.notificationItem);
+        notificationItem.transform.SetParent(parent.transform, false);
+        notificationItem.Init();
+        return notificationItem;
+    }
     internal static PassengerItem CreatPassengerItem(Passenger o, Panel rideDetails) {
         PassengerItem obj = Instantiate(defaultItemsFactory.passengerItem);
         obj.Init(o, rideDetails);

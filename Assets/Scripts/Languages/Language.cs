@@ -49,10 +49,7 @@ public class Language : MonoBehaviour
 
     public string GetString(string _name)
     {
-        if (arabic == false)
-        {
-            return _name;
-        }
+
         if (!XML_Strings.ContainsKey(_name))
         {
             Debug.LogError("This string is not present in the XML file where you're reading: " + _name);
@@ -129,7 +126,7 @@ public class Language : MonoBehaviour
             {
                 var elemEnum = element.GetEnumerator();
                 while (elemEnum.MoveNext())
-                    XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), (elemEnum.Current as XmlElement).InnerText);
+                XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), (elemEnum.Current as XmlElement).InnerText);
             }
         }
         else Debug.LogError("The specified language does not exist: " + language);

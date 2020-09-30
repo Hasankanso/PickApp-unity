@@ -40,6 +40,11 @@ public class SearchPanel : Panel {
     public void OpenDateTimePicker(Text dateLabel) {
         OpenDateTimePicker((dt) => OnDatePicked(dateLabel, dt));
     }
+    public void OpenNotificationPanel()
+    {
+        NotificationScript p = PanelsFactory.CreateNotificationScript();
+        Open(p);
+    }
 
     private void SearchResults(List<Ride> results, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK))
