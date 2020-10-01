@@ -37,6 +37,7 @@ public class SettingsPanel : Panel {
             arabicCheck.enabled = true;
             Cache.SetLanguage("Arabic");
         }
+        AdMob.DestroyBanner();
         SceneManager.LoadScene("MainScene");
     }
     public void openHowItWorks() {
