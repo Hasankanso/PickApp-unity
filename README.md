@@ -1,8 +1,7 @@
 # TheProject
 let private drivers offer rides and drive together, this modern way is flexible and energy/money saving. It may help solving congestion problems since more people will go in one car, which means less cars on the road.<br>
 # TODO
-device registration(waiting backendless team), confirmation email(waiting backendless team),push notifications(waiting backendless team), alertBusiness(need pus notification only)(waiting backendless team),chatting system(waiting backendless team), show recent locations in findlocationpanel.banner rewarded final testing(waiting accept payment info)
-native ads(waiting admob respond) <br>
+device registration(waiting backendless team), confirmation email(waiting backendless team),push notifications(waiting backendless team), alertBusiness(need pus notification only)(waiting backendless team),chatting system(waiting backendless team), show recent locations in findlocationpanel, native ads(waiting admob respond) <br>
 
 fix backendless code(decrease requests), GUI, car default image, logout by push notification, notification panel, searchpanel automatic end date +24, if user change end date this will be disabled, how it works, terms & conditions, privacy policy, licenses, user in cache,
 backendless validation, delete user, backup data, input field error when pressing back android.<br>
