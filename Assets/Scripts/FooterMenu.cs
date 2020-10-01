@@ -96,6 +96,7 @@ public class FooterMenu : MonoBehaviour {
             Program.IsLoggedIn = false;
         } else {
             Program.User.Person = u;
+            Program.User.Email = Cache.GetEmail();
             Program.CountryComponent = Program.Person.CountryInformations.CountryComponent;
             Program.IsLoggedIn = true;
             if (Program.User.UserStatus == "EMAIL_CONFIRMATION_PENDING") {

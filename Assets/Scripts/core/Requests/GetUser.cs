@@ -18,6 +18,7 @@ namespace Requests {
         {
             JObject json = (JObject)response;
             Person u = Person.ToObject((JObject)json["person"]);
+            Cache.SetEmail(json["email"].ToString());
             string userStatus = json["userStatus"].ToString();
             Program.User.UserStatus = userStatus;
             Driver driver = null;

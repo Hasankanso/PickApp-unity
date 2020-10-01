@@ -54,7 +54,9 @@ public class InputFieldScript : MonoBehaviour {
         this.PlaceHolder();
     }
     public void clickedOut() {
-        SetText(stringEdit);
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            SetText(stringEdit);
+        }
         placeHolderText = placeHolder.GetComponent<Text>();
         if (placeHolderText.fontSize != 40 && string.IsNullOrEmpty(text.GetComponent<Text>().text)) {
             placeHolderText.transform.position -= new Vector3(-19.7f, -8.1f, 0);
