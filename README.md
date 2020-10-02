@@ -3,7 +3,7 @@ let private drivers offer rides and drive together, this modern way is flexible 
 # TODO
 device registration(waiting backendless team), confirmation email(waiting backendless team),push notifications(waiting backendless team), alertBusiness(need pus notification only)(waiting backendless team),chatting system(waiting backendless team), show recent locations in findlocationpanel, native ads(waiting admob respond) <br>
 
-fix backendless code(decrease requests), GUI, car default image, logout by push notification, notification panel, searchpanel automatic end date +24, if user change end date this will be disabled, how it works, terms & conditions, privacy policy, licenses, user in cache,
+fix backendless code(decrease requests), GUI, logout by push notification, notification panel, searchpanel automatic end date +24, if user change end date this will be disabled, how it works, terms & conditions, privacy policy, licenses, user in cache,
 backendless validation, delete user, backup data, input field error when pressing back android.<br>
 
 loubani arabic language(search about change language,input fields,xml files)<br>
