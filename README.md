@@ -1,9 +1,10 @@
 # TheProject
 let private drivers offer rides and drive together, this modern way is flexible and energy/money saving. It may help solving congestion problems since more people will go in one car, which means less cars on the road.<br>
 # TODO
-device registration(waiting backendless team), confirmation email(waiting backendless team),push notifications(waiting backendless team), alertBusiness(need pus notification only)(waiting backendless team),confirm email(waiting abckendless team),chatting system(waiting backendless team), show recent locations in findlocationpanel, native ads(waiting admob respond) <br>
+waiting backendless or admob team:<br>
+device registration, confirmation email, push notifications, alertBusiness(need pus notification only), confirm email, delete user(delete rates only), chatting system, native ads<br>
 
-fix backendless code(decrease requests), GUI, logout by push notification, notification panel, searchpanel automatic end date +24, if user change end date this will be disabled, how it works, terms & conditions, privacy policy, licenses, user in cache,
+fix backendless code(decrease requests), show recent locations in findlocationpanel, GUI, logout by push notification, notification panel, searchpanel automatic end date +24, if user change end date this will be disabled, how it works, terms & conditions, privacy policy, licenses, user in cache,
 backendless validation, delete user, backup data, input field error when pressing back android.<br>
 
 loubani arabic language(search about change language,input fields,xml files)<br>
@@ -16,11 +17,6 @@ UserBusiness <br>
 		we should store in archive and not delete them(high)<br>
 	getLoggedInUser:<br>
 		we should get user by id and somthing else(high security)<br>
-		should get rates(high)<br>
-	Login:<br>
-		should get rates(high)<br>
-		
-
 Review:
 generally comment is optional.
 if rate is less than 3 stars, user should give a reason from a dropdown, if the reason doesnt exist there, he can choose "something else" and the comment 
