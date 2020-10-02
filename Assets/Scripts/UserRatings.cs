@@ -15,18 +15,23 @@ public class UserRatings : Panel {
     float distance;
 
     public override void Init() {
-        GetMyRating();
+        AddRateToList(Program.Person.Rates);
+        DownloadAndAddRaterImages();
         distance = Vector3.Distance(listView.transform.position, scrollContainer.transform.position);
     }
     public void GetMyRatingOnPull() {
         float newDistance = Vector3.Distance(listView.transform.position, scrollContainer.transform.position);
         if (newDistance + 150 < distance) {
-            GetMyRating();
+            Request<List<Rate>> request = new GetUserReviews(Program.User);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(Response);
         }
     }
     public void AddRateToList(List<Rate> rates) {
         if (rates != null) {
             listView.Clear();
+            ratesItem.Clear();
             foreach (Rate o in rates) {
                 var item = ItemsFactory.CreateRatingItem(listView.scrollContainer, o);
                 listView.Add(item.gameObject);
@@ -40,12 +45,6 @@ public class UserRatings : Panel {
                 Texture2D downloadedImg = await Request<object>.DownloadImage(ratesItem[i].rate.Rater.ProfilePictureUrl);
                 ratesItem[i].SetPicture(downloadedImg);
             }
-    }
-    private void GetMyRating() {
-        Request<List<Rate>> request = new GetUserReviews(Program.User);
-        request.AddSendListener(OpenSpinner);
-        request.AddReceiveListener(CloseSpinner);
-        request.Send(Response);
     }
     private void Response(List<Rate> result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {

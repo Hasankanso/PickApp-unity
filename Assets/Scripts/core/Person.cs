@@ -10,7 +10,7 @@ public class Person {
     public string id;
     private string firstName, lastName, bio, chattiness;
     private DateTime birthday;
-    private List<Rate> rates;
+    private List<Rate> rates = new List<Rate>();
     private List<Ride> upcomingRides = new List<Ride>();
     private bool gender;
     public Texture2D profilePicture;
@@ -185,6 +185,16 @@ public class Person {
                 }
             }
             p.UpcomingRides = rides;
+        }
+        JArray ratesArray = (JArray)json.GetValue("rates");
+        List<Rate> rates = new List<Rate>();
+        if (ratesArray != null) {
+            foreach (var rate in ratesArray) {
+                if (rate.HasValues == true) {
+                    rates.Add(Rate.ToObject((JObject)rate));
+                }
+            }
+            p.rates = rates;
         }
         return p;
     }
