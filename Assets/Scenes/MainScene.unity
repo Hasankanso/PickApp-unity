@@ -211,6 +211,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &272761263 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 423877738322387911, guid: f6c6f563b87464e4a9c6c6817357bd0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6904850426566296094}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354847fa27667a8489b9f9f939786ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &351387425 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6904850426700368717, guid: f6c6f563b87464e4a9c6c6817357bd0d,
@@ -2793,6 +2805,11 @@ PrefabInstance:
       propertyPath: panelName
       value: Search
       objectReference: {fileID: 0}
+    - target: {fileID: 6904850426700368751, guid: f6c6f563b87464e4a9c6c6817357bd0d,
+        type: 3}
+      propertyPath: test
+      value: 
+      objectReference: {fileID: 272761263}
     - target: {fileID: 6904850426700369269, guid: f6c6f563b87464e4a9c6c6817357bd0d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2837,6 +2854,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216528482189197944, guid: f6c6f563b87464e4a9c6c6817357bd0d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -229
       objectReference: {fileID: 0}
     - target: {fileID: 9215589737283894625, guid: f6c6f563b87464e4a9c6c6817357bd0d,
         type: 3}

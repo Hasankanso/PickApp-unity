@@ -10,16 +10,18 @@ using ArabicSupport;
 public class SearchPanel : Panel {
     public InputFieldScript from, to;
     public Text minDate, maxDate,nbOfNotifications;
-    public Dropdown numberOfPersons;
+    //public Dropdown numberOfPersons;
     private Location fromL, toL;
     private SearchInfo info = null;
     private Language lan;
+    public UpDownPicker upDownPicker;
 
     public static readonly string PANELNAME = "SEARCHPANEL";
 
     private void Start() {
         //this should be in init
         Clear();
+        upDownPicker.Init("Persons",1,8,1);
     }
     public override void Init() {
 
@@ -29,7 +31,7 @@ public class SearchPanel : Panel {
     }
     public void Search() {
         if (Vadilate()) {
-            info = new SearchInfo(fromL, toL, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), int.Parse(numberOfPersons.options[numberOfPersons.value].text));
+            info = new SearchInfo(fromL, toL, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), upDownPicker.Counter);//int.Parse(numberOfPersons.options[numberOfPersons.value].text));
             Request<List<Ride>> request = new SearchForRides(info);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
@@ -142,6 +144,7 @@ public class SearchPanel : Panel {
         to.Reset();
         minDate.text = Program.DateToString(DateTime.Now.AddMinutes(10));
         maxDate.text = Program.DateToString(DateTime.Now.AddDays(1));
-        numberOfPersons.value = 0;
+        upDownPicker.Clear();
+        //numberOfPersons.value = 0;
     }
 }
