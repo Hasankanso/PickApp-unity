@@ -12,9 +12,6 @@ adel ads mediation<br>
 # ERRORS:
 All request should check on userobject id and something else<br>
 CarBusiness:<br>
-	AddCar UpdateCar:<br>
-		saving images should use atomic counters(low consistance)<br>
-		cars coming from front-end without image, by default this car take default image located in "Images\DefaultImages"(High storage)<br>
 	UpdateCar:<br>
 		updating car picture, we should delete old picture(high storage)<br>
 		we need to check if this car for this driver(high security)<br>
