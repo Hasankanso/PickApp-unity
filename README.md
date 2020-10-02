@@ -1,9 +1,10 @@
 # TheProject
 let private drivers offer rides and drive together, this modern way is flexible and energy/money saving. It may help solving congestion problems since more people will go in one car, which means less cars on the road.<br>
 # TODO
-device registration(waiting backendless team), confirmation email(waiting backendless team),push notifications(waiting backendless team), alertBusiness(need pus notification only)(waiting backendless team),chatting system(waiting backendless team), show recent locations in findlocationpanel, native ads(waiting admob respond) <br>
+waiting backendless or admob team:<br>
+device registration, confirmation email, push notifications, alertBusiness(need pus notification only), confirm email, delete user(delete rates only), chatting system, native ads<br>
 
-fix backendless code(decrease requests), GUI, car default image, logout by push notification, notification panel, searchpanel automatic end date +24, if user change end date this will be disabled, how it works, terms & conditions, privacy policy, licenses, user in cache,
+fix backendless code(decrease requests), show recent locations in findlocationpanel, GUI, logout by push notification, notification panel, searchpanel automatic end date +24, if user change end date this will be disabled, how it works, terms & conditions, privacy policy, licenses, user in cache,
 backendless validation, delete user, backup data, input field error when pressing back android.<br>
 
 loubani arabic language(search about change language,input fields,xml files)<br>
@@ -11,32 +12,11 @@ adel ads mediation<br>
 
 # ERRORS:
 All request should check on userobject id and something else<br>
-CarBusiness:<br>
-	AddCar UpdateCar:<br>
-		saving images should use atomic counters(low consistance)<br>
-		cars coming from front-end without image, by default this car take default image located in "Images\DefaultImages"(High storage)<br>
-	UpdateCar:<br>
-		updating car picture, we should delete old picture(high storage)<br>
-		we need to check if this car for this driver(high security)<br>
-	DeleteCar:<br>
-		delete car, if car deleted we should return car, and if not we return code and message only(response should be fixed in unity)(medium consistance)<br>
-		we need to check if this car for this driver(high security)<br>
-DriverBusiness:<br>
-	becomeDriver:<br>
-		when saving car,if it doesn't have image, by default this car take default image located in "Images\DefaultImages"(High storage)<br>
-PersonBusiness:<br>
-	EditPerson:<br>
-		when email updated we should send verification email(high security)<br>
 UserBusiness <br>
 	deleteUser:<br>
 		we should store in archive and not delete them(high)<br>
 	getLoggedInUser:<br>
 		we should get user by id and somthing else(high security)<br>
-		should get rates(high)<br>
-	Login:<br>
-		should get rates(high)<br>
-		
-
 Review:
 generally comment is optional.
 if rate is less than 3 stars, user should give a reason from a dropdown, if the reason doesnt exist there, he can choose "something else" and the comment 
