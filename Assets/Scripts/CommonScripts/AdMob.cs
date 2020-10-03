@@ -8,7 +8,7 @@ using UnityEngine;
 public class AdMob : MonoBehaviour {
     private static AdRequest request;
     private static RewardedAd rewardedAd;
-    private static BannerView bannerView;
+    public static BannerView bannerView;
     private static Action rewardedAdAction;
 
     void Start() {
@@ -98,6 +98,8 @@ public class AdMob : MonoBehaviour {
 
     private static void LoadBannerAd() {
         bannerView.LoadAd(request);
+        //Debug.Log("111" + bannerView.GetResponseInfo());
+        //Debug.Log("333" + bannerView.MediationAdapterClassName());
     }
 
     private static void InitializeRewardAd() {
@@ -126,6 +128,8 @@ public class AdMob : MonoBehaviour {
         LoadRewardedAd();
     }
     private static void LoadRewardedAd() {
+        Debug.Log("111"+rewardedAd.GetResponseInfo());
+        Debug.Log("333" + rewardedAd.MediationAdapterClassName());
         rewardedAd.LoadAd(request);
     }
     public static void ShowRewardedAd(Action afterShowAction) {

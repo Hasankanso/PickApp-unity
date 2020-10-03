@@ -23,12 +23,11 @@ namespace GoogleMobileAds.Common.Mediation.UnityAds
     {
         public DummyClient ()
         {
-            Debug.Log ("Dummy " + MethodBase.GetCurrentMethod ().Name);
+
         }
 
         public void SetGDPRConsentMetaData(bool consent)
         {
-            Debug.Log ("Dummy " + MethodBase.GetCurrentMethod ().Name);
         }
     }
 }

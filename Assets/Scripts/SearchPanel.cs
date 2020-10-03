@@ -22,6 +22,7 @@ public class SearchPanel : Panel {
         //this should be in init
         Clear();
         upDownPicker.Init("Persons",1,8,1);
+        Debug.Log(SystemInfo.deviceUniqueIdentifier);
     }
     public override void Init() {
 
