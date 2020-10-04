@@ -128,8 +128,6 @@ public class AdMob : MonoBehaviour {
         LoadRewardedAd();
     }
     private static void LoadRewardedAd() {
-        Debug.Log("111"+rewardedAd.GetResponseInfo());
-        Debug.Log("333" + rewardedAd.MediationAdapterClassName());
         rewardedAd.LoadAd(request);
     }
     public static void ShowRewardedAd(Action afterShowAction) {

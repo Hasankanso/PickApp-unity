@@ -334,7 +334,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Persons
+  m_Text: Generic title
 --- !u!1 &5601348095574591083
 GameObject:
   m_ObjectHideFlags: 0

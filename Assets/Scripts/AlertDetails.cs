@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class AlertDetails : Panel
 {   //todo
 
-    public Text rideOrigin, rideTarget, ClientsNb, luggage, ridePrice, rideComment;
+    public Text rideOrigin, rideTarget, seats, luggage, ridePrice, rideComment;
     public Person person;
     public Text minDate, maxDate;
     public GameObject confirmModel;
@@ -21,7 +21,7 @@ public class AlertDetails : Panel
     public void Init(Alert alert) {
         this.rideOrigin.text= alert.From.ToString();
         this.rideTarget.text = alert.To.ToString();
-        this.ClientsNb.text = alert.NumberOfPersons.ToString();
+        this.seats.text = alert.NumberOfPersons.ToString();
         this.luggage.text = alert.NumberOfLuggage.ToString();
         this.ridePrice.text = alert.Price.ToString()+ Program.Person.CountryInformations.Unit.ToString();
         this.rideComment.text = alert.Comment;

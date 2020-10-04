@@ -2201,7 +2201,7 @@ MonoBehaviour:
   minDate: {fileID: 6904850426700368717}
   maxDate: {fileID: 6904850426700368749}
   nbOfNotifications: {fileID: 7983535727233802237}
-  upDownPicker: {fileID: 423877738322387911}
+  persons: {fileID: 423877738322387911}
 --- !u!1 &6904850426700369487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,7 +2465,7 @@ PrefabInstance:
     - target: {fileID: 6086516425909041242, guid: f3b2cbc38b732ff4292829fb7ea3a78a,
         type: 3}
       propertyPath: m_Name
-      value: UpDownPicker
+      value: Persons
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3b2cbc38b732ff4292829fb7ea3a78a, type: 3}

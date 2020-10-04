@@ -31,15 +31,14 @@ public class AddCarPanel : Panel {
     public Button add,
     update,
     becomeDriverBtn;
-    public Dropdown maxSeats;
-    public Dropdown maxLuggages;
+    public UpDownPicker maxSeats,maxLuggage;
     private Car car = null;
     private Driver driver = null;
     private string color;
 
     public void Submit() {
         if (VadilateSecondView()) {
-            car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
+            car = new Car(carName.text.text, int.Parse(year.text.text), maxSeats.Value, maxLuggage.Value, brand.text.text, color, carImage.sprite.texture);
             Request<List<Car>> request = new AddCar(car, Program.User);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
@@ -48,7 +47,7 @@ public class AddCarPanel : Panel {
     }
     public void BecomeDriver() {
         if (VadilateSecondView()) {
-            car = new Car(carName.text.text, int.Parse(year.text.text), int.Parse(maxSeats.options[maxSeats.value].text), int.Parse(maxLuggages.options[maxLuggages.value].text), brand.text.text, color, carImage.sprite.texture);
+            car = new Car(carName.text.text, int.Parse(year.text.text), maxSeats.Value, maxLuggage.Value, brand.text.text, color, carImage.sprite.texture);
             driver.Cars = new List<Car>();
             driver.Cars.Add(car);
             Request<Driver> request = new BecomeDriverRequest(Program.User, driver);
@@ -62,8 +61,6 @@ public class AddCarPanel : Panel {
         if (!code.Equals((int)HttpStatusCode.OK)) {
             OpenDialog(message, false);
         } else {
-            Program.Driver.regions.Clear();
-            Program.Driver.regions = result.regions;
             Program.User.Driver = result;
             MissionCompleted(AddRidePanel.PANELNAME, "Now you are a driver", false);
         }
@@ -77,19 +74,19 @@ public class AddCarPanel : Panel {
         viewImageModel.gameObject.SetActive(false);
     }
     public void submitUpdate() {
-        // if (VadilateSecondView()) {
-        car.Name = carName.text.text;
-        car.Year = int.Parse(year.text.text);
-        car.MaxSeats = int.Parse(maxSeats.options[maxSeats.value].text);
-        car.MaxLuggage = int.Parse(maxLuggages.options[maxLuggages.value].text);
-        car.Brand = brand.text.text;
-        car.Color = color;
-        car.Picture = carImage.sprite.texture;
-        Request<List<Car>> request = new EditCar(car, Program.User);
-        request.AddSendListener(OpenSpinner);
-        request.AddReceiveListener(CloseSpinner);
-        request.Send(response);
-
+        if (VadilateSecondView()) {
+            car.Name = carName.text.text;
+            car.Year = int.Parse(year.text.text);
+            car.MaxSeats = maxSeats.Value;
+            car.MaxLuggage = maxLuggage.Value;
+            car.Brand = brand.text.text;
+            car.Color = color;
+            car.Picture = carImage.sprite.texture;
+            Request<List<Car>> request = new EditCar(car, Program.User);
+            request.AddSendListener(OpenSpinner);
+            request.AddReceiveListener(CloseSpinner);
+            request.Send(response);
+        }
     }
 
     private void response(List<Car> result, int code, string message) {
@@ -101,13 +98,6 @@ public class AddCarPanel : Panel {
             MissionCompleted(ProfilePanel.PANELNAME, "Car has been edited");
         }
     }
-    private void response2(Car result, int code, string message) {
-        if (!code.Equals((int)HttpStatusCode.OK)) { } else {
-            FooterMenu.dFooterMenu.OpenAddRidePanel();
-            DestroyImediateForwardBackward();
-
-        }
-    }
 
     public void Init(Car car) {
         Clear();
@@ -115,8 +105,8 @@ public class AddCarPanel : Panel {
         update.gameObject.SetActive(true);
         carName.SetText(car.Name);
         year.SetText(car.Year.ToString());
-        maxSeats.value = car.MaxSeats - 1;
-        maxLuggages.value = car.MaxLuggage - 1;
+        maxSeats.Init("Max seats", 1, 8, car.MaxSeats);
+        maxLuggage.Init("Max luggage", 1, 8, car.MaxLuggage);
         brand.SetText(car.Brand);
         color = car.Color;
         GetColor(car.Color);
@@ -125,10 +115,14 @@ public class AddCarPanel : Panel {
     }
     public override void Init() {
         Clear();
+        maxSeats.Init("Max seats", 1, 8, 1);
+        maxLuggage.Init("Max luggage", 1, 8, car.MaxLuggage);
         add.gameObject.SetActive(true);
     }
     public void Init(Driver driver) {
         Clear();
+        maxSeats.Init("Max seats", 1, 8, 1);
+        maxLuggage.Init("Max luggage", 1, 8, car.MaxLuggage);
         this.driver = driver;
         becomeDriverBtn.gameObject.SetActive(true);
     }
@@ -298,8 +292,8 @@ public class AddCarPanel : Panel {
         carName.Reset();
         brand.Reset();
         year.Reset();
-        maxLuggages.value = 0;
-        maxSeats.value = 0;
+        maxLuggage.Clear();
+        maxSeats.Clear();
         //disable all color checkmark
         BlackCheckMark.enabled = false;
         WhiteCheckMark.enabled = false;

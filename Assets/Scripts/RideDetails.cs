@@ -20,7 +20,7 @@ public class RideDetails : Panel {
     public GameObject reserveSeatsButton, updateReserveSeats, addReserveSeats, editReserveSeats, cancelReservedSeats; //reserve
 
     public Text monday, tuesday, wednesday, thursday, friday, saturday, sunday;
-    public Dropdown personsDropdown, luggagesDropdown;
+    public UpDownPicker personsPicker, luggagesPicker;
     private Car car = null;
 
     //if this panel opened to view a Ride details
@@ -28,8 +28,6 @@ public class RideDetails : Panel {
 
     //if this panel opened to view Schedule details
     private ScheduleRide schedule;
-    private List<string> seatsList = new List<string>();
-    private List<string> luggageList = new List<string>();
 
     private void SetPermissions(bool isSmokingAllowed, bool isACAllowed, bool isPetsAllowed, bool isMusicAllowed, bool isKidsSeat) {
         smokingImage.sprite = smokingOffSpirite;
@@ -59,9 +57,9 @@ public class RideDetails : Panel {
     public void OpenRideDialog() {
         removeRideDialog.gameObject.SetActive(true);
         TimeSpan diff = ride.LeavingDate - DateTime.Now;
-        if (diff.TotalHours <48)
+        if (diff.TotalHours < 48)
             cancelRideReason.gameObject.SetActive(true);
-        else 
+        else
             cancelRideReason.gameObject.SetActive(false);
     }
 
@@ -92,14 +90,8 @@ public class RideDetails : Panel {
         if (ride.Passengers != null && ride.Passengers[0].Luggages > 0) {
             availableLuggage += ride.Passengers[0].Luggages;
         }
-        for (int i = 1; i <= availableSeats; i++) {
-            seatsList.Add(i.ToString());
-        }
-        for (int i = 1; i <= availableLuggage; i++) {
-            luggageList.Add(i.ToString());
-        }
-        personsDropdown.AddOptions(seatsList);
-        luggagesDropdown.AddOptions(luggageList);
+        personsPicker.Init("Seats", 1, availableSeats);
+        luggagesPicker.Init("Luggage", 0, availableLuggage);
         personsDialog.gameObject.SetActive(true);
     }
     public void EditRide() {
@@ -327,10 +319,8 @@ public class RideDetails : Panel {
         CloseRideDialog();
         CloseCancelReserveDialog();
 
-        personsDropdown.ClearOptions();
-        luggagesDropdown.ClearOptions();
-        seatsList.Clear();
-        luggageList.Clear();
+        personsPicker.Clear();
+        luggagesPicker.Clear();
 
         from.text = "";
         to.text = "";
@@ -436,7 +426,7 @@ public class RideDetails : Panel {
             LoginPanel login = PanelsFactory.CreateLogin();
             Open(login, () => { login.Init(false); });
         } else {
-            Request<Ride> request = new ReserveSeat(ride, Program.User, personsDropdown.value + 1, luggagesDropdown.value + 1);
+            Request<Ride> request = new ReserveSeat(ride, Program.User, personsPicker.Value, luggagesPicker.Value);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(ReserveSeatsResponse);
@@ -449,7 +439,7 @@ public class RideDetails : Panel {
         } else {
             Program.Person.UpcomingRides.Add(result);
             FooterMenu.dFooterMenu.OpenSearchPanel();
-            OpenDialog("You reserved " + (personsDropdown.value + 1) + " seat(s) and " + (luggagesDropdown.value + 1) + " luggage(s).", true);
+            OpenDialog("You reserved " + personsPicker.Value + " seat(s) and " + luggagesPicker.Value + " luggage(s).", true);
             DestroyImediateForwardBackward();
         }
     }
@@ -458,7 +448,7 @@ public class RideDetails : Panel {
             LoginPanel login = PanelsFactory.CreateLogin();
             Open(login, () => { login.Init(false); });
         } else {
-            Request<Ride> request = new EditReservation(ride, personsDropdown.value + 1, luggagesDropdown.value + 1);
+            Request<Ride> request = new EditReservation(ride, personsPicker.Value, luggagesPicker.Value);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(EditReservationResponse);
@@ -472,7 +462,7 @@ public class RideDetails : Panel {
             Program.Person.UpcomingRides.Remove(ride);
             Program.Person.UpcomingRides.Add(result);
             FooterMenu.dFooterMenu.OpenSearchPanel();
-            OpenDialog("You reserved " + (personsDropdown.value + 1) + " seat(s) and " + (luggagesDropdown.value + 1) + " luggage(s).", true);
+            OpenDialog("You reserved " + personsPicker.Value + " seat(s) and " + luggagesPicker.Value + " luggage(s).", true);
             DestroyImediateForwardBackward();
         }
     }

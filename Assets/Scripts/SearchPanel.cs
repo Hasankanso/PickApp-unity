@@ -10,19 +10,19 @@ using ArabicSupport;
 public class SearchPanel : Panel {
     public InputFieldScript from, to;
     public Text minDate, maxDate,nbOfNotifications;
-    //public Dropdown numberOfPersons;
     private Location fromL, toL;
     private SearchInfo info = null;
     private Language lan;
-    public UpDownPicker upDownPicker;
+    public UpDownPicker persons;
 
     public static readonly string PANELNAME = "SEARCHPANEL";
 
     private void Start() {
         //this should be in init
         Clear();
-        upDownPicker.Init("Persons",1,8,1);
-        Debug.Log(SystemInfo.deviceUniqueIdentifier);
+        persons.Init("Persons",1,8,1);
+        //Debug.Log(SystemInfo.deviceUniqueIdentifier);
+        AdMob.InitializeBannerView();
     }
     public override void Init() {
 
@@ -31,8 +31,11 @@ public class SearchPanel : Panel {
         var maxDT = Program.StringToDate(maxDate.text);
     }
     public void Search() {
+        Debug.Log("111" + AdMob.bannerView.GetResponseInfo());
+        Debug.Log("333" + AdMob.bannerView.MediationAdapterClassName());
+        AdMob.DestroyBanner();
         if (Vadilate()) {
-            info = new SearchInfo(fromL, toL, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), upDownPicker.Counter);//int.Parse(numberOfPersons.options[numberOfPersons.value].text));
+            info = new SearchInfo(fromL, toL, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), persons.Value);
             Request<List<Ride>> request = new SearchForRides(info);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
@@ -41,6 +44,7 @@ public class SearchPanel : Panel {
     }
 
     public void OpenDateTimePicker(Text dateLabel) {
+        AdMob.InitializeBannerView();
         OpenDateTimePicker((dt) => OnDatePicked(dateLabel, dt));
     }
     public void OpenNotificationPanel()
@@ -145,7 +149,6 @@ public class SearchPanel : Panel {
         to.Reset();
         minDate.text = Program.DateToString(DateTime.Now.AddMinutes(10));
         maxDate.text = Program.DateToString(DateTime.Now.AddDays(1));
-        upDownPicker.Clear();
-        //numberOfPersons.value = 0;
+        persons.Clear();
     }
 }

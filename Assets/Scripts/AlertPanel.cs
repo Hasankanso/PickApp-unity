@@ -14,23 +14,24 @@ public class AlertPanel : Panel {
     public InputFieldScript from, to, price, comment;
     private Location fromL, toL;
     public Text minDate, maxDate;
-    public Dropdown nbPersons, luggages;
+    public UpDownPicker numberOfPersons, numberOfLuggage;
     private Alert alert;
 
     public void Init(SearchInfo searchInfo) {
         Clear();
+        numberOfPersons.Init("Persons", 1, 8, searchInfo.PassengersNumber);
+        numberOfLuggage.Init("Luggage", 0, 8);
         this.fromL = searchInfo.From;
         this.toL = searchInfo.To;
         this.from.SetText(searchInfo.From.ToString());
         this.to.SetText(searchInfo.To.ToString());
         this.minDate.text = Program.DateToString(searchInfo.MinDate);
         this.maxDate.text = Program.DateToString(searchInfo.MaxDate);
-        this.nbPersons.value = searchInfo.PassengersNumber;
     }
     public void submit() {
         if (Validate()) {
             AdMob.ShowRewardedAd(() => {
-                alert = new Alert(Program.User, fromL, toL, price.text.text, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), int.Parse(nbPersons.options[nbPersons.value].text), int.Parse(luggages.options[luggages.value].text), comment.text.text);
+                alert = new Alert(Program.User, fromL, toL, price.text.text, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), numberOfPersons.Value, numberOfLuggage.Value, comment.text.text);
                 Request<string> request = new BroadCastAlert(alert);
                 request.AddSendListener(OpenSpinner);
                 request.AddReceiveListener(CloseSpinner);
@@ -127,8 +128,8 @@ public class AlertPanel : Panel {
         from.Reset();
         to.Reset();
         price.Reset();
-        nbPersons.value = 0;
-        luggages.value = 0;
+        numberOfPersons.Clear();
+        numberOfLuggage.Clear();
         comment.Reset();
         minDate.text = Program.DateToString(DateTime.Now.AddMinutes(10));
         maxDate.text = Program.DateToString(DateTime.Now.AddDays(1));

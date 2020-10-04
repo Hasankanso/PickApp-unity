@@ -65,7 +65,7 @@ public class Ride {
     public Ride(List<Passenger> passengers) {
         Passengers = passengers;
     }
-    public Ride() { 
+    public Ride() {
     }
     public static string Valid(Ride ride) {
         string validateUser = User.ValidateLogin(Program.User);
@@ -276,11 +276,9 @@ public class Ride {
         JArray passengersJ = (JArray)json.GetValue("passengers");
         List<Passenger> passengers = null;
 
-        if (passengersJ != null)
-        {
+        if (passengersJ != null) {
             passengers = new List<Passenger>();
-            foreach (var passenger in passengersJ)
-            {
+            foreach (var passenger in passengersJ) {
                 passengers.Add(Passenger.ToObject((JObject)passenger));
             }
         }
@@ -307,12 +305,16 @@ public class Ride {
         Location to = Location.ToObject((JObject)json[nameof(Ride.to)]);
 
 
-
-        JObject driverJ = (JObject)json["driver"];
-        JObject personJ = (JObject)driverJ["person"];
-        Person person = Person.ToObject(personJ);
-        Driver driver = Driver.ToObject(driverJ);
-        User user = new User(person, driver);
+        User user;
+        if (json.GetValue("driver") != null || json.GetValue("driver").HasValues) {
+            JObject driverJ = (JObject)json["driver"];
+            Driver driver = Driver.ToObject(driverJ);
+            JObject personJ = (JObject)driverJ["person"];
+            Person person = Person.ToObject(personJ);
+            user = new User(person, driver);
+        } else {
+            user = new User(Program.Person, Program.Driver);
+        }
         string price = "";
         var p = json[nameof(price)];
         if (p != null)

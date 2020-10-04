@@ -20,9 +20,9 @@ public class UpDownPicker : MonoBehaviour {
     }
     public void CounterUp() {
         down.sprite = minusOn;
-        if (!(Counter >= max)) {
+        if (!(Value >= max)) {
             counterInt++;
-            this.counter.text = "" + Counter;
+            this.counter.text = "" + Value;
         }
         if (counterInt == max) {
             up.sprite = plusOff;
@@ -30,19 +30,22 @@ public class UpDownPicker : MonoBehaviour {
     }
     public void CounterDown() {
         up.sprite = plusOn;
-        if (!(Counter <= min)) {
+        if (!(Value <= min)) {
             counterInt--;
-            this.counter.text = "" + Counter;
+            this.counter.text = "" + Value;
         }
         if (counterInt == min) {
             down.sprite = minusOff;
         }
     }
-    public int Counter { get => counterInt; }
-
+    public int Value { get => counterInt; }
+    public void SetValue(int value) {
+        counterInt = value;
+        this.counter.text = "" + Value;
+    }
     internal void Clear() {
         counterInt = 0;
-        counter.text = "" + Counter;
+        counter.text = "" + Value;
         down.sprite = minusOff;
     }
 }
