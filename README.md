@@ -2,10 +2,10 @@
 let private drivers offer rides and drive together, this modern way is flexible and energy/money saving. It may help solving congestion problems since more people will go in one car, which means less cars on the road.<br>
 # TODO
 waiting backendless or admob team:<br>
-device registration, confirmation email, push notifications, alertBusiness(need pus notification only), logout by push notification, confirm email, delete user(delete rates only), chatting system, native ads<br>
+device registration, confirmation email, push notifications, alertBusiness(need pus notification only), logout by push notification, confirm email, delete user(delete rates only), chatting system, native ads,delete user<br>
 
 fix backendless code(decrease requests), , show recent locations in findlocationpanel and fix item design, add ride map pick adn its items design, all items should be inherited form item class add select usnelect clear moveup move down.., GUI, notification panel, searchpanel automatic end date +24, if user change end date this will be disabled, how it works, terms & conditions, privacy policy, licenses, user in cache,
-backendless validation, change resume admob, not driver and add ride scenario, delete user, backup data, input field error when pressing back android.<br>
+backendless validation, change resume admob, backup data, input field error when pressing back android.<br>
 
 loubani arabic language(search about change language,input fields,xml files)<br>
 adel ads mediation<br>
