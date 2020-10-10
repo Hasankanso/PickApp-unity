@@ -35,7 +35,7 @@ public static class Cache {
     }
     public static string GetLanguage()
     {
-        return PlayerPrefs.GetString(currentLanguageKey);
+        return PlayerPrefs.GetString(currentLanguageKey, "English");
     }
     public static void SetEmail(string email) {
         PlayerPrefs.SetString("email", email);

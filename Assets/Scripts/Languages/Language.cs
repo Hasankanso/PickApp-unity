@@ -10,160 +10,123 @@ using UnityEngine.Networking;
 public class Language : MonoBehaviour
 {
 
-    static Hashtable XML_Strings;
-    private static readonly string relativeFolderPath = "Lang/";
-    private static readonly string languageURL = "http://yourdomainname.dx.am/MLS_Languages/";
-    private static string currentLanguage = "Arabic";
-    private readonly string defaultLanguage = "English";
-    public static bool arabic = false;
+  private Hashtable XML_Strings;
+  private static readonly string relativeFolderPath = "Lang/";
+  private static string directory;
+  private static readonly string languageURL = "https://backendlessappcontent.com/5FB0EA72-A363-4451-FFA5-A56F031D6600/C8502745-CB10-4F56-9FD5-3EFCE59F1926/files/languages/";
 
+  public bool arabic = false;
+  public bool english = false;
 
-    private Action<bool,
-    long> OnSetFinished;
+  public static Language defaultInstance;
 
-    public static Language language; 
+  public bool Arabic
+  {
+    get => arabic;
+  }
 
-    public bool Arabic
+  public void Awake()
+  {
+    Destroy(defaultInstance);
+    defaultInstance = this;
+    Program.language = this;
+
+    directory = Path.Combine(Application.persistentDataPath, relativeFolderPath);
+
+    var currlang = Cache.GetLanguage();
+
+    if (currlang.Equals("Arabic"))
     {
-        get => arabic;
-        set => arabic = value;
+      arabic = true;
     }
 
-    public void Awake()
+    if (!currlang.Equals("English"))
     {
-        if (language == null)
-        {
-            language = this;
-        }
-
-        var currlang = Cache.GetLanguage();
-        if (currlang.Equals("Arabic"))
-        {
-            arabic = true;
-            OpenLocalXML(currlang);
-        }
-
-        if (currlang == string.Empty) 
-            currlang = defaultLanguage;
+      LoadXml(currlang);
+    } else {
+      english = true;
     }
 
-    public string GetString(string _name)
+  }
+
+  public string GetString(string _name)
+  {
+
+    if (!XML_Strings.ContainsKey(_name))
     {
+      Debug.LogError("This string is not present in the XML file where you're reading: " + _name);
 
-        if (!XML_Strings.ContainsKey(_name))
-        {
-            Debug.LogError("This string is not present in the XML file where you're reading: " + _name);
-
-            return "";
-        }
-
-        return (string)XML_Strings[_name];
+      return "";
     }
 
-    public void LoadLanguage(string Language, Action NeedInternet, Action<bool, long> OnSetFinished)
+    return (string)XML_Strings[_name];
+  }
+
+  public static bool LanguageExists(string language)
+  {
+    if (language.Equals("English")) return true;
+    print(PlayerPrefs.GetInt(language, 0) == 1);
+    return PlayerPrefs.GetInt(language, 0) == 1;
+  }
+
+  public static IEnumerator DownloadXml(string language, Action<bool, string> OnDownloadComplete)
+  {
+    UnityWebRequest wwwXML = new UnityWebRequest(languageURL + language + ".xml");
+    wwwXML.downloadHandler = new DownloadHandlerBuffer();
+    print("start download");
+    yield return wwwXML.SendWebRequest();
+    print(languageURL + language + ".xml");
+    if (wwwXML.isNetworkError || wwwXML.isHttpError)
     {
-        bool exist = PlayerPrefs.GetInt(Language, 0) == 1 ? true : false;
-        this.OnSetFinished = OnSetFinished;
-
-        if (exist)
-        {
-            OpenLocalXML(Language);
-            OnSetFinished(true,
-          default);
-        }
-        else
-        {
-            NeedInternet();
-        }
+      OnDownloadComplete(false, language);
     }
-
-    private void DownloadFromInternet(string Language, Action<bool, long> OnSetFinished)
+    else
     {
-        this.OnSetFinished = OnSetFinished;
-        StartCoroutine(OpenWebXML(Language));
+      var xml = new XmlDocument();
+      xml.Load(new StringReader(wwwXML.downloadHandler.text));
+      xml.Save(directory + language + ".xml");
+      PlayerPrefs.SetInt(language, 1);
+      OnDownloadComplete(true, language);
     }
+  }
 
-    private static void SetLanguageOnWeb(string xmlText, string language)
+  private static void LoadXml(string lang)
+  {
+    var path = directory + lang + ".xml";
+    var xml = new XmlDocument();
+    xml.Load(path);
+    var element = xml.DocumentElement;
+    defaultInstance.XML_Strings = new Hashtable();
+    if (element != null)
     {
-        var xml = new XmlDocument();
-        xml.Load(new StringReader(xmlText));
-
-        XML_Strings = new Hashtable();
-
-        var doc_element = xml.DocumentElement[language]; 
-
-        if (doc_element != null) 
-        {
-            if (arabic == true)
-            {
-                XML_Strings = CreateFixedHash(xml);
-
-            }
-            else
-            {
-                var elemEnum = doc_element.GetEnumerator();
-                while (elemEnum.MoveNext()) 
-                XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), (elemEnum.Current as XmlElement).InnerText);
-            }
-        }
-        else Debug.LogError("Language does not exists: " + language);
-
+      if (defaultInstance.arabic == true)
+      {
+        defaultInstance.XML_Strings = FixArabicTable(xml);
+      }
+      else
+      {
+        var elemEnum = element.GetEnumerator();
+        while (elemEnum.MoveNext())
+          defaultInstance.XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), (elemEnum.Current as XmlElement).InnerText);
+      }
+      Cache.SetLanguage(lang);
+      PlayerPrefs.SetInt(lang, 1);
     }
-
-    private static void SetLocalLanguage(string path, string language)
+    else Debug.LogError("The specified language does not exist: " + lang);
+  }
+  private static Hashtable FixArabicTable(XmlDocument xml)
+  {
+    var fixedHash = new Hashtable();
+    var element = xml.DocumentElement;
+    if (element != null)
     {
-        var xml = new XmlDocument();
-        xml.Load(path);
-        var element = xml.DocumentElement;
-        XML_Strings = new Hashtable();
-        if (element != null)
-        {
-            if (arabic == true)
-            {
-                XML_Strings = CreateFixedHash(xml);
-            }
-            else
-            {
-                var elemEnum = element.GetEnumerator();
-                while (elemEnum.MoveNext())
-                XML_Strings.Add((elemEnum.Current as XmlElement).GetAttribute("name"), (elemEnum.Current as XmlElement).InnerText);
-            }
-        }
-        else Debug.LogError("The specified language does not exist: " + language);
+      var elemEnum = element.GetEnumerator();
+
+      while (elemEnum.MoveNext())
+        fixedHash.Add((elemEnum.Current as XmlElement).GetAttribute("name"), ArabicFixer.Fix((elemEnum.Current as XmlElement).InnerText, true, true));
+
     }
-    private static Hashtable CreateFixedHash(XmlDocument xml)
-    {
-        var fixedHash = new Hashtable();
-        var element = xml.DocumentElement;
-        if (element != null)
-        {
-            var elemEnum = element.GetEnumerator();
-
-            while (elemEnum.MoveNext())
-                fixedHash.Add((elemEnum.Current as XmlElement).GetAttribute("name"), ArabicFixer.Fix((elemEnum.Current as XmlElement).InnerText, true, true));
-
-        }
-        return fixedHash;
-    }
-
-    private IEnumerator OpenWebXML(string Language)
-    {
-        UnityWebRequest wwwXML = null;
-
-        wwwXML = new UnityWebRequest(languageURL + Language + ".xml");
-        yield
-        return wwwXML.SendWebRequest();
-
-        SetLanguageOnWeb(wwwXML.downloadHandler.text, currentLanguage);
-        currentLanguage = Language;
-        PlayerPrefs.SetInt(Language, 1);
-        OnSetFinished(wwwXML.downloadHandler.isDone, wwwXML.responseCode);
-    }
-
-    private static void OpenLocalXML(string Language)
-    {
-        SetLocalLanguage(Path.Combine(Application.persistentDataPath, relativeFolderPath + Language + ".xml"), Language);
-        currentLanguage = Language;
-    }
+    return fixedHash;
+  }
 
 }
