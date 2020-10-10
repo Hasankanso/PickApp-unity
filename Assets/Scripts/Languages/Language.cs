@@ -84,9 +84,21 @@ public class Language : MonoBehaviour
     {
       var xml = new XmlDocument();
       xml.Load(new StringReader(wwwXML.downloadHandler.text));
-      xml.Save(directory + language + ".xml");
-      PlayerPrefs.SetInt(language, 1);
-      OnDownloadComplete(true, language);
+      try
+      {
+        if (!Directory.Exists(directory))
+        {
+          Directory.CreateDirectory(directory);
+        }
+
+        xml.Save(directory + language + ".xml");
+        PlayerPrefs.SetInt(language, 1);
+        OnDownloadComplete(true, language);
+      }
+      catch (IOException)
+      {
+        OnDownloadComplete(false, language);
+      }
     }
   }
 
