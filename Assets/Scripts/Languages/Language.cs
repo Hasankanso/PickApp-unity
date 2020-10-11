@@ -35,6 +35,12 @@ public class Language : MonoBehaviour
 
     var currlang = Cache.GetLanguage();
 
+    if (!LanguageExists(currlang))
+    {
+      currlang = "English";
+      Cache.SetLanguage(currlang);
+    }
+
     if (currlang.Equals("Arabic"))
     {
       arabic = true;
@@ -43,7 +49,9 @@ public class Language : MonoBehaviour
     if (!currlang.Equals("English"))
     {
       LoadXml(currlang);
-    } else {
+    }
+    else
+    {
       english = true;
     }
 
@@ -65,8 +73,18 @@ public class Language : MonoBehaviour
   public static bool LanguageExists(string language)
   {
     if (language.Equals("English")) return true;
-    print(PlayerPrefs.GetInt(language, 0) == 1);
-    return PlayerPrefs.GetInt(language, 0) == 1;
+
+    var path = directory + language + ".xml";
+    try
+    {
+      var xml = new XmlDocument();
+      xml.Load(path);
+      return true;
+    }
+    catch (Exception)
+    {
+      return false;
+    }
   }
 
   public static IEnumerator DownloadXml(string language, Action<bool, string> OnDownloadComplete)
@@ -92,7 +110,6 @@ public class Language : MonoBehaviour
         }
 
         xml.Save(directory + language + ".xml");
-        PlayerPrefs.SetInt(language, 1);
         OnDownloadComplete(true, language);
       }
       catch (IOException)
@@ -106,6 +123,7 @@ public class Language : MonoBehaviour
   {
     var path = directory + lang + ".xml";
     var xml = new XmlDocument();
+
     xml.Load(path);
     var element = xml.DocumentElement;
     defaultInstance.XML_Strings = new Hashtable();

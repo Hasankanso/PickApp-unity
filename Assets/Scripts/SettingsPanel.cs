@@ -17,10 +17,16 @@ public class SettingsPanel : Panel
 
   public override void Init()
   {
+    Clear();
     AdMob.InitializeBannerView();
     this.user = Program.User;
+    InitLangCheckBoxes();
+
+  }
+
+  private void InitLangCheckBoxes(){
     string lang = Cache.GetLanguage();
-    Clear();
+
     if (lang == "English")
     {
       englishCheck.enabled = true;
@@ -31,9 +37,7 @@ public class SettingsPanel : Panel
       arabicCheck.enabled = true;
       englishCheck.enabled = false;
     }
-
   }
-
   public void ChangeLanguages(int index)
   {
     string newLanguage = "";
@@ -54,7 +58,7 @@ public class SettingsPanel : Panel
 
     if (!Language.LanguageExists(newLanguage))
     {
-      StartCoroutine(Language.DownloadXml(newLanguage, OnDownloadLangComplete));
+      OpenYesNoDialog(newLanguage + " doesn't exist locally, do you want to download? (~5 mb)", (decision) => OnLanguageDownloadDecision(decision, newLanguage));
     }
     else
     {
@@ -65,15 +69,27 @@ public class SettingsPanel : Panel
 
   }
 
+  private void OnLanguageDownloadDecision(bool decision, string language)
+  {
+    if (decision)
+    {
+      StartCoroutine(Language.DownloadXml(language, OnDownloadLangComplete));
+    } else {
+      InitLangCheckBoxes();
+    }
+  }
+
   private void OnDownloadLangComplete(bool done, string language)
   {
-    if (done) { 
-    Cache.SetLanguage(language);
-    AdMob.DestroyBanner();
-    SceneManager.LoadScene("MainScene");
+    if (done)
+    {
+      Cache.SetLanguage(language);
+      AdMob.DestroyBanner();
+      SceneManager.LoadScene("MainScene");
     }
-    else { 
-    OpenDialog("something went wrong...", false);
+    else
+    {
+      OpenDialog("something went wrong...", false);
     }
   }
 

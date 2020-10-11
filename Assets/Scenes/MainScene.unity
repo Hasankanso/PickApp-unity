@@ -347,6 +347,8 @@ MonoBehaviour:
     type: 3}
   phonePanel: {fileID: 443956895328933485, guid: 3be08d5e75f73d74dab9236e9a7bed77,
     type: 3}
+  yesNoDialog: {fileID: 6569699145431085007, guid: 6626a85a64d9183409b7a04c93480463,
+    type: 3}
 --- !u!4 &483680003
 Transform:
   m_ObjectHideFlags: 0
@@ -738,6 +740,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a9170ca94be484fa5db553dba72433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arabic: 0
+  english: 0
 --- !u!4 &1115672364
 Transform:
   m_ObjectHideFlags: 0
