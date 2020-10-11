@@ -12,7 +12,7 @@ public static class Program {
     public static Color activePlaceHolderColor = new Color(255f / 255f, 188f / 255f, 66f / 255f);
     public static int fontSize = 28;
     public static Font font;
-    public static Language language = Language.language;
+    public static Language language = Language.defaultInstance;
     private static User user;
     private static bool isLoggedIn = false;
     private static FirebaseApp firebaseApp = FirebaseApp.Create();
