@@ -1238,6 +1238,7 @@ RectTransform:
   - {fileID: 5831838088795214188}
   - {fileID: 1672561175186353966}
   - {fileID: 2089551047875017642}
+  - {fileID: 5011674073158173844}
   m_Father: {fileID: 2089551047411437398}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1771,6 +1772,7 @@ MonoBehaviour:
   countryDP: {fileID: 9017438368215154040}
   birthday: {fileID: 2710564684243753430}
   profilePicture: {fileID: 2089551047775857687}
+  banner: {fileID: 8028667043832318803}
 --- !u!1 &2089551047537765896
 GameObject:
   m_ObjectHideFlags: 0
@@ -3611,6 +3613,41 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls: []
+--- !u!1 &8028667043832318803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5011674073158173844}
+  m_Layer: 5
+  m_Name: Banner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5011674073158173844
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028667043832318803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2089551047132805094}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -21.525}
+  m_SizeDelta: {x: 0, y: 143.05}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8524368850699044941
 GameObject:
   m_ObjectHideFlags: 0

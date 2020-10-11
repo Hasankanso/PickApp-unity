@@ -1,4 +1,5 @@
-﻿using Requests;
+﻿using GoogleMobileAds.Api;
+using Requests;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -17,8 +18,6 @@ public class AccountPanel : Panel {
     private bool haveProfile = false;
 
     public void submit() {
-        Debug.Log("111" + AdMob.bannerView.GetResponseInfo());
-        Debug.Log("333" + AdMob.bannerView.MediationAdapterClassName());
         if (vadilate()) {
             CountryInformations cI = Program.CountriesInformations[countryDP.options[countryDP.value].text];
             Person editedPerson = new Person(firstName.text.text, lastName.text.text,

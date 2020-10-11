@@ -275,8 +275,7 @@ public class Ride {
 
         JArray passengersJ = (JArray)json.GetValue("passengers");
         List<Passenger> passengers = null;
-
-        if (passengersJ != null) {
+        if (passengersJ != null&& passengersJ.HasValues) {
             passengers = new List<Passenger>();
             foreach (var passenger in passengersJ) {
                 passengers.Add(Passenger.ToObject((JObject)passenger));
@@ -306,7 +305,7 @@ public class Ride {
 
 
         User user;
-        if (json.GetValue("driver") != null || json.GetValue("driver").HasValues) {
+        if (json.GetValue("driver") != null && json.GetValue("driver").HasValues) {
             JObject driverJ = (JObject)json["driver"];
             Driver driver = Driver.ToObject(driverJ);
             JObject personJ = (JObject)driverJ["person"];

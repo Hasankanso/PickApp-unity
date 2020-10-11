@@ -115,14 +115,14 @@ public class AddCarPanel : Panel {
     }
     public override void Init() {
         Clear();
-        maxSeats.Init("Max seats", 1, 8, 1);
-        maxLuggage.Init("Max luggage", 1, 8, car.MaxLuggage);
+        maxSeats.Init("Max seats", 1, 8, 3);
+        maxLuggage.Init("Max luggage", 1, 8, 2);
         add.gameObject.SetActive(true);
     }
     public void Init(Driver driver) {
         Clear();
-        maxSeats.Init("Max seats", 1, 8, 1);
-        maxLuggage.Init("Max luggage", 1, 8, car.MaxLuggage);
+        maxSeats.Init("Max seats", 1, 8, 3);
+        maxLuggage.Init("Max luggage", 1, 8, 2);
         this.driver = driver;
         becomeDriverBtn.gameObject.SetActive(true);
     }

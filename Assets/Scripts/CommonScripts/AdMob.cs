@@ -7,39 +7,16 @@ using System.Collections.Generic;
 using UnityEngine;
 public class AdMob : MonoBehaviour {
     private static AdRequest request;
-    private static RewardedAd rewardedAd;
+    public static RewardedAd rewardedAd;
     public static BannerView bannerView;
     private static Action rewardedAdAction;
 
     void Start() {
-        //Initialize App
-        /*MobileAds.Initialize((initStatus) => {
-            Dictionary<string, AdapterStatus> map = initStatus.getAdapterStatusMap();
-            foreach (KeyValuePair<string, AdapterStatus> keyValuePair in map) {
-                string className = keyValuePair.Key;
-                AdapterStatus status = keyValuePair.Value;
-                switch (status.InitializationState) {
-                    case AdapterState.NotReady:
-                        // The adapter initialization did not complete.
-                        break;
-                    case AdapterState.Ready:
-                        // The adapter was successfully initialized.
-                        break;
-                }
-            }
-        });*/
-        //for testing purpose
-        AdColonyAppOptions.SetUserId("myUser");
-        AdColonyAppOptions.SetTestMode(true);
-        //
         InitialzeAdRequest();
         InitializeRewardAd();
     }
     private void InitialzeAdRequest() {
         UnityAds.SetGDPRConsentMetaData(true);
-        AdColonyAppOptions.SetGDPRRequired(true);
-        AdColonyAppOptions.SetGDPRConsentString("1");
-
         //initialize App
         MobileAds.Initialize(initStatus => { });
         //set info if user logged in to optimize user click on ad
@@ -87,8 +64,7 @@ public class AdMob : MonoBehaviour {
         // Clean up banner ad before creating a new one.
         DestroyBanner();
 
-        AdSize adaptiveSize =
-                AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
+        AdSize adaptiveSize = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
 
         bannerView = new BannerView(adUnitId, adaptiveSize, AdPosition.Bottom);
 
@@ -98,8 +74,6 @@ public class AdMob : MonoBehaviour {
 
     private static void LoadBannerAd() {
         bannerView.LoadAd(request);
-        //Debug.Log("111" + bannerView.GetResponseInfo());
-        //Debug.Log("333" + bannerView.MediationAdapterClassName());
     }
 
     private static void InitializeRewardAd() {
@@ -160,6 +134,7 @@ public class AdMob : MonoBehaviour {
     //destroy banner on panel back and mission completed and admobrequest
     public static void DestroyBanner() {
         if (bannerView != null) {
+            //bannerView.Hide();
             bannerView.Destroy();
         }
     }
