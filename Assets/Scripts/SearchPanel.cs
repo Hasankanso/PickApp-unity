@@ -9,7 +9,7 @@ using ArabicSupport;
 
 public class SearchPanel : Panel {
     public InputFieldScript from, to;
-    public Text minDate, maxDate,nbOfNotifications;
+    public Text minDate, maxDate, nbOfNotifications;
     private Location fromL, toL;
     private SearchInfo info = null;
     private Language lan;
@@ -20,9 +20,8 @@ public class SearchPanel : Panel {
     private void Start() {
         //this should be in init
         Clear();
-        persons.Init("Persons",1,8,1);
+        persons.Init("Persons", 1, 8, 1);
         //Debug.Log(SystemInfo.deviceUniqueIdentifier);
-        AdMob.InitializeBannerView();
     }
     public override void Init() {
 
@@ -31,9 +30,6 @@ public class SearchPanel : Panel {
         var maxDT = Program.StringToDate(maxDate.text);
     }
     public void Search() {
-        Debug.Log("111" + AdMob.bannerView.GetResponseInfo());
-        Debug.Log("333" + AdMob.bannerView.MediationAdapterClassName());
-        AdMob.DestroyBanner();
         if (Vadilate()) {
             info = new SearchInfo(fromL, toL, Program.StringToDate(minDate.text), Program.StringToDate(maxDate.text), persons.Value);
             Request<List<Ride>> request = new SearchForRides(info);
@@ -47,8 +43,7 @@ public class SearchPanel : Panel {
         AdMob.InitializeBannerView();
         OpenDateTimePicker((dt) => OnDatePicked(dateLabel, dt));
     }
-    public void OpenNotificationPanel()
-    {
+    public void OpenNotificationPanel() {
         NotificationScript p = PanelsFactory.CreateNotificationScript();
         p.AddNotificationItem("hello", "me");
         Open(p);
@@ -120,7 +115,7 @@ public class SearchPanel : Panel {
     }
 
     public void OnFromLocationPicked(Location loc) {
-        if (Program.language.Arabic==true) {
+        if (Program.language.Arabic == true) {
             fromL = loc;
             string fromLoca = fromL.Name;
             fromLoca = ArabicFixer.Fix(fromLoca, true, true);
@@ -133,7 +128,7 @@ public class SearchPanel : Panel {
     }
 
     public void OnToLocationPicked(Location loc) {
-        if (Program.language.Arabic==true) {
+        if (Program.language.Arabic == true) {
             toL = loc;
             string toLoca = ArabicFixer.Fix(toL.Name, true, true);
             to.GetComponent<InputField>().text = toLoca;

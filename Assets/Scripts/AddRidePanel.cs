@@ -125,7 +125,7 @@ public class AddRidePanel : Panel {
             if (!Program.IsLoggedIn) {
                 LoginPanel login = PanelsFactory.CreateLogin();
                 Open(login, () => { login.Init(false); });
-                return; //end this function
+                return;
             }
 
             DateTime wholeDate = Program.StringToDate(date.text);
@@ -137,12 +137,12 @@ public class AddRidePanel : Panel {
                 ride = new Ride(ride.id, Program.User, null, fromL, toL, comment.text.text, price.text.text,
           wholeDate, isMusicAllowed.IsOn, isAcAllowed.IsOn, isSmokingAllowed.IsOn, isPetsAllowed.IsOn, kidSeats.isOn,
           0, 0,
-          stopTime, null, null,null);
+          stopTime, null, null, null);
             else
                 ride = new Ride(null, Program.User, null, fromL, toL, comment.text.text, price.text.text,
           wholeDate, isMusicAllowed.IsOn, isAcAllowed.IsOn, isSmokingAllowed.IsOn, isPetsAllowed.IsOn, kidSeats.isOn,
           0, 0,
-          stopTime, null, null,null);
+          stopTime, null, null, null);
 
             if (carPickerPanel == null) {
                 carPickerPanel = PanelsFactory.CreateCarsListPanel();
@@ -247,13 +247,15 @@ public class AddRidePanel : Panel {
             from.Error();
             OpenDialog("Please fill \"From\" Field.", false);
             return false;
-
         }
         if (to.text.text.Equals("")) {
             to.Error();
             OpenDialog("Please fill \"To\" Field.", false);
             return false;
-
+        }
+        if (string.IsNullOrEmpty(comment.text.text) || comment.text.text.Length < 25 || comment.text.text.Length > 400) {
+            OpenDialog("Please add a comment between 25 and 400 characters", false);
+            return false;
         }
         return true;
     }

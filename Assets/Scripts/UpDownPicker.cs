@@ -8,7 +8,7 @@ public class UpDownPicker : MonoBehaviour {
     public Image up, down;
     public Sprite minusOn, minusOff, plusOn, plusOff;
     int min, max, counterInt;
-
+    bool isCounterUpDownDisabled = false;
 
     public void Init(string title, int min, int max, int defaultCounter = 0) {
         Clear();
@@ -17,25 +17,42 @@ public class UpDownPicker : MonoBehaviour {
         this.counter.text = "" + counterInt;
         this.min = min;
         this.max = max;
-    }
-    public void CounterUp() {
-        down.sprite = minusOn;
-        if (!(Value >= max)) {
-            counterInt++;
-            this.counter.text = "" + Value;
+        if (counterInt == min) {
+            down.sprite = minusOff;
+        } else {
+            down.sprite = minusOn;
         }
         if (counterInt == max) {
             up.sprite = plusOff;
+        } else {
+            up.sprite = plusOn;
+        }
+        if (counterInt == max && counterInt == min) {
+            isCounterUpDownDisabled = true;
+        }
+    }
+    public void CounterUp() {
+        if (!isCounterUpDownDisabled) {
+            down.sprite = minusOn;
+            if (!(Value >= max)) {
+                counterInt++;
+                this.counter.text = "" + Value;
+            }
+            if (counterInt == max) {
+                up.sprite = plusOff;
+            }
         }
     }
     public void CounterDown() {
-        up.sprite = plusOn;
-        if (!(Value <= min)) {
-            counterInt--;
-            this.counter.text = "" + Value;
-        }
-        if (counterInt == min) {
-            down.sprite = minusOff;
+        if (!isCounterUpDownDisabled) {
+            up.sprite = plusOn;
+            if (!(Value <= min)) {
+                counterInt--;
+                this.counter.text = "" + Value;
+            }
+            if (counterInt == min) {
+                down.sprite = minusOff;
+            }
         }
     }
     public int Value { get => counterInt; }
