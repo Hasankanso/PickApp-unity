@@ -7,9 +7,10 @@ public class UpDownPicker : MonoBehaviour {
     public Text title, counter;
     public Image up, down;
     public Sprite minusOn, minusOff, plusOn, plusOff;
-    int min, max, counterInt;
+    int counterInt;
     bool isCounterUpDownDisabled = false;
 
+    public int min, max; 
     public void Init(string title, int min, int max, int defaultCounter = 0) {
         Clear();
         this.title.text = title;
