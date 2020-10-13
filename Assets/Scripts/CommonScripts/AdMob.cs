@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class AdMob : MonoBehaviour {
     private static AdRequest request;
-    public static RewardedAd rewardedAd;
-    public static BannerView bannerView;
+    private static RewardedAd rewardedAd;
+    private static BannerView bannerView;
     private static Action rewardedAdAction;
 
     void Start() {
@@ -37,6 +37,7 @@ public class AdMob : MonoBehaviour {
             .SetBirthday(Program.Person.Birthday)
             .TagForChildDirectedTreatment(tagForChildDirected)
             .AddTestDevice("0D194CF269BFB841E3F9F699EE9B5E2E")
+            .AddTestDevice("a1a50261-ddc6-4e35-a14c-4f20cd50c688")
             .AddTestDevice("7eafce40-1d8d-47cb-b032-197c154be9d8")
             .AddExtra("color_bg", "D81159")
             .Build();
@@ -44,6 +45,7 @@ public class AdMob : MonoBehaviour {
             request = new AdRequest.Builder()
             .TagForChildDirectedTreatment(false)
             .AddTestDevice("0D194CF269BFB841E3F9F699EE9B5E2E")
+            .AddTestDevice("a1a50261-ddc6-4e35-a14c-4f20cd50c688")
             .AddTestDevice("7eafce40-1d8d-47cb-b032-197c154be9d8")
             .AddExtra("color_bg", "D81159")
             .Build();
@@ -67,7 +69,6 @@ public class AdMob : MonoBehaviour {
         AdSize adaptiveSize = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
 
         bannerView = new BannerView(adUnitId, adaptiveSize, AdPosition.Bottom);
-
         // Load a banner ad.
         LoadBannerAd();
     }
