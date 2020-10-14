@@ -64,7 +64,7 @@ public class LocationsFinderPanel : Panel {
                         var id = o.Value<string>("place_id").ToString();
 
                         LocationItem obj = Instantiate(locItem);
-                        obj.Init(this, id, description);
+                        obj.Init(this, id, description, token);
 
                         listView.Add(obj.gameObject);
                     }
