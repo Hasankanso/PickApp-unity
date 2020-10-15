@@ -75,8 +75,7 @@ public class LoginPanel : Panel {
             OpenDialog(message, false);
         } else {
             Program.User = u;
-            Program.CountryComponent = Program.Person.CountryInformations.CountryComponent;
-            Cache.User(u);
+            Cache.SetUser(u);
             Program.IsLoggedIn = true;
             if (!isFromProfilePanel) {
                 OpenDialog("Welcome back to PickApp " + Program.User.Person.FirstName, true);

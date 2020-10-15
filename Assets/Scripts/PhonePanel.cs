@@ -103,8 +103,7 @@ public class PhonePanel : Panel {
             OpenDialog(message, false);
         } else {
             Program.User = user;
-            Program.CountryComponent = Program.Person.CountryInformations.CountryComponent;
-            Cache.User(user);
+            Cache.SetUser(user);
             Program.IsLoggedIn = true;
             FooterMenu.dFooterMenu.OpenSearchPanel();
             OpenDialog("Welcome to PickApp!", true);

@@ -66,7 +66,7 @@ public static class Program {
     public static FirebaseApp FirebaseApp { get => firebaseApp; set => firebaseApp = value; }
     public static Driver Driver { get => User == null ? null : User.Driver; }
     public static Person Person { get => User == null ? null : User.Person; }
-    public static string CountryComponent { get => countryComponent; set => countryComponent = value; }
+    public static string CountryComponent { get => Person == null ? null : Person.CountryInformations.CountryComponent; }
 
     public static Sprite GetImage(Texture2D texture2D) {
         return Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 1024);
