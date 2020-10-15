@@ -9,8 +9,6 @@ fix backendless code(decrease requests),input field when keyboard open issue,sho
  GUI, notification panel, searchpanel automatic end date +24( if user change end date this will be disabled, how it works), terms & conditions, privacy policy, licenses, user in cache(person, user already done, need to think what else should we add it in cache),
 backendless validation, backup data, input field error when pressing back android, contact us( send email for user to confirm that we receive his email)<br>
 
-loubani arabic language(search about change language,input fields,xml files)<br>
-adel ads mediation<br>
 
 # ERRORS:
 All request should check on userobject id and something else<br>
