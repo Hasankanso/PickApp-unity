@@ -35,13 +35,11 @@ public class BecomeDriver : Panel {
             foreach (var item in regionItems) {
                 regions.Add(item.getRegion());
             }
-
             driver = new Driver(regions);
             Request<Driver> request = new EditRegions(Program.User, driver);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
             request.Send(EditResponse);
-
         }
     }
     private void EditResponse(Driver driver, int code, string message) {
@@ -109,42 +107,35 @@ public class BecomeDriver : Panel {
         title.text = "Become a driver";
     }
     public bool Validate() {
-        bool valid = true;
         for (int i = 0; i < regionItems.Count; i++) {
             if (!regionItems[i].Validate()) {
                 OpenDialog("Insert the region then click next", false);
-                valid = false;
+                return false;
             }
-
         }
         if (regionItems.Count == 4) {
             OpenDialog("You have Add The Maximum Number Of Regions", false);
-            valid = false;
-
+            return false;
         }
-
-        return valid;
+        return true;
     }
     public bool ValidateAddingRegions() {
-        bool valid = true;
-        print(regionItems.Count + " regionItems");
         for (int i = 0; i < regionItems.Count; i++) {
             if (!regionItems[i].Validate()) {
                 OpenDialog("Please add the previous region first", false);
-                valid = false;
+                return false;
             }
         }
-        return valid;
+        return true;
     }
     public bool ValidateRegionName(string region) {
-        bool valid = true;
         for (int i = 0; i < regionItems.Count; i++) {
             if (regionItems[i].ToString().Equals(region)) {
                 OpenDialog("This region is already exist", false);
-                valid = false;
+                return false;
             }
         }
-        return valid;
+        return true;
     }
     public void ValidateDeleteRegion() {
         for (int i = 0; i < regionCounter; i++) {

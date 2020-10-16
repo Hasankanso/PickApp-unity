@@ -135,7 +135,6 @@ public class LoginPanel : Panel {
             OpenDialog("Your phone number is invalid", false);
             return false;
         }
-
         return true;
     }
 

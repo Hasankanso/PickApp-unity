@@ -32,7 +32,6 @@ public class BioPanel : Panel {
     private void Response(Person result, int code, string message) {
         if (!code.Equals((int)HttpStatusCode.OK)) {
             OpenDialog(message, false);
-            Debug.Log(code);
         } else {
             List<Ride> upcomingRides = Program.Person.UpcomingRides;
             List<Rate> rates = Program.Person.Rates;
@@ -44,23 +43,22 @@ public class BioPanel : Panel {
     }
 
     private bool Validate() {
-        bool valid = true;
         if (bio.text.text.Equals("")) {
             bio.Error();
             OpenDialog("There was an error adding bio", false);
-            valid = false;
+            return false;
         } else
         if (bio.text.text.Length < 20) {
             bio.Error();
             OpenDialog("Bio is too short", false);
-            valid = false;
+            return false;
         } else
         if (bio.text.text.Length > 190) {
             bio.Error();
             OpenDialog("Bio is too long", false);
-            valid = false;
+            return false;
         }
-        return valid;
+        return true;
     }
     internal override void Clear() {
         bio.Reset();

@@ -31,7 +31,7 @@ public class AddCarPanel : Panel {
     public Button add,
     update,
     becomeDriverBtn;
-    public UpDownPicker maxSeats,maxLuggage;
+    public UpDownPicker maxSeats, maxLuggage;
     private Car car = null;
     private Driver driver = null;
     private string color;
@@ -127,42 +127,36 @@ public class AddCarPanel : Panel {
         becomeDriverBtn.gameObject.SetActive(true);
     }
     private bool VadilateFirstView() {
-        bool valid = true;
         if (carName.text.text.Equals("")) {
             carName.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Insert your car name", false);
-            OpenDialog(p);
-            valid = false;
-        } else if (brand.text.text.Equals("")) {
+            OpenDialog("Insert your car name", false);
+            return false;
+        }
+        if (brand.text.text.Equals("")) {
             brand.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Insert your car brand", false);
-            OpenDialog(p);
-            valid = false;
-        } else if (year.text.text.Equals("")) {
+            OpenDialog("Insert your car brand", false);
+            return false;
+        }
+        if (year.text.text.Equals("")) {
             year.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Insert your car year", false);
-            OpenDialog(p);
-            valid = false;
+            OpenDialog("Insert your car year", false);
+            return false;
         } else {
             if (int.Parse(year.text.text) < 1960 || int.Parse(year.text.text) > DateTime.Now.Year) {
                 year.Error();
-                Panel p = PanelsFactory.CreateDialogBox("Invalid year", false);
-                OpenDialog(p);
-                valid = false;
+                OpenDialog("Invalid year", false);
+                return false;
             }
         }
-
-        return valid;
+        return true;
     }
 
     private bool VadilateSecondView() {
-        bool valid = true;
         if (!BlackCheckMark.isActiveAndEnabled && !WhiteCheckMark.isActiveAndEnabled && !GreyCheckMark.isActiveAndEnabled && !DarkGreyCheckMark.isActiveAndEnabled && !RedCheckMark.isActiveAndEnabled && !BlueCheckMark.isActiveAndEnabled && !DarkBlueCheckMark.isActiveAndEnabled && !YellowCheckMark.isActiveAndEnabled && !PinkCheckMark.isActiveAndEnabled && !PurpleCheckMark.isActiveAndEnabled && !BrownCheckMark.isActiveAndEnabled && !OrangeCheckMark.isActiveAndEnabled && !GreenCheckMark.isActiveAndEnabled) {
-            Panel p = PanelsFactory.CreateDialogBox("Choose car color", false);
-            OpenDialog(p);
-            valid = false;
+            OpenDialog("Choose car color", false);
+            return false;
         }
-        return valid;
+        return true;
     }
     private void GetColor(string color) {
         if (color.Equals("#000000")) {

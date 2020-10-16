@@ -56,12 +56,12 @@ public class ItemsFactory : MonoBehaviour {
         return ratingItem;
     }
 
-    public static ScheduleItem CreateScheduleItem(GameObject parent, ScheduleRide scheduleRide, Panel profilePanel) {
+    /*public static ScheduleItem CreateScheduleItem(GameObject parent, ScheduleRide scheduleRide, Panel profilePanel) {
         ScheduleItem scheduleItem = Instantiate(defaultItemsFactory.scheduleItem);
         scheduleItem.transform.SetParent(parent.transform, false);
         scheduleItem.init(scheduleRide, profilePanel);
         return scheduleItem;
-    }
+    }*/
     public static MyRideItem CreateMyRideItem(GameObject parent, Ride ride, Person person, MyRidePanel yourRidesPanel) {
         MyRideItem myRideItem = Instantiate(defaultItemsFactory.myRideItem);
         myRideItem.transform.SetParent(parent.transform, false);

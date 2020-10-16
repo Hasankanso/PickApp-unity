@@ -120,37 +120,31 @@ public class AccountPanel : Panel {
     private bool vadilate() {
         if (firstName.text.text.Equals("")) {
             firstName.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Please insert your name", false);
-            OpenDialog(p);
+            OpenDialog("Please insert your name", false);
             return false;
         }
         if (lastName.text.text.Equals("")) {
             lastName.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Please insert your last name", false);
-            OpenDialog(p);
+            OpenDialog("Please insert your last name", false);
             return false;
         }
         if (birthday.text.Equals("")) {
-            Panel p = PanelsFactory.CreateDialogBox("The birthday field can't be empty", false);
-            OpenDialog(p);
+            OpenDialog("The birthday field can't be empty", false);
             return false;
         } else {
             int age = CalculateAge();
             if (age < 14) {
-                Panel p = PanelsFactory.CreateDialogBox("You are under the legal age", false);
-                OpenDialog(p);
+                OpenDialog("You are under the legal age", false);
                 return false;
             }
             if (age > 100) {
-                Panel p = PanelsFactory.CreateDialogBox("Invalid birthday", false);
-                OpenDialog(p);
+                OpenDialog("Invalid birthday", false);
                 return false;
             }
         }
         if (!IsValidEmail(email.text.text)) {
             email.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Invalid email", false);
-            OpenDialog(p);
+            OpenDialog("Invalid email", false);
             return false;
         }
         return true;
@@ -163,7 +157,6 @@ public class AccountPanel : Panel {
             return false;
         }
     }
-
     internal override void Clear() {
         firstName.Reset();
         lastName.Reset();

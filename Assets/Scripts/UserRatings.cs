@@ -41,7 +41,7 @@ public class UserRatings : Panel {
     }
     private async void DownloadAndAddRaterImages() {
         for (int i = 0; i < ratesItem.Count; i++)
-            if (ratesItem[i].rate.Rater.profilePicture == null) {
+            if (ratesItem[i].rate.Rater != null && ratesItem[i].rate.Rater.profilePicture == null) {
                 Texture2D downloadedImg = await Request<object>.DownloadImage(ratesItem[i].rate.Rater.ProfilePictureUrl);
                 ratesItem[i].SetPicture(downloadedImg);
             }

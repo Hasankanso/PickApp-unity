@@ -13,9 +13,13 @@ public class RatingItem : Panel {
         dateTime.text = Program.DateToString(rate.Date);
         grade.text = rate.Grade + "/5";
         comment.text = rate.Comment;
-        fullName.text = rate.Rater.FirstName + " " + rate.Rater.LastName;
-        if (rate.Rater.profilePicture != null) {
-            profileImage.sprite = Program.GetImage(rate.Rater.profilePicture);
+        if (rate.Rater!=null) {
+            fullName.text = rate.Rater.FirstName + " " + rate.Rater.LastName;
+            if (rate.Rater.profilePicture != null) {
+                profileImage.sprite = Program.GetImage(rate.Rater.profilePicture);
+            }
+        } else {
+            fullName.text = "Deleted Account";
         }
     }
     internal void SetPicture(Texture2D img) {

@@ -74,8 +74,7 @@ public class DirectionsFinderPanel : Panel
 
     if (uwr.isNetworkError || uwr.isHttpError)
     {
-      Panel dialog = PanelsFactory.CreateDialogBox(uwr.error, false);
-      OpenDialog(dialog);
+      OpenDialog(uwr.error, false);
     }
     else
     {
@@ -104,8 +103,7 @@ public class DirectionsFinderPanel : Panel
 
     if (uwr.isNetworkError || uwr.isHttpError)
     {
-      Panel dialog = PanelsFactory.CreateDialogBox(uwr.error, false);
-      OpenDialog(dialog);
+      OpenDialog(uwr.error, false);
     }
     else
     {

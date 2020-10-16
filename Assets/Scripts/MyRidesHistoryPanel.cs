@@ -63,8 +63,6 @@ public class MyRidesHistoryPanel : Panel {
         if (result) {
             OpenDialog("No results found", false);
         }
-
-
     }
     internal override void Clear() {
         

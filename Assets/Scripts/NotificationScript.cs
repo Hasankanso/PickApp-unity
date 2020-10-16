@@ -67,6 +67,4 @@ public class NotificationScript : Panel
         firstView.gameObject.SetActive(false);
 
     }
-
-
 }

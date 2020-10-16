@@ -203,7 +203,6 @@ public class AddRidePanel : Panel {
         }
 
     }
-
     public void closeView(int index) {
         if (index == 0) {
             firstView.SetActive(true);

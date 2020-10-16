@@ -69,36 +69,30 @@ public class RegisterPanel : Panel {
     private bool Validate() {
         if (firstName.text.text.Equals("")) {
             firstName.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Please insert your name", false);
-            OpenDialog(p);
+            OpenDialog("Please insert your name", false);
             return false;
         }
         if (lastName.text.text.Equals("")) {
             lastName.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Please insert your last name", false);
-            OpenDialog(p);
+            OpenDialog("Please insert your last name", false);
             return false;
         }
         if (CalculateAge() < 14) {
-            Panel p = PanelsFactory.CreateDialogBox("You are under the legal age", false);
-            OpenDialog(p);
+            OpenDialog("You are under the legal age", false);
             return false;
         }
         Debug.Log(CalculateAge());
         if (CalculateAge() > 100) {
-            Panel p = PanelsFactory.CreateDialogBox("Invalid birthday", false);
-            OpenDialog(p);
+            OpenDialog("Invalid birthday", false);
             return false;
         }
         if (email.text.text.Equals("")) {
             email.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Enter your email", false);
-            OpenDialog(p);
+            OpenDialog("Enter your email", false);
         }
         if (!IsValidEmail(email.text.text)) {
             email.Error();
-            Panel p = PanelsFactory.CreateDialogBox("Invalid email", false);
-            OpenDialog(p);
+            OpenDialog("Invalid email", false);
         }
         if (!acceptCheckBox.isOn) {
             OpenDialog("Accept terms & privacy", false);

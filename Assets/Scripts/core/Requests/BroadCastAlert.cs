@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace Requests {
     class BroadCastAlert : Request<string> {
@@ -27,8 +28,30 @@ namespace Requests {
         }
 
         protected override string IsValid() {
-            return string.Empty;
+            //need detailed checking
+            if (alert.MinDate < DateTime.Now) {
+                return "Minimum date range can't be empty!";
+            }
+            if (alert.MinDate > Program.MaxAlertDate) {
+                return "The max period of alert is six months";
+            }
 
+            if (alert.MaxDate < DateTime.Now) {
+                return "Invalid maximum date range";
+            }
+            if (alert.MaxDate > Program.MaxAlertDate) {
+                return "The max period of alert is six months";
+            }
+            if (alert.MaxDate < alert.MinDate) {
+                return "The maximum date range couldn't be less tham the minimum.";
+            }
+            if (alert.Price == 0) {
+                return "Set your alert price";
+            }
+            if (string.IsNullOrEmpty(alert.Comment) || alert.Comment.Length < 25 || alert.Comment.Length > 400) {
+                return "Please add a comment between 25 and 400 characters";
+            }
+            return string.Empty;
         }
     }
 }

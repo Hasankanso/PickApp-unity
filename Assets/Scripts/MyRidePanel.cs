@@ -11,7 +11,6 @@ public class MyRidePanel : Panel {
     public static readonly string PANELNAME = "MyRides";
     float distance;
 
-
     public override void Init() {
         ImplementYourRidesList(Program.Person.UpcomingRides);
         Status = StatusE.VIEW;
@@ -36,7 +35,6 @@ public class MyRidePanel : Panel {
             ImplementYourRidesList(Program.Person.UpcomingRides);
         }
     }
-
     public void ImplementYourRidesList(List<Ride> rides) {
         listMyRidesView.Clear();
         if (rides == null) return;

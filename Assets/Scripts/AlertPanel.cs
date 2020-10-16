@@ -74,54 +74,56 @@ public class AlertPanel : Panel {
         }
     }
     private bool Validate() {
-        bool valid = true;
         if (from.text.text.Equals("")) {
             from.Error();
             OpenDialog("From can't be empty!", false);
-            valid = false;
+            return false;
+        }
+        if (to.text.text.Equals("")) {
+            to.Error();
+            OpenDialog("Going-To can't be empty!", false);
+            return false;
         }
         if (minDate.text.Equals("")) {
             OpenDialog("Minimum date range can't be empty!", false);
-            valid = false;
+            return false;
         } else {
             if (Program.StringToDate(minDate.text) < DateTime.Now) {
                 OpenDialog("Minimum date range can't be empty!", false);
-                valid = false;
+                return false;
             }
             if (Program.StringToDate(minDate.text) > Program.MaxAlertDate) {
                 OpenDialog("The max period of alert is six months", false);
-                valid = false;
+                return false;
             }
         }
         if (maxDate.text.Equals("")) {
             OpenDialog("Maximum date range can't be empty!", false);
-            valid = false;
+            return false;
         } else {
             if (Program.StringToDate(maxDate.text) < DateTime.Now) {
                 OpenDialog("Invalid maximum date range", false);
-                valid = false;
+                return false;
             }
             if (Program.StringToDate(maxDate.text) > Program.MaxAlertDate) {
                 OpenDialog("The max period of alert is six months", false);
-                valid = false;
+                return false;
             }
         }
         if (Program.StringToDate(maxDate.text) < Program.StringToDate(minDate.text)) {
             OpenDialog("The maximum date range couldn't be less tham the minimum.", false);
-            valid = false;
-        }
-
-        if (to.text.text.Equals("")) {
-            to.Error();
-            OpenDialog("Going-To can't be empty!", false);
-            valid = false;
+            return false;
         }
         if (price.text.text.Equals("")) {
             price.Error();
             OpenDialog("Price can't be empty!", false);
-            valid = false;
+            return false;
         }
-        return valid;
+        if (string.IsNullOrEmpty(comment.text.text) || comment.text.text.Length < 25 || comment.text.text.Length > 400) {
+            OpenDialog("Please add a comment between 25 and 400 characters", false);
+            return false;
+        }
+        return true;
     }
 
     internal override void Clear() {
