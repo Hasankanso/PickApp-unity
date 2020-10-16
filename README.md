@@ -7,7 +7,7 @@ use system language to set language,chatting system, native ads<br>
 
 fix backendless code(decrease requests),input field when keyboard open issue,show recent locations in findlocationpanel and fix item design, add ride map pick adn its items design, all items should be inherited form item class add select usnelect clear moveup move down..,
  GUI, notification panel, terms & conditions, privacy policy, licenses, user in cache(person, user already done, need to think what else should we add it in cache),
-backendless validation, backup data, input field error when pressing back android, contact us( send email for user to confirm that we receive his email)<br>
+backendless validation, backup data, input field error when pressing back android<br>
 
 
 # ERRORS:
