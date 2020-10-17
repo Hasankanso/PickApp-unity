@@ -55,7 +55,6 @@ public class SearchPanel : Panel
 
   public void OpenMaxDateTimePicker()
   {
-    //AdMob.InitializeBannerView(); // why this is here?
     OpenDateTimePicker((dt) => maxDate.text = Program.DateToString(dt));
     maxDateChanged = true;
   }
@@ -70,7 +69,7 @@ public class SearchPanel : Panel
   private void SearchResults(List<Ride> results, int code, string message)
   {
     if (!code.Equals((int)HttpStatusCode.OK))
-      OpenDialog("Something went wrong!", false);
+      OpenDialog(message, false);
     else
     {
       RideResultsPanel p = PanelsFactory.CreateRideResults();

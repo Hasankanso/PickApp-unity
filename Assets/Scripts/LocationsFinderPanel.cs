@@ -36,6 +36,7 @@ public class LocationsFinderPanel : Panel {
         itemClicked = OnLocationPicked;
         searchField.text = initText;
         token = GenerateToken();
+        //to auto open keyboard
         searchField.Select();
         searchField.ActivateInputField();
     }
