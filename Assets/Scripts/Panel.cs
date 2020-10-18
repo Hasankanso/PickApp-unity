@@ -10,7 +10,7 @@ using BackendlessAPI.Engine;
 using System.Collections.Generic;
 using BackendlessAPI.Utils;
 using System;
-
+using BackendlessAPI.RT;
 
 public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 {
@@ -35,6 +35,11 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   {
 
   }
+
+  public virtual void RightToLeft(){
+    
+  }
+
   public virtual void Init(StatusE statusE)
   {
 
@@ -44,6 +49,10 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
   {
     nextPanel.Status = Status;
     nextPanel.opened = true;
+    if(Program.language.Arabic){
+      RightToLeft();
+    }
+
   }
 
   public int Id { get => id; }
