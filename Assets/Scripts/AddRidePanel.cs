@@ -41,10 +41,6 @@ public class AddRidePanel : Panel
   public override void Init()
   {
     Clear();
-    if (Program.Driver == null)
-    {
-      //Open(b) causes crach in unity, cause the AddRide panel and BecomeDriver trying to open at the same time ---Serhan
-    }
     Status = StatusE.ADD;
   }
   public void Init(Ride ride)
@@ -109,7 +105,7 @@ public class AddRidePanel : Panel
 
   }
 
-  public override void RightToLeft()
+  public override void ConvertToArabicUI()
   {
     from.text.alignment = TextAnchor.MiddleRight;
     to.text.alignment = TextAnchor.MiddleRight;

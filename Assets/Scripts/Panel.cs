@@ -36,7 +36,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
 
   }
 
-  public virtual void RightToLeft(){
+  public virtual void ConvertToArabicUI(){
     
   }
 
@@ -50,7 +50,7 @@ public abstract class Panel : MonoBehaviour, IEquatable<Panel>
     nextPanel.Status = Status;
     nextPanel.opened = true;
     if(Program.language.Arabic){
-      RightToLeft();
+      ConvertToArabicUI();
     }
 
   }
