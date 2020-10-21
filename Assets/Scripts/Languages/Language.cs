@@ -15,14 +15,19 @@ public class Language : MonoBehaviour
   private static string directory;
   private static readonly string languageURL = "https://backendlessappcontent.com/5FB0EA72-A363-4451-FFA5-A56F031D6600/C8502745-CB10-4F56-9FD5-3EFCE59F1926/files/languages/";
 
-  public bool arabic = false;
-  public bool english = false;
+  private bool arabic = false;
+  private bool english = false;
 
   public static Language defaultInstance;
 
   public bool Arabic
   {
     get => arabic;
+  }
+
+  public bool English
+  {
+    get => english;
   }
 
   public void Awake()

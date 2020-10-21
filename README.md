@@ -2,10 +2,10 @@
 let private drivers offer rides and drive together, this modern way is flexible and energy/money saving. It may help solving congestion problems since more people will go in one car, which means less cars on the road.<br>
 # TODO
 waiting backendless or admob team:<br>
-device registration, confirmation email, finder location response language,push notifications, alertBusiness(need pus notification only), logout by push notification, confirm email, 
+device registration, confirmation email, finder location response language,push notifications, alertBusiness(need pus notification only), logout by push notification,
 use system language to set language,chatting system, native ads<br>
 
-fix backendless code(decrease requests),input field when keyboard open issue,show recent locations in findlocationpanel and fix item design, add ride map pick adn its items design, all items should be inherited form item class add select usnelect clear moveup move down..,
+fix backendless code(decrease requests), show recent locations in findlocationpanel and fix item design, add ride map pick adn its items design, all items should be inherited form item class add select usnelect clear moveup move down..,
  GUI, notification panel, terms & conditions, privacy policy, licenses, user in cache(person, user already done, need to think what else should we add it in cache),
 backendless validation, backup data, input field error when pressing back android<br>
 

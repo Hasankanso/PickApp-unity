@@ -36,6 +36,13 @@ public class FooterMenu : MonoBehaviour {
         inboxPanel.Hide();
         profilePanel.Hide();
         currPanel = searchPanel;
+
+        searchPanel.ConvertToArabicUI();
+        addRidePanel.ConvertToArabicUI();
+        profilePanel.ConvertToArabicUI();
+        inboxPanel.ConvertToArabicUI();
+        yourRidesPanel.ConvertToArabicUI();
+
         searchButton.image.sprite = searchButton.spriteState.selectedSprite;
 
         panels = new Dictionary<string, Panel>(5);
