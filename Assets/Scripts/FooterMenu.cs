@@ -54,17 +54,8 @@ public class FooterMenu : MonoBehaviour {
         buttons.Add(ProfilePanel.PANELNAME, profileButton);
         string userId = Cache.GetUserId();
         if (!string.IsNullOrEmpty(userId)) {
-            User user = new User();
-            user.Id = Cache.GetUserId();
-            user.Phone = "+" + Cache.GetPhoneCode() + "" + Cache.GetPhone();
-            user.Email = Cache.GetEmail();
-
-            user.Person = Cache.GetPerson();
-            Program.User = user;
+            Program.User = Cache.GetUser();
             Program.IsLoggedIn = true;
-
-            Request<Person> request = new GetLoggedInUser(user);
-            request.Send(ResponseGetLoggedInUser);
         }
         searchPanel.Init();
     }

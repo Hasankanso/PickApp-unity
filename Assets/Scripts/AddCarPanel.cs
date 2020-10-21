@@ -38,7 +38,7 @@ public class AddCarPanel : Panel {
 
     public void Submit() {
         if (VadilateSecondView()) {
-            car = new Car(carName.text.text, int.Parse(year.text.text), maxSeats.Value, maxLuggage.Value, brand.text.text, color, carImage.sprite.texture);
+            car = new Car(carName.text.text, int.Parse(year.text.text), maxLuggage.Value, maxSeats.Value, brand.text.text, color, carImage.sprite.texture);
             Request<List<Car>> request = new AddCar(car, Program.User);
             request.AddSendListener(OpenSpinner);
             request.AddReceiveListener(CloseSpinner);
@@ -47,7 +47,7 @@ public class AddCarPanel : Panel {
     }
     public void BecomeDriver() {
         if (VadilateSecondView()) {
-            car = new Car(carName.text.text, int.Parse(year.text.text), maxSeats.Value, maxLuggage.Value, brand.text.text, color, carImage.sprite.texture);
+            car = new Car(carName.text.text, int.Parse(year.text.text),  maxLuggage.Value, maxSeats.Value, brand.text.text, color, carImage.sprite.texture);
             driver.Cars = new List<Car>();
             driver.Cars.Add(car);
             Request<Driver> request = new BecomeDriverRequest(Program.User, driver);

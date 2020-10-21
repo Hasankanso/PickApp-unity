@@ -10,13 +10,13 @@ public class Driver
     public List<Location> regions = new List<Location>();
     List<Car> cars;
     string id;
-    private List<ScheduleRide> schedules = new List<ScheduleRide>();
+    //private List<ScheduleRide> schedules = new List<ScheduleRide>();
 
     private DateTime updated;
-    public Driver(string dId, List<Car> cars, List<ScheduleRide> schedules, List<Location> regions)
+    public Driver(string dId, List<Car> cars/*, List<ScheduleRide> schedules*/, List<Location> regions)
     {
         this.cars = cars;
-        this.schedules = schedules;
+       // this.schedules = schedules;
         this.id = dId;
         this.regions = regions;
 
@@ -29,11 +29,6 @@ public class Driver
     public Driver(List<Location> regions)
     {
         this.Regions = regions;
-    }
-    public Driver(string id, string firstName, string lastName, DateTime birthday, string email, string phone, string password, string region, Texture2D profilePicture, bool gender, List<Rate> rates, float rateAverage, List<Car> cars)
-    {
-        this.id = id;
-        this.cars = cars;
     }
     public override bool Equals(object d)
     {
@@ -59,11 +54,11 @@ public class Driver
             carsArray.Add(c.ToJson());
         }
         driverJ[nameof(cars)] = carsArray;
-        foreach (ScheduleRide s in schedules)
+        /*foreach (ScheduleRide s in schedules)
         {
             schedulesArray.Add(s.ToJson());
         }
-        driverJ[nameof(schedules)] = schedulesArray;
+        driverJ[nameof(schedules)] = schedulesArray;*/
         return driverJ;
     }
 
@@ -75,7 +70,7 @@ public class Driver
         JArray carsJ = (JArray)driver.GetValue("cars");
         List<Car> cars = null;
 
-        List<ScheduleRide> schedules = new List<ScheduleRide>();
+        //List<ScheduleRide> schedules = new List<ScheduleRide>();
         List<Location> regions = new List<Location>(3);
 
         if (carsJ != null)
@@ -111,7 +106,7 @@ public class Driver
             regions.Add(regL3);
         }
 
-        if (driver.GetValue("schedules") != null && !string.IsNullOrEmpty(driver.GetValue("schedules").ToString()) && !driver.GetValue("schedules").ToString().Equals("[]"))
+       /* if (driver.GetValue("schedules") != null && !string.IsNullOrEmpty(driver.GetValue("schedules").ToString()) && !driver.GetValue("schedules").ToString().Equals("[]"))
         {
             JArray schedulesJ = (JArray)driver.GetValue("schedules");
 
@@ -119,9 +114,9 @@ public class Driver
             {
                 schedules.Add(ScheduleRide.ToObject((JObject)schedule));
             }
-        }
+        }*/
 
-        return new Driver(did, cars, schedules, regions);
+        return new Driver(did, cars,/* schedules,*/ regions);
     }
     public List<Car> Cars
     {
@@ -143,11 +138,11 @@ public class Driver
         get => updated;
         set => updated = value;
     }
-    public List<ScheduleRide> Schedules
+   /* public List<ScheduleRide> Schedules
     {
         get => schedules;
         set => schedules = value;
-    }
+    }*/
     public string Id
     {
         get => id;

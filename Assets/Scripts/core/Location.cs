@@ -81,7 +81,6 @@ public class Location
     }
     return string.Empty;
   }
-  public string Id { get => id; }
   public string PlaceId { get => placeId; }
   public string Name { get => name; }
   public double Latitude { get => latitude; }

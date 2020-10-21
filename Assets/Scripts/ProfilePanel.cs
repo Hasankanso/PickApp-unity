@@ -115,7 +115,7 @@ public class ProfilePanel : Panel {
         Panel panel = PanelsFactory.CreateChattinessPanel();
         Open(panel);
     }
-    public void AddSchedule() {
+    /*public void AddSchedule() {
         Driver driver = Program.Driver;
         if (driver.Cars.Count > 0) {
             if (driver.Schedules.Count < Program.MaxSchedulesPerUser) {
@@ -126,7 +126,7 @@ public class ProfilePanel : Panel {
         } else {
             OpenDialog("Please add a car first.", false);
         }
-    }
+    }*/
 
     public void AddCar() {
         Driver driver = Program.Driver;

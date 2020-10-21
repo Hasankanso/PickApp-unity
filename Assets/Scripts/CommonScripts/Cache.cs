@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class Cache {
@@ -11,14 +12,13 @@ public static class Cache {
     public static bool GetDisableAllCheckbox() {
         return bool.Parse(PlayerPrefs.GetString("disableAll", "true"));
     }
+    public static void SetDisableAllCheckbox(bool disableAll) {
+        PlayerPrefs.SetString("disableAll", disableAll.ToString());
+    }
     public static void SetNewsCheckbox(bool news) {
         PlayerPrefs.SetString("news", news.ToString());
     }
 
-    //Cache for user
-    public static void SetPhone(string phone) {
-        PlayerPrefs.SetString("phone", phone);
-    }
     public static void SetLanguage(string value) {
         PlayerPrefs.SetString(currentLanguageKey, value);
     }
@@ -27,9 +27,6 @@ public static class Cache {
     }
     public static void SetEmail(string email) {
         PlayerPrefs.SetString("email", email);
-    }
-    public static void SetPhoneCode(string phoneCode) {
-        PlayerPrefs.SetString("phoneCode", phoneCode);
     }
     public static void SetUserId(string userId) {
         PlayerPrefs.SetString("userId", userId);
@@ -46,214 +43,60 @@ public static class Cache {
     public static string GetPhoneCode() {
         return PlayerPrefs.GetString("phoneCode", "");
     }
-    public static void SetDisableAllCheckbox(bool disableAll) {
-        PlayerPrefs.SetString("disableAll", disableAll.ToString());
-    }
 
-    //Person cache
-    public static void SetPersonId(string id) {
-        PlayerPrefs.SetString("personId", id);
-    }
-    public static string GetPersonId() {
-        return PlayerPrefs.GetString("personId", "");
-    }
-    public static void SetFirstName(string firstName) {
-        PlayerPrefs.SetString("firstName", firstName);
-    }
-    public static string GetFirstName() {
-        return PlayerPrefs.GetString("firstName", "");
-    }
-    public static void SetLastName(string lastName) {
-        PlayerPrefs.SetString("lastName", lastName);
-    }
-    public static string GetLastName() {
-        return PlayerPrefs.GetString("lastName", "");
-    }
-    public static void SetBirthday(string birthday) {
-        PlayerPrefs.SetString("birthday", birthday);
-    }
-    public static string GetBirthday() {
-        return PlayerPrefs.GetString("birthday", "");
-    }
-    public static void SetBio(string bio) {
-        PlayerPrefs.SetString("bio", bio);
-    }
-    public static string GetBio() {
-        return PlayerPrefs.GetString("bio", "");
-    }
-    public static void SetChattiness(string chattiness) {
-        PlayerPrefs.SetString("chattiness", chattiness);
-    }
-    public static string GetChattiness() {
-        return PlayerPrefs.GetString("chattiness", "");
-    }
-    public static void SetGender(string gender) {
-        PlayerPrefs.SetString("gender", gender);
-    }
-    public static string GetGender() {
-        return PlayerPrefs.GetString("gender", "");
-    }
-    public static void SetRateAverage(string rateAverage) {
-        PlayerPrefs.SetString("rateAverage", rateAverage);
-    }
-    public static string GetRateAverage() {
-        return PlayerPrefs.GetString("rateAverage", "");
-    }
-    public static void SetAcomplishedRides(string acomplishedRides) {
-        PlayerPrefs.SetString("acomplishedRides", acomplishedRides);
-    }
-    public static string GetAcomplishedRides() {
-        return PlayerPrefs.GetString("acomplishedRides", "");
-    }
-    public static void SetCanceledRides(string canceledRides) {
-        PlayerPrefs.SetString("canceledRides", canceledRides);
-    }
-    public static string GetCanceledRides() {
-        return PlayerPrefs.GetString("canceledRides", "");
-    }
-    public static void SetRateCount(string rateCount) {
-        PlayerPrefs.SetString("rateCount", rateCount);
-    }
-    public static string GetRateCount() {
-        return PlayerPrefs.GetString("rateCount", "");
-    }
-
-    public static void SetProfilePictureUrl(string profilePictureUrl) {
-        PlayerPrefs.SetString("profilePictureUrl", profilePictureUrl);
-    }
-    public static string GetProfilePictureUrl() {
-        return PlayerPrefs.GetString("profilePictureUrl", "");
-    }
-    //Person's country informations
-    public static void SetUnit(string unit) {
-        PlayerPrefs.SetString("unit", unit);
-    }
-    public static string GetUnit() {
-        return PlayerPrefs.GetString("unit", "");
-    }
-    public static void SetCountryInformationsId(string countryInformationsId) {
-        PlayerPrefs.SetString("countryInformationsId", countryInformationsId);
-    }
-    public static string GetCountryInformationsId() {
-        return PlayerPrefs.GetString("countryInformationsId", "");
-    }
-    public static void SetCountryName(string countryName) {
-        PlayerPrefs.SetString("countryName", countryName);
-    }
-    public static string GetCountryName() {
-        return PlayerPrefs.GetString("countryName", "");
-    }
-    public static void SetDigits(string digits) {
-        PlayerPrefs.SetString("digits", digits);
-    }
-    public static string GetDigits() {
-        return PlayerPrefs.GetString("digits", "");
-    }
-    public static void SetCode(string code) {
-        PlayerPrefs.SetString("code", code);
-    }
-    public static string GetCode() {
-        return PlayerPrefs.GetString("code", "");
-    }
-
-    //Driver
-    public static void SetDriverId(string id) {
-        PlayerPrefs.SetString("driverId", id);
-    }
-    public static string GetDriverId() {
-        return PlayerPrefs.GetString("driverId", "");
-    }
-
-    //Driver's regions
-    public static void SetRegionId(string regionId) {
-        PlayerPrefs.SetString("regionId", regionId);
-    }
-    public static string GetRegionId() {
-        return PlayerPrefs.GetString("regionId", "");
-    }
-    public static void SetRegionName(string regionName) {
-        PlayerPrefs.SetString("regionName", regionName);
-    }
-    public static string GetRegionName() {
-        return PlayerPrefs.GetString("regionName", "");
-    }
-    public static void SetRegionPlaceId(string regionPlaceId) {
-        PlayerPrefs.SetString("regionPlaceId", regionPlaceId);
-    }
-    public static string GetRegionPlaceId() {
-        return PlayerPrefs.GetString("regionPlaceId", "");
-    }
-    public static void SetRegionLatitude(string regionLatitude) {
-        PlayerPrefs.SetString("regionLatitude", regionLatitude);
-    }
-    public static string GetRegionLatitude() {
-        return PlayerPrefs.GetString("regionLatitude", "");
-    }
-    public static void SetRegionLongitude(string regionLongitude) {
-        PlayerPrefs.SetString("regionLongitude", regionLongitude);
-    }
-    public static string GetRegionLongitude() {
-        return PlayerPrefs.GetString("regionLongitude", "");
-    }
+    //User cache
     public static void SetUser(User user) {
         if (user != null) {
             if (user.Person != null)
-                SetPhoneCode(user.Person.CountryInformations.Code.Split(new string[] { "+" }, StringSplitOptions.None)[1]);
-            if (user.phone != null)
-                SetPhone(user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
+                PlayerPrefs.SetString("phoneCode", user.Person.CountryInformations.Code.Split(new string[] { "+" }, StringSplitOptions.None)[1]);
+            if (user.phone != null) {
+                PlayerPrefs.SetString("phone", user.phone.Split(new string[] { user.Person.CountryInformations.Code }, StringSplitOptions.None)[1]);
+            }
             if (user.Email != null)
                 SetEmail(user.Email);
             if (user.Id != null)
                 SetUserId(user.Id);
             SetPerson(user.Person);
+            if (user.Driver != null) {
+                SetDriver(user.Driver);
+            }
         }
     }
+    public static User GetUser() {
+        return new User(GetPerson(), GetDriver(), "+" + GetPhoneCode() + GetPhone(), GetEmail(), GetUserId(), null);
+    }
     public static void NullifyUser() {
-        SetPhoneCode("");
-        SetPhone("");
+        PlayerPrefs.SetString("phoneCode", "");
+        PlayerPrefs.SetString("phone", "");
         SetEmail("");
         SetUserId("");
         NullifyPerson();
+        NullifyDriver();
     }
-    public static void NullifyPerson() {
-        SetPersonId("");
-        SetFirstName("");
-        SetLastName("");
-        SetBio("");
-        SetChattiness("");
 
-        SetBirthday("");
-
-        SetGender("");
-        SetRateAverage("");
-        SetAcomplishedRides("");
-        SetCanceledRides("");
-        SetRateCount("");
-
-        SetProfilePictureUrl("");
-        SetCountryInformationsId("");
-        SetUnit("");
-        SetCode("");
-    }
+    //Person cache
     public static Person GetPerson() {
         //get person from cache
         Person person = new Person();
-        person.Id = GetPersonId();
-        person.FirstName = GetFirstName();
-        person.LastName = GetLastName();
-        person.Bio = GetBio();
-        person.Chattiness = GetChattiness();
-        person.Birthday = Program.StringToBirthday(GetBirthday());
-        person.Gender = bool.Parse(GetGender());
-        person.ProfilePictureUrl = GetProfilePictureUrl();
-        person.RateAverage = float.Parse(GetRateAverage());
+        person.Id = PlayerPrefs.GetString("personId", "");
+        person.FirstName = PlayerPrefs.GetString("firstName", "");
+        person.LastName = PlayerPrefs.GetString("lastName", "");
+        person.Bio = PlayerPrefs.GetString("bio", "");
+        person.Chattiness = PlayerPrefs.GetString("chattiness", "");
+        person.Birthday = Program.StringToBirthday(PlayerPrefs.GetString("birthday", ""));
+        person.Gender = bool.Parse(PlayerPrefs.GetString("gender", ""));
+        person.ProfilePictureUrl = PlayerPrefs.GetString("profilePictureUrl", "");
+        person.RateAverage = float.Parse(PlayerPrefs.GetString("rateAverage", ""));
+        person.AcomplishedRides = int.Parse(PlayerPrefs.GetString("acomplishedRides", ""));
+        person.CanceledRides = int.Parse(PlayerPrefs.GetString("canceledRides", ""));
+        person.RateCount = int.Parse(PlayerPrefs.GetString("rateCount", ""));
         //get country from cache
         CountryInformations countryInformations = new CountryInformations();
-        countryInformations.Id = GetCountryInformationsId();
-        countryInformations.Unit = GetUnit();
-        countryInformations.Name = GetCountryName();
-        countryInformations.Digits = int.Parse(GetDigits());
-        countryInformations.Code = GetCode();
+        countryInformations.Id = PlayerPrefs.GetString("countryInformationsId", "");
+        countryInformations.Unit = PlayerPrefs.GetString("unit", "");
+        countryInformations.Name = PlayerPrefs.GetString("countryName", "");
+        countryInformations.Digits = int.Parse(PlayerPrefs.GetString("digits", ""));
+        countryInformations.Code = PlayerPrefs.GetString("code", "");
 
         person.CountryInformations = countryInformations;
 
@@ -262,36 +105,146 @@ public static class Cache {
     public static void SetPerson(Person person) {
         if (person != null) {
             if (person.Id != null)
-                SetPersonId(person.Id);
+                PlayerPrefs.SetString("personId", person.Id);
             if (person.FirstName != null)
-                SetFirstName(person.FirstName);
+                PlayerPrefs.SetString("firstName", person.FirstName);
             if (person.LastName != null)
-                SetLastName(person.LastName);
+                PlayerPrefs.SetString("lastName", person.LastName);
             if (person.Bio != null)
-                SetBio(person.Bio);
+                PlayerPrefs.SetString("bio", person.Bio);
             if (person.Chattiness != null)
-                SetChattiness(person.Chattiness);
+                PlayerPrefs.SetString("chattiness", person.Chattiness);
 
             if (person.Birthday != null)
-                SetBirthday(Program.BirthdayToString(person.Birthday));
+                PlayerPrefs.SetString("birthday", Program.BirthdayToString(person.Birthday));
 
-            SetGender(person.Gender.ToString());
-            SetRateAverage(person.RateAverage.ToString());
-            SetAcomplishedRides(person.AcomplishedRides.ToString());
-            SetCanceledRides(person.CanceledRides.ToString());
-            SetRateCount(person.RateCount.ToString());
+            PlayerPrefs.SetString("gender", person.Gender.ToString());
+            PlayerPrefs.SetString("rateAverage", person.RateAverage.ToString());
+            PlayerPrefs.SetString("acomplishedRides", person.AcomplishedRides.ToString());
+            PlayerPrefs.SetString("canceledRides", person.CanceledRides.ToString());
+            PlayerPrefs.SetString("rateCount", person.RateCount.ToString());
 
             if (person.ProfilePictureUrl != null)
-                SetProfilePictureUrl(person.ProfilePictureUrl);
+                PlayerPrefs.SetString("profilePictureUrl", person.ProfilePictureUrl);
             if (person.CountryInformations != null) {
                 if (person.CountryInformations.Id != null)
-                    SetCountryInformationsId(person.CountryInformations.Id);
+                    PlayerPrefs.SetString("countryInformationsId", person.CountryInformations.Id);
                 if (person.CountryInformations.Unit != null)
-                    SetUnit(person.CountryInformations.Unit);
+                    PlayerPrefs.SetString("unit", person.CountryInformations.Unit);
                 if (person.CountryInformations.Code != null)
-                    SetCode(person.CountryInformations.Code);
-                SetDigits(person.CountryInformations.Digits.ToString());
+                    PlayerPrefs.SetString("code", person.CountryInformations.Code);
+                PlayerPrefs.SetString("digits", person.CountryInformations.Digits.ToString());
             }
         }
+    }
+    public static void NullifyPerson() {
+        PlayerPrefs.SetString("personId", "");
+        PlayerPrefs.SetString("firstName", "");
+        PlayerPrefs.SetString("lastName", "");
+        PlayerPrefs.SetString("bio", "");
+        PlayerPrefs.SetString("chattiness", "");
+
+        PlayerPrefs.SetString("birthday", "");
+
+        PlayerPrefs.SetString("gender", "");
+        PlayerPrefs.SetString("rateAverage", "");
+        PlayerPrefs.SetString("acomplishedRides", "");
+        PlayerPrefs.SetString("canceledRides", "");
+        PlayerPrefs.SetString("rateCount", "");
+
+        PlayerPrefs.SetString("profilePictureUrl", "");
+        PlayerPrefs.SetString("countryInformationsId", "");
+        PlayerPrefs.SetString("unit", "");
+        PlayerPrefs.SetString("code", "");
+        PlayerPrefs.SetString("digits", "");
+    }
+    //Driver
+    public static void SetDriver(Driver d) {
+        PlayerPrefs.SetString("driverId", d.Id);
+        SetRegions(d.Regions);
+        SetCars(d.Cars);
+    }
+    public static Driver GetDriver() {
+        string driverId = PlayerPrefs.GetString("driverId", "");
+        if (string.IsNullOrEmpty(driverId)) {
+            return null;
+        }
+        Driver d = new Driver(driverId, GetCars(), GetRegions());
+        return d;
+    }
+    //Driver's regions
+    public static void SetRegions(List<Location> location) {
+        PlayerPrefs.SetString("regionsCount", location.Count.ToString());
+        for (int i = 0; i < location.Count; i++) {
+            PlayerPrefs.SetString("regionName" + i, location[i].Name);
+            PlayerPrefs.SetString("regionPlaceId" + i, location[i].PlaceId);
+            PlayerPrefs.SetString("regionLatitude" + i, location[i].Latitude.ToString());
+            PlayerPrefs.SetString("regionLongitude" + i, location[i].Longitude.ToString());
+        }
+    }
+    public static List<Location> GetRegions() {
+        List<Location> locations = new List<Location>();
+        int regionsCount = int.Parse(PlayerPrefs.GetString("regionsCount", "0"));
+        for (int i = 0; i < regionsCount; i++) {
+            var name = PlayerPrefs.GetString("regionName" + i, "");
+            var placeId = PlayerPrefs.GetString("regionPlaceId" + i, "");
+            var latit = PlayerPrefs.GetString("regionLatitude" + i, "");
+            var longi = PlayerPrefs.GetString("regionLongitude" + i, "");
+            locations.Add(new Location(placeId, name, double.Parse(latit), double.Parse(longi)));
+        }
+        return locations;
+    }
+    //Driver's cars
+    public static void SetCars(List<Car> cars) {
+        PlayerPrefs.SetString("carsCount", cars.Count.ToString());
+        for (int i = 0; i < cars.Count; i++) {
+            PlayerPrefs.SetString("carId" + i, cars[i].Id);
+            PlayerPrefs.SetString("carYear" + i, cars[i].Year.ToString());
+            PlayerPrefs.SetString("carMaxLuggage" + i, cars[i].MaxLuggage.ToString());
+            PlayerPrefs.SetString("carMaxSeats" + i, cars[i].MaxSeats.ToString());
+            PlayerPrefs.SetString("carName" + i, cars[i].Name);
+            PlayerPrefs.SetString("carColor" + i, cars[i].Color);
+            PlayerPrefs.SetString("carBrand" + i, cars[i].Brand);
+            PlayerPrefs.SetString("carPictureUrl" + i, cars[i].CarPictureUrl);
+        }
+    }
+    public static List<Car> GetCars() {
+        List<Car> cars = new List<Car>();
+        int carsCount = int.Parse(PlayerPrefs.GetString("carsCount", "0"));
+        for (int i = 0; i < carsCount; i++) {
+            var id = PlayerPrefs.GetString("carId" + i, "");
+            var year = int.Parse(PlayerPrefs.GetString("carYear" + i, ""));
+            var maxLuggage = int.Parse(PlayerPrefs.GetString("carMaxLuggage" + i, ""));
+            var maxSeats = int.Parse(PlayerPrefs.GetString("carMaxSeats" + i, ""));
+            var name = PlayerPrefs.GetString("carName" + i, "");
+            var color = PlayerPrefs.GetString("carColor" + i, "");
+            var brand = PlayerPrefs.GetString("carBrand" + i, "");
+            var picture = PlayerPrefs.GetString("carPictureUrl" + i, "");
+            cars.Add(new Car(id, name, year, maxLuggage, maxSeats, brand, color, picture));
+        }
+        return cars;
+    }
+    public static void NullifyDriver() {
+        PlayerPrefs.SetString("driverId", "");
+        int regionsCount = int.Parse(PlayerPrefs.GetString("regionsCount", "0"));
+        for (int i = 0; i < regionsCount; i++) {
+            PlayerPrefs.SetString("regionName" + i, "");
+            PlayerPrefs.SetString("regionPlaceId" + i, "");
+            PlayerPrefs.SetString("regionLatitude" + i, "");
+            PlayerPrefs.SetString("regionLongitude" + i, "");
+        }
+        PlayerPrefs.SetString("regionsCount", "");
+        int carsCount = int.Parse(PlayerPrefs.GetString("carsCount", "0"));
+        for (int i = 0; i < carsCount; i++) {
+            PlayerPrefs.SetString("carId" + i, "");
+            PlayerPrefs.SetString("carYear" + i, "");
+            PlayerPrefs.SetString("carMaxLuggage" + i, "");
+            PlayerPrefs.SetString("carMaxSeats" + i, "");
+            PlayerPrefs.SetString("carName" + i, "");
+            PlayerPrefs.SetString("carColor" + i, "");
+            PlayerPrefs.SetString("carBrand" + i, "");
+            PlayerPrefs.SetString("carPictureUrl" + i, "");
+        }
+        PlayerPrefs.SetString("carsCount", "");
     }
 }
